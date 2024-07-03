@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name" translatable="false">NSGS-App</string>
+    <string name="ssid_label" translatable="false">SSID: %1$s</string>
+    <string name="bssid_label" translatable="false">BSSID: %1$s</string>
+    <string name="security_label">Security: %1$s</string>
+    <string name="coordinates_label">Coordinates: %1$s</string>
+    <string name="postal_code_label">Postal Code: %1$s</string>
+    <string name="neighborhood_label">Neighborhood: %1$s</string>
+    <string name="total_networks_label">Total Networks: %1$s</string>
+</resources>
