@@ -7,7 +7,8 @@
     android:layout_margin="8dp"
     android:elevation="2dp"
     android:background="@drawable/item_background">
-
+    <!-- NOT USING STRINGS.XML BECAUSE THESE ARE PLACEHOLDERS/NEVER DISPLAYED-->
+    <!-- @TODO replace with strings.xml -->
     <TextView
         android:id="@+id/ssid"
         android:layout_width="wrap_content"

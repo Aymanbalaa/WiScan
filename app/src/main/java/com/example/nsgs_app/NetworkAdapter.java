@@ -31,7 +31,7 @@ public class NetworkAdapter extends RecyclerView.Adapter<NetworkAdapter.NetworkV
     public void onBindViewHolder(@NonNull NetworkViewHolder holder, int position) {
         Network network = networkList.get(position);
 
-        //following best strings.xml practive
+        //following best strings.xml practice
         //uses strings.xml to allow easy translation if needed
         holder.ssid.setText(context.getString(R.string.ssid_label, network.getSsid()));
         holder.bssid.setText(context.getString(R.string.bssid_label, network.getBssid()));

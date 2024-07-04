@@ -65,8 +65,4 @@ public class Network {
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
     }
-
-
-
-
 }
