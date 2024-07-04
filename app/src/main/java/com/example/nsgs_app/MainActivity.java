@@ -2,6 +2,7 @@ package com.example.nsgs_app;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
     private NetworkAdapter networkAdapter;
     private List<Network> networkList;
     private TextView totalNetworksTextView;
-
+    private Handler handler;
+    private Runnable fetchTask;
+    private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
+    private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,23 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        fetchNetworks();
+        handler = new Handler();
+        fetchTask = new Runnable() {
+            @Override
+            public void run() {
+                fetchNetworks();
+                handler.postDelayed(this, FETCH_INTERVAL);
+            }
+        };
+
+        fetchNetworks(); // Initial fetch on create
+        handler.postDelayed(fetchTask, FETCH_INTERVAL); // Schedule fetch every interval
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(fetchTask);
     }
 
     private void fetchNetworks() {
@@ -53,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         //10.0.2.2:5000 is to be used if the emulator and server are running on same device??
         //otherwise use the endpoint of server
         String url = "http://10.0.2.2:5000/get_all_networks";
+        //String url = "https://0040-192-226-194-155.ngrok-free.app/get_all_networks";
 
         Request request = new Request.Builder()
                 .url(url)
@@ -76,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         Gson gson = new Gson();
 
                         // Filtering JSON data and feeding it into List of Networks
-                        Type networkListType = new TypeToken<List<Network>>(){}.getType();
+                        Type networkListType = new TypeToken<List<Network>>() {}.getType();
                         networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
 
                         // Sort the list by SSID
