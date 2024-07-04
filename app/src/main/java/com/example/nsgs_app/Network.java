@@ -7,6 +7,29 @@ public class Network {
     private String postalCode;
     private String security;
     private String neighborhood;
+    private String coordinates;
+    private String provider;
+
+    //Cosntructor only for testing filtering function can be removed later
+    public Network(int id, String ssid, String security) {
+        this.id = id;
+        this.ssid = ssid;
+        this.security = security;
+    }
+
+    //Cosntructor only for testing Details activity can be removed later
+
+
+    public Network(int id, String ssid, String bssid, String postalCode, String security, String neighborhood, String coordinates, String provider) {
+        this.id = id;
+        this.ssid = ssid;
+        this.bssid = bssid;
+        this.postalCode = postalCode;
+        this.security = security;
+        this.neighborhood = neighborhood;
+        this.coordinates = coordinates;
+        this.provider = provider;
+    }
 
     public int getId() {
         return id;
@@ -48,8 +71,6 @@ public class Network {
         this.coordinates = coordinates;
     }
 
-    private String coordinates;
-
     public String getPostalCode() {
         return postalCode;
     }
@@ -64,5 +85,13 @@ public class Network {
 
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 }

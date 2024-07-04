@@ -1,6 +1,7 @@
 package com.example.nsgs_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,21 @@ public class NetworkAdapter extends RecyclerView.Adapter<NetworkAdapter.NetworkV
         holder.coordinates.setText(context.getString(R.string.coordinates_label, network.getCoordinates()));
         holder.postalCode.setText(context.getString(R.string.postal_code_label, network.getPostalCode()));
         holder.neighborhood.setText(context.getString(R.string.neighborhood_label, network.getNeighborhood()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            //The view of the holder is itemView
+            //gives instruction upon network item click-sends to activity page where detailed info about the network selected is displayed namely estimated location and network provider
+            @Override
+            public void onClick(View v) {
+                int pos;
+                pos = holder.getLayoutPosition();
+
+                Intent intent = new Intent(v.getContext(), NetworkDetails.class);
+                intent.putExtra("Network id", networkList.get(pos).getId());
+                v.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override

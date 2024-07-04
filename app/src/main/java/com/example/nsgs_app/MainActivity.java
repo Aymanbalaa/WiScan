@@ -18,8 +18,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import java.util.Collections;
+import java.util.Comparator;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private NetworkAdapter networkAdapter;
     private List<Network> networkList;
     private TextView totalNetworksTextView;
+    protected NetworkAdapterFilteringBySSID networkAdapterFilteringBySSID;
+    protected NetworkAdapterFiteringByProtocol networkRecyclerViewByProtocolAdapter;
     private Handler handler;
     private Runnable fetchTask;
     private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
@@ -58,6 +64,21 @@ public class MainActivity extends AppCompatActivity {
 
         fetchNetworks(); // Initial fetch on create
         handler.postDelayed(fetchTask, FETCH_INTERVAL); // Schedule fetch every interval
+
+        //Testing sorting and filtering
+        // Testing-generating list of networks
+        List<Network> networksList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            networksList.add(new Network(i, "BELL_"+i, "bssid"+i, "H3SE9", "WEP"+i, "Concordia"+i, "548621", "BELL"+i));
+        }
+
+
+        //sortBySSID(networksList);
+        //sortByProtocol(networksList);
+        //filterBySSID();
+        filterByProtocol();
+
+
     }
 
     @Override
@@ -106,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                             public int compare(Network n1, Network n2) {
                                 return n1.getSsid().compareToIgnoreCase(n2.getSsid());
                             }
+
                         });
 
                         runOnUiThread(() -> {
@@ -126,4 +148,96 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @SuppressLint("StringFormatMatches")
+    void sortBySSID(List<Network>networks){
+        //Sorting by SSIDs
+        //Collections.sort(networkList, Comparator.comparing(Network::getBssid));
+        Collections.sort(networks, Comparator.comparing(Network::getBssid));
+
+        runOnUiThread(() -> {
+            // Update the total networks count (Top Page)
+            totalNetworksTextView.setText(getString(R.string.total_networks_label, networks.size()));
+
+            // linking recycler view from xml to java
+            networkAdapter = new NetworkAdapter(MainActivity.this, networks);
+
+            recyclerView.setAdapter(networkAdapter);
+        });
+
+    }
+
+    @SuppressLint("StringFormatMatches")
+    void sortByProtocol (List<Network>networks){
+        //Sorting by Security Protocols
+        Collections.sort(networks, Comparator.comparing(Network::getBssid));
+
+        runOnUiThread(() -> {
+            // Update the total networks count (Top Page)
+            totalNetworksTextView.setText(getString(R.string.total_networks_label, networks.size()));
+
+            // linking recycler view from xml to java
+            networkAdapter = new NetworkAdapter(MainActivity.this, networks);
+            recyclerView.setAdapter(networkAdapter);
+        });
+
+    }
+
+    @SuppressLint("StringFormatMatches")
+    void filterBySSID(){
+
+        // Testing-generating list of networks
+        List<Network> networksList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            networksList.add(new Network(i, "Network" + i, "Wep" + i));
+        }
+
+        //Sorting by Security Protocol using Collections Library
+        Collections.sort(networksList, Comparator.comparing(Network::getSsid));
+        runOnUiThread(() -> {
+            //runOnUiThread method is used to update the UI with the fetched data.
+            // This ensures that database operations do not block the main thread, preventing the UI from freezing.
+
+            // Update the total networks count (Top Page)
+            totalNetworksTextView.setText(getString(R.string.total_networks_label, networksList.size()));
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this); //creates a linear layout manager for recycler view
+            recyclerView = findViewById(R.id.recyclerView);
+            networkAdapterFilteringBySSID = new NetworkAdapterFilteringBySSID (networksList); //binds networks with adapter so networks can be set to adapted view
+
+            recyclerView.setLayoutManager(linearLayoutManager); //set linear layout manager to recycler view layout
+            recyclerView.setAdapter(networkAdapterFilteringBySSID); //integrate adapter in recycler view layout
+    });
+
+
+    }
+
+    @SuppressLint("StringFormatMatches")
+    void filterByProtocol(){
+
+        // Testing-generating list of networks
+        List<Network> networksList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            networksList.add(new Network(i, "Network" + i, "Wep" + i));
+        }
+
+        //Sorting by Security Protocol using Collections Library
+        Collections.sort(networksList, Comparator.comparing(Network::getSsid));
+        runOnUiThread(() -> {
+            //runOnUiThread method is used to update the UI with the fetched data.
+            // This ensures that database operations do not block the main thread, preventing the UI from freezing.
+            totalNetworksTextView.setText(getString(R.string.total_networks_label, networksList.size()));
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this); //creates a linear layout manager for recycler view
+            recyclerView = findViewById(R.id.recyclerView);
+            networkRecyclerViewByProtocolAdapter = new NetworkAdapterFiteringByProtocol(networksList); //binds networks with adapter so networks can be set to adapted view
+
+            recyclerView.setLayoutManager(linearLayoutManager); //set linear layout manager to recycler view layout
+            recyclerView.setAdapter(networkRecyclerViewByProtocolAdapter); //integrate adapter in recycler view layout
+
+        });
+
+    }
+
 }

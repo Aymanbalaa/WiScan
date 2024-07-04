@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NetworkDetails">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/grey"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:title="Network Details" />
+
+    <TextView
+        android:id="@+id/textViewNetworkSSIDDetailsActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewNetworkSecurityDetailsActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Security:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textViewNetworkSSIDDetailsActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewNetworkBssidDetailsActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bssid:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textViewNetworkSecurityDetailsActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewNetworkPostalDetailsActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Postal code:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textViewNetworkBssidDetailsActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Neighborhood:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textViewNetworkPostalDetailsActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewNetworkCoodinatesDetailsActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coordinates:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textView5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewNetworkProviderDetailsActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Provider:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textViewNetworkCoodinatesDetailsActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewProtocolDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="@id/textViewNetworkSecurityDetailsActivity"
+        app:layout_constraintStart_toEndOf="@id/textViewNetworkSecurityDetailsActivity"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewBssidDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="@id/textViewNetworkBssidDetailsActivity"
+        app:layout_constraintStart_toEndOf="@id/textViewNetworkBssidDetailsActivity"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewPostalCodeDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="@id/textViewNetworkPostalDetailsActivity"
+        app:layout_constraintStart_toEndOf="@id/textViewNetworkPostalDetailsActivity"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewNeighborDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="@id/textView5"
+        app:layout_constraintStart_toEndOf="@id/textView5"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewCoordinatesDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="@id/textViewNetworkCoodinatesDetailsActivity"
+        app:layout_constraintStart_toEndOf="@id/textViewNetworkCoodinatesDetailsActivity"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewProviderDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="@id/textViewNetworkProviderDetailsActivity"
+        app:layout_constraintStart_toEndOf="@id/textViewNetworkProviderDetailsActivity"
+        android:layout_marginStart="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
