@@ -3,24 +3,135 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:usesCleartextTraffic="true"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:padding="16dp"
+    android:id="@+id/main"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_profile_image"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentTop="true"
+        android:contentDescription="Profile Image"/>
 
     <TextView
-        android:id="@+id/totalNetworksTextView"
+        android:id="@+id/hi_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Networks: 0"
+        android:text="@string/hi"
         android:textSize="18sp"
+        android:layout_toEndOf="@id/profile_image"
+        android:layout_marginStart="8dp"
+        android:layout_alignTop="@id/profile_image"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/thomas"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_margin="16dp" />
+        android:layout_below="@id/hi_text"
+        android:layout_alignStart="@id/hi_text"
+        android:layout_marginTop="4dp"
+        android:textColor="@android:color/black"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/totalNetworksTextView"
-        android:layout_marginTop="8dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/profile_image"
+        android:layout_marginTop="32dp">
 
+        <Button
+            android:id="@+id/guidance_button"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:text="@string/guidance"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/ic_guidance"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp" />
+
+        <Button
+            android:id="@+id/wifi_button"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:text="@string/wifi"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/ic_wifi"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:lines="2"/>
+
+        <Button
+            android:id="@+id/location_button"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:text="@string/location"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/ic_location"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:lines="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@android:color/holo_orange_light"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/home_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_home"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Home"/>
+
+        <ImageButton
+            android:id="@+id/signal_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_signal"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Signal"/>
+
+        <ImageButton
+            android:id="@+id/location_icon_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_location"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Location"/>
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_settings"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Settings"/>
+    </LinearLayout>
 </RelativeLayout>
