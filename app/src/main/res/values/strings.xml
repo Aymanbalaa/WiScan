@@ -7,4 +7,9 @@
     <string name="postal_code_label">Postal Code: %1$s</string>
     <string name="neighborhood_label">Neighborhood: %1$s</string>
     <string name="total_networks_label">Total Networks: %1$s</string>
+    <string name="hi">Hi</string>
+    <string name="thomas">Thomas</string>
+    <string name="guidance">Help</string>
+    <string name="wifi">Scanned Network List</string>
+    <string name="location">Map</string>
 </resources>

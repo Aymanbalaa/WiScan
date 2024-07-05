@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Button locationButton = findViewById(R.id.location_button);
 
         guidanceButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, GuidanceActivity.class);
-            startActivity(intent);
+            Toast.makeText(MainActivity.this, "Not available yet", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(MainActivity.this, GuidanceActivity.class);
+//            startActivity(intent);
         });
 
         wifiButton.setOnClickListener(v -> {
@@ -27,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         locationButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LocationActivity.class);
-            startActivity(intent);
+            Toast.makeText(MainActivity.this, "Not available yet", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(MainActivity.this, LocationActivity.class);
+//            startActivity(intent);
         });
     }
 }
