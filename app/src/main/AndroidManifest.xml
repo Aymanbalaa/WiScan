@@ -29,6 +29,7 @@
         <activity android:name=".GuidanceActivity" />
         <activity android:name=".WiFiActivity" />
         <activity android:name=".LocationActivity" />
+        <activity android:name=".NetworkDetailActivity" />
 
     </application>
 </manifest>
