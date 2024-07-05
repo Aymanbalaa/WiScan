@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_sort_SSID"
+        android:title="Sort by SSID"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sort_protocol"
+        android:title="Sort by protocol"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_filter_SSID"
+        android:title="filter by SSID"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_filter_protocol"
+        android:title="filter by protocol"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+</menu>

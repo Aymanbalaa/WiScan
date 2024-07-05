@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,11 +46,16 @@ public class MainActivity extends AppCompatActivity {
     private Runnable fetchTask;
     private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
     private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
+    List<Network> networksList; //for testing sorting and filtering functions
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Toobar setting
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         totalNetworksTextView = findViewById(R.id.totalNetworksTextView);
         recyclerView = findViewById(R.id.recyclerView);
@@ -67,19 +75,46 @@ public class MainActivity extends AppCompatActivity {
 
         //Testing sorting and filtering
         // Testing-generating list of networks
-        List<Network> networksList = new ArrayList<>();
+        networksList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             networksList.add(new Network(i, "BELL_"+i, "bssid"+i, "H3SE9", "WEP"+i, "Concordia"+i, "548621", "BELL"+i));
         }
 
 
-        //sortBySSID(networksList);
-        //sortByProtocol(networksList);
-        //filterBySSID();
-        filterByProtocol();
-
+        sortBySSID(networksList);
 
     }
+    // Setting up Actions item on toolbar in Main
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu item on action bar
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item ) {
+        // Handle action bar item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.action_sort_SSID) {
+            sortBySSID(networksList);
+            return true;
+        } else if (id == R.id.action_sort_protocol) {
+            sortByProtocol(networksList);
+            return true;
+        } else if (id == R.id.action_filter_SSID) {
+            filterBySSID();
+
+        }else {
+            filterByProtocol();
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -161,9 +196,8 @@ public class MainActivity extends AppCompatActivity {
             totalNetworksTextView.setText(getString(R.string.total_networks_label, networks.size()));
 
             // linking recycler view from xml to java
-            networkAdapter = new NetworkAdapter(MainActivity.this, networks);
-
             recyclerView.setAdapter(networkAdapter);
+            networkAdapter = new NetworkAdapter(MainActivity.this, networks);
         });
 
     }
@@ -238,6 +272,12 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 }

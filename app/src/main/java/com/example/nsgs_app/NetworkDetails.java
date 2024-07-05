@@ -56,7 +56,8 @@ public class NetworkDetails extends AppCompatActivity {
             runOnUiThread(() -> {
 
                 //Showing details of network
-                textViewSSID.setText(Network_id);;
+                // Displaying network details
+                textViewSSID.setText(network.getSsid());
                 bssid.setText(network.getBssid());
                 postalcode.setText(network.getPostalCode());
                 textViewProtocol.setText(network.getSecurity());
