@@ -1,6 +1,9 @@
 // NetworkDetailActivity.java
 package com.example.nsgs_app;
 
+import static com.example.nsgs_app.NetworkProviderGuesser.getNetworkProvider;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class NetworkDetailActivity extends AppCompatActivity {
-    private TextView ssid, bssid, security, coordinates, postalCode, neighborhood;
+    private TextView ssid, bssid, security, coordinates, postalCode, neighborhood, provider;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
         coordinates = findViewById(R.id.coordinates);
         postalCode = findViewById(R.id.postalCode);
         neighborhood = findViewById(R.id.neighborhood);
+        provider = findViewById(R.id.provider);
 
         // Retrieve the network details from the intent
         Intent intent = getIntent();
@@ -38,6 +43,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
         coordinates.setText(getString(R.string.coordinates_label,intent.getStringExtra("coordinates")));
         postalCode.setText(getString(R.string.postal_code_label,intent.getStringExtra("postalCode")));
         neighborhood.setText(getString(R.string.neighborhood_label,intent.getStringExtra("neighborhood")));
+        provider.setText(getString(R.string.provider_label,getNetworkProvider(intent.getStringExtra("ssid"))));
     }
 
     // Static method to start this activity with network details

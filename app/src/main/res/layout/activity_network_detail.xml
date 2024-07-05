@@ -63,6 +63,14 @@
             android:textSize="16sp"
             android:paddingBottom="8dp"
             android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/provider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:paddingBottom="8dp"
+            android:textColor="@android:color/darker_gray" />
     </LinearLayout>
 
 </LinearLayout>

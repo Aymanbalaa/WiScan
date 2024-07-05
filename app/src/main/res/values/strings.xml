@@ -12,4 +12,5 @@
     <string name="guidance">Help</string>
     <string name="wifi">Scanned Network List</string>
     <string name="location">Map</string>
+    <string name="provider_label">Provider : %1s</string>
 </resources>
