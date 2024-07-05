@@ -19,7 +19,7 @@
         android:paddingBottom="4dp"
         android:textColor="@android:color/black" />
 
-    <TextView
+  <!--  <TextView
         android:id="@+id/bssid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         android:textSize="14sp"
         android:paddingBottom="4dp"
         android:textColor="@android:color/darker_gray" />
-
+-->
     <TextView
         android:id="@+id/security"
         android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
         android:paddingBottom="4dp"
         android:textColor="@android:color/darker_gray" />
 
-    <TextView
+<!--    <TextView
         android:id="@+id/coordinates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,5 +62,5 @@
         android:text="Neighborhood"
         android:textSize="14sp"
         android:paddingBottom="4dp"
-        android:textColor="@android:color/darker_gray" />
+        android:textColor="@android:color/darker_gray" />-->
 </LinearLayout>

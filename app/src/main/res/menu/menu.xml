@@ -1,27 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_sort_SSID"
-        android:title="Sort by SSID"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_sort_protocol"
-        android:title="Sort by protocol"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_filter_SSID"
-        android:title="filter by SSID"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_filter_protocol"
-        android:title="filter by protocol"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
+    <item android:id="@+id/action_sort_SSID" android:title="Sort by SSID" />
+    <item android:id="@+id/action_sort_protocol" android:title="Sort by Protocol" />
+    <item android:id="@+id/action_filter_SSID" android:title="Filter by SSID" />
+    <item android:id="@+id/action_filter_wep" android:title="Filter by WEP" />
+    <item android:id="@+id/action_filter_wpa" android:title="Filter by WPA" />
+    <item android:id="@+id/action_filter_wpa2" android:title="Filter by WPA2" />
+    <item android:id="@+id/action_filter_wpa3" android:title="Filter by WPA3" />
 
 
 </menu>

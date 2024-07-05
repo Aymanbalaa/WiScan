@@ -41,25 +41,28 @@ public class MainActivity extends AppCompatActivity {
     private List<Network> networkList;
     private TextView totalNetworksTextView;
     protected NetworkAdapterFilteringBySSID networkAdapterFilteringBySSID;
-    protected NetworkAdapterFiteringByProtocol networkRecyclerViewByProtocolAdapter;
     private Handler handler;
     private Runnable fetchTask;
     private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
     private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
-    List<Network> networksList; //for testing sorting and filtering functions
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Toobar setting
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // Initialize networkList
+        networkList = new ArrayList<>();
 
+        // Initialize TextView before using it
         totalNetworksTextView = findViewById(R.id.totalNetworksTextView);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        // Toolbar setting
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         handler = new Handler();
         fetchTask = new Runnable() {
@@ -73,18 +76,34 @@ public class MainActivity extends AppCompatActivity {
         fetchNetworks(); // Initial fetch on create
         handler.postDelayed(fetchTask, FETCH_INTERVAL); // Schedule fetch every interval
 
-        //Testing sorting and filtering
-        // Testing-generating list of networks
-        networksList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            networksList.add(new Network(i, "BELL_"+i, "bssid"+i, "H3SE9", "WEP"+i, "Concordia"+i, "548621", "BELL"+i));
-        }
+        // For Testing only should be removed when integrated with rest of code
+        networkList = new ArrayList<>();
+        networkList.add(new Network(1, "BELL_12", "bssid1", "H3SE9", "WEP", "Concordia", "548621", "BELL"));
+        networkList.add(new Network(2, "Telus_02", "bssid2", "H3SE9", "WEP", "Concordia1", "548621", "Telus"));
+        networkList.add(new Network(3, "Koodo_25", "bssid4", "H3SE9", "WEP", "Concordia4", "548621", "Koodo"));
+        networkList.add(new Network(4, "BELL_56", "bssid3", "H3SE9", "WPA", "Concordia3", "548621", "BELL"));
+        networkList.add(new Network(5, "Telus_41", "bssid2", "H3SE9", "WPA", "Concordia1", "548621", "Telus"));
+        networkList.add(new Network(6, "Koodo_20", "bssid4", "H3SE9", "WPA", "Concordia4", "548621", "Koodo"));
+        networkList.add(new Network(7, "BELL_28", "bssid3", "H3SE9", "WPA2", "Concordia3", "548621", "BELL"));
+        networkList.add(new Network(8, "Telus_09", "bssid2", "H3SE9", "WPA2", "Concordia1", "548621", "Telus"));
+        networkList.add(new Network(9, "Koodo_89_", "bssid4", "H3SE9", "WPA2", "Concordia4", "548621", "Koodo"));
+        networkList.add(new Network(10, "BELL_74", "bssid3", "H3SE9", "WPA3", "Concordia3", "548621", "BELL"));
+        networkList.add(new Network(11, "Telus_30", "bssid2", "H3SE9", "WPA3", "Concordia1", "548621", "Telus"));
+        networkList.add(new Network(12, "Koodo_17_", "bssid4", "H3SE9", "WPA3", "Concordia4", "548621", "Koodo"));
 
-
-        sortBySSID(networksList);
+        // Sorting by SSID by default
+        sortBySSID();
 
     }
     // Setting up Actions item on toolbar in Main
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //Sorting by SSID by default
+        sortBySSID();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,18 +118,27 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_sort_SSID) {
-            sortBySSID(networksList);
+            sortBySSID();
             return true;
         } else if (id == R.id.action_sort_protocol) {
-            sortByProtocol(networksList);
+            sortByProtocol();
             return true;
         } else if (id == R.id.action_filter_SSID) {
             filterBySSID();
-
-        }else {
-            filterByProtocol();
+            return true;
+        } else if (id == R.id.action_filter_wep) {
+            filterByProtocol("WEP");
+            return true;
+        } else if (id == R.id.action_filter_wpa) {
+            filterByProtocol("WPA");
+            return true;
+        } else if (id == R.id.action_filter_wpa2) {
+            filterByProtocol("WPA2");
+            return true;
+        } else if (id == R.id.action_filter_wpa3) {
+            filterByProtocol("WPA3");
+            return true;
         }
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -179,6 +207,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     runOnUiThread(() -> Toast.makeText(MainActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show());
+
+
+
                 }
             }
         });
@@ -186,59 +217,52 @@ public class MainActivity extends AppCompatActivity {
 
 
     @SuppressLint("StringFormatMatches")
-    void sortBySSID(List<Network>networks){
+    void sortBySSID(){
         //Sorting by SSIDs
         //Collections.sort(networkList, Comparator.comparing(Network::getBssid));
-        Collections.sort(networks, Comparator.comparing(Network::getBssid));
+        Collections.sort(networkList, Comparator.comparing(Network::getBssid));
 
         runOnUiThread(() -> {
             // Update the total networks count (Top Page)
-            totalNetworksTextView.setText(getString(R.string.total_networks_label, networks.size()));
+            totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
 
             // linking recycler view from xml to java
             recyclerView.setAdapter(networkAdapter);
-            networkAdapter = new NetworkAdapter(MainActivity.this, networks);
+            networkAdapter = new NetworkAdapter(MainActivity.this, networkList);
         });
 
     }
 
     @SuppressLint("StringFormatMatches")
-    void sortByProtocol (List<Network>networks){
+    void sortByProtocol (){
         //Sorting by Security Protocols
-        Collections.sort(networks, Comparator.comparing(Network::getBssid));
+        Collections.sort(networkList, Comparator.comparing(Network::getBssid));
 
         runOnUiThread(() -> {
             // Update the total networks count (Top Page)
-            totalNetworksTextView.setText(getString(R.string.total_networks_label, networks.size()));
+            totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
 
             // linking recycler view from xml to java
-            networkAdapter = new NetworkAdapter(MainActivity.this, networks);
+            networkAdapter = new NetworkAdapter(MainActivity.this, networkList);
             recyclerView.setAdapter(networkAdapter);
         });
 
     }
 
     @SuppressLint("StringFormatMatches")
-    void filterBySSID(){
-
-        // Testing-generating list of networks
-        List<Network> networksList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            networksList.add(new Network(i, "Network" + i, "Wep" + i));
-        }
-
+    void filterBySSID( ){
         //Sorting by Security Protocol using Collections Library
-        Collections.sort(networksList, Comparator.comparing(Network::getSsid));
+        Collections.sort(networkList, Comparator.comparing(Network::getSsid));
         runOnUiThread(() -> {
             //runOnUiThread method is used to update the UI with the fetched data.
             // This ensures that database operations do not block the main thread, preventing the UI from freezing.
 
             // Update the total networks count (Top Page)
-            totalNetworksTextView.setText(getString(R.string.total_networks_label, networksList.size()));
+            totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this); //creates a linear layout manager for recycler view
             recyclerView = findViewById(R.id.recyclerView);
-            networkAdapterFilteringBySSID = new NetworkAdapterFilteringBySSID (networksList); //binds networks with adapter so networks can be set to adapted view
+            networkAdapterFilteringBySSID = new NetworkAdapterFilteringBySSID (networkList); //binds networks with adapter so networks can be set to adapted view
 
             recyclerView.setLayoutManager(linearLayoutManager); //set linear layout manager to recycler view layout
             recyclerView.setAdapter(networkAdapterFilteringBySSID); //integrate adapter in recycler view layout
@@ -248,27 +272,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("StringFormatMatches")
-    void filterByProtocol(){
+    void filterByProtocol(String protocol){
 
-        // Testing-generating list of networks
-        List<Network> networksList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            networksList.add(new Network(i, "Network" + i, "Wep" + i));
+        List<Network> filteredList = new ArrayList<>();
+        for (Network network : networkList) {
+            if (network.getSecurity().equalsIgnoreCase(protocol)) {
+                filteredList.add(network);
+            }
         }
 
         //Sorting by Security Protocol using Collections Library
-        Collections.sort(networksList, Comparator.comparing(Network::getSsid));
+        Collections.sort(networkList, Comparator.comparing(Network::getSsid));
         runOnUiThread(() -> {
             //runOnUiThread method is used to update the UI with the fetched data.
             // This ensures that database operations do not block the main thread, preventing the UI from freezing.
-            totalNetworksTextView.setText(getString(R.string.total_networks_label, networksList.size()));
+            totalNetworksTextView.setText(getString(R.string.total_networks_label, filteredList.size()));
 
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this); //creates a linear layout manager for recycler view
-            recyclerView = findViewById(R.id.recyclerView);
-            networkRecyclerViewByProtocolAdapter = new NetworkAdapterFiteringByProtocol(networksList); //binds networks with adapter so networks can be set to adapted view
-
-            recyclerView.setLayoutManager(linearLayoutManager); //set linear layout manager to recycler view layout
-            recyclerView.setAdapter(networkRecyclerViewByProtocolAdapter); //integrate adapter in recycler view layout
+            // linking recycler view from xml to java
+            networkAdapter = new NetworkAdapter(MainActivity.this, filteredList);
+            recyclerView.setAdapter(networkAdapter);
 
         });
 

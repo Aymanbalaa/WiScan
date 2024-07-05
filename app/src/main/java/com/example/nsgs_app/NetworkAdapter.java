@@ -35,11 +35,11 @@ public class NetworkAdapter extends RecyclerView.Adapter<NetworkAdapter.NetworkV
         //following best strings.xml practice
         //uses strings.xml to allow easy translation if needed
         holder.ssid.setText(context.getString(R.string.ssid_label, network.getSsid()));
-        holder.bssid.setText(context.getString(R.string.bssid_label, network.getBssid()));
+      /*  holder.bssid.setText(context.getString(R.string.bssid_label, network.getBssid()));*/
         holder.security.setText(context.getString(R.string.security_label, network.getSecurity()));
-        holder.coordinates.setText(context.getString(R.string.coordinates_label, network.getCoordinates()));
+      /*  holder.coordinates.setText(context.getString(R.string.coordinates_label, network.getCoordinates()));
         holder.postalCode.setText(context.getString(R.string.postal_code_label, network.getPostalCode()));
-        holder.neighborhood.setText(context.getString(R.string.neighborhood_label, network.getNeighborhood()));
+        holder.neighborhood.setText(context.getString(R.string.neighborhood_label, network.getNeighborhood()));*/
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             //The view of the holder is itemView
@@ -68,11 +68,11 @@ public class NetworkAdapter extends RecyclerView.Adapter<NetworkAdapter.NetworkV
         public NetworkViewHolder(@NonNull View itemView) {
             super(itemView);
             ssid = itemView.findViewById(R.id.ssid);
-            bssid = itemView.findViewById(R.id.bssid);
+           /* bssid = itemView.findViewById(R.id.bssid);*/
             security = itemView.findViewById(R.id.security);
-            coordinates = itemView.findViewById(R.id.coordinates);
+           /* coordinates = itemView.findViewById(R.id.coordinates);
             postalCode = itemView.findViewById(R.id.postalCode);
-            neighborhood = itemView.findViewById(R.id.neighborhood);
+            neighborhood = itemView.findViewById(R.id.neighborhood);*/
         }
     }
 }
