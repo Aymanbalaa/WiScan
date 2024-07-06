@@ -14,4 +14,7 @@
     <string name="location">Map</string>
     <string name="provider_label">Provider : %1s</string>
     <string name="settings">SETTINGS</string>
+    <string name="sort_by_ssid">Sort by SSID</string>
+    <string name="sort_by_security_protocol">Sort by Security Protocol</string>
+    <string name="sort">Sort</string>
 </resources>

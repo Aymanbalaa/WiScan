@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -108,14 +110,6 @@ public class WiFiActivity extends AppCompatActivity {
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
                         networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
 
-                        // Sort the list by SSID
-                        networkList.sort(new Comparator<Network>() {
-                            @Override
-                            public int compare(Network n1, Network n2) {
-                                return n1.getSsid().compareToIgnoreCase(n2.getSsid());
-                            }
-                        });
-
                         runOnUiThread(() -> {
                             // Update the total networks count (Top Page)
                             totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
@@ -136,15 +130,39 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_wifi, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            // Handle the back button press
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {// Back button
+            navigateToMainActivity();
+            return true;
+        } else if (itemId == R.id.sort_by_ssid) {// Sort by SSID
+            sortNetworkList(Comparator.comparing(Network::getSsid, String::compareToIgnoreCase));
+            return true;
+        } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
+            sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void navigateToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void sortNetworkList(Comparator<Network> comparator) {
+        if (networkList != null) {
+            networkList.sort(comparator);
+            networkAdapter.notifyDataSetChanged();
+        }
     }
 }

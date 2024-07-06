@@ -92,6 +92,7 @@
             android:lines="2"/>
     </LinearLayout>
 
+<!--@TODO CHECK IF TEAM AGREES TO DELETE ALL WHAT IS BELOW -->
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="56dp"-->
@@ -99,7 +100,7 @@
 <!--        android:orientation="horizontal"-->
 <!--        android:background="@android:color/holo_orange_light"-->
 <!--        android:gravity="center">-->
-
+<!--    -->
 <!--        <ImageButton-->
 <!--            android:id="@+id/home_button"-->
 <!--            android:layout_width="0dp"-->
