@@ -41,6 +41,7 @@ public class WiFiActivity extends AppCompatActivity {
     private Runnable fetchTask;
     private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
     private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
+    private Comparator<Network> currentComparator; // Save the current comparator
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -80,10 +81,11 @@ public class WiFiActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
 
         // DO NOT CHANGE
-        // 10.0.2.2:5000 is to be used if the emulator and server are running on same device
-        // otherwise use the endpoint of server
+        // 10.0.2.2:5000 is to be used if the emulator and server are running on the same device
+        // otherwise use the endpoint of the server
         String url = "http://10.0.2.2:5000/get_all_networks";
-        // String url = "https://0040-192-226-194-155.ngrok-free.app/get_all_networks";
+        //String url = "http://217.15.171.225:5000/get_all_networks";
+        //String url = "http://nsgs-proxy-server.online:5000/get_all_networks";
 
         Request request = new Request.Builder()
                 .url(url)
@@ -113,6 +115,11 @@ public class WiFiActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             // Update the total networks count (Top Page)
                             totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
+
+                            // Sort the network list if a comparator is set
+                            if (currentComparator != null) {
+                                networkList.sort(currentComparator);
+                            }
 
                             // linking recycler view from xml to java
                             networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList);
@@ -164,5 +171,6 @@ public class WiFiActivity extends AppCompatActivity {
             networkList.sort(comparator);
             networkAdapter.notifyDataSetChanged();
         }
+        currentComparator = comparator; // Save the current comparator
     }
 }

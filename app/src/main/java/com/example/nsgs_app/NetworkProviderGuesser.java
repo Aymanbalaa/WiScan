@@ -10,12 +10,17 @@ public class NetworkProviderGuesser {
     private static final Map<String, String> providers = new HashMap<>();
 
     static {
-        // ADD MORE HERE ADD MORE HERE ADD MORE HERE JUST HERE
-        providers.put("Bell", ".*Bell.*|.*bell.*");
-        providers.put("Rogers", ".*Rogers.*|.*rogers.*");
-        providers.put("Telus", ".*Telus.*|.*telus.*");
-        providers.put("Videotron", ".*Videotron.*|.*videotron.*");
-
+        // ADD MORE COMBINATIONS FOR NETWORK PROVIDERS
+        providers.put("Bell", ".*Bell.*|.*BELL.*|.*bell.*");
+        providers.put("Rogers", ".*Rogers.*|.*ROGERS.*|.*rogers.*");
+        providers.put("Telus", ".*Telus.*|.*TELUS.*|.*telus.*");
+        providers.put("Videotron", ".*Videotron.*|.*VIDEOTRON.*|.*videotron.*");
+        providers.put("Shaw", ".*Shaw.*|.*SHAW.*|.*shaw.*");
+        providers.put("Fido", ".*Fido.*|.*FIDO.*|.*fido.*");
+        providers.put("Koodo", ".*Koodo.*|.*KOODO.*|.*koodo.*");
+        providers.put("Freedom Mobile", ".*Freedom.*|.*FREEDOM.*|.*freedom.*|.*Freedom Mobile.*|.*FREEDOM MOBILE.*|.*freedom mobile.*"); // no spaces in ssid lol
+        providers.put("Virgin Mobile", ".*Virgin.*|.*VIRGIN.*|.*virgin.*|.*Virgin Mobile.*|.*VIRGIN MOBILE.*|.*virgin mobile.*");
+        providers.put("Public Mobile", ".*Public.*|.*PUBLIC.*|.*public.*|.*Public Mobile.*|.*PUBLIC MOBILE.*|.*public mobile.*");
     }
 
     public static String getNetworkProvider(String ssid) {
