@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ public class WiFiActivity extends AppCompatActivity {
     private Runnable fetchTask;
     private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
     private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
+    private Comparator<Network> currentComparator; // Save the current comparator
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -78,10 +81,11 @@ public class WiFiActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
 
         // DO NOT CHANGE
-        // 10.0.2.2:5000 is to be used if the emulator and server are running on same device
-        // otherwise use the endpoint of server
+        // 10.0.2.2:5000 is to be used if the emulator and server are running on the same device
+        // otherwise use the endpoint of the server
         String url = "http://10.0.2.2:5000/get_all_networks";
-        // String url = "https://0040-192-226-194-155.ngrok-free.app/get_all_networks";
+        //String url = "http://217.15.171.225:5000/get_all_networks";
+        //String url = "http://nsgs-proxy-server.online:5000/get_all_networks";
 
         Request request = new Request.Builder()
                 .url(url)
@@ -108,17 +112,14 @@ public class WiFiActivity extends AppCompatActivity {
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
                         networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
 
-                        // Sort the list by SSID
-                        networkList.sort(new Comparator<Network>() {
-                            @Override
-                            public int compare(Network n1, Network n2) {
-                                return n1.getSsid().compareToIgnoreCase(n2.getSsid());
-                            }
-                        });
-
                         runOnUiThread(() -> {
                             // Update the total networks count (Top Page)
                             totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
+
+                            // Sort the network list if a comparator is set
+                            if (currentComparator != null) {
+                                networkList.sort(currentComparator);
+                            }
 
                             // linking recycler view from xml to java
                             networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList);
@@ -136,15 +137,40 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_wifi, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            // Handle the back button press
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {// Back button
+            navigateToMainActivity();
+            return true;
+        } else if (itemId == R.id.sort_by_ssid) {// Sort by SSID
+            sortNetworkList(Comparator.comparing(Network::getSsid, String::compareToIgnoreCase));
+            return true;
+        } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
+            sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void navigateToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void sortNetworkList(Comparator<Network> comparator) {
+        if (networkList != null) {
+            networkList.sort(comparator);
+            networkAdapter.notifyDataSetChanged();
+        }
+        currentComparator = comparator; // Save the current comparator
     }
 }

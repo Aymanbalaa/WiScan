@@ -3,6 +3,7 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">127.0.0.1</domain>
         <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">217.15.171.225</domain>
         <domain includeSubdomains="true">10.0.2.2</domain> <!-- If you are using an emulator -->
     </domain-config>
 </network-security-config>
