@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class NetworkDetailActivity extends AppCompatActivity {
     private TextView ssid, bssid, security, coordinates, postalCode, neighborhood, provider;
-
+    // all the textviews used in the network Details Page
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

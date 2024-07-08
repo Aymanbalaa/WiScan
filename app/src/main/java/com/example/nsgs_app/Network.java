@@ -8,6 +8,9 @@ public class Network {
     private String security;
     private String neighborhood;
 
+    //used to get and store the network details
+    // class offers a better interface
+
     public int getId() {
         return id;
     }

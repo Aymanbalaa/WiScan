@@ -42,6 +42,8 @@ public class WiFiActivity extends AppCompatActivity {
     private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
     private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
     private Comparator<Network> currentComparator; // Save the current comparator
+    private int scrollPosition = 0; // Save the scroll position
+    private int scrollOffset = 0; // Save the scroll offset
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -83,8 +85,8 @@ public class WiFiActivity extends AppCompatActivity {
         // DO NOT CHANGE
         // 10.0.2.2:5000 is to be used if the emulator and server are running on the same device
         // otherwise use the endpoint of the server
-        String url = "http://10.0.2.2:5000/get_all_networks";
-        //String url = "http://217.15.171.225:5000/get_all_networks";
+        //String url = "http://10.0.2.2:5000/get_all_networks";
+        String url = "http://217.15.171.225:5000/get_all_networks";
         //String url = "http://nsgs-proxy-server.online:5000/get_all_networks";
 
         Request request = new Request.Builder()
@@ -113,6 +115,15 @@ public class WiFiActivity extends AppCompatActivity {
                         networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
 
                         runOnUiThread(() -> {
+                            // Save the current scroll position and offset
+                            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                            if (layoutManager != null) {
+                                scrollPosition = layoutManager.findFirstVisibleItemPosition();
+                                if (scrollPosition != RecyclerView.NO_POSITION) {
+                                    scrollOffset = layoutManager.findViewByPosition(scrollPosition).getTop();
+                                }
+                            }
+
                             // Update the total networks count (Top Page)
                             totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
 
@@ -124,6 +135,11 @@ public class WiFiActivity extends AppCompatActivity {
                             // linking recycler view from xml to java
                             networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList);
                             recyclerView.setAdapter(networkAdapter);
+
+                            // Restore the scroll position and offset
+                            if (layoutManager != null && scrollPosition != RecyclerView.NO_POSITION) {
+                                layoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
+                            }
                         });
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -168,8 +184,22 @@ public class WiFiActivity extends AppCompatActivity {
 
     private void sortNetworkList(Comparator<Network> comparator) {
         if (networkList != null) {
+            // Save the current scroll position and offset
+            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+            if (layoutManager != null) {
+                scrollPosition = layoutManager.findFirstVisibleItemPosition();
+                if (scrollPosition != RecyclerView.NO_POSITION) {
+                    scrollOffset = layoutManager.findViewByPosition(scrollPosition).getTop();
+                }
+            }
+
             networkList.sort(comparator);
             networkAdapter.notifyDataSetChanged();
+
+            // Restore the scroll position and offset
+            if (layoutManager != null && scrollPosition != RecyclerView.NO_POSITION) {
+                layoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
+            }
         }
         currentComparator = comparator; // Save the current comparator
     }
