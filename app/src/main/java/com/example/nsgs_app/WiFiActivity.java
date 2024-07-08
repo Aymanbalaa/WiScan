@@ -67,6 +67,7 @@ public class WiFiActivity extends AppCompatActivity {
         fetchTask = new Runnable() {
             @Override
             public void run() {
+                saveScrollPosition(); // Save the scroll position before fetching data
                 fetchNetworks();
                 handler.postDelayed(this, FETCH_INTERVAL);
             }
