@@ -2,6 +2,7 @@ package com.example.nsgs_app;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -42,8 +43,10 @@ public class WiFiActivity extends AppCompatActivity {
     private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
     private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
     private Comparator<Network> currentComparator; // Save the current comparator
-    private int scrollPosition = 0; // Save the scroll position
-    private int scrollOffset = 0; // Save the scroll offset
+
+    private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFFFF
+    private static final String SCROLL_POSITION_KEY = "scroll_position";
+    private static final String SCROLL_OFFSET_KEY = "scroll_offset";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -71,6 +74,38 @@ public class WiFiActivity extends AppCompatActivity {
 
         fetchNetworks(); // Initial fetch on create
         handler.postDelayed(fetchTask, FETCH_INTERVAL); // Schedule fetch every interval
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Save the current scroll position and offset
+        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        if (layoutManager != null) {
+            int scrollPosition = layoutManager.findFirstVisibleItemPosition();
+            int scrollOffset = 0;
+            if (scrollPosition != RecyclerView.NO_POSITION) {
+                scrollOffset = layoutManager.findViewByPosition(scrollPosition).getTop();
+            }
+            SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt(SCROLL_POSITION_KEY, scrollPosition);
+            editor.putInt(SCROLL_OFFSET_KEY, scrollOffset);
+            editor.apply();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Restore the scroll position and offset
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        int scrollPosition = preferences.getInt(SCROLL_POSITION_KEY, RecyclerView.NO_POSITION);
+        int scrollOffset = preferences.getInt(SCROLL_OFFSET_KEY, 0);
+        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        if (layoutManager != null && scrollPosition != RecyclerView.NO_POSITION) {
+            layoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
+        }
     }
 
     @Override
@@ -115,15 +150,6 @@ public class WiFiActivity extends AppCompatActivity {
                         networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
 
                         runOnUiThread(() -> {
-                            // Save the current scroll position and offset
-                            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                            if (layoutManager != null) {
-                                scrollPosition = layoutManager.findFirstVisibleItemPosition();
-                                if (scrollPosition != RecyclerView.NO_POSITION) {
-                                    scrollOffset = layoutManager.findViewByPosition(scrollPosition).getTop();
-                                }
-                            }
-
                             // Update the total networks count (Top Page)
                             totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
 
@@ -137,6 +163,10 @@ public class WiFiActivity extends AppCompatActivity {
                             recyclerView.setAdapter(networkAdapter);
 
                             // Restore the scroll position and offset
+                            SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                            int scrollPosition = preferences.getInt(SCROLL_POSITION_KEY, RecyclerView.NO_POSITION);
+                            int scrollOffset = preferences.getInt(SCROLL_OFFSET_KEY, 0);
+                            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                             if (layoutManager != null && scrollPosition != RecyclerView.NO_POSITION) {
                                 layoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
                             }
@@ -186,11 +216,19 @@ public class WiFiActivity extends AppCompatActivity {
         if (networkList != null) {
             // Save the current scroll position and offset
             LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+            int scrollPosition = 0;
+            int scrollOffset = 0;
             if (layoutManager != null) {
                 scrollPosition = layoutManager.findFirstVisibleItemPosition();
+
                 if (scrollPosition != RecyclerView.NO_POSITION) {
                     scrollOffset = layoutManager.findViewByPosition(scrollPosition).getTop();
                 }
+                SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putInt(SCROLL_POSITION_KEY, scrollPosition);
+                editor.putInt(SCROLL_OFFSET_KEY, scrollOffset);
+                editor.apply();
             }
 
             networkList.sort(comparator);
