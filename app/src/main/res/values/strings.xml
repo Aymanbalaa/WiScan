@@ -17,4 +17,5 @@
     <string name="sort_by_ssid">Sort by SSID</string>
     <string name="sort_by_security_protocol">Sort by Security Protocol</string>
     <string name="sort">Sort</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
