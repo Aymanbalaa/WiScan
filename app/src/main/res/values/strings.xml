@@ -17,4 +17,11 @@
     <string name="sort_by_ssid">Sort by SSID</string>
     <string name="sort_by_security_protocol">Sort by Security Protocol</string>
     <string name="sort">Sort</string>
+    <string name="settingsTitle">Settings</string>
+    <string name="spinnerPrompt1">Country</string>
+    <string name="spinnerPrompt2">Metric</string>
+    <string name="spinnerPrompt3">Language</string>
+    <string name="spinnerPrompt4">Database Sync</string>
+    <string name="buttonSave">Save</string>
+
 </resources>

@@ -1,19 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spinnerMetric"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:backgroundTint="#631212"
+    android:padding="16dp">
 
-<!--    YOU ARE FREE TO CHANGE EVERYTHING !!!!!!!-->
-<!--    IF YOU HAVE A STRING FOR A TEXT THAT WILL BE DISPLAYED IT SHOULD NOT BE HERE -->
-<!--    IT SHOULD BE IN STRINGS.XML -->
+    <!--    YOU ARE FREE TO CHANGE EVERYTHING !!!!!!!-->
+    <!--    IF YOU HAVE A STRING FOR A TEXT THAT WILL BE DISPLAYED IT SHOULD NOT BE HERE -->
+    <!--    IT SHOULD BE IN STRINGS.XML -->
+
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings Page"
+        android:id="@+id/Settings"
+        android:layout_width="131dp"
+        android:layout_height="81dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="135dp"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="537dp"
+        android:text="@string/settingsTitle"
+        android:textAlignment="center"
         android:textSize="24sp"
-        android:layout_centerInParent="true"
-        android:textColor="@android:color/black"/>
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinnerCountry"
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="243dp"
+        android:layout_marginEnd="120dp"
+        android:prompt="@string/spinnerPrompt1" />
+
+    <Spinner
+        android:id="@+id/spinnerMetric"
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="314dp"
+        android:layout_marginEnd="120dp"
+        android:prompt="@string/spinnerPrompt2"
+        tools:ignore="DuplicateIds" />
+
+    <Spinner
+        android:id="@+id/spinnerLanguage"
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="384dp"
+        android:layout_marginEnd="120dp"
+        android:prompt="@string/spinnerPrompt3" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="130dp"
+        android:layout_height="68dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginEnd="111dp"
+        android:layout_marginBottom="215dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:text="@string/buttonSave" />
+
 </RelativeLayout>

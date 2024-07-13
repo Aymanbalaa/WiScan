@@ -3,6 +3,7 @@ package com.example.nsgs_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     // NO HARDCODED STRINGS THAT WILL BE DISPLAY SHOULD BE HERE
     // EVERYTHING SHOULD BE IN STRINGS.XML
+
+
+    private Spinner countrySpinner, languageSpinner,temperatureSpinner,dbSpinner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,8 @@ public class SettingsActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+
     }
 
     @Override
@@ -34,4 +41,17 @@ public class SettingsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    private void setupUI(){
+
+        countrySpinner = findViewById(R.id.spinnerCountry);
+        languageSpinner = findViewById(R.id.spinnerLanguage);
+        temperatureSpinner = findViewById(R.id.spinnerMetric);
+
+    }
+
+
+
+
 }
