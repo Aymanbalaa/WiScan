@@ -16,7 +16,7 @@
 
            </item>
 
-              <item android:drawable = "@drawable/ic_arrow_down"
+              <item android:drawable = "@drawable/ic_arrow_right_24"
                   android:gravity ="end"/>
 
 

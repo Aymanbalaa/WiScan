@@ -13,7 +13,7 @@ public class SettingsActivity extends AppCompatActivity {
     // EVERYTHING SHOULD BE IN STRINGS.XML
 
 
-    private Spinner countrySpinner, languageSpinner,temperatureSpinner,dbSpinner;
+    private Spinner languageSpinner,temperatureSpinner,dbSpinner;
 
 
     @Override
@@ -45,7 +45,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void setupUI(){
 
-        countrySpinner = findViewById(R.id.spinnerCountry);
         languageSpinner = findViewById(R.id.spinnerLanguage);
         temperatureSpinner = findViewById(R.id.spinnerMetric);
 

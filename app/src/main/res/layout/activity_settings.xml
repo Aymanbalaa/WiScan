@@ -30,30 +30,16 @@
         android:textStyle="bold" />
 
     <Spinner
-        android:id="@+id/spinnerCountry"
-        android:layout_width="263dp"
-        android:layout_height="44dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="261dp"
-        android:layout_marginEnd="70dp"
-        android:background="@drawable/baseline_arrow_down"
-        android:entries="@array/countryArray"
-        android:prompt="@string/spinnerPrompt1" />
-
-    <Spinner
         android:id="@+id/spinnerMetric"
         android:layout_width="263dp"
         android:layout_height="44dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="337dp"
-        android:layout_marginEnd="70dp"
-        android:background="@drawable/baseline_arrow_down"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/baseline_arrow"
         android:entries="@array/measurementsArray"
         android:prompt="@string/spinnerPrompt2"
         tools:ignore="DuplicateIds" />
@@ -66,10 +52,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="428dp"
-        android:layout_marginEnd="70dp"
-        android:background="@drawable/baseline_arrow_down"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/baseline_arrow"
         android:entries="@array/languageArray"
         android:prompt="@string/spinnerPrompt3" />
 
@@ -80,25 +66,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="511dp"
-        android:layout_marginEnd="70dp"
-        android:background="@drawable/baseline_arrow_down"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/baseline_arrow"
         android:entries="@array/databaseArray"
         android:prompt="@string/spinnerPrompt3" />
-
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="119dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="595dp"
-        android:layout_marginEnd="157dp"
-        android:backgroundTint="@color/green"
-        android:text="@string/buttonSave" />
 
 
 </RelativeLayout>
