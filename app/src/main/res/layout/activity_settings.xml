@@ -4,7 +4,7 @@
     android:id="@+id/spinnerMetric"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#631212"
+    android:backgroundTint="#FFFFFF"
     android:padding="16dp">
 
     <!--    YOU ARE FREE TO CHANGE EVERYTHING !!!!!!!-->
@@ -14,14 +14,16 @@
 
     <TextView
         android:id="@+id/Settings"
-        android:layout_width="131dp"
-        android:layout_height="81dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="135dp"
-        android:layout_marginEnd="129dp"
-        android:layout_marginBottom="537dp"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="184dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginBottom="499dp"
         android:text="@string/settingsTitle"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -29,14 +31,15 @@
 
     <Spinner
         android:id="@+id/spinnerCountry"
-        android:layout_width="178dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="97dp"
-        android:layout_marginTop="243dp"
+        android:layout_marginTop="259dp"
         android:layout_marginEnd="120dp"
+        android:background="@drawable/baseline_arrow_down"
         android:prompt="@string/spinnerPrompt1" />
 
     <Spinner
@@ -50,6 +53,7 @@
         android:layout_marginTop="314dp"
         android:layout_marginEnd="120dp"
         android:prompt="@string/spinnerPrompt2"
+        android:background="@drawable/baseline_arrow_down"
         tools:ignore="DuplicateIds" />
 
     <Spinner
@@ -62,6 +66,7 @@
         android:layout_marginStart="97dp"
         android:layout_marginTop="384dp"
         android:layout_marginEnd="120dp"
+        android:background="@drawable/baseline_arrow_down"
         android:prompt="@string/spinnerPrompt3" />
 
     <Button
@@ -71,10 +76,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="154dp"
-        android:layout_marginEnd="111dp"
-        android:layout_marginBottom="215dp"
-        android:backgroundTint="@android:color/holo_green_dark"
+        android:layout_marginStart="149dp"
+        android:layout_marginEnd="147dp"
+        android:layout_marginBottom="177dp"
+        android:backgroundTint="@color/green"
         android:text="@string/buttonSave" />
 
 </RelativeLayout>
