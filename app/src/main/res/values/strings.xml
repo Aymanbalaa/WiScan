@@ -18,10 +18,48 @@
     <string name="sort_by_security_protocol">Sort by Security Protocol</string>
     <string name="sort">Sort</string>
     <string name="settingsTitle">Settings</string>
+
     <string name="spinnerPrompt1">Country</string>
-    <string name="spinnerPrompt2">Metric</string>
+    <string name="country1">Canada</string>
+    <string name="country2">USA</string>
+    <string-array name="countryArray">
+        <item>@string/country1</item>
+        <item>@string/country2</item>
+    </string-array>
+
+
+    <string name="spinnerPrompt2">Measurements</string>
+    <string name="metric">Metric</string>
+    <string name="imperial">Imperial</string>
+    <string-array name="measurementsArray">
+        <item>@string/metric</item>
+        <item>@string/imperial</item>
+    </string-array>
+
+
     <string name="spinnerPrompt3">Language</string>
+    <string name="language1">English</string>
+    <string name="language2">French</string>
+    <string-array name="languageArray">
+        <item>@string/language1</item>
+        <item>@string/language2</item>
+    </string-array>
+
+
     <string name="spinnerPrompt4">Database Sync</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string-array name="databaseArray">
+        <item>@string/low</item>
+        <item>@string/medium</item>
+        <item>@string/high</item>
+    </string-array>
+
+
     <string name="buttonSave">Save</string>
+
+
+
 
 </resources>

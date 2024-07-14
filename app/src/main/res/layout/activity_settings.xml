@@ -31,55 +31,74 @@
 
     <Spinner
         android:id="@+id/spinnerCountry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="263dp"
+        android:layout_height="44dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="259dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="261dp"
+        android:layout_marginEnd="70dp"
         android:background="@drawable/baseline_arrow_down"
+        android:entries="@array/countryArray"
         android:prompt="@string/spinnerPrompt1" />
 
     <Spinner
         android:id="@+id/spinnerMetric"
-        android:layout_width="178dp"
-        android:layout_height="wrap_content"
+        android:layout_width="263dp"
+        android:layout_height="44dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="314dp"
-        android:layout_marginEnd="120dp"
-        android:prompt="@string/spinnerPrompt2"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="337dp"
+        android:layout_marginEnd="70dp"
         android:background="@drawable/baseline_arrow_down"
+        android:entries="@array/measurementsArray"
+        android:prompt="@string/spinnerPrompt2"
         tools:ignore="DuplicateIds" />
+
 
     <Spinner
         android:id="@+id/spinnerLanguage"
-        android:layout_width="178dp"
-        android:layout_height="wrap_content"
+        android:layout_width="268dp"
+        android:layout_height="44dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="384dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="428dp"
+        android:layout_marginEnd="70dp"
         android:background="@drawable/baseline_arrow_down"
+        android:entries="@array/languageArray"
+        android:prompt="@string/spinnerPrompt3" />
+
+    <Spinner
+        android:id="@+id/spinnerDB"
+        android:layout_width="268dp"
+        android:layout_height="44dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="511dp"
+        android:layout_marginEnd="70dp"
+        android:background="@drawable/baseline_arrow_down"
+        android:entries="@array/databaseArray"
         android:prompt="@string/spinnerPrompt3" />
 
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="130dp"
-        android:layout_height="68dp"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="149dp"
-        android:layout_marginEnd="147dp"
-        android:layout_marginBottom="177dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="595dp"
+        android:layout_marginEnd="157dp"
         android:backgroundTint="@color/green"
         android:text="@string/buttonSave" />
+
 
 </RelativeLayout>
