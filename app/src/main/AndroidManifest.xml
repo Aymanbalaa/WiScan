@@ -32,6 +32,7 @@
         <activity android:name=".LocationActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".NetworkDetailActivity" />
+        <activity android:name=".HelpActivity" />
 
     </application>
 </manifest>
