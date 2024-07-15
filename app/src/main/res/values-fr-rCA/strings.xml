@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NSGS-App</string>
+    <string name="ssid_label">SSID: %1$s</string>
+    <string name="bssid_label">BSSID: %1$s</string>
+    <string name="security_label">Sécurité : %1$s</string>
+    <string name="coordinates_label">Coordonnés: %1$s</string>
+    <string name="postal_code_label">Code Postal: %1$s</string>
+    <string name="neighborhood_label">Quartier: %1$s</string>
+    <string name="total_networks_label">Réseaux Totaux: %1$s</string>
+    <string name="hi">Bienvenue</string>
+    <string name="thomas">Thomas</string>
+    <string name="guidance">Aide</string>
+    <string name="wifi">Liste des Réseaux Analysés</string>
+    <string name="location">Map</string>
+    <string name="provider_label">Fournisseur: %1s</string>
+    <string name="settings">PARAMÈTRES</string>
+    <string name="sort_by_ssid">Trier par SSID</string>
+    <string name="sort_by_security_protocol">Trier par Protocole de Sécurité</string>
+    <string name="sort">Trier</string>
+    <string name="settingsTitle">Paramètres</string>
+
+    <string name="spinnerPrompt1">Pays</string>
+    <string name="country1">Canada</string>
+    <string name="country2">États-Unis</string>
+
+    <string-array name="countryArray">
+        <item>@string/country1</item>
+        <item>@string/country2</item>
+    </string-array>
+
+    <string name="spinnerPrompt2">Mesures</string>
+    <string name="metric">Métrique</string>
+    <string name="imperial">Impérial</string>
+
+    <string-array name="measurementsArray">
+        <item>@string/metric</item>
+        <item>@string/imperial</item>
+    </string-array>
+
+    <string name="spinnerPrompt3">Langue</string>
+    <string name="language1">Anglais</string>
+    <string name="language2">Français</string>
+
+    <string-array name="languageArray">
+        <item>@string/language1</item>
+        <item>@string/language2</item>
+    </string-array>
+
+    <string name="spinnerPrompt4">Synchronisation de Base de Données</string>
+    <string name="low">Faible</string>
+    <string name="medium">Moyen</string>
+    <string name="high">Haut</string>
+
+    <string-array name="databaseArray">
+        <item>@string/low</item>
+        <item>@string/medium</item>
+        <item>@string/high</item>
+    </string-array>
+
+
+
+    <string name="buttonSave">Sauvegarder</string>
+</resources>

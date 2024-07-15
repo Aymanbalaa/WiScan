@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name" translatable="false">NSGS-App</string>
-    <string name="ssid_label" translatable="false">SSID: %1$s</string>
-    <string name="bssid_label" translatable="false">BSSID: %1$s</string>
+    <string name="app_name">NSGS-App</string>
+    <string name="ssid_label">SSID: %1$s</string>
+    <string name="bssid_label">BSSID: %1$s</string>
     <string name="security_label">Security: %1$s</string>
     <string name="coordinates_label">Coordinates: %1$s</string>
     <string name="postal_code_label">Postal Code: %1$s</string>
@@ -58,6 +58,11 @@
 
 
     <string name="buttonSave">Save</string>
+
+    <string-array name="languageCode">
+        <item>en</item>
+        <item>fr</item>
+    </string-array>
 
 
 

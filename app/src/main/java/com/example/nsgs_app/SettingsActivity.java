@@ -47,6 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         languageSpinner = findViewById(R.id.spinnerLanguage);
         temperatureSpinner = findViewById(R.id.spinnerMetric);
+        dbSpinner = findViewById(R.id.spinnerDB);
 
     }
 
