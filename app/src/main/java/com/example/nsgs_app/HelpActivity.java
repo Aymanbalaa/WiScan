@@ -1,17 +1,24 @@
 package com.example.nsgs_app;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import java.util.ArrayList;
+import android.widget.TextView;
+
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HelpActivity extends AppCompatActivity {
 
     ExpandableListView faqListView;
     List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    Map<String, String> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,28 +41,103 @@ public class HelpActivity extends AppCompatActivity {
     }
 
     private void prepareListData() {
-        listDataHeader = new ArrayList<>();
-        listDataChild = new HashMap<>();
+        listDataHeader = List.of(
+                getString(R.string.faq_what_is_nsgs),
+                getString(R.string.faq_start_wifi_scan),
+                getString(R.string.faq_configure_wifi_settings),
+                getString(R.string.faq_view_scanned_data)
+        );
 
-        // Adding FAQ questions
-        listDataHeader.add("What is NSGS App?");
-        listDataHeader.add("How do I start a WiFi scan?");
-        listDataHeader.add("How do I configure the WiFi scan settings?");
-        listDataHeader.add("Where can I see the scanned WiFi data?");
+        listDataChild = Map.of(
+                getString(R.string.faq_what_is_nsgs), getString(R.string.answer_what_is_nsgs),
+                getString(R.string.faq_start_wifi_scan), getString(R.string.answer_start_wifi_scan),
+                getString(R.string.faq_configure_wifi_settings), getString(R.string.answer_configure_wifi_settings),
+                getString(R.string.faq_view_scanned_data), getString(R.string.answer_view_scanned_data)
+        );
+    }
 
-        // Adding FAQ answers
-        List<String> answer1 = new ArrayList<>();
-        answer1.add("The NSGS (Network Security Geo-Scanner) App is designed to capture local WiFi data, clean it, display progress to the user, and send the data for advanced visualizations such as graphs and maps. The app allows users to configure WiFi scan frequency and radius.");
-        List<String> answer2 = new ArrayList<>();
-        answer2.add("To start a WiFi scan, navigate to the WiFiActivity section, and press the 'Start Scan' button. The app will begin scanning for local WiFi networks based on the configured settings.");
-        List<String> answer3 = new ArrayList<>();
-        answer3.add("You can configure the WiFi scan settings by going to the SettingsActivity section. Here you can adjust the scan frequency and radius according to your needs.");
-        List<String> answer4 = new ArrayList<>();
-        answer4.add("The scanned WiFi data is displayed in the LocationActivity section. This section provides a detailed view of the networks captured during the scan, including their BSSIDs, SSIDs, and security protocols.");
+    public class FaqExpandableListAdapter extends BaseExpandableListAdapter {
 
-        listDataChild.put(listDataHeader.get(0), answer1);
-        listDataChild.put(listDataHeader.get(1), answer2);
-        listDataChild.put(listDataHeader.get(2), answer3);
-        listDataChild.put(listDataHeader.get(3), answer4);
+        private Context context;
+        private List<String> listDataHeader;
+        private Map<String, String> listDataChild;
+
+        public FaqExpandableListAdapter(Context context, List<String> listDataHeader, Map<String, String> listDataChild) {
+            this.context = context;
+            this.listDataHeader = listDataHeader;
+            this.listDataChild = listDataChild;
+        }
+
+        @Override
+        public int getGroupCount() {
+            return this.listDataHeader.size();
+        }
+
+        @Override
+        public int getChildrenCount(int groupPosition) {
+            return 1;  // Each group has one child (answer)
+        }
+
+        @Override
+        public Object getGroup(int groupPosition) {
+            return this.listDataHeader.get(groupPosition);
+        }
+
+        @Override
+        public Object getChild(int groupPosition, int childPosition) {
+            return this.listDataChild.get(this.listDataHeader.get(groupPosition));
+        }
+
+        @Override
+        public long getGroupId(int groupPosition) {
+            return groupPosition;
+        }
+
+        @Override
+        public long getChildId(int groupPosition, int childPosition) {
+            return childPosition;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return false;
+        }
+
+        @Override
+        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+            String headerTitle = (String) getGroup(groupPosition);
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(android.R.layout.simple_expandable_list_item_1, null);
+            }
+
+            TextView lblListHeader = convertView.findViewById(android.R.id.text1);
+            lblListHeader.setText(headerTitle);
+            lblListHeader.setTextSize(20);  // Increase text size for group items
+            lblListHeader.setPadding(0, 20, 50, 20);  // Increase padding for group items
+
+            return convertView;
+        }
+
+        @Override
+        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+            final String childText = (String) getChild(groupPosition, childPosition);
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(android.R.layout.simple_expandable_list_item_2, null);
+            }
+
+            TextView txtListChild = convertView.findViewById(android.R.id.text2);
+            txtListChild.setText(childText);
+            txtListChild.setTextSize(18);  // Set text size for child items
+            txtListChild.setPadding(0, 0, 0, 5);  // Increase padding for child items
+
+            return convertView;
+        }
+
+        @Override
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+            return true;
+        }
     }
 }
