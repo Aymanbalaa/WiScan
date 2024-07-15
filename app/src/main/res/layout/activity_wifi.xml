@@ -19,8 +19,39 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_below="@id/totalNetworksTextView"
+        android:layout_above="@id/infoLayout"
         android:layout_marginTop="8dp" />
 
+    <LinearLayout
+        android:id="@+id/infoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/cpuTempTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CPU Temp: N/A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/cpuTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CPU Time: N/A"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/scanningStatusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scanning Status: N/A"
+            android:textSize="16sp" />
+    </LinearLayout>
 </RelativeLayout>
