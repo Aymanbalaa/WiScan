@@ -67,4 +67,10 @@
 
 
 
+
+    <string name="cpuTemperature" translatable="false">"CPU Temperature: "</string>
+    <string name="cpu_time">"CPU Time: "</string>
+    <string name="scanning_status">"Scanning Status: "</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
 </resources>

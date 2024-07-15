@@ -61,4 +61,9 @@
 
 
     <string name="buttonSave">Sauvegarder</string>
+    <string name="cpu_time">Temps du CPU:</string>
+    <string name="scanning_status">Statut de numérisation</string>
+    <string name="active">Actif</string>
+    <string name="inactive">Inactif</string>
+    <string name="cpuTemperature">Température du CPU</string>
 </resources>
