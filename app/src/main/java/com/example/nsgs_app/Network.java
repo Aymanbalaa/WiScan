@@ -1,68 +1,68 @@
 package com.example.nsgs_app;
 
 public class Network {
-    private int id;
     private String ssid;
     private String bssid;
-    private String postalCode;
     private String security;
+    private String coordinates;
+    private String postalCode;
     private String neighborhood;
 
-    //used to get and store the network details
-    // class offers a better interface
-
-    public int getId() {
-        return id;
+    // Constructor
+    public Network(String ssid, String bssid, String security, String coordinates, String postalCode, String neighborhood) {
+        this.ssid = ssid;
+        this.bssid = bssid;
+        this.security = security;
+        this.coordinates = coordinates;
+        this.postalCode = postalCode;
+        this.neighborhood = neighborhood;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    // Getter methods
     public String getSsid() {
         return ssid;
-    }
-
-    public void setSsid(String ssid) {
-        this.ssid = ssid;
     }
 
     public String getBssid() {
         return bssid;
     }
 
-    public void setBssid(String ssid) {
-        this.bssid = bssid;
-    }
 
     public String getSecurity() {
         return security;
-    }
-
-    public void setSecurity(String security) {
-        this.security = security;
     }
 
     public String getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(String coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    private String coordinates;
-
     public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
     public String getNeighborhood() {
         return neighborhood;
+    }
+
+    // Setter methods (if needed)
+    public void setSsid(String ssid) {
+        this.ssid = ssid;
+    }
+
+    public void setBssid(String bssid) {
+        this.bssid = bssid;
+    }
+
+    public void setSecurity(String security) {
+        this.security = security;
+    }
+
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public void setNeighborhood(String neighborhood) {
