@@ -1,19 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@android:color/white">
-
-<!--    YOU ARE FREE TO CHANGE EVERYTHING !!!!!!!-->
-<!--    IF YOU HAVE A STRING FOR A TEXT THAT WILL BE DISPLAYED IT SHOULD NOT BE HERE -->
-<!--    IT SHOULD BE IN STRINGS.XML -->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
 
     <TextView
+        android:id="@+id/settingsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings Page"
+        android:text="@string/settingsTitle"
+        android:textAlignment="center"
         android:textSize="24sp"
-        android:layout_centerInParent="true"
-        android:textColor="@android:color/black"/>
-</RelativeLayout>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerMetric"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerMetric"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:background="@drawable/custom_spinner"
+        android:entries="@array/measurementsArray"
+        android:prompt="@string/spinnerPrompt2"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerLanguage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settingsTitle" />
+
+    <Spinner
+        android:id="@+id/spinnerLanguage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_spinner"
+        android:entries="@array/languageArray"
+        android:prompt="@string/spinnerPrompt3"
+        app:layout_constraintTop_toBottomOf="@id/spinnerMetric"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerDB" />
+
+    <Spinner
+        android:id="@+id/spinnerDB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_spinner"
+        android:entries="@array/databaseArray"
+        android:prompt="@string/spinnerPrompt4"
+        app:layout_constraintTop_toBottomOf="@id/spinnerLanguage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
