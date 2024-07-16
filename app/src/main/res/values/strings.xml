@@ -17,6 +17,8 @@
     <string name="sort_by_ssid">Sort by SSID</string>
     <string name="sort_by_security_protocol">Sort by Security Protocol</string>
     <string name="sort">Sort</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
     <string name="settingsTitle">Settings</string>
 
     <string name="spinnerPrompt1">Country</string>
@@ -71,4 +73,5 @@
     <string name="scanning_status">"Scanning Status: "</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
+
 </resources>

@@ -27,6 +27,9 @@ public class Network {
         return bssid;
     }
 
+    public void setBssid(String bssid) {
+        this.bssid = bssid;
+    }
 
     public String getSecurity() {
         return security;
@@ -49,9 +52,6 @@ public class Network {
         this.ssid = ssid;
     }
 
-    public void setBssid(String bssid) {
-        this.bssid = bssid;
-    }
 
     public void setSecurity(String security) {
         this.security = security;
@@ -67,5 +67,34 @@ public class Network {
 
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
+    }
+
+    //blablabla bs string filtering
+    public double getLatitude() {
+        if (coordinates != null && !coordinates.isEmpty()) {
+            String[] parts = coordinates.split(",");
+            if (parts.length == 2) {
+                try {
+                    return Double.parseDouble(parts[0].trim());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0.0;
+    }
+
+    public double getLongitude() {
+        if (coordinates != null && !coordinates.isEmpty()) {
+            String[] parts = coordinates.split(",");
+            if (parts.length == 2) {
+                try {
+                    return Double.parseDouble(parts[1].trim());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return 0.0;
     }
 }

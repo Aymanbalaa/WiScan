@@ -61,6 +61,7 @@ public class WiFiActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFFFF
     private static final String SCROLL_POSITION_KEY = "scroll_position";
     private static final String SCROLL_OFFSET_KEY = "scroll_offset";
+    private static final String NETWORK_LIST_KEY = "network_list";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -103,7 +104,7 @@ public class WiFiActivity extends AppCompatActivity {
         fetchNetworks(); // Initial fetch on create
         fetchSystemStats();
 
-        handler.postDelayed(fetchTask, FETCH_INTERVAL); // Schedule fetch every interval
+        handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
 
         // Check for write permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -178,6 +179,9 @@ public class WiFiActivity extends AppCompatActivity {
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
                         networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
 
+                        // Save the network list to shared preferences
+                        saveNetworkList(networkList);
+
                         runOnUiThread(() -> {
                             // Update the total networks count (Top Page)
                             totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
@@ -204,6 +208,17 @@ public class WiFiActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void saveNetworkList(List<Network> networkList) {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String networkListJson = gson.toJson(networkList);
+        editor.putString(NETWORK_LIST_KEY, networkListJson);
+        editor.apply();
+    }
+
 
     private void fetchSystemStats() {
         OkHttpClient client2 = new OkHttpClient();
@@ -301,6 +316,8 @@ public class WiFiActivity extends AppCompatActivity {
             }
         }
     }
+
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
