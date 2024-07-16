@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name" translatable="false">NSGS-App</string>
-    <string name="ssid_label" translatable="false">SSID: %1$s</string>
-    <string name="bssid_label" translatable="false">BSSID: %1$s</string>
+    <string name="app_name">NSGS-App</string>
+    <string name="ssid_label">SSID: %1$s</string>
+    <string name="bssid_label">BSSID: %1$s</string>
     <string name="security_label">Security: %1$s</string>
     <string name="coordinates_label">Coordinates: %1$s</string>
     <string name="postal_code_label">Postal Code: %1$s</string>
@@ -17,5 +17,61 @@
     <string name="sort_by_ssid">Sort by SSID</string>
     <string name="sort_by_security_protocol">Sort by Security Protocol</string>
     <string name="sort">Sort</string>
+
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="settingsTitle">Settings</string>
+
+    <string name="spinnerPrompt1">Country</string>
+    <string name="country1">Canada</string>
+    <string name="country2">USA</string>
+    <string-array name="countryArray">
+        <item>@string/country1</item>
+        <item>@string/country2</item>
+    </string-array>
+
+
+    <string name="spinnerPrompt2">Measurements</string>
+    <string name="Celsius" translatable="false">Celsius</string>
+    <string name="Fahrenheit" translatable="false">Fahrenheit</string>
+    <string-array name="measurementsArray">
+        <item>@string/Celsius</item>
+        <item>@string/Fahrenheit</item>
+    </string-array>
+
+    <string name="spinnerPrompt3">Language</string>
+    <string name="language1">English</string>
+    <string name="language2">French</string>
+    <string name="language3">Russian</string>
+    <string-array name="languageArray">
+        <item>@string/language1</item>
+        <item>@string/language2</item>
+        <item>@string/language3</item>
+    </string-array>
+
+    <string name="spinnerPrompt4">Database Sync</string>
+    <string name="low">3</string>
+    <string name="medium">5</string>
+    <string name="high">10</string>
+
+    <string-array name="databaseArray">
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+
+    <string name="buttonSave">Save</string>
+
+    <string-array name="languageCode">
+        <item>en</item>
+        <item>fr</item>
+        <item>ru</item>
+    </string-array>
+
+
+    <string name="cpuTemperature">"CPU Temperature: "</string>
+    <string name="cpu_time">"CPU Time: "</string>
+    <string name="scanning_status">"Scanning Status: "</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
+
 </resources>
