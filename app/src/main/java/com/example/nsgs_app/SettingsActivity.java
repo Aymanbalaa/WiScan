@@ -3,7 +3,11 @@ package com.example.nsgs_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +17,7 @@ public class SettingsActivity extends AppCompatActivity {
     // EVERYTHING SHOULD BE IN STRINGS.XML
 
 
-    private Spinner languageSpinner,temperatureSpinner,dbSpinner;
+    private Spinner languageSpinner, temperatureSpinner, dbSpinner;
 
 
     @Override
@@ -25,6 +29,52 @@ public class SettingsActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+
+        setupUI();
+
+
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String[] langCode = getResources().getStringArray(R.array.languageCode);
+
+                String selectedLanguage = langCode[i];
+                String currentLanguage = getSharedPreferences("prefs", MODE_PRIVATE).getString("language","en");
+
+
+                if (!selectedLanguage.equals(currentLanguage)){
+                    Language.setLanguage(SettingsActivity.this, selectedLanguage);
+                    Language.saveLanguage(SettingsActivity.this, selectedLanguage);
+
+                    if (selectedLanguage == "en") {
+                        Toast.makeText(SettingsActivity.this, "Language set to English", Toast.LENGTH_SHORT).show();
+                    } else if (selectedLanguage == "fr") {
+                        Toast.makeText(SettingsActivity.this, "Language set to French", Toast.LENGTH_SHORT).show();
+                    }
+
+                    recreate();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        String currentLanguage = getSharedPreferences("prefs", MODE_PRIVATE).getString("language", "en");
+        String [] langCode = getResources().getStringArray(R.array.languageCode);
+
+        for (int i = 0; i < langCode.length; i++) {
+            if (langCode[i].equals(currentLanguage)){
+                languageSpinner.setSelection(i);
+                break;
+            }
+        }
+
 
 
     }
@@ -46,8 +96,13 @@ public class SettingsActivity extends AppCompatActivity {
     private void setupUI(){
 
         languageSpinner = findViewById(R.id.spinnerLanguage);
-        temperatureSpinner = findViewById(R.id.spinnerMetric);
+//        temperatureSpinner = findViewById(R.id.spinnerMetric);
         dbSpinner = findViewById(R.id.spinnerDB);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.languageCode, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        languageSpinner.setAdapter(adapter);
 
     }
 
