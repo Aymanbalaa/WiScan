@@ -2,6 +2,7 @@ package com.example.nsgs_app;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import androidx.annotation.NonNull;
@@ -25,20 +26,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -47,8 +38,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    private OkHttpClient client;
-    private final String url = "http://217.15.171.225:5000/get_all_networks";
+    private List<Network> networkList;
+    private static final String PREFS_NAME = "WiFiActivityPrefs";
+    private static final String NETWORK_LIST_KEY = "network_list";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +53,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(binding.getRoot());
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        client = new OkHttpClient();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Fetch the network list from shared preferences
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String networkListJson = preferences.getString(NETWORK_LIST_KEY, null);
+        if (networkListJson != null) {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<Network>>() {}.getType();
+            networkList = gson.fromJson(networkListJson, listType);
+        }
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d(TAG, "onMapReady");
         mMap = googleMap;
         enableMyLocation();
-        fetchAndAddNetworkPins();
+        addNetworkPins();
     }
 
     private void enableMyLocation() {
@@ -117,48 +117,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private void fetchAndAddNetworkPins() {
-        Log.d(TAG, "Fetching network pins from " + url);
-        Request request = new Request.Builder().url(url).build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e(TAG, "Failed to fetch network data", e);
-                runOnUiThread(() -> Toast.makeText(MapsActivity.this, "Failed to fetch network data", Toast.LENGTH_SHORT).show());
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String responseData = response.body().string();
-                    Log.d(TAG, "Network data fetched successfully: " + responseData);
-                    runOnUiThread(() -> addNetworkPins(responseData));
-                } else {
-                    Log.e(TAG, "Failed to fetch network data: " + response.message());
-                    runOnUiThread(() -> Toast.makeText(MapsActivity.this, "Failed to fetch network data", Toast.LENGTH_SHORT).show());
-                }
-            }
-        });
-    }
-
-    private void addNetworkPins(String responseData) {
-        Log.d(TAG, "Adding network pins to map");
-        Gson gson = new Gson();
-
-        try {
-            Type listType = new TypeToken<List<Network>>() {}.getType();
-            List<Network> networkList = gson.fromJson(responseData, listType);
-
+    private void addNetworkPins() {
+        if (networkList != null) {
             for (Network network : networkList) {
                 LatLng networkLocation = new LatLng(network.getLatitude(), network.getLongitude());
                 mMap.addMarker(new MarkerOptions()
                         .position(networkLocation)
                         .title(network.getSsid())
-                        .snippet("Security: " + network.getSecurityProtocol()));
+                        .snippet("Security: " + network.getSecurity()));
             }
-        } catch (JsonSyntaxException | IllegalStateException e) {
-            Log.e(TAG, "Failed to parse network data", e);
-            Toast.makeText(this, "Failed to parse network data", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "No network data available", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -173,29 +142,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    // Network class representing the data structure
-    class Network {
-        private String ssid;
-        private double latitude;
-        private double longitude;
-        private String securityProtocol;
-
-        public String getSsid() {
-            return ssid;
-        }
-
-        public double getLatitude() {
-            return latitude;
-        }
-
-        public double getLongitude() {
-            return longitude;
-        }
-
-        public String getSecurityProtocol() {
-            return securityProtocol;
-        }
     }
 }
