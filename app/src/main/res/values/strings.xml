@@ -40,9 +40,11 @@
     <string name="spinnerPrompt3">Language</string>
     <string name="language1">English</string>
     <string name="language2">French</string>
+    <string name="language3">Russian</string>
     <string-array name="languageArray">
         <item>@string/language1</item>
         <item>@string/language2</item>
+        <item>@string/language3</item>
     </string-array>
 
 
@@ -62,13 +64,11 @@
     <string-array name="languageCode">
         <item>en</item>
         <item>fr</item>
+        <item>ru</item>
     </string-array>
 
 
-
-
-
-    <string name="cpuTemperature" translatable="false">"CPU Temperature: "</string>
+    <string name="cpuTemperature">"CPU Temperature: "</string>
     <string name="cpu_time">"CPU Time: "</string>
     <string name="scanning_status">"Scanning Status: "</string>
     <string name="active">Active</string>

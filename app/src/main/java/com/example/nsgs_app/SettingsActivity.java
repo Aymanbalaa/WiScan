@@ -59,6 +59,9 @@ public class SettingsActivity extends AppCompatActivity {
                     } else if (selectedLanguage == "fr") {
                         Toast.makeText(SettingsActivity.this, "Language set to French", Toast.LENGTH_SHORT).show();
                     }
+                    if (selectedLanguage == "ru"){
+                        Toast.makeText(SettingsActivity.this, "Language set to Russian", Toast.LENGTH_SHORT).show();
+                    }
 
                     recreate();
                 }
@@ -84,9 +87,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void measurementSelector() {
-
-
-
 
 
     }

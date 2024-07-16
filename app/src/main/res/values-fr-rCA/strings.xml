@@ -41,10 +41,12 @@
     <string name="spinnerPrompt3">Langue</string>
     <string name="language1">Anglais</string>
     <string name="language2">Français</string>
+    <string name="language3">Russe</string>
 
     <string-array name="languageArray">
         <item>@string/language1</item>
         <item>@string/language2</item>
+        <item>@string/language3</item>
     </string-array>
 
     <string name="spinnerPrompt4">Synchronisation de Base de Données</string>
