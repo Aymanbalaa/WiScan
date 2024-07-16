@@ -27,4 +27,7 @@ public class Language {
         resources.updateConfiguration(conf,resources.getDisplayMetrics());
     }
 
+
+
+
 }
