@@ -1,5 +1,7 @@
 package com.example.nsgs_app;
 
+import static com.example.nsgs_app.NetworkProviderGuesser.getNetworkProvider;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -257,17 +259,27 @@ public class WiFiActivity extends AppCompatActivity {
         File csvFile = new File(downloadFolder, "networks.csv");
 
         try (FileWriter writer = new FileWriter(csvFile)) {
-            writer.append("SSID,BSSID,Capabilities,Frequency,Level\n");
+            writer.append("SSID,BSSID,Capabilities,Frequency,Level,Security,Coordinates,Postal Code,Neighborhood,Provider\n");
             for (Network network : networkList) {
                 writer.append(network.getSsid())
                         .append(',')
                         .append(network.getBssid())
                         .append(',')
-                        .append(network.getCapabilities())
+                        .append(network.getCapabilities() != null ? network.getCapabilities() : "null")
                         .append(',')
                         .append(String.valueOf(network.getFrequency()))
                         .append(',')
                         .append(String.valueOf(network.getLevel()))
+                        .append(',')
+                        .append(network.getSecurity() != null ? network.getSecurity() : "null")
+                        .append(',')
+                        .append("\"").append(network.getCoordinates() != null ? network.getCoordinates() : "null").append("\"")
+                        .append(',')
+                        .append(network.getPostalCode() != null ? network.getPostalCode() : "null")
+                        .append(',')
+                        .append(network.getNeighborhood() != null ? network.getNeighborhood() : "null")
+                        .append(',')
+                        .append(getNetworkProvider(network.getSsid()) != null ? getNetworkProvider(network.getSsid()) : "Unknown Provider")
                         .append('\n');
             }
             Toast.makeText(this, "CSV file exported to Downloads folder", Toast.LENGTH_SHORT).show();
@@ -276,6 +288,8 @@ public class WiFiActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
