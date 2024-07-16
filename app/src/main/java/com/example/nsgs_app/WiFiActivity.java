@@ -257,19 +257,17 @@ public class WiFiActivity extends AppCompatActivity {
         File csvFile = new File(downloadFolder, "networks.csv");
 
         try (FileWriter writer = new FileWriter(csvFile)) {
-            writer.append("SSID,BSSID,Security,Longitude,Latitude,Neighborhood,PostalCode\n");
+            writer.append("SSID,BSSID,Capabilities,Frequency,Level\n");
             for (Network network : networkList) {
                 writer.append(network.getSsid())
                         .append(',')
                         .append(network.getBssid())
                         .append(',')
-                        .append(network.getSecurity())
+                        .append(network.getCapabilities())
                         .append(',')
-                        .append(String.valueOf(network.getCoordinates()))
+                        .append(String.valueOf(network.getFrequency()))
                         .append(',')
-                        .append(String.valueOf(network.getNeighborhood()))
-                        .append(',')
-                        .append(String.valueOf(network.getPostalCode()))
+                        .append(String.valueOf(network.getLevel()))
                         .append('\n');
             }
             Toast.makeText(this, "CSV file exported to Downloads folder", Toast.LENGTH_SHORT).show();
@@ -285,6 +283,8 @@ public class WiFiActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted, proceed with exporting
+            } else {
+                Toast.makeText(this, "Permission denied to write to external storage", Toast.LENGTH_SHORT).show();
             }
         }
     }
