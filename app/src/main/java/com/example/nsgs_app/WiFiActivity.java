@@ -24,7 +24,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -44,8 +43,7 @@ public class WiFiActivity extends AppCompatActivity {
     private TextView totalNetworksTextView;
     private Handler handler;
     private Runnable fetchTask;
-    private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
-    private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
+    private int fetchInterval; // This variable will hold the fetch interval in milliseconds
     private Comparator<Network> currentComparator; // Save the current comparator
 
     private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFFFF
@@ -72,19 +70,26 @@ public class WiFiActivity extends AppCompatActivity {
         scanningStatusTextView = findViewById(R.id.scanningStatusTextView);
 
         handler = new Handler();
+
+        // Retrieve the fetch interval from SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+        String fetchIntervalString = preferences.getString("fetch_unit", "10");
+        int fetchIntervalSeconds = Integer.parseInt(fetchIntervalString);
+        fetchInterval = fetchIntervalSeconds * 1000; // Convert to milliseconds
+
         fetchTask = new Runnable() {
             @Override
             public void run() {
                 saveScrollPosition(); // Save the scroll position before fetching data
                 fetchNetworks();
                 fetchSystemStats();
-                handler.postDelayed(this, FETCH_INTERVAL);
+                handler.postDelayed(this, fetchInterval);
             }
         };
 
         fetchNetworks(); // Initial fetch on create
         fetchSystemStats();
-        handler.postDelayed(fetchTask, FETCH_INTERVAL); // Schedule fetch every interval
+        handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
     }
 
     @Override
@@ -186,7 +191,7 @@ public class WiFiActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 Log.e("WiFiActivity", "Error fetching system stats: " + e.getMessage());
-                runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error fetching system stats", Toast.LENGTH_SHORT).show()); // @TODO STRINGS.XML
+                runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error fetching system stats", Toast.LENGTH_SHORT).show());
             }
 
             @SuppressLint({"StringFormatMatches", "SetTextI18n"})
@@ -207,7 +212,12 @@ public class WiFiActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             if (systemStats != null && !systemStats.isEmpty()) {
                                 SystemStats stats = systemStats.get(0);
-                                cpuTempTextView.setText(getString(R.string.cpuTemperature) + stats.getTemperature("Celsius")); // @TODO replace with the actual settings
+
+                                // Get the temperature unit from SharedPreferences
+                                SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+                                String temperatureUnit = preferences.getString("temperature_unit", "Celsius");
+
+                                cpuTempTextView.setText(getString(R.string.cpuTemperature) + stats.getTemperature(temperatureUnit));
                                 cpuTimeTextView.setText(getString(R.string.cpu_time) + stats.getTime());
                                 scanningStatusTextView.setText(getString(R.string.scanning_status) + (stats.getStatus() == 1 ? getString(R.string.active) : getString(R.string.inactive)));
                             }

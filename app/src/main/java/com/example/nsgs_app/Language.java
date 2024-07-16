@@ -7,9 +7,7 @@ import android.content.res.Resources;
 
 import java.util.Locale;
 
-
 public class Language {
-
 
     public static void saveLanguage(Context context, String langCode){
        SharedPreferences sharedPreferences = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
@@ -26,8 +24,4 @@ public class Language {
         conf.setLocale(locale);
         resources.updateConfiguration(conf,resources.getDisplayMetrics());
     }
-
-
-
-
 }

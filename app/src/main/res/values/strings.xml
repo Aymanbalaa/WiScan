@@ -29,13 +29,12 @@
 
 
     <string name="spinnerPrompt2">Measurements</string>
-    <string name="metric">Metric</string>
-    <string name="imperial">Imperial</string>
+    <string name="Celsius" translatable="false">Celsius</string>
+    <string name="Fahrenheit" translatable="false">Fahrenheit</string>
     <string-array name="measurementsArray">
-        <item>@string/metric</item>
-        <item>@string/imperial</item>
+        <item>@string/Celsius</item>
+        <item>@string/Fahrenheit</item>
     </string-array>
-
 
     <string name="spinnerPrompt3">Language</string>
     <string name="language1">English</string>
@@ -47,17 +46,16 @@
         <item>@string/language3</item>
     </string-array>
 
-
     <string name="spinnerPrompt4">Database Sync</string>
-    <string name="low">Low</string>
-    <string name="medium">Medium</string>
-    <string name="high">High</string>
-    <string-array name="databaseArray">
-        <item>@string/low</item>
-        <item>@string/medium</item>
-        <item>@string/high</item>
-    </string-array>
+    <string name="low">3</string>
+    <string name="medium">5</string>
+    <string name="high">10</string>
 
+    <string-array name="databaseArray">
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
 
     <string name="buttonSave">Save</string>
 

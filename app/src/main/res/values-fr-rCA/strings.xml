@@ -30,12 +30,12 @@
     </string-array>
 
     <string name="spinnerPrompt2">Mesures</string>
-    <string name="metric">Métrique</string>
-    <string name="imperial">Impérial</string>
 
+    <string name="Celsius" translatable="false">Celsius</string>
+    <string name="Fahrenheit" translatable="false">Fahrenheit</string>
     <string-array name="measurementsArray">
-        <item>@string/metric</item>
-        <item>@string/imperial</item>
+        <item>@string/Celsius</item>
+        <item>@string/Fahrenheit</item>
     </string-array>
 
     <string name="spinnerPrompt3">Langue</string>
@@ -55,17 +55,17 @@
     <string name="high">Haut</string>
 
     <string-array name="databaseArray">
-        <item>@string/low</item>
-        <item>@string/medium</item>
-        <item>@string/high</item>
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
     </string-array>
 
 
 
     <string name="buttonSave">Sauvegarder</string>
-    <string name="cpu_time">Temps du CPU:</string>
-    <string name="scanning_status">Statut de numérisation</string>
+    <string name="cpu_time">Temps du CPU: </string>
+    <string name="scanning_status">Statut de numérisation: </string>
     <string name="active">Actif</string>
     <string name="inactive">Inactif</string>
-    <string name="cpuTemperature">Température du CPU</string>
+    <string name="cpuTemperature">Température du CPU: </string>
 </resources>

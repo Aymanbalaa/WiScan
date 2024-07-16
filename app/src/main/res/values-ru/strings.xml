@@ -25,8 +25,14 @@
     <string name="country2">США</string>
 
     <string name="spinnerPrompt2">Измерения</string>
-    <string name="metric">Метрика</string>
-    <string name="imperial">Империал</string>
+
+
+    <string name="Celsius" translatable="false">Celsius</string>
+    <string name="Fahrenheit" translatable="false">Fahrenheit</string>
+    <string-array name="measurementsArray">
+        <item>@string/Celsius</item>
+        <item>@string/Fahrenheit</item>
+    </string-array>
 
 
 
