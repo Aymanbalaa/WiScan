@@ -1,19 +1,26 @@
 package com.example.nsgs_app;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +29,8 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -36,6 +45,8 @@ import okhttp3.Response;
 
 public class WiFiActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1;
+
     private RecyclerView recyclerView;
     private NetworkAdapter networkAdapter;
     private List<Network> networkList;
@@ -47,6 +58,7 @@ public class WiFiActivity extends AppCompatActivity {
     private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
     private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
     private Comparator<Network> currentComparator; // Save the current comparator
+    private Button btnExportCsv;
 
     private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFFFF
     private static final String SCROLL_POSITION_KEY = "scroll_position";
@@ -70,6 +82,7 @@ public class WiFiActivity extends AppCompatActivity {
         cpuTempTextView = findViewById(R.id.cpuTempTextView);
         cpuTimeTextView = findViewById(R.id.cpuTimeTextView);
         scanningStatusTextView = findViewById(R.id.scanningStatusTextView);
+        btnExportCsv = findViewById(R.id.btn_export_csv);
 
         handler = new Handler();
         fetchTask = new Runnable() {
@@ -85,6 +98,21 @@ public class WiFiActivity extends AppCompatActivity {
         fetchNetworks(); // Initial fetch on create
         fetchSystemStats();
         handler.postDelayed(fetchTask, FETCH_INTERVAL); // Schedule fetch every interval
+
+        // Check for write permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
+        }
+
+        btnExportCsv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exportToCsv();
+            }
+        });
     }
 
     @Override
@@ -222,6 +250,43 @@ public class WiFiActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void exportToCsv() {
+        File downloadFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File csvFile = new File(downloadFolder, "networks.csv");
+
+        try (FileWriter writer = new FileWriter(csvFile)) {
+            writer.append("SSID,BSSID,Capabilities,Frequency,Level\n");
+            for (Network network : networkList) {
+                writer.append(network.getSsid())
+                        .append(',')
+                        .append(network.getBssid())
+                        .append(',')
+                        .append(network.getCapabilities())
+                        .append(',')
+                        .append(String.valueOf(network.getFrequency()))
+                        .append(',')
+                        .append(String.valueOf(network.getLevel()))
+                        .append('\n');
+            }
+            Toast.makeText(this, "CSV file exported to Downloads folder", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(this, "Failed to export CSV file", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, proceed with exporting
+            } else {
+                Toast.makeText(this, "Permission denied to write to external storage", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
