@@ -104,7 +104,7 @@ public class WiFiActivity extends AppCompatActivity {
         fetchNetworks(); // Initial fetch on create
         fetchSystemStats();
 
-        handler.postDelayed(fetchTask, FETCH_INTERVAL); // Schedule fetch every interval
+        handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
 
         // Check for write permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -315,6 +315,7 @@ public class WiFiActivity extends AppCompatActivity {
                 // Permission granted, proceed with exporting
             }
         }
+    }
 
     
 

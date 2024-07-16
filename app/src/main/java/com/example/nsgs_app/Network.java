@@ -52,9 +52,6 @@ public class Network {
         this.ssid = ssid;
     }
 
-    public void setBssid(String bssid) {
-        this.bssid = bssid;
-    }
 
     public void setSecurity(String security) {
         this.security = security;
