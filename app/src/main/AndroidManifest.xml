@@ -33,15 +33,13 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="ENTER API KEY HERE AND ONLY HERE" />
-
+            android:value="" />
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -49,7 +47,13 @@
         <activity android:name=".WiFiActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".NetworkDetailActivity" />
-        <activity android:name=".MapsActivity" />
+        <activity
+            android:name=".MapsActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
     </application>
 
