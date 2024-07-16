@@ -27,6 +27,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -39,6 +40,7 @@ public class WiFiActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private NetworkAdapter networkAdapter;
     private List<Network> networkList;
+    private List<Network> filteredNetworkList; // List for filtered networks
     private List<SystemStats> systemStats;
     private TextView cpuTempTextView, cpuTimeTextView, scanningStatusTextView;
     private TextView totalNetworksTextView;
@@ -47,6 +49,8 @@ public class WiFiActivity extends AppCompatActivity {
     private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
     private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
     private Comparator<Network> currentComparator; // Save the current comparator
+    private String currentFilter; // Save the current filter
+    private boolean isFilteringMode = false; // Track whether filtering mode is active
 
     private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFFFF
     private static final String SCROLL_POSITION_KEY = "scroll_position";
@@ -146,10 +150,23 @@ public class WiFiActivity extends AppCompatActivity {
                             // Update the total networks count (Top Page)
                             totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
 
-                            // Sort the network list if a comparator is set
+                            // Apply the current sort or filter
+                            applyCurrentSortOrFilter();
+
+                       /*     // Sort the network list if a comparator is set
                             if (currentComparator != null) {
                                 networkList.sort(currentComparator);
                             }
+
+                            // Apply the current filter if any
+
+                            if(currentFilter!= null){
+                                filterNetworkList(currentFilter);
+                                // Update the adapter with the filtered list
+                                networkAdapter.updateNetworkList(filteredNetworkList);
+                                networkAdapter.notifyDataSetChanged();
+                            }
+*/
 
                             // linking recycler view from xml to java
                             networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList);
@@ -231,7 +248,41 @@ public class WiFiActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {// Back button
+            navigateToMainActivity();
+            return true;
+        } else if (itemId == R.id.sort_by_ssid) {// Sort by SSID
+            isFilteringMode = false;
+            sortNetworkList(Comparator.comparing(Network::getSsid, String::compareToIgnoreCase));
+            return true;
+        } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
+            isFilteringMode = false;
+            sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
+            return true;
+        } else if (itemId == R.id.action_filter_wep) { // Filter by WEP
+            isFilteringMode = true;
+            filterNetworkList("WEP");
+            return true;
+        } else if (itemId == R.id.action_filter_wpa) { // Filter by WPA
+            isFilteringMode = true;
+            filterNetworkList("WPA");
+            return true;
+        } else if (itemId == R.id.action_filter_wpa2) { // Filter by WPA2
+            isFilteringMode = true;
+            filterNetworkList("WPA2");
+            return true;
+        } else if (itemId == R.id.action_filter_wpa3) { // Filter by WPA3
+            isFilteringMode = true;
+            filterNetworkList("WPA3");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == android.R.id.home) {// Back button
@@ -244,8 +295,21 @@ public class WiFiActivity extends AppCompatActivity {
             sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
             return true;
         }
+        else if (itemId == R.id.action_filter_wep) { // Filter by WEP
+            filterNetworkList("WEP");
+            return true;
+        } else if (itemId == R.id.action_filter_wpa) { // Filter by WPA
+            filterNetworkList("WPA");
+            return true;
+        } else if (itemId == R.id.action_filter_wpa2) { // Filter by WPA2
+            filterNetworkList("WPA2");
+            return true;
+        } else if (itemId == R.id.action_filter_wpa3) { // Filter by WPA3
+            filterNetworkList("WPA3");
+            return true;
+        }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     private void navigateToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -254,10 +318,72 @@ public class WiFiActivity extends AppCompatActivity {
         finish();
     }
 
+
+    private void sortNetworkList(Comparator<Network> comparator) {
+        currentComparator = comparator;
+        if (networkList != null) {
+            filteredNetworkList = new ArrayList<>(networkList);
+            filteredNetworkList.sort(comparator);
+            updateAdapter(filteredNetworkList);
+        }
+    }
+
+    private void filterNetworkList(String securityType) {
+        currentFilter = securityType;
+        if (networkList != null) {
+            if (securityType == null) {
+                filteredNetworkList = new ArrayList<>(networkList); // No filter, show all networks
+            } else {
+                filteredNetworkList = networkList.stream()
+                        .filter(network -> network.getSecurity().equalsIgnoreCase(securityType))
+                        .collect(Collectors.toList());
+            }
+            updateAdapter(filteredNetworkList);
+        }
+    }
+
+    private void applyCurrentSortOrFilter() {
+        if (networkList == null) {
+            return;
+        }
+
+        if (isFilteringMode && currentFilter != null) {
+            // Apply the current filter
+            filteredNetworkList = networkList.stream()
+                    .filter(network -> network.getSecurity().equalsIgnoreCase(currentFilter))
+                    .collect(Collectors.toList());
+        } else if (!isFilteringMode && currentComparator != null) {
+            // Apply the current sort
+            filteredNetworkList = new ArrayList<>(networkList);
+            filteredNetworkList.sort(currentComparator);
+        } else {
+            filteredNetworkList = new ArrayList<>(networkList);
+        }
+
+        updateAdapter(filteredNetworkList);
+    }
+
+    @SuppressLint("StringFormatMatches")
+    private void updateAdapter(List<Network> networkList) {
+        // Update the total networks count (Top Page)
+        totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
+
+        if (networkAdapter == null) {
+            networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList);
+            recyclerView.setAdapter(networkAdapter);
+        } else {
+            networkAdapter.updateNetworkList(networkList);
+            networkAdapter.notifyDataSetChanged();
+        }
+    }
+/*
+
     private void sortNetworkList(Comparator<Network> comparator) {
         if (networkList != null) {
+            currentFilter= null;
             // Save the current scroll position and offset
             saveScrollPosition();
+
 
             networkList.sort(comparator);
             networkAdapter.notifyDataSetChanged();
@@ -267,6 +393,42 @@ public class WiFiActivity extends AppCompatActivity {
         }
         currentComparator = comparator; // Save the current comparator
     }
+
+    //filtering Networks
+    @SuppressLint("StringFormatMatches")
+    private void filterNetworkList(String securityType) {
+        if (networkList != null) {
+
+            runOnUiThread(() -> {
+                // Save the current scroll position and offset
+                saveScrollPosition();
+
+                currentFilter = securityType; // Set the current filter
+
+                // Apply the filter
+                if (securityType != null) {
+                    filteredNetworkList = networkList.stream()
+                            .filter(network -> network.getSecurity().equalsIgnoreCase(securityType))
+                            .collect(Collectors.toList());
+                }*/
+/* else {
+                    filteredNetworkList = new ArrayList<>(networkList);
+                }*//*
+
+
+                // Update the total networks count (Top Page)
+                totalNetworksTextView.setText(getString(R.string.total_networks_label, filteredNetworkList.size()));
+
+                // Update the adapter with the filtered list
+                networkAdapter.updateNetworkList(filteredNetworkList);
+                networkAdapter.notifyDataSetChanged();
+
+                // Restore the scroll position and offset
+                restoreScrollPosition();
+            });
+        }
+    }
+*/
 
     private void saveScrollPosition() {
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();

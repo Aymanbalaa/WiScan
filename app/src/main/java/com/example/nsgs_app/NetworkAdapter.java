@@ -44,6 +44,12 @@ public class NetworkAdapter extends RecyclerView.Adapter<NetworkAdapter.NetworkV
         return networkList.size();
     }
 
+    // updates the network list and notify changes
+    public void updateNetworkList(List<Network> newNetworkList) {
+        this.networkList = newNetworkList;
+        notifyDataSetChanged();
+    }
+
     public static class NetworkViewHolder extends RecyclerView.ViewHolder {
         TextView ssid, security;
 
