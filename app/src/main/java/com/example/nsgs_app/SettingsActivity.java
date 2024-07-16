@@ -33,6 +33,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         setupUI();
 
+        languageSelector();
+        measurementSelector();
+
+    }
+
+
+    private void languageSelector() {
 
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -74,10 +81,19 @@ public class SettingsActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    private void measurementSelector() {
+
+
 
 
 
     }
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -96,14 +112,8 @@ public class SettingsActivity extends AppCompatActivity {
     private void setupUI(){
 
         languageSpinner = findViewById(R.id.spinnerLanguage);
-//        temperatureSpinner = findViewById(R.id.spinnerMetric);
+       // temperatureSpinner = findViewById(R.id.spinnerMetric);
         dbSpinner = findViewById(R.id.spinnerDB);
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.languageCode, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        languageSpinner.setAdapter(adapter);
-
     }
 
 
