@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,15 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button guidanceButton = findViewById(R.id.guidance_button);
-        Button     wifiButton = findViewById(R.id.wifi_button);
+        Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
-        Button settingsButton = findViewById(R.id.settings_button);
-
-        guidanceButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, GuidanceActivity.class);
-            startActivity(intent);
-        });
 
         wifiButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, WiFiActivity.class);
@@ -34,11 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         locationButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, LocationActivity.class);
-            startActivity(intent);
-        });
-
-        settingsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
     }
@@ -52,11 +39,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.help) {
-            Intent intent = new Intent(this, HelpActivity.class);
-            startActivity(intent);
+        int id = item.getItemId();
+
+        if (id == R.id.help) {
+            Intent helpIntent = new Intent(this, HelpActivity.class);
+            startActivity(helpIntent);
+            return true;
+        } else if (id == R.id.settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }
