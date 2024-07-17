@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         locationButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LocationActivity.class);
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(intent);
         });
     }
@@ -52,5 +52,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+      
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(intent);
+        });
     }
 }
