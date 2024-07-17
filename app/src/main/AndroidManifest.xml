@@ -49,6 +49,7 @@
         <activity android:name=".WiFiActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".NetworkDetailActivity" />
+        <activity android:name=".HelpActivity" />
         <activity
             android:name=".MapsActivity"
             android:parentActivityName=".MainActivity">
