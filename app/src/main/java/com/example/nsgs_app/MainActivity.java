@@ -16,15 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button guidanceButton = findViewById(R.id.guidance_button);
-        Button     wifiButton = findViewById(R.id.wifi_button);
+        Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
-        Button settingsButton = findViewById(R.id.settings_button);
-
-        guidanceButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, GuidanceActivity.class);
-            startActivity(intent);
-        });
 
         wifiButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, WiFiActivity.class);
@@ -33,11 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         locationButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intent);
-        });
-
-        settingsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
     }

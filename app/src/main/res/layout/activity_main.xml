@@ -38,19 +38,6 @@
         android:layout_marginTop="32dp">
 
         <Button
-            android:id="@+id/guidance_button"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:text="@string/guidance"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:drawableLeft="@drawable/ic_guidance"
-            android:gravity="center_vertical"
-            android:paddingLeft="16dp" />
-
-        <Button
             android:id="@+id/wifi_button"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -74,19 +61,6 @@
             android:textSize="18sp"
             android:textColor="@android:color/white"
             android:drawableLeft="@drawable/ic_location"
-            android:gravity="center_vertical"
-            android:paddingLeft="16dp"
-            android:lines="2"/>
-
-        <Button
-            android:id="@+id/settings_button"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:backgroundTint="@android:color/holo_purple"
-            android:text="@string/settings"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:drawableLeft="@drawable/ic_settings"
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:lines="2"/>
