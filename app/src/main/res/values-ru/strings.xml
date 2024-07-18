@@ -57,9 +57,9 @@
 
 
     <string-array name="databaseArray">
-        <item>@string/low</item>
-        <item>@string/medium</item>
-        <item>@string/high</item>
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
     </string-array>
 
 
