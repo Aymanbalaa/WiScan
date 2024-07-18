@@ -5,11 +5,10 @@
         android:id="@+id/settings"
         android:title="Settings"
         android:icon="@drawable/ic_settings"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/help"
         android:title="Help"
         android:icon="@android:drawable/ic_menu_help"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 </menu>
-
