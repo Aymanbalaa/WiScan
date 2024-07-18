@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class NetworkDetailActivity extends AppCompatActivity {
     private TextView ssid, bssid, security, coordinates, postalCode, neighborhood, provider;
     // all the textviews used in the network Details Page
+    private String currentFilterToWIFI;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
 
         // Retrieve the network details from the intent
         Intent intent = getIntent();
+        currentFilterToWIFI = intent.getStringExtra("currentFilter");
         ssid.setText(getString(R.string.ssid_label,intent.getStringExtra("ssid")));
         bssid.setText(getString(R.string.bssid_label,intent.getStringExtra("bssid")));
         security.setText(getString(R.string.security_label,intent.getStringExtra("security")));
@@ -47,7 +49,8 @@ public class NetworkDetailActivity extends AppCompatActivity {
     }
 
     // Static method to start this activity with network details
-    public static void start(Context context, Network network) {
+
+    public static void start(Context context, Network network, String currentFilter) {
         Intent intent = new Intent(context, NetworkDetailActivity.class);
         intent.putExtra("ssid", network.getSsid());
         intent.putExtra("bssid", network.getBssid());
@@ -55,6 +58,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
         intent.putExtra("coordinates", network.getCoordinates());
         intent.putExtra("postalCode", network.getPostalCode());
         intent.putExtra("neighborhood", network.getNeighborhood());
+        intent.putExtra("currentFilter", currentFilter); // Pass current filter state
         context.startActivity(intent);
     }
 
@@ -63,6 +67,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             // Handle the back button press
             Intent intent = new Intent(this, WiFiActivity.class);
+            intent.putExtra("currentFilter", currentFilterToWIFI);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();

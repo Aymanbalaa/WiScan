@@ -24,6 +24,9 @@
                   android:title="Filter by WPA3" />
             <item android:id="@+id/action_filter_unprotected"
                 android:title="Filter by unprotected" />
+            <item
+                android:id="@+id/action_default_view"
+                android:title="Default View"/>
         </menu>
 
 

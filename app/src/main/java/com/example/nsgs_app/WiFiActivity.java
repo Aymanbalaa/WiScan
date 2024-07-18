@@ -26,7 +26,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import okhttp3.Call;
@@ -101,6 +103,21 @@ public class WiFiActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // Check if there is a filter state passed back from NetworkDetailActivity
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("currentFilter")) {
+            currentFilter = intent.getStringExtra("currentFilter");
+            isFilteringMode = currentFilter != null;
+        }
+        applyCurrentSortOrFilter();
+
+        /*else {
+            // Apply the current sort or filter if no filter state is passed back
+            applyCurrentSortOrFilter();
+        }*/
+
+        recyclerView.setAdapter(networkAdapter);
+
         // Restore the scroll position and offset
         restoreScrollPosition();
     }
@@ -144,9 +161,10 @@ public class WiFiActivity extends AppCompatActivity {
 
                         // Filtering JSON data and feeding it into List of Networks
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
-                        networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
+                        networkList  = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
 
                         runOnUiThread(() -> {
+
                             // Update the total networks count (Top Page)
                             totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
 
@@ -239,7 +257,14 @@ public class WiFiActivity extends AppCompatActivity {
             return true;
         } else if (itemId == R.id.sort_by_ssid) {// Sort by SSID
             isFilteringMode = false;
-            sortNetworkList(Comparator.comparing(Network::getSsid, String::compareToIgnoreCase));
+            sortNetworkList(Comparator.comparing(Network::getSsid, (ssid1, ssid2) -> {
+                boolean ssid1HasNumbers = ssid1.matches(".*\\d.*");
+                boolean ssid2HasNumbers = ssid2.matches(".*\\d.*");
+                if (ssid1HasNumbers && !ssid2HasNumbers) return 1;
+                if (!ssid1HasNumbers && ssid2HasNumbers) return -1;
+                return ssid1.compareToIgnoreCase(ssid2);
+            }));
+            //sortNetworkList(Comparator.comparing(Network::getSsid, String::compareToIgnoreCase));
             return true;
         } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
             isFilteringMode = false;
@@ -267,6 +292,10 @@ public class WiFiActivity extends AppCompatActivity {
             filterNetworkList("unprotected");
             return true;
         }
+        else if (itemId == R.id.action_default_view) { // Default View
+            resetFiltersAndSort();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -276,6 +305,8 @@ public class WiFiActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 
 
     private void sortNetworkList(Comparator<Network> comparator) {
@@ -322,13 +353,22 @@ public class WiFiActivity extends AppCompatActivity {
         updateAdapter(filteredNetworkList);
     }
 
+    //Reset to default view
+
+    private void resetFiltersAndSort() {
+        isFilteringMode = false;
+        currentFilter = null;
+        currentComparator = null;
+        applyCurrentSortOrFilter();
+    }
+
     @SuppressLint("StringFormatMatches")
     private void updateAdapter(List<Network> networkList) {
         // Update the total networks count (Top Page)
         totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
 
         if (networkAdapter == null) {
-            networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList);
+            networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList, currentFilter);
             recyclerView.setAdapter(networkAdapter);
         } else {
             networkAdapter.updateNetworkList(networkList);

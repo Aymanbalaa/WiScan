@@ -2,6 +2,7 @@
 package com.example.nsgs_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,12 @@ import java.util.List;
 public class NetworkAdapter extends RecyclerView.Adapter<NetworkAdapter.NetworkViewHolder> {
     private Context context;
     private List<Network> networkList;
+    private String currentFilter; // variable for the current filter
 
-    public NetworkAdapter(Context context, List<Network> networkList) {
+    public NetworkAdapter(Context context, List<Network> networkList, String currentFilter) {
         this.context = context;
         this.networkList = networkList;
+        this.currentFilter = this.currentFilter; // Initializing the current filter
     }
 
     @NonNull
@@ -35,8 +38,20 @@ public class NetworkAdapter extends RecyclerView.Adapter<NetworkAdapter.NetworkV
         holder.ssid.setText(context.getString(R.string.ssid_label, network.getSsid()));
         holder.security.setText(context.getString(R.string.security_label, network.getSecurity()));
 
-        // Set OnClickListener to open NetworkDetailActivity with network details
-        holder.itemView.setOnClickListener(v -> NetworkDetailActivity.start(context, network));
+        // Set OnClickListener to open NetworkDetailActivity with network details and current filter
+        holder.itemView.setOnClickListener(v -> NetworkDetailActivity.start(context, network, currentFilter));
+
+       /* holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, NetworkDetailActivity.class);
+            intent.putExtra("ssid", network.getSsid());
+            intent.putExtra("bssid", network.getBssid());
+            intent.putExtra("security", network.getSecurity());
+            intent.putExtra("coordinates", network.getCoordinates());
+            intent.putExtra("postalCode", network.getPostalCode());
+            intent.putExtra("neighborhood", network.getNeighborhood());
+            intent.putExtra("currentFilter", currentFilter); // Pass the current filter state
+            context.startActivity(intent);
+        });*/
     }
 
     @Override
