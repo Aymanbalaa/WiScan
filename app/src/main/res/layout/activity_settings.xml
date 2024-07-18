@@ -34,9 +34,9 @@
     <Spinner
         android:id="@+id/spinnerMetric"
         android:layout_width="0dp"
-        android:layout_height="38dp"
+        android:layout_height="50dp"
         android:layout_marginTop="136dp"
-        android:background="@drawable/custom_spinner"
+        android:background="@drawable/baseline_arrow"
         android:entries="@array/measurementsArray"
         android:prompt="@string/spinnerPrompt2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,8 +61,8 @@
     <Spinner
         android:id="@+id/spinnerLanguage"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_spinner"
+        android:layout_height="50dp"
+        android:background="@drawable/baseline_arrow"
         android:entries="@array/languageArray"
         android:prompt="@string/spinnerPrompt3"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,8 +87,8 @@
     <Spinner
         android:id="@+id/spinnerDB"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_spinner"
+        android:layout_height="50dp"
+        android:background="@drawable/baseline_arrow"
         android:entries="@array/databaseArray"
         android:prompt="@string/spinnerPrompt4"
         app:layout_constraintBottom_toBottomOf="parent"

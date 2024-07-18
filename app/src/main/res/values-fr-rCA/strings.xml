@@ -39,9 +39,9 @@
     </string-array>
 
     <string name="spinnerPrompt3">Langue</string>
-    <string name="language1">Anglais</string>
+    <string name="language1">English</string>
     <string name="language2">Français</string>
-    <string name="language3">Russe</string>
+    <string name="language3">Русский</string>
 
     <string-array name="languageArray">
         <item>@string/language1</item>

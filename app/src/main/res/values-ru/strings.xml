@@ -38,9 +38,15 @@
 
 
     <string name="spinnerPrompt3">Язык</string>
-    <string name="language1">Английский</string>
-    <string name="language2">Французский</string>
+    <string name="language1">English</string>
+    <string name="language2">Français</string>
+    <string name="language3">Русский</string>
 
+    <string-array name="languageArray">
+        <item>@string/language1</item>
+        <item>@string/language2</item>
+        <item>@string/language3</item>
+    </string-array>
 
     <string name="spinnerPrompt4">Синхронизация базы данных</string>
     <string name="low">Низкий</string>
@@ -48,11 +54,6 @@
     <string name="high">Высокий</string>
 
 
-    <string-array name="languageArray">
-        <item>@string/language1</item>
-        <item>@string/language2</item>
-        <item>@string/language3</item>
-    </string-array>
 
 
     <string-array name="databaseArray">
@@ -69,5 +70,5 @@
     <string name="scanning_status">Статус сканирования</string>
     <string name="active">Активный</string>
     <string name="inactive">Неактивный</string>
-    <string name="language3">Русский</string>
+
 </resources>
