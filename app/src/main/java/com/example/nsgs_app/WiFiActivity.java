@@ -126,8 +126,10 @@ public class WiFiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (isAtBottom) {
                     recyclerView.scrollToPosition(0);
+                    btnScrollBottom.setText("Scroll to Bottom");
                 } else {
                     recyclerView.scrollToPosition(networkList.size() - 1);
+                    btnScrollBottom.setText("Scroll to Top");
                 }
                 isAtBottom = !isAtBottom;
             }
