@@ -58,7 +58,8 @@ public class WiFiActivity extends AppCompatActivity {
     private Runnable fetchTask;
     private int fetchInterval; // This variable will hold the fetch interval in milliseconds
     private Comparator<Network> currentComparator; // Save the current comparator
-    private Button btnExportCsv;
+    private Button btnExportCsv, btnScrollBottom;
+    private boolean isAtBottom = false; // Track the current scroll position
     private String currentQuery = ""; // This will hold the current search query
 
     private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFFFF
@@ -82,6 +83,7 @@ public class WiFiActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         btnExportCsv = findViewById(R.id.btn_export_csv);
+        btnScrollBottom = findViewById(R.id.btn_scroll_bottom);
 
         handler = new Handler();
 
@@ -116,6 +118,18 @@ public class WiFiActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 exportToCsv();
+            }
+        });
+
+        btnScrollBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isAtBottom) {
+                    recyclerView.scrollToPosition(0);
+                } else {
+                    recyclerView.scrollToPosition(networkList.size() - 1);
+                }
+                isAtBottom = !isAtBottom;
             }
         });
 
