@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.settings) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            settingsIntent.putExtra("isDialog", true);
             startActivity(settingsIntent);
             return true;
         }

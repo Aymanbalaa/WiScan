@@ -16,30 +16,41 @@
         android:layout_alignParentTop="true"
         android:layout_margin="16dp" />
 
-    <Button
-        android:id="@+id/btn_export_csv"
-        android:layout_width="wrap_content"
+    <SearchView
+        android:id="@+id/search_ssid"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Export to CSV"
+        android:queryHint="Search for SSID"
         android:layout_below="@id/totalNetworksTextView"
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginEnd="16dp"
+        android:iconifiedByDefault="false"
+        android:padding="10dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_below="@id/btn_export_csv"
+        android:layout_below="@id/search_ssid"
         android:layout_above="@id/infoLayout"
         android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btn_export_csv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Export to CSV"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp" />
 
     <LinearLayout
         android:id="@+id/infoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/btn_export_csv"
         android:orientation="vertical"
         android:padding="16dp">
 

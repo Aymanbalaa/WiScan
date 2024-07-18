@@ -8,12 +8,14 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -48,7 +51,8 @@ public class WiFiActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private NetworkAdapter networkAdapter;
-    private List<Network> networkList;
+    private List<Network> networkList = new ArrayList<>();
+    private List<Network> filteredNetworkList = new ArrayList<>();
     private List<SystemStats> systemStats;
     private TextView cpuTempTextView, cpuTimeTextView, scanningStatusTextView;
     private TextView totalNetworksTextView;
@@ -57,6 +61,7 @@ public class WiFiActivity extends AppCompatActivity {
     private int fetchInterval; // This variable will hold the fetch interval in milliseconds
     private Comparator<Network> currentComparator; // Save the current comparator
     private Button btnExportCsv;
+    private String currentQuery = ""; // This will hold the current search query
 
     private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFFFF
     private static final String SCROLL_POSITION_KEY = "scroll_position";
@@ -120,8 +125,24 @@ public class WiFiActivity extends AppCompatActivity {
                 exportToCsv();
             }
         });
- 
 
+        // Setup SearchView
+        SearchView searchView = findViewById(R.id.search_ssid);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                currentQuery = query;
+                filterNetworks(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                currentQuery = newText;
+                filterNetworks(newText);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -191,9 +212,20 @@ public class WiFiActivity extends AppCompatActivity {
                                 networkList.sort(currentComparator);
                             }
 
+                            // Update filtered network list
+                            filteredNetworkList.clear();
+                            filteredNetworkList.addAll(networkList);
+
+                            // Apply current search query to the updated list
+                            filterNetworks(currentQuery);
+
                             // linking recycler view from xml to java
-                            networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList);
-                            recyclerView.setAdapter(networkAdapter);
+                            if (networkAdapter == null) {
+                                networkAdapter = new NetworkAdapter(WiFiActivity.this, filteredNetworkList);
+                                recyclerView.setAdapter(networkAdapter);
+                            } else {
+                                networkAdapter.notifyDataSetChanged();
+                            }
 
                             // Restore the scroll position and offset
                             restoreScrollPosition();
@@ -209,7 +241,6 @@ public class WiFiActivity extends AppCompatActivity {
         });
     }
 
-
     private void saveNetworkList(List<Network> networkList) {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -218,7 +249,6 @@ public class WiFiActivity extends AppCompatActivity {
         editor.putString(NETWORK_LIST_KEY, networkListJson);
         editor.apply();
     }
-
 
     private void fetchSystemStats() {
         OkHttpClient client2 = new OkHttpClient();
@@ -317,8 +347,6 @@ public class WiFiActivity extends AppCompatActivity {
         }
     }
 
-    
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -355,6 +383,8 @@ public class WiFiActivity extends AppCompatActivity {
             saveScrollPosition();
 
             networkList.sort(comparator);
+            filteredNetworkList.clear();
+            filteredNetworkList.addAll(networkList);
             networkAdapter.notifyDataSetChanged();
 
             // Restore the scroll position and offset
@@ -369,7 +399,10 @@ public class WiFiActivity extends AppCompatActivity {
             int scrollPosition = layoutManager.findFirstVisibleItemPosition();
             int scrollOffset = 0;
             if (scrollPosition != RecyclerView.NO_POSITION) {
-                scrollOffset = layoutManager.findViewByPosition(scrollPosition).getTop();
+                View firstVisibleView = layoutManager.findViewByPosition(scrollPosition);
+                if (firstVisibleView != null) {
+                    scrollOffset = firstVisibleView.getTop();
+                }
             }
             SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
@@ -386,6 +419,22 @@ public class WiFiActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         if (layoutManager != null && scrollPosition != RecyclerView.NO_POSITION) {
             layoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
+        }
+    }
+
+    private void filterNetworks(String query) {
+        filteredNetworkList.clear();
+        if (TextUtils.isEmpty(query)) {
+            filteredNetworkList.addAll(networkList);
+        } else {
+            for (Network network : networkList) {
+                if (network.getSsid().toLowerCase().contains(query.toLowerCase())) {
+                    filteredNetworkList.add(network);
+                }
+            }
+        }
+        if (networkAdapter != null) {
+            networkAdapter.notifyDataSetChanged();
         }
     }
 }
