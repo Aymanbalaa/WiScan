@@ -66,49 +66,81 @@
             android:lines="2"/>
     </LinearLayout>
 
-<!--@TODO CHECK IF TEAM AGREES TO DELETE ALL WHAT IS BELOW -->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="56dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:background="@android:color/holo_orange_light"-->
-<!--        android:gravity="center">-->
-<!--    -->
-<!--        <ImageButton-->
-<!--            android:id="@+id/home_button"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:src="@drawable/ic_home"-->
-<!--            android:background="?attr/selectableItemBackground"-->
-<!--            android:contentDescription="Home"/>-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp">
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/signal_button"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:src="@drawable/ic_signal"-->
-<!--            android:background="?attr/selectableItemBackground"-->
-<!--            android:contentDescription="Signal"/>-->
+        <TextView
+            android:id="@+id/cpuTempTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CPU Temperature: 59.1°C"
+            android:textSize="18sp" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/location_icon_button"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:src="@drawable/ic_location"-->
-<!--            android:background="?attr/selectableItemBackground"-->
-<!--            android:contentDescription="Location"/>-->
+        <TextView
+            android:id="@+id/cpuTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CPU Uptime: 2 minutes"
+            android:textSize="18sp" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/settings_button"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:src="@drawable/ic_settings"-->
-<!--            android:background="?attr/selectableItemBackground"-->
-<!--            android:contentDescription="Settings"/>-->
-<!--    </LinearLayout>-->
+        <TextView
+            android:id="@+id/scanningStatusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scanning Status: Active"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <!--@TODO CHECK IF TEAM AGREES TO DELETE ALL WHAT IS BELOW -->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="56dp"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:background="@android:color/holo_orange_light"-->
+    <!--        android:gravity="center">-->
+    <!--    -->
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/home_button"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:src="@drawable/ic_home"-->
+    <!--            android:background="?attr/selectableItemBackground"-->
+    <!--            android:contentDescription="Home"/>-->
+
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/signal_button"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:src="@drawable/ic_signal"-->
+    <!--            android:background="?attr/selectableItemBackground"-->
+    <!--            android:contentDescription="Signal"/>-->
+
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/location_icon_button"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:src="@drawable/ic_location"-->
+    <!--            android:background="?attr/selectableItemBackground"-->
+    <!--            android:contentDescription="Location"/>-->
+
+    <!--        <ImageButton-->
+    <!--            android:id="@+id/settings_button"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:src="@drawable/ic_settings"-->
+    <!--            android:background="?attr/selectableItemBackground"-->
+    <!--            android:contentDescription="Settings"/>-->
+    <!--    </LinearLayout>-->
 </RelativeLayout>

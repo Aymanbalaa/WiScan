@@ -53,8 +53,6 @@ public class WiFiActivity extends AppCompatActivity {
     private NetworkAdapter networkAdapter;
     private List<Network> networkList = new ArrayList<>();
     private List<Network> filteredNetworkList = new ArrayList<>();
-    private List<SystemStats> systemStats;
-    private TextView cpuTempTextView, cpuTimeTextView, scanningStatusTextView;
     private TextView totalNetworksTextView;
     private Handler handler;
     private Runnable fetchTask;
@@ -83,9 +81,6 @@ public class WiFiActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        cpuTempTextView = findViewById(R.id.cpuTempTextView);
-        cpuTimeTextView = findViewById(R.id.cpuTimeTextView);
-        scanningStatusTextView = findViewById(R.id.scanningStatusTextView);
         btnExportCsv = findViewById(R.id.btn_export_csv);
 
         handler = new Handler();
@@ -101,13 +96,11 @@ public class WiFiActivity extends AppCompatActivity {
             public void run() {
                 saveScrollPosition(); // Save the scroll position before fetching data
                 fetchNetworks();
-                fetchSystemStats();
                 handler.postDelayed(this, fetchInterval);
             }
         };
 
         fetchNetworks(); // Initial fetch on create
-        fetchSystemStats();
 
         handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
 
@@ -248,66 +241,6 @@ public class WiFiActivity extends AppCompatActivity {
         String networkListJson = gson.toJson(networkList);
         editor.putString(NETWORK_LIST_KEY, networkListJson);
         editor.apply();
-    }
-
-    private void fetchSystemStats() {
-        OkHttpClient client2 = new OkHttpClient();
-
-        // DO NOT CHANGE
-        // 10.0.2.2:5000 is to be used if the emulator and server are running on the same device
-        // otherwise use the endpoint of the server
-        String url = "http://217.15.171.225:5000/get_system_stats";
-
-        Request request2 = new Request.Builder()
-                .url(url)
-                .build();
-
-        client2.newCall(request2).enqueue(new Callback() {
-
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.e("WiFiActivity", "Error fetching system stats: " + e.getMessage());
-                runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error fetching system stats", Toast.LENGTH_SHORT).show());
-            }
-
-            @SuppressLint({"StringFormatMatches", "SetTextI18n"})
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String responseData = response.body().string();
-                    Log.d("WiFiActivity", "System Stats Response: " + responseData); // Log the response data
-                    try {
-                        // Fetch JSON
-                        JSONObject jsonObject = new JSONObject(responseData);
-                        Gson gson = new Gson();
-
-                        // Filtering JSON data and feeding it into List of Networks
-                        Type systemStatsType = new TypeToken<List<SystemStats>>() {}.getType();
-                        systemStats = gson.fromJson(jsonObject.getJSONArray("system_stats").toString(), systemStatsType);
-
-                        runOnUiThread(() -> {
-                            if (systemStats != null && !systemStats.isEmpty()) {
-                                SystemStats stats = systemStats.get(0);
-
-                                // Get the temperature unit from SharedPreferences
-                                SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
-                                String temperatureUnit = preferences.getString("temperature_unit", "Celsius");
-
-                                cpuTempTextView.setText(getString(R.string.cpuTemperature) + stats.getTemperature(temperatureUnit));
-                                cpuTimeTextView.setText(getString(R.string.cpu_time) + stats.getTime());
-                                scanningStatusTextView.setText(getString(R.string.scanning_status) + (stats.getStatus() == 1 ? getString(R.string.active) : getString(R.string.inactive)));
-                            }
-                        });
-                    } catch (Exception e) {
-                        Log.e("WiFiActivity", "Error parsing system stats JSON: " + e.getMessage(), e);
-                        runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error parsing system stats", Toast.LENGTH_SHORT).show());
-                    }
-                } else {
-                    Log.e("WiFiActivity", "Unsuccessful response for system stats: " + response.code());
-                    runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error fetching system stats", Toast.LENGTH_SHORT).show());
-                }
-            }
-        });
     }
 
     private void exportToCsv() {

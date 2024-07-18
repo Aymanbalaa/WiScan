@@ -34,7 +34,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_below="@id/search_ssid"
-        android:layout_above="@id/infoLayout"
+        android:layout_above="@id/btn_export_csv"
         android:layout_marginTop="8dp" />
 
     <Button
@@ -43,8 +43,8 @@
         android:layout_height="wrap_content"
         android:text="Export to CSV"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
 
     <LinearLayout
         android:id="@+id/infoLayout"
@@ -52,27 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/btn_export_csv"
         android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/cpuTempTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CPU Temp: N/A"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/cpuTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CPU Time: N/A"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/scanningStatusTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Scanning Status: N/A"
-            android:textSize="16sp" />
+        android:padding="0dp">
     </LinearLayout>
 </RelativeLayout>
