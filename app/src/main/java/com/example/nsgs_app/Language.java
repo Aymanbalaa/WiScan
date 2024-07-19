@@ -24,4 +24,12 @@ public class Language {
         conf.setLocale(locale);
         resources.updateConfiguration(conf,resources.getDisplayMetrics());
     }
+
+    public static String getLanguage(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("language", "en");
+    }
+
+
+
 }
