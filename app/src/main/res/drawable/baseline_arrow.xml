@@ -6,17 +6,16 @@
            <item>
 
                <shape android:shape = "rectangle">
-
                    <solid android:color = '@color/grey'/>
                    <padding android:right = "12dp"
                        android:left = "12dp"/>
-                   <corners android:radius = "0dp"/>
+                   <corners android:radius = "9dp"/>
 
                </shape>
 
            </item>
 
-              <item android:drawable = "@drawable/ic_arrow_right_24"
+              <item android:drawable = "@drawable/ic_arrow_down"
                   android:gravity ="end"/>
 
 

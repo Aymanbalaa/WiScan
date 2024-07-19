@@ -1,4 +1,6 @@
 <resources>
+
+    //MAIN PAGE
     <string name="app_name">NSGS-App</string>
     <string name="ssid_label">SSID: %1$s</string>
     <string name="bssid_label">BSSID: %1$s</string>
@@ -12,11 +14,20 @@
     <string name="guidance">Help</string>
     <string name="wifi">Scanned Network List</string>
     <string name="location">Map</string>
+
+
+    // SSID PAGE
     <string name="provider_label">Provider : %1s</string>
     <string name="settings">SETTINGS</string>
     <string name="sort_by_ssid">Sort by SSID</string>
     <string name="sort_by_security_protocol">Sort by Security Protocol</string>
     <string name="sort">Sort</string>
+    <string name="cpuTemperature">"CPU Temperature: "</string>
+    <string name="cpu_time">"CPU Time: "</string>
+    <string name="scanning_status">"Scanning Status: "</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
+
 
     // FAQ QUESTIONS
     <string name="faq_what_is_nsgs">What is NSGS App?</string>
@@ -31,18 +42,13 @@
     <string name="answer_view_scanned_data">The scanned WiFi data is displayed in the LocationActivity section. This section provides a detailed view of the networks captured during the scan, including their BSSIDs, SSIDs, and security protocols.</string>
 
     <string name="title_activity_maps">MapsActivity</string>
+
+
     <string name="settingsTitle">Settings</string>
+    <string name="help_title">Help</string>
 
-    <string name="spinnerPrompt1">Country</string>
-    <string name="country1">Canada</string>
-    <string name="country2">USA</string>
-    <string-array name="countryArray">
-        <item>@string/country1</item>
-        <item>@string/country2</item>
-    </string-array>
-
-
-    <string name="spinnerPrompt2">Measurements</string>
+    // SETTINGS PAGE
+    <string name="temperature_unit_text_view">Temperature Unit</string>
     <string name="Celsius" translatable="false">Celsius</string>
     <string name="Fahrenheit" translatable="false">Fahrenheit</string>
     <string-array name="measurementsArray">
@@ -50,20 +56,19 @@
         <item>@string/Fahrenheit</item>
     </string-array>
 
-    <string name="spinnerPrompt3">Language</string>
+    <string name="language_text_view">Language</string>
     <string name="language1">English</string>
-    <string name="language2">French</string>
-    <string name="language3">Russian</string>
+    <string name="language2">Français</string>
+    <string name="language3">Русский</string>
+
+    
     <string-array name="languageArray">
         <item>@string/language1</item>
         <item>@string/language2</item>
         <item>@string/language3</item>
     </string-array>
 
-    <string name="spinnerPrompt4">Database Sync</string>
-    <string name="low">3</string>
-    <string name="medium">5</string>
-    <string name="high">10</string>
+    <string name="db_text_view">Database Refresh Interval</string>
 
     <string-array name="databaseArray">
         <item>3</item>
@@ -80,10 +85,7 @@
     </string-array>
 
 
-    <string name="cpuTemperature">"CPU Temperature: "</string>
-    <string name="cpu_time">"CPU Time: "</string>
-    <string name="scanning_status">"Scanning Status: "</string>
-    <string name="active">Active</string>
-    <string name="inactive">Inactive</string>
+
+
 
 </resources>

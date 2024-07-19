@@ -20,12 +20,8 @@
     <string name="sort">Сортировать</string>
     <string name="settingsTitle">Настройки</string>
 
-    <string name="spinnerPrompt1">Страна</string>
-    <string name="country1">Канада</string>
-    <string name="country2">США</string>
 
-    <string name="spinnerPrompt2">Измерения</string>
-
+    <string name="temperature_unit_text_view">Единица измерения температуры</string>
 
     <string name="Celsius" translatable="false">Celsius</string>
     <string name="Fahrenheit" translatable="false">Fahrenheit</string>
@@ -35,18 +31,10 @@
     </string-array>
 
 
-
-
-    <string name="spinnerPrompt3">Язык</string>
-    <string name="language1">Английский</string>
-    <string name="language2">Французский</string>
-
-
-    <string name="spinnerPrompt4">Синхронизация базы данных</string>
-    <string name="low">Низкий</string>
-    <string name="medium">Середина</string>
-    <string name="high">Высокий</string>
-
+    <string name="language_text_view">Язык</string>
+    <string name="language1">English</string>
+    <string name="language2">Français</string>
+    <string name="language3">Русский</string>
 
     <string-array name="languageArray">
         <item>@string/language1</item>
@@ -56,9 +44,9 @@
 
 
     <string-array name="databaseArray">
-        <item>@string/low</item>
-        <item>@string/medium</item>
-        <item>@string/high</item>
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
     </string-array>
 
 
@@ -69,5 +57,15 @@
     <string name="scanning_status">Статус сканирования</string>
     <string name="active">Активный</string>
     <string name="inactive">Неактивный</string>
-    <string name="language3">Русский</string>
+    <string name="db_text_view">Интервал обновления базы данных</string>
+    <string name="faq_what_is_nsgs">Что такое приложение NSGS?</string>
+    <string name="faq_start_wifi_scan">Как запустить сканирование Wi-Fi?</string>
+    <string name="faq_configure_wifi_settings">Как настроить параметры сканирования Wi-Fi?</string>
+    <string name="faq_view_scanned_data">Где я могу увидеть отсканированные данные Wi-Fi?</string>
+    <string name="answer_what_is_nsgs">Приложение NSGS (Network Security Geo-Scanner) предназначено для сбора локальных данных Wi-Fi, их очистки, отображения прогресса пользователю и отправки данных для расширенной визуализации, такой как графики и карты. Приложение позволяет пользователям настраивать частоту и радиус сканирования Wi-Fi.</string>
+    <string name="answer_start_wifi_scan">Чтобы начать сканирование Wi-Fi, перейдите в раздел WiFiActivity и нажмите кнопку «Начать сканирование». Приложение начнет сканирование локальных сетей Wi-Fi на основе настроенных параметров.</string>
+    <string name="answer_configure_wifi_settings">Вы можете настроить параметры сканирования WiFi, перейдя в раздел SettingsActivity. Здесь вы можете настроить частоту и радиус сканирования в соответствии с вашими потребностями.</string>
+    <string name="answer_view_scanned_data">Сканированные данные Wi-Fi отображаются в разделе LocationActivity. В этом разделе представлен подробный обзор сетей, захваченных во время сканирования, включая их BSSID, SSID и протоколы безопасности.</string>
+    <string name="help_title">Помощь</string>
+
 </resources>
