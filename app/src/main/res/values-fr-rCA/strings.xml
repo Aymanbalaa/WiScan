@@ -20,16 +20,7 @@
     <string name="sort">Trier</string>
     <string name="settingsTitle">Paramètres</string>
 
-    <string name="spinnerPrompt1">Pays</string>
-    <string name="country1">Canada</string>
-    <string name="country2">États-Unis</string>
 
-    <string-array name="countryArray">
-        <item>@string/country1</item>
-        <item>@string/country2</item>
-    </string-array>
-
-    <string name="spinnerPrompt2">Mesures</string>
 
     <string name="Celsius" translatable="false">Celsius</string>
     <string name="Fahrenheit" translatable="false">Fahrenheit</string>
@@ -38,7 +29,7 @@
         <item>@string/Fahrenheit</item>
     </string-array>
 
-    <string name="spinnerPrompt3">Langue</string>
+
     <string name="language1">English</string>
     <string name="language2">Français</string>
     <string name="language3">Русский</string>
@@ -49,10 +40,7 @@
         <item>@string/language3</item>
     </string-array>
 
-    <string name="spinnerPrompt4">Synchronisation de Base de Données</string>
-    <string name="low">Faible</string>
-    <string name="medium">Moyen</string>
-    <string name="high">Haut</string>
+
 
     <string-array name="databaseArray">
         <item>3</item>
@@ -68,4 +56,16 @@
     <string name="active">Actif</string>
     <string name="inactive">Inactif</string>
     <string name="cpuTemperature">Température du CPU: </string>
+    <string name="temperature_unit_text_view">Unité de température</string>
+    <string name="language_text_view">Langue</string>
+    <string name="db_text_view">Intervalle d\'actualisation de la base de données</string>
+    <string name="faq_what_is_nsgs">Qu\'est-ce que l\'application NSGD?</string>
+    <string name="faq_start_wifi_scan">Comment démarrer une analyse WIFI?</string>
+    <string name="faq_configure_wifi_settings">Comment configurer le scan WIFI?</string>
+    <string name="faq_view_scanned_data">Où puis-je voir les données WIFI numérisées?</string>
+    <string name="answer_what_is_nsgs">L\'application NSGS (Network Security Geo-Scanner) est conçue pour capturer les données WiFi locales, les nettoyer, afficher la progression à l\'utilisateur et envoyer les données pour des visualisations avancées telles que des graphiques et des cartes. L\'application permet aux utilisateurs de configurer la fréquence et le rayon de numérisation WiFi.</string>
+    <string name="answer_start_wifi_scan">Pour lancer une analyse WiFi, accédez à la section WiFiActivity et appuyez sur le bouton Démarrer l\'analyse. L\'application commencera à rechercher les réseaux WiFi locaux en fonction des paramètres configurés.</string>
+    <string name="answer_configure_wifi_settings">Vous pouvez configurer les paramètres d\'analyse WiFi en accédant à la section SettingsActivity. Ici, vous pouvez ajuster la fréquence et le rayon de balayage en fonction de vos besoins.</string>
+    <string name="answer_view_scanned_data">Les données WiFi analysées sont affichées dans la section LocationActivity. Cette section fournit une vue détaillée des réseaux capturés lors de l\'analyse, y compris leurs BSSID, SSID et protocoles de sécurité.</string>
+    <string name="help_title">Aide</string>
 </resources>
