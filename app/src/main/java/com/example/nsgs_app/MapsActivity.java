@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -13,6 +14,8 @@ import androidx.core.content.ContextCompat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.nsgs_app.databinding.ActivityMapsBinding;
@@ -23,13 +26,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -41,6 +48,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private List<Network> networkList;
     private static final String PREFS_NAME = "WiFiActivityPrefs";
     private static final String NETWORK_LIST_KEY = "network_list";
+    private Map<LatLng, List<Network>> locationNetworkMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +82,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d(TAG, "onMapReady");
         mMap = googleMap;
         enableMyLocation();
+        groupNetworksByLocation();
         addNetworkPins();
+        setMarkerClickListener();
     }
 
     private void enableMyLocation() {
@@ -117,18 +127,69 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private void addNetworkPins() {
+    private void groupNetworksByLocation() {
+        locationNetworkMap = new HashMap<>();
         if (networkList != null) {
             for (Network network : networkList) {
-                LatLng networkLocation = new LatLng(network.getLatitude(), network.getLongitude());
-                mMap.addMarker(new MarkerOptions()
-                        .position(networkLocation)
-                        .title(network.getSsid())
-                        .snippet("Security: " + network.getSecurity()));
+                LatLng location = new LatLng(network.getLatitude(), network.getLongitude());
+                if (!locationNetworkMap.containsKey(location)) {
+                    locationNetworkMap.put(location, new ArrayList<>());
+                }
+                locationNetworkMap.get(location).add(network);
+            }
+        }
+    }
+
+    private void addNetworkPins() {
+        if (locationNetworkMap != null) {
+            for (Map.Entry<LatLng, List<Network>> entry : locationNetworkMap.entrySet()) {
+                LatLng location = entry.getKey();
+                List<Network> networks = entry.getValue();
+                if (networks.size() == 1) {
+                    Network network = networks.get(0);
+                    mMap.addMarker(new MarkerOptions()
+                            .position(location)
+                            .title(network.getSsid())
+                            .snippet("Security: " + network.getSecurity()));
+                } else {
+                    mMap.addMarker(new MarkerOptions()
+                            .position(location)
+                            .title("Multiple Networks"));
+                }
             }
         } else {
             Toast.makeText(this, "No network data available", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void setMarkerClickListener() {
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                LatLng position = marker.getPosition();
+                List<Network> networks = locationNetworkMap.get(position);
+                if (networks != null && networks.size() > 1) {
+                    showNetworkListDialog(networks);
+                }
+                return false;
+            }
+        });
+    }
+
+    private void showNetworkListDialog(List<Network> networks) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Networks at this location");
+
+        ListView networkListView = new ListView(this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        for (Network network : networks) {
+            adapter.add(network.getSsid() + " (Security: " + network.getSecurity() + ")");
+        }
+        networkListView.setAdapter(adapter);
+
+        builder.setView(networkListView);
+        builder.setPositiveButton("OK", null);
+        builder.show();
     }
 
     @Override

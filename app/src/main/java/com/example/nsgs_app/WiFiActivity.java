@@ -266,17 +266,17 @@ public class WiFiActivity extends AppCompatActivity {
         try (FileWriter writer = new FileWriter(csvFile)) {
             writer.append("SSID,BSSID,Security,Longitude,Latitude,Neighborhood,Postal Code\n");
             for (Network network : networkList) {
-                writer.append(network.getSsid())
+                writer.append(escapeCsvValue(network.getSsid()))
                         .append(',')
-                        .append(network.getBssid())
+                        .append(escapeCsvValue(network.getBssid()))
                         .append(',')
-                        .append(network.getSecurity())
+                        .append(escapeCsvValue(network.getSecurity())) // main reason why we need to escape before
                         .append(',')
-                        .append(String.valueOf(network.getCoordinates()))
+                        .append(escapeCsvValue(String.valueOf(network.getCoordinates())))
                         .append(',')
-                        .append(String.valueOf(network.getNeighborhood()))
+                        .append(escapeCsvValue(String.valueOf(network.getNeighborhood())))
                         .append(',')
-                        .append(String.valueOf(network.getPostalCode()))
+                        .append(escapeCsvValue(String.valueOf(network.getPostalCode())))
                         .append('\n');
             }
             Toast.makeText(this, "CSV file exported to Downloads folder", Toast.LENGTH_SHORT).show();
@@ -385,5 +385,12 @@ public class WiFiActivity extends AppCompatActivity {
         if (networkAdapter != null) {
             networkAdapter.notifyDataSetChanged();
         }
+    }
+
+    private String escapeCsvValue(String value) {
+        if (value == null) {
+            return "\"\"";
+        }
+        return "\"" + value.replace("\"", "\"\"") + "\"";
     }
 }
