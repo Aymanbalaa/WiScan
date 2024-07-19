@@ -68,4 +68,8 @@
     <string name="answer_configure_wifi_settings">Vous pouvez configurer les paramètres d\'analyse WiFi en accédant à la section SettingsActivity. Ici, vous pouvez ajuster la fréquence et le rayon de balayage en fonction de vos besoins.</string>
     <string name="answer_view_scanned_data">Les données WiFi analysées sont affichées dans la section LocationActivity. Cette section fournit une vue détaillée des réseaux capturés lors de l\'analyse, y compris leurs BSSID, SSID et protocoles de sécurité.</string>
     <string name="help_title">Aide</string>
+    <string name="multiple_networks">Plusieurs réseaux</string>
+    <string name="location_permission_is_required_to_use_this_feature">Une autorisation de localisation est requise pour utiliser cette fonctionnalité</string>
+    <string name="you_are_here">Vous êtes là</string>
+    <string name="networks_at_this_location">Réseaux à cet endroit</string>
 </resources>

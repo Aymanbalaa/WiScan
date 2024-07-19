@@ -100,7 +100,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 Log.d(TAG, "Location found: " + location.toString());
                                 LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 15));
-                                mMap.addMarker(new MarkerOptions().position(myLocation).title("You are here"));
+                                mMap.addMarker(new MarkerOptions().position(myLocation).title(getString(R.string.you_are_here)));
                             } else {
                                 Log.d(TAG, "Location is null");
                             }
@@ -122,7 +122,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 enableMyLocation();
             } else {
                 Log.d(TAG, "Location permission denied in requestPermissionsResult");
-                Toast.makeText(this, "Location permission is required to use this feature", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.location_permission_is_required_to_use_this_feature, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -150,11 +150,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     mMap.addMarker(new MarkerOptions()
                             .position(location)
                             .title(network.getSsid())
-                            .snippet("Security: " + network.getSecurity()));
+                            .snippet(R.string.security_label+": " + network.getSecurity()));
                 } else {
                     mMap.addMarker(new MarkerOptions()
                             .position(location)
-                            .title("Multiple Networks"));
+                            .title(getString(R.string.multiple_networks)));
                 }
             }
         } else {
@@ -178,12 +178,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void showNetworkListDialog(List<Network> networks) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Networks at this location");
+        builder.setTitle(R.string.networks_at_this_location);
 
         ListView networkListView = new ListView(this);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         for (Network network : networks) {
-            adapter.add(network.getSsid() + " (Security: " + network.getSecurity() + ")");
+            adapter.add(network.getSsid() + " ("+R.string.security_label+": " + network.getSecurity() + ")");
         }
         networkListView.setAdapter(adapter);
 

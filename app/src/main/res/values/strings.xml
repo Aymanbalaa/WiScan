@@ -41,7 +41,7 @@
     <string name="answer_configure_wifi_settings">You can configure the WiFi scan settings by going to the SettingsActivity section. Here you can adjust the scan frequency and radius according to your needs.</string>
     <string name="answer_view_scanned_data">The scanned WiFi data is displayed in the LocationActivity section. This section provides a detailed view of the networks captured during the scan, including their BSSIDs, SSIDs, and security protocols.</string>
 
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
 
 
     <string name="settingsTitle">Settings</string>
@@ -77,6 +77,10 @@
     </string-array>
 
     <string name="buttonSave">Save</string>
+    <string name="multiple_networks">Multiple Networks</string>
+    <string name="location_permission_is_required_to_use_this_feature">Location permission is required to use this feature</string>
+    <string name="you_are_here">You are here</string>
+    <string name="networks_at_this_location">Networks at this location</string>
 
     <string-array name="languageCode">
         <item>en</item>
