@@ -27,6 +27,7 @@
     <string name="scanning_status">"Scanning Status: "</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
+    <string name="activeActivity">Active Networks List</string>
 
 
     // FAQ QUESTIONS

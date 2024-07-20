@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
+        Button activeButton = findViewById(R.id.active_button);
 
         wifiButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, WiFiActivity.class);
@@ -49,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
         locationButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(intent);
+        });
+
+        activeButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ActiveActivity.class);
             startActivity(intent);
         });
 
