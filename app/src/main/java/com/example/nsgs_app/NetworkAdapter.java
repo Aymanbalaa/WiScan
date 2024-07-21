@@ -1,4 +1,3 @@
-// NetworkAdapter.java
 package com.example.nsgs_app;
 
 import android.content.Context;

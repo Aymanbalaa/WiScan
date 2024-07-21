@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name" translatable="false">NSGS-App</string>
-    <string name="ssid_label" translatable="false">SSID: %1$s</string>
-    <string name="bssid_label" translatable="false">BSSID: %1$s</string>
+
+    //MAIN PAGE
+    <string name="app_name">NSGS-App</string>
+    <string name="ssid_label">SSID: %1$s</string>
+    <string name="bssid_label">BSSID: %1$s</string>
     <string name="security_label">Security: %1$s</string>
     <string name="coordinates_label">Coordinates: %1$s</string>
     <string name="postal_code_label">Postal Code: %1$s</string>
@@ -12,14 +14,83 @@
     <string name="guidance">Help</string>
     <string name="wifi">Scanned Network List</string>
     <string name="location">Map</string>
+
+
+    // SSID PAGE
     <string name="provider_label">Provider : %1s</string>
     <string name="settings">SETTINGS</string>
     <string name="sort_by_ssid">Sort by SSID</string>
     <string name="sort_by_security_protocol">Sort by Security Protocol</string>
     <string name="sort">Sort</string>
-    <string name="cpu_temperature">"CPU Temperature: "</string>
+    <string name="cpuTemperature">"CPU Temperature: "</string>
     <string name="cpu_time">"CPU Time: "</string>
     <string name="scanning_status">"Scanning Status: "</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
+    <string name="activeActivity">Active Networks List</string>
+
+
+    // FAQ QUESTIONS
+    <string name="faq_what_is_nsgs">What is NSGS App?</string>
+    <string name="faq_start_wifi_scan">How do I start a WiFi scan?</string>
+    <string name="faq_configure_wifi_settings">How do I configure the WiFi scan settings?</string>
+    <string name="faq_view_scanned_data">Where can I see the scanned WiFi data?</string>
+
+    // FAQ ANSWERS
+    <string name="answer_what_is_nsgs">The NSGS (Network Security Geo-Scanner) App is designed to capture local WiFi data, clean it, display progress to the user, and send the data for advanced visualizations such as graphs and maps. The app allows users to configure WiFi scan frequency and radius.</string>
+    <string name="answer_start_wifi_scan">To see scanned network, navigate to the Scanned Network List section, and press the button. The app will begin getting the data from the cloud to show in this list.</string>
+    <string name="answer_configure_wifi_settings">You can configure the WiFi scan settings by going to the Main page and clicking on the three dots at the top right corner of the header. Here you can adjust the scan frequency and radius according to your needs.</string>
+    <string name="answer_view_scanned_data">The scanned WiFi data is displayed in the Scanned Network List section. This section provides a detailed view of the networks captured during the scan, including their BSSIDs, SSIDs, and security protocols.</string>
+
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
+
+
+    <string name="settingsTitle">Settings</string>
+    <string name="help_title">Help</string>
+
+    // SETTINGS PAGE
+    <string name="temperature_unit_text_view">Temperature Unit</string>
+    <string name="Celsius" translatable="false">Celsius</string>
+    <string name="Fahrenheit" translatable="false">Fahrenheit</string>
+    <string-array name="measurementsArray">
+        <item>@string/Celsius</item>
+        <item>@string/Fahrenheit</item>
+    </string-array>
+
+    <string name="language_text_view">Language</string>
+    <string name="language1">English</string>
+    <string name="language2">Français</string>
+    <string name="language3">Русский</string>
+
+    
+    <string-array name="languageArray">
+        <item>@string/language1</item>
+        <item>@string/language2</item>
+        <item>@string/language3</item>
+    </string-array>
+
+    <string name="db_text_view">Database Refresh Interval</string>
+
+    <string-array name="databaseArray">
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+
+    <string name="buttonSave">Save</string>
+    <string name="multiple_networks">Multiple Networks</string>
+    <string name="location_permission_is_required_to_use_this_feature">Location permission is required to use this feature</string>
+    <string name="you_are_here">You are here</string>
+    <string name="networks_at_this_location">Networks at this location</string>
+
+    <string-array name="languageCode">
+        <item>en</item>
+        <item>fr</item>
+        <item>ru</item>
+    </string-array>
+
+
+
+
+
 </resources>

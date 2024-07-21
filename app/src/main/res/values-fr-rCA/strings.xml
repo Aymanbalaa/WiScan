@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NSGS-App</string>
+    <string name="ssid_label">SSID: %1$s</string>
+    <string name="bssid_label">BSSID: %1$s</string>
+    <string name="security_label">Sécurité : %1$s</string>
+    <string name="coordinates_label">Coordonnés: %1$s</string>
+    <string name="postal_code_label">Code Postal: %1$s</string>
+    <string name="neighborhood_label">Quartier: %1$s</string>
+    <string name="total_networks_label">Réseaux Totaux: %1$s</string>
+    <string name="hi">Bienvenue</string>
+    <string name="thomas">Thomas</string>
+    <string name="guidance">Aide</string>
+    <string name="wifi">Liste des Réseaux Analysés</string>
+    <string name="location">Map</string>
+    <string name="provider_label">Fournisseur: %1s</string>
+    <string name="settings">PARAMÈTRES</string>
+    <string name="sort_by_ssid">Trier par SSID</string>
+    <string name="sort_by_security_protocol">Trier par Protocole de Sécurité</string>
+    <string name="sort">Trier</string>
+    <string name="settingsTitle">Paramètres</string>
+
+
+
+    <string name="Celsius" translatable="false">Celsius</string>
+    <string name="Fahrenheit" translatable="false">Fahrenheit</string>
+    <string-array name="measurementsArray">
+        <item>@string/Celsius</item>
+        <item>@string/Fahrenheit</item>
+    </string-array>
+
+
+    <string name="language1">English</string>
+    <string name="language2">Français</string>
+    <string name="language3">Русский</string>
+
+    <string-array name="languageArray">
+        <item>@string/language1</item>
+        <item>@string/language2</item>
+        <item>@string/language3</item>
+    </string-array>
+
+
+
+    <string-array name="databaseArray">
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+    </string-array>
+
+    <string name="activeActivity">Liste des réseaux actifs</string>
+
+    <string name="buttonSave">Sauvegarder</string>
+    <string name="cpu_time">Temps du CPU: </string>
+    <string name="scanning_status">Statut de numérisation: </string>
+    <string name="active">Actif</string>
+    <string name="inactive">Inactif</string>
+    <string name="cpuTemperature">Température du CPU: </string>
+    <string name="temperature_unit_text_view">Unité de température</string>
+    <string name="language_text_view">Langue</string>
+    <string name="db_text_view">Intervalle d\'actualisation de la base de données</string>
+    <string name="faq_what_is_nsgs">Qu\'est-ce que l\'application NSGD?</string>
+    <string name="faq_start_wifi_scan">Comment démarrer une analyse WIFI?</string>
+    <string name="faq_configure_wifi_settings">Comment configurer le scan WIFI?</string>
+    <string name="faq_view_scanned_data">Où puis-je voir les données WIFI numérisées?</string>
+    <string name="answer_what_is_nsgs">L\'application NSGS (Network Security Geo-Scanner) est conçue pour capturer les données WiFi locales, les nettoyer, afficher la progression à l\'utilisateur et envoyer les données pour des visualisations avancées telles que des graphiques et des cartes. L\'application permet aux utilisateurs de configurer la fréquence et le rayon de numérisation WiFi.</string>
+    <string name="answer_start_wifi_scan">Pour afficher le réseau scanné, accédez à la section Liste des réseaux scannés et appuyez sur le bouton . L\'application commencera à récupérer les données du nuage pour les afficher dans cette liste.</string>
+    <string name="answer_configure_wifi_settings">Pour afficher le réseau scanné, accédez à la section Liste des réseaux scannés et appuyez sur le bouton . L\'application commencera à récupérer les données du nuage pour les afficher dans cette liste.</string>
+    <string name="answer_view_scanned_data">Les données WiFi analysées sont affichées dans la section Liste des réseaux analysés. Cette section fournit une vue détaillée des réseaux capturés pendant l\'analyse, y compris leurs BSSID, SSID et protocoles de sécurité.</string>
+    <string name="help_title">Aide</string>
+    <string name="multiple_networks">Plusieurs réseaux</string>
+    <string name="location_permission_is_required_to_use_this_feature">Une autorisation de localisation est requise pour utiliser cette fonctionnalité</string>
+    <string name="you_are_here">Vous êtes là</string>
+    <string name="networks_at_this_location">Réseaux à cet endroit</string>
+</resources>

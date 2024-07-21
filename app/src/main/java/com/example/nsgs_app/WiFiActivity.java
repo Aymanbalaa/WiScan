@@ -1,19 +1,28 @@
 package com.example.nsgs_app;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +31,8 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -39,24 +50,32 @@ import okhttp3.Response;
 
 public class WiFiActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1;
+
     private RecyclerView recyclerView;
     private NetworkAdapter networkAdapter;
     private List<Network> networkList;
     private List<Network> filteredNetworkList; // List for filtered networks
     private List<SystemStats> systemStats;
     private TextView cpuTempTextView, cpuTimeTextView, scanningStatusTextView;
+    private List<Network> networkList = new ArrayList<>();
+    private List<Network> filteredNetworkList = new ArrayList<>();
     private TextView totalNetworksTextView;
     private Handler handler;
     private Runnable fetchTask;
-    private final int FETCH_INTERVAL_SECONDS = 10; // Duration between HTTP requests
-    private final int FETCH_INTERVAL = FETCH_INTERVAL_SECONDS * 1000; // DO NOT CHANGE
+    private int fetchInterval; // This variable will hold the fetch interval in milliseconds
     private Comparator<Network> currentComparator; // Save the current comparator
     private String currentFilter; // Save the current filter
-    private boolean isFilteringMode = false; // Track whether filtering mode is active
+    private boolean isFilteringMode = false; // Track whether filtering mode is activ
+    private Button btnExportCsv, btnScrollBottom;
+    private boolean isAtBottom = false; // Track the current scroll position
+    private String currentQuery = ""; // This will hold the current search query
+
 
     private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFFFF
     private static final String SCROLL_POSITION_KEY = "scroll_position";
     private static final String SCROLL_OFFSET_KEY = "scroll_offset";
+    private static final String NETWORK_LIST_KEY = "network_list";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -73,24 +92,76 @@ public class WiFiActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        cpuTempTextView = findViewById(R.id.cpuTempTextView);
-        cpuTimeTextView = findViewById(R.id.cpuTimeTextView);
-        scanningStatusTextView = findViewById(R.id.scanningStatusTextView);
+        btnExportCsv = findViewById(R.id.btn_export_csv);
+        btnScrollBottom = findViewById(R.id.btn_scroll_bottom);
 
         handler = new Handler();
+
+        // Retrieve the fetch interval from SharedPreferences
+        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+        String fetchIntervalString = preferences.getString("fetch_unit", "10");
+        int fetchIntervalSeconds = Integer.parseInt(fetchIntervalString);
+        fetchInterval = fetchIntervalSeconds * 1000; // Convert to milliseconds
+
         fetchTask = new Runnable() {
             @Override
             public void run() {
                 saveScrollPosition(); // Save the scroll position before fetching data
                 fetchNetworks();
-                fetchSystemStats();
-                handler.postDelayed(this, FETCH_INTERVAL);
+                handler.postDelayed(this, fetchInterval);
             }
         };
 
         fetchNetworks(); // Initial fetch on create
-        fetchSystemStats();
-        handler.postDelayed(fetchTask, FETCH_INTERVAL); // Schedule fetch every interval
+
+        handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
+
+        // Check for write permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
+        }
+
+        btnExportCsv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exportToCsv();
+            }
+        });
+
+        btnScrollBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isAtBottom) {
+                    recyclerView.scrollToPosition(0);
+                    btnScrollBottom.setText("Scroll to Bottom");
+                } else {
+                    recyclerView.scrollToPosition(networkList.size() - 1);
+                    btnScrollBottom.setText("Scroll to Top");
+                }
+                isAtBottom = !isAtBottom;
+            }
+        });
+
+        // Setup SearchView
+        SearchView searchView = findViewById(R.id.search_ssid);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                currentQuery = query;
+                filterNetworks(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                currentQuery = newText;
+                filterNetworks(newText);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -163,6 +234,9 @@ public class WiFiActivity extends AppCompatActivity {
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
                         networkList  = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
 
+                        // Save the network list to shared preferences
+                        saveNetworkList(networkList);
+
                         runOnUiThread(() -> {
 
                             // Update the total networks count (Top Page)
@@ -171,6 +245,25 @@ public class WiFiActivity extends AppCompatActivity {
                             // Apply the current sort or filter
                             applyCurrentSortOrFilter();
                             recyclerView.setAdapter(networkAdapter);
+                            // Sort the network list if a comparator is set
+                            if (currentComparator != null) {
+                                networkList.sort(currentComparator);
+                            }
+
+                            // Update filtered network list
+                            filteredNetworkList.clear();
+                            filteredNetworkList.addAll(networkList);
+
+                            // Apply current search query to the updated list
+                            filterNetworks(currentQuery);
+
+                            // linking recycler view from xml to java
+                            if (networkAdapter == null) {
+                                networkAdapter = new NetworkAdapter(WiFiActivity.this, filteredNetworkList);
+                                recyclerView.setAdapter(networkAdapter);
+                            } else {
+                                networkAdapter.notifyDataSetChanged();
+                            }
 
                             // Restore the scroll position and offset
                             restoreScrollPosition();
@@ -186,59 +279,50 @@ public class WiFiActivity extends AppCompatActivity {
         });
     }
 
-    private void fetchSystemStats() {
-        OkHttpClient client2 = new OkHttpClient();
+    private void saveNetworkList(List<Network> networkList) {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String networkListJson = gson.toJson(networkList);
+        editor.putString(NETWORK_LIST_KEY, networkListJson);
+        editor.apply();
+    }
 
-        // DO NOT CHANGE
-        // 10.0.2.2:5000 is to be used if the emulator and server are running on the same device
-        // otherwise use the endpoint of the server
-        String url = "http://217.15.171.225:5000/get_system_stats";
+    private void exportToCsv() {
+        File downloadFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File csvFile = new File(downloadFolder, "networks.csv");
 
-        Request request2 = new Request.Builder()
-                .url(url)
-                .build();
-
-        client2.newCall(request2).enqueue(new Callback() {
-
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.e("WiFiActivity", "Error fetching system stats: " + e.getMessage());
-                runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error fetching system stats", Toast.LENGTH_SHORT).show()); // @TODO STRINGS.XML
+        try (FileWriter writer = new FileWriter(csvFile)) {
+            writer.append("SSID,BSSID,Security,Longitude,Latitude,Neighborhood,Postal Code\n");
+            for (Network network : networkList) {
+                writer.append(escapeCsvValue(network.getSsid()))
+                        .append(',')
+                        .append(escapeCsvValue(network.getBssid()))
+                        .append(',')
+                        .append(escapeCsvValue(network.getSecurity())) // main reason why we need to escape before
+                        .append(',')
+                        .append(escapeCsvValue(String.valueOf(network.getCoordinates())))
+                        .append(',')
+                        .append(escapeCsvValue(String.valueOf(network.getNeighborhood())))
+                        .append(',')
+                        .append(escapeCsvValue(String.valueOf(network.getPostalCode())))
+                        .append('\n');
             }
+            Toast.makeText(this, "CSV file exported to Downloads folder", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(this, "Failed to export CSV file", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
 
-            @SuppressLint({"StringFormatMatches", "SetTextI18n"})
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String responseData = response.body().string();
-                    Log.d("WiFiActivity", "System Stats Response: " + responseData); // Log the response data
-                    try {
-                        // Fetch JSON
-                        JSONObject jsonObject = new JSONObject(responseData);
-                        Gson gson = new Gson();
-
-                        // Filtering JSON data and feeding it into List of Networks
-                        Type systemStatsType = new TypeToken<List<SystemStats>>() {}.getType();
-                        systemStats = gson.fromJson(jsonObject.getJSONArray("system_stats").toString(), systemStatsType);
-
-                        runOnUiThread(() -> {
-                            if (systemStats != null && !systemStats.isEmpty()) {
-                                SystemStats stats = systemStats.get(0);
-                                cpuTempTextView.setText(getString(R.string.cpu_temperature) + stats.getTemperature("Celsius")); // @TODO replace with the actual settings
-                                cpuTimeTextView.setText(getString(R.string.cpu_time) + stats.getTime());
-                                scanningStatusTextView.setText(getString(R.string.scanning_status) + (stats.getStatus() == 1 ? getString(R.string.active) : getString(R.string.inactive)));
-                            }
-                        });
-                    } catch (Exception e) {
-                        Log.e("WiFiActivity", "Error parsing system stats JSON: " + e.getMessage(), e);
-                        runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error parsing system stats", Toast.LENGTH_SHORT).show());
-                    }
-                } else {
-                    Log.e("WiFiActivity", "Unsuccessful response for system stats: " + response.code());
-                    runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error fetching system stats", Toast.LENGTH_SHORT).show());
-                }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, proceed with exporting
             }
-        });
+        }
     }
 
     @Override
@@ -318,6 +402,7 @@ public class WiFiActivity extends AppCompatActivity {
         }
     }
 
+
     private void filterNetworkList(String securityType) {
         currentFilter = securityType;
         if (networkList != null) {
@@ -336,6 +421,11 @@ public class WiFiActivity extends AppCompatActivity {
         if (networkList == null) {
             return;
         }
+            networkList.sort(comparator);
+            filteredNetworkList.clear();
+            filteredNetworkList.addAll(networkList);
+            networkAdapter.notifyDataSetChanged();
+
 
         if (isFilteringMode && currentFilter != null) {
             // Apply the current filter
@@ -382,7 +472,10 @@ public class WiFiActivity extends AppCompatActivity {
             int scrollPosition = layoutManager.findFirstVisibleItemPosition();
             int scrollOffset = 0;
             if (scrollPosition != RecyclerView.NO_POSITION) {
-                scrollOffset = layoutManager.findViewByPosition(scrollPosition).getTop();
+                View firstVisibleView = layoutManager.findViewByPosition(scrollPosition);
+                if (firstVisibleView != null) {
+                    scrollOffset = firstVisibleView.getTop();
+                }
             }
             SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
@@ -400,5 +493,28 @@ public class WiFiActivity extends AppCompatActivity {
         if (layoutManager != null && scrollPosition != RecyclerView.NO_POSITION) {
             layoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
         }
+    }
+
+    private void filterNetworks(String query) {
+        filteredNetworkList.clear();
+        if (TextUtils.isEmpty(query)) {
+            filteredNetworkList.addAll(networkList);
+        } else {
+            for (Network network : networkList) {
+                if (network.getSsid().toLowerCase().contains(query.toLowerCase())) {
+                    filteredNetworkList.add(network);
+                }
+            }
+        }
+        if (networkAdapter != null) {
+            networkAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private String escapeCsvValue(String value) {
+        if (value == null) {
+            return "\"\"";
+        }
+        return "\"" + value.replace("\"", "\"\"") + "\"";
     }
 }
