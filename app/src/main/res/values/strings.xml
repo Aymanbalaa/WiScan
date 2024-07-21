@@ -38,9 +38,9 @@
 
     // FAQ ANSWERS
     <string name="answer_what_is_nsgs">The NSGS (Network Security Geo-Scanner) App is designed to capture local WiFi data, clean it, display progress to the user, and send the data for advanced visualizations such as graphs and maps. The app allows users to configure WiFi scan frequency and radius.</string>
-    <string name="answer_start_wifi_scan">To start a WiFi scan, navigate to the WiFiActivity section, and press the "Start Scan" button. The app will begin scanning for local WiFi networks based on the configured settings.</string>
-    <string name="answer_configure_wifi_settings">You can configure the WiFi scan settings by going to the SettingsActivity section. Here you can adjust the scan frequency and radius according to your needs.</string>
-    <string name="answer_view_scanned_data">The scanned WiFi data is displayed in the LocationActivity section. This section provides a detailed view of the networks captured during the scan, including their BSSIDs, SSIDs, and security protocols.</string>
+    <string name="answer_start_wifi_scan">To see scanned network, navigate to the Scanned Network List section, and press the button. The app will begin getting the data from the cloud to show in this list.</string>
+    <string name="answer_configure_wifi_settings">You can configure the WiFi scan settings by going to the Main page and clicking on the three dots at the top right corner of the header. Here you can adjust the scan frequency and radius according to your needs.</string>
+    <string name="answer_view_scanned_data">The scanned WiFi data is displayed in the Scanned Network List section. This section provides a detailed view of the networks captured during the scan, including their BSSIDs, SSIDs, and security protocols.</string>
 
     <string name="title_activity_maps" translatable="false">MapsActivity</string>
 
