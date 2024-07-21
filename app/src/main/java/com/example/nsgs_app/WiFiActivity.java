@@ -269,7 +269,7 @@ public class WiFiActivity extends AppCompatActivity {
         File csvFile = new File(downloadFolder, "networks.csv");
 
         try (FileWriter writer = new FileWriter(csvFile)) {
-            writer.append("SSID,BSSID,Security,Longitude,Latitude,Neighborhood,Postal Code\n");
+            writer.append("SSID,BSSID,Security,Coordinates,Neighborhood,Postal Code\n");
             for (Network network : networkList) {
                 writer.append(escapeCsvValue(network.getSsid()))
                         .append(',')
