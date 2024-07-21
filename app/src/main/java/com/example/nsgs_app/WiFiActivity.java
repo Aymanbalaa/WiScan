@@ -37,9 +37,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import okhttp3.Call;
@@ -56,23 +54,18 @@ public class WiFiActivity extends AppCompatActivity {
     private NetworkAdapter networkAdapter;
     private List<Network> networkList;
     private List<Network> filteredNetworkList; // List for filtered networks
-    private List<SystemStats> systemStats;
-    private TextView cpuTempTextView, cpuTimeTextView, scanningStatusTextView;
-    private List<Network> networkList = new ArrayList<>();
-    private List<Network> filteredNetworkList = new ArrayList<>();
     private TextView totalNetworksTextView;
     private Handler handler;
     private Runnable fetchTask;
     private int fetchInterval; // This variable will hold the fetch interval in milliseconds
     private Comparator<Network> currentComparator; // Save the current comparator
     private String currentFilter; // Save the current filter
-    private boolean isFilteringMode = false; // Track whether filtering mode is activ
+    private boolean isFilteringMode = false; // Track whether filtering mode is active
     private Button btnExportCsv, btnScrollBottom;
     private boolean isAtBottom = false; // Track the current scroll position
     private String currentQuery = ""; // This will hold the current search query
 
-
-    private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFFFF
+    private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFS
     private static final String SCROLL_POSITION_KEY = "scroll_position";
     private static final String SCROLL_OFFSET_KEY = "scroll_offset";
     private static final String NETWORK_LIST_KEY = "network_list";
@@ -182,11 +175,6 @@ public class WiFiActivity extends AppCompatActivity {
         }
         applyCurrentSortOrFilter();
 
-        /*else {
-            // Apply the current sort or filter if no filter state is passed back
-            applyCurrentSortOrFilter();
-        }*/
-
         recyclerView.setAdapter(networkAdapter);
 
         // Restore the scroll position and offset
@@ -232,7 +220,7 @@ public class WiFiActivity extends AppCompatActivity {
 
                         // Filtering JSON data and feeding it into List of Networks
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
-                        networkList  = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
+                        networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
 
                         // Save the network list to shared preferences
                         saveNetworkList(networkList);
@@ -244,22 +232,10 @@ public class WiFiActivity extends AppCompatActivity {
 
                             // Apply the current sort or filter
                             applyCurrentSortOrFilter();
-                            recyclerView.setAdapter(networkAdapter);
-                            // Sort the network list if a comparator is set
-                            if (currentComparator != null) {
-                                networkList.sort(currentComparator);
-                            }
-
-                            // Update filtered network list
-                            filteredNetworkList.clear();
-                            filteredNetworkList.addAll(networkList);
-
-                            // Apply current search query to the updated list
-                            filterNetworks(currentQuery);
 
                             // linking recycler view from xml to java
                             if (networkAdapter == null) {
-                                networkAdapter = new NetworkAdapter(WiFiActivity.this, filteredNetworkList);
+                                networkAdapter = new NetworkAdapter(WiFiActivity.this, filteredNetworkList, currentFilter);
                                 recyclerView.setAdapter(networkAdapter);
                             } else {
                                 networkAdapter.notifyDataSetChanged();
@@ -332,7 +308,6 @@ public class WiFiActivity extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
@@ -348,7 +323,6 @@ public class WiFiActivity extends AppCompatActivity {
                 if (!ssid1HasNumbers && ssid2HasNumbers) return -1;
                 return ssid1.compareToIgnoreCase(ssid2);
             }));
-            //sortNetworkList(Comparator.comparing(Network::getSsid, String::compareToIgnoreCase));
             return true;
         } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
             isFilteringMode = false;
@@ -370,13 +344,11 @@ public class WiFiActivity extends AppCompatActivity {
             isFilteringMode = true;
             filterNetworkList("WPA3");
             return true;
-        }
-        else if (itemId == R.id.action_filter_unprotected) { // Filter by WPA3
+        } else if (itemId == R.id.action_filter_unprotected) { // Filter by unprotected
             isFilteringMode = true;
             filterNetworkList("unprotected");
             return true;
-        }
-        else if (itemId == R.id.action_default_view) { // Default View
+        } else if (itemId == R.id.action_default_view) { // Default View
             resetFiltersAndSort();
             return true;
         }
@@ -390,9 +362,6 @@ public class WiFiActivity extends AppCompatActivity {
         finish();
     }
 
-
-
-
     private void sortNetworkList(Comparator<Network> comparator) {
         currentComparator = comparator;
         if (networkList != null) {
@@ -401,7 +370,6 @@ public class WiFiActivity extends AppCompatActivity {
             updateAdapter(filteredNetworkList);
         }
     }
-
 
     private void filterNetworkList(String securityType) {
         currentFilter = securityType;
@@ -421,11 +389,6 @@ public class WiFiActivity extends AppCompatActivity {
         if (networkList == null) {
             return;
         }
-            networkList.sort(comparator);
-            filteredNetworkList.clear();
-            filteredNetworkList.addAll(networkList);
-            networkAdapter.notifyDataSetChanged();
-
 
         if (isFilteringMode && currentFilter != null) {
             // Apply the current filter
@@ -442,8 +405,6 @@ public class WiFiActivity extends AppCompatActivity {
 
         updateAdapter(filteredNetworkList);
     }
-
-    //Reset to default view
 
     private void resetFiltersAndSort() {
         isFilteringMode = false;
