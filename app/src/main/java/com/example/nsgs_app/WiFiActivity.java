@@ -191,11 +191,8 @@ public class WiFiActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
 
         // DO NOT CHANGE
-        // 10.0.2.2:5000 is to be used if the emulator and server are running on the same device
-        // otherwise use the endpoint of the server
         //String url = "http://10.0.2.2:5000/get_all_networks";
         String url = "http://217.15.171.225:5000/get_all_networks";
-        //String url = "http://nsgs-proxy-server.online:5000/get_all_networks";
 
         Request request = new Request.Builder()
                 .url(url)
@@ -242,7 +239,7 @@ public class WiFiActivity extends AppCompatActivity {
                             }
 
                             // Restore the scroll position and offset
-                            restoreScrollPosition();
+                            // restoreScrollPosition(); ( to reintroduce if needed but was causing the flat list twitching bug )
                         });
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -447,7 +444,7 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
     private void restoreScrollPosition() {
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); // causes slight offset that we did not fix
         int scrollPosition = preferences.getInt(SCROLL_POSITION_KEY, RecyclerView.NO_POSITION);
         int scrollOffset = preferences.getInt(SCROLL_OFFSET_KEY, 0);
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
@@ -472,7 +469,7 @@ public class WiFiActivity extends AppCompatActivity {
         }
     }
 
-    private String escapeCsvValue(String value) {
+    private String escapeCsvValue(String value) { // because of Security = (WEP, XXXX) and coordinates = [34.34,47.74]
         if (value == null) {
             return "\"\"";
         }
