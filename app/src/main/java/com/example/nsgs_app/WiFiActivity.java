@@ -252,7 +252,7 @@ public class WiFiActivity extends AppCompatActivity {
         });
     }
 
-    private void saveNetworkList(List<Network> networkList) {
+    private void saveNetworkList(List<Network> networkList) { // maybe can be done more effeciently
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         Gson gson = new Gson();
@@ -403,7 +403,7 @@ public class WiFiActivity extends AppCompatActivity {
         updateAdapter(filteredNetworkList);
     }
 
-    private void resetFiltersAndSort() {
+    private void resetFiltersAndSort() { // no need for function
         isFilteringMode = false;
         currentFilter = null;
         currentComparator = null;
