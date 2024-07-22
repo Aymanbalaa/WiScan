@@ -143,8 +143,6 @@ public class ActiveActivity extends AppCompatActivity {
                                 activeNetworkAdapter.notifyDataSetChanged();
                             }
 
-                            // Restore the scroll position and offset
-                            restoreScrollPosition();
                         });
                     } catch (Exception e) {
                         e.printStackTrace();

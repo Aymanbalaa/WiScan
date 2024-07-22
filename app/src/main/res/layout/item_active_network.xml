@@ -3,26 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="@drawable/border">
+    android:padding="16dp"
+    android:layout_margin="6dp"
+    android:elevation="2dp"
+    android:background="@drawable/item_background">
 
     <TextView
         android:id="@+id/ssidTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:padding="8dp" />
+        android:text="SSID: "
+        android:textSize="16sp" />
 
-    <RatingBar
-        android:id="@+id/signalStrengthRatingBar"
+    <ImageView
+        android:id="@+id/signalStrengthImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/signalStrengthPercentageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:numStars="5"
-        android:stepSize="0.5"
-        android:isIndicator="true"
-        android:scaleX="0.6"
-        android:scaleY="0.6" />
+        android:paddingStart="8dp"
+        android:text="0%"
+        android:textSize="16sp" />
 </LinearLayout>

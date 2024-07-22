@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +33,21 @@ public class ActiveNetworkAdapter extends RecyclerView.Adapter<ActiveNetworkAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ActiveNetwork activeNetwork = activeNetworkList.get(position);
         holder.ssidTextView.setText("SSID: " + activeNetwork.getSsid());
-        holder.signalStrengthRatingBar.setRating(convertSignalStrengthToRating(activeNetwork.getSignalStrength()));
+        int signalStrength = activeNetwork.getSignalStrength();
+        holder.signalStrengthPercentageTextView.setText(signalStrength + "%");
+
+        // Set the appropriate signal strength drawable
+        if (signalStrength <= 20) {
+            holder.signalStrengthImageView.setImageResource(R.drawable.signal_0);
+        } else if (signalStrength <= 40) {
+            holder.signalStrengthImageView.setImageResource(R.drawable.signal_1);
+        } else if (signalStrength <= 60) {
+            holder.signalStrengthImageView.setImageResource(R.drawable.signal_2);
+        } else if (signalStrength <= 80) {
+            holder.signalStrengthImageView.setImageResource(R.drawable.signal_3);
+        } else {
+            holder.signalStrengthImageView.setImageResource(R.drawable.signal_4);
+        }
     }
 
     @Override
@@ -43,17 +57,14 @@ public class ActiveNetworkAdapter extends RecyclerView.Adapter<ActiveNetworkAdap
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ssidTextView;
-        RatingBar signalStrengthRatingBar;
+        ImageView signalStrengthImageView;
+        TextView signalStrengthPercentageTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ssidTextView = itemView.findViewById(R.id.ssidTextView);
-            signalStrengthRatingBar = itemView.findViewById(R.id.signalStrengthRatingBar);
+            signalStrengthImageView = itemView.findViewById(R.id.signalStrengthImageView);
+            signalStrengthPercentageTextView = itemView.findViewById(R.id.signalStrengthPercentageTextView);
         }
-    }
-
-    private float convertSignalStrengthToRating(int signalStrength) {
-        // Assuming signalStrength ranges from 0 to 100
-        return (signalStrength / 20.0f); // Convert to a 5-star rating
     }
 }
