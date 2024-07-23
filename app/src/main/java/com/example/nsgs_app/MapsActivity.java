@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -49,6 +50,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String PREFS_NAME = "WiFiActivityPrefs";
     private static final String NETWORK_LIST_KEY = "network_list";
     private Map<LatLng, List<Network>> locationNetworkMap;
+    private Handler handler;
+    private Runnable refreshRunnable;
+    private static final int REFRESH_INTERVAL = 10000; // 10 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +71,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // Fetch the network list from shared preferences
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        String networkListJson = preferences.getString(NETWORK_LIST_KEY, null);
-        if (networkListJson != null) {
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<Network>>() {}.getType();
-            networkList = gson.fromJson(networkListJson, listType);
-        }
+        handler = new Handler();
+        refreshRunnable = new Runnable() {
+            @Override
+            public void run() {
+                fetchNetworkList();
+                groupNetworksByLocation();
+                updateNetworkPins();
+                handler.postDelayed(this, REFRESH_INTERVAL);
+            }
+        };
     }
 
     @Override
@@ -82,8 +88,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d(TAG, "onMapReady");
         mMap = googleMap;
         enableMyLocation();
-        groupNetworksByLocation();
-        addNetworkPins();
+        handler.post(refreshRunnable);
         setMarkerClickListener();
     }
 
@@ -127,6 +132,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    private void fetchNetworkList() {
+        NetworkManager networkManager = NetworkManager.getInstance(this);
+        networkManager.fetchNetworks();
+        networkList = networkManager.getNetworkList();
+    }
+
     private void groupNetworksByLocation() {
         locationNetworkMap = new HashMap<>();
         if (networkList != null) {
@@ -140,7 +151,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    private void addNetworkPins() {
+    private void updateNetworkPins() {
+        mMap.clear();
         if (locationNetworkMap != null) {
             for (Map.Entry<LatLng, List<Network>> entry : locationNetworkMap.entrySet()) {
                 LatLng location = entry.getKey();
@@ -150,7 +162,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     mMap.addMarker(new MarkerOptions()
                             .position(location)
                             .title(network.getSsid())
-                            .snippet(R.string.security_label+": " + network.getSecurity()));
+                            .snippet(getString(R.string.security_label) + ":" + network.getSecurity()));
                 } else {
                     mMap.addMarker(new MarkerOptions()
                             .position(location)
@@ -183,7 +195,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         ListView networkListView = new ListView(this);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         for (Network network : networks) {
-            adapter.add(network.getSsid() + " ("+R.string.security_label+": " + network.getSecurity() + ")");
+            String securityLabel = String.format(getString(R.string.security_label), network.getSecurity());
+            adapter.add(network.getSsid() + " (" + securityLabel + ")");
         }
         networkListView.setAdapter(adapter);
 
@@ -203,5 +216,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(refreshRunnable);
     }
 }

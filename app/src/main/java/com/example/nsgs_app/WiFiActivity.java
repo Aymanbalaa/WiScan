@@ -188,77 +188,10 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
     private void fetchNetworks() {
-        OkHttpClient client = new OkHttpClient();
-
-        // DO NOT CHANGE
-        //String url = "http://10.0.2.2:5000/get_all_networks";
-        String url = "http://217.15.171.225:5000/get_all_networks";
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("WiFiActivity", "Error fetching data: " + e.getMessage());
-                runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show());
-            }
-
-            @SuppressLint("StringFormatMatches")
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String responseData = response.body().string();
-                    try {
-                        // Fetch JSON
-                        JSONObject jsonObject = new JSONObject(responseData);
-                        Gson gson = new Gson();
-
-                        // Filtering JSON data and feeding it into List of Networks
-                        Type networkListType = new TypeToken<List<Network>>() {}.getType();
-                        networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
-
-                        // Save the network list to shared preferences
-                        saveNetworkList(networkList);
-
-                        runOnUiThread(() -> {
-
-                            // Update the total networks count (Top Page)
-                            totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
-
-                            // Apply the current sort or filter
-                            applyCurrentSortOrFilter();
-
-                            // linking recycler view from xml to java
-                            if (networkAdapter == null) {
-                                networkAdapter = new NetworkAdapter(WiFiActivity.this, filteredNetworkList, currentFilter);
-                                recyclerView.setAdapter(networkAdapter);
-                            } else {
-                                networkAdapter.notifyDataSetChanged();
-                            }
-
-                            // Restore the scroll position and offset
-                            // restoreScrollPosition(); ( to reintroduce if needed but was causing the flat list twitching bug )
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show());
-                    }
-                } else {
-                    runOnUiThread(() -> Toast.makeText(WiFiActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show());
-                }
-            }
-        });
-    }
-
-    private void saveNetworkList(List<Network> networkList) { // maybe can be done more effeciently
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        Gson gson = new Gson();
-        String networkListJson = gson.toJson(networkList);
-        editor.putString(NETWORK_LIST_KEY, networkListJson);
-        editor.apply();
+        NetworkManager networkManager = NetworkManager.getInstance(this);
+        networkManager.fetchNetworks();
+        networkList = networkManager.getNetworkList();
+        applyCurrentSortOrFilter();
     }
 
     private void exportToCsv() {

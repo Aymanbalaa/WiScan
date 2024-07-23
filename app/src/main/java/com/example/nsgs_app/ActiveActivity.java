@@ -70,11 +70,7 @@ public class ActiveActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        // Retrieve the fetch interval from SharedPreferences
-        SharedPreferences preferences2 = getSharedPreferences("prefs", MODE_PRIVATE);
-        String fetchIntervalString = preferences2.getString("fetch_unit", "10");
-        int fetchIntervalSeconds = Integer.parseInt(fetchIntervalString);
-        fetchInterval = fetchIntervalSeconds * 1000; // Convert to milliseconds
+        fetchInterval = 1000; // Convert to milliseconds
 
         fetchTask = new Runnable() {
             @Override
