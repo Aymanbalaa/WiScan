@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/background_color">
 
     <TextView
         android:layout_width="match_parent"
@@ -12,21 +13,19 @@
         android:text="FAQ"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="@color/primary_text_color"
         android:paddingBottom="16dp" />
 
     <ExpandableListView
         android:id="@+id/faqListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_margin="0dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:childDivider="@android:color/darker_gray"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
+        android:childDivider="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="15dp"
         android:groupIndicator="@null"
-        android:padding="16dp" />
-
-
-
+        android:padding="0dp" />
 
 </LinearLayout>
