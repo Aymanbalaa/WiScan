@@ -39,6 +39,7 @@ public class ActiveActivity extends AppCompatActivity {
     private Handler handler;
     private Runnable fetchTask;
     private int fetchInterval;
+    private List<Network> networkList;
 
     private static final String PREFS_NAME = "ActiveActivityPrefs";
     private static final String SCROLL_POSITION_KEY = "scroll_position";
@@ -58,11 +59,20 @@ public class ActiveActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // Fetch the network list from shared preferences
+        SharedPreferences preferences = getSharedPreferences("WiFiActivityPrefs", MODE_PRIVATE);
+        String networkListJson = preferences.getString("network_list", null);
+        if (networkListJson != null) {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<Network>>() {}.getType();
+            networkList = gson.fromJson(networkListJson, listType);
+        }
+
         handler = new Handler();
 
         // Retrieve the fetch interval from SharedPreferences
-        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
-        String fetchIntervalString = preferences.getString("fetch_unit", "10");
+        SharedPreferences preferences2 = getSharedPreferences("prefs", MODE_PRIVATE);
+        String fetchIntervalString = preferences2.getString("fetch_unit", "10");
         int fetchIntervalSeconds = Integer.parseInt(fetchIntervalString);
         fetchInterval = fetchIntervalSeconds * 1000; // Convert to milliseconds
 
@@ -137,7 +147,7 @@ public class ActiveActivity extends AppCompatActivity {
 
                             // linking recycler view from xml to java
                             if (activeNetworkAdapter == null) {
-                                activeNetworkAdapter = new ActiveNetworkAdapter(ActiveActivity.this, filteredActiveNetworkList);
+                                activeNetworkAdapter = new ActiveNetworkAdapter(ActiveActivity.this, filteredActiveNetworkList, networkList);
                                 recyclerView.setAdapter(activeNetworkAdapter);
                             } else {
                                 activeNetworkAdapter.notifyDataSetChanged();

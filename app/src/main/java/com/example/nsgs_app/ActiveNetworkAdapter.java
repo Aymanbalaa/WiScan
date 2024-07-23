@@ -1,6 +1,7 @@
 package com.example.nsgs_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,12 @@ public class ActiveNetworkAdapter extends RecyclerView.Adapter<ActiveNetworkAdap
 
     private Context context;
     private List<ActiveNetwork> activeNetworkList;
+    private List<Network> networkList;
 
-    public ActiveNetworkAdapter(Context context, List<ActiveNetwork> activeNetworkList) {
+    public ActiveNetworkAdapter(Context context, List<ActiveNetwork> activeNetworkList, List<Network> networkList) {
         this.context = context;
         this.activeNetworkList = activeNetworkList;
+        this.networkList = networkList;
     }
 
     @NonNull
@@ -48,6 +51,27 @@ public class ActiveNetworkAdapter extends RecyclerView.Adapter<ActiveNetworkAdap
         } else {
             holder.signalStrengthImageView.setImageResource(R.drawable.signal_4);
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            Network selectedNetwork = null;
+            for (Network network : networkList) {
+                if (network.getBssid().equals(activeNetwork.getBssid())) {
+                    selectedNetwork = network;
+                    break;
+                }
+            }
+
+            if (selectedNetwork != null) {
+                Intent intent = new Intent(context, ActiveNetworkDetailsActivity.class);
+                intent.putExtra("ssid", selectedNetwork.getSsid());
+                intent.putExtra("bssid", selectedNetwork.getBssid());
+                intent.putExtra("security", selectedNetwork.getSecurity());
+                intent.putExtra("coordinates", selectedNetwork.getCoordinates());
+                intent.putExtra("postalCode", selectedNetwork.getPostalCode());
+                intent.putExtra("neighborhood", selectedNetwork.getNeighborhood());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
