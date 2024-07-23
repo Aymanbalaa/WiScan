@@ -59,14 +59,19 @@
     <string name="temperature_unit_text_view">Unité de température</string>
     <string name="language_text_view">Langue</string>
     <string name="db_text_view">Intervalle d\'actualisation de la base de données</string>
-    <string name="faq_what_is_nsgs">Qu\'est-ce que l\'application NSGD?</string>
-    <string name="faq_start_wifi_scan">Comment démarrer une analyse WIFI?</string>
-    <string name="faq_configure_wifi_settings">Comment configurer le scan WIFI?</string>
-    <string name="faq_view_scanned_data">Où puis-je voir les données WIFI numérisées?</string>
-    <string name="answer_what_is_nsgs">L\'application NSGS (Network Security Geo-Scanner) est conçue pour capturer les données WiFi locales, les nettoyer, afficher la progression à l\'utilisateur et envoyer les données pour des visualisations avancées telles que des graphiques et des cartes. L\'application permet aux utilisateurs de configurer la fréquence et le rayon de numérisation WiFi.</string>
-    <string name="answer_start_wifi_scan">Pour afficher le réseau scanné, accédez à la section Liste des réseaux scannés et appuyez sur le bouton . L\'application commencera à récupérer les données du nuage pour les afficher dans cette liste.</string>
-    <string name="answer_configure_wifi_settings">Pour afficher le réseau scanné, accédez à la section Liste des réseaux scannés et appuyez sur le bouton . L\'application commencera à récupérer les données du nuage pour les afficher dans cette liste.</string>
-    <string name="answer_view_scanned_data">Les données WiFi analysées sont affichées dans la section Liste des réseaux analysés. Cette section fournit une vue détaillée des réseaux capturés pendant l\'analyse, y compris leurs BSSID, SSID et protocoles de sécurité.</string>
+
+    // FAQ Questions
+    <string name="faq_what_is_nsgs">Qu\'est-ce que l\'application NSGS ?</string>
+    <string name="faq_start_wifi_scan">Comment puis-je voir un scan WiFi ?</string>
+    <string name="faq_configure_wifi_settings">Comment configurer les paramètres de scan WiFi ?</string>
+    <string name="faq_view_scanned_data">Où puis-je voir les données scannées du WiFi ?</string>
+
+    // FAQ Answers
+    <string name="answer_what_is_nsgs">L\'application NSGS (Network Security Geo-Scanner) est conçue pour capturer les données locales WiFi, les nettoyer, afficher la progression à l\'utilisateur et envoyer les données pour des visualisations avancées telles que des graphiques et des cartes.</string>
+    <string name="answer_start_wifi_scan">Pour voir les réseaux scannés, allez dans la section "Liste des réseaux scannés" et appuyez sur le bouton. L\'application commencera à récupérer les données depuis le cloud pour les afficher dans cette liste.</string>
+    <string name="answer_configure_wifi_settings">Vous pouvez configurer les paramètres de scan WiFi en allant à la page principale et en cliquant sur les trois points en haut à droite de l\'en-tête. Ici, vous pouvez ajuster la fréquence de scan, les unités de température et la langue selon vos besoins. Assurez-vous que votre Pi est allumé et connecté à un point d\'accès. Vous devriez voir un retour d\'état sur l\'écran LCD du Pi. Assurez-vous que le capteur GPS n\'est pas trop proche du Pi lors du premier démarrage ou du redémarrage du Pi.</string>
+    <string name="answer_view_scanned_data">Les données scannées du WiFi sont affichées dans la section "Liste des réseaux scannés". Cette section fournit une vue détaillée des réseaux capturés pendant le scan, y compris leurs BSSID, SSID et protocoles de sécurité.</string>
+
     <string name="help_title">Aide</string>
     <string name="multiple_networks">Plusieurs réseaux</string>
     <string name="location_permission_is_required_to_use_this_feature">Une autorisation de localisation est requise pour utiliser cette fonctionnalité</string>

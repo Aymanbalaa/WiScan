@@ -32,14 +32,14 @@
 
     // FAQ QUESTIONS
     <string name="faq_what_is_nsgs">What is NSGS App?</string>
-    <string name="faq_start_wifi_scan">How do I start a WiFi scan?</string>
+    <string name="faq_start_wifi_scan">How do I see a WiFi scan?</string>
     <string name="faq_configure_wifi_settings">How do I configure the WiFi scan settings?</string>
     <string name="faq_view_scanned_data">Where can I see the scanned WiFi data?</string>
 
     // FAQ ANSWERS
-    <string name="answer_what_is_nsgs">The NSGS (Network Security Geo-Scanner) App is designed to capture local WiFi data, clean it, display progress to the user, and send the data for advanced visualizations such as graphs and maps. The app allows users to configure WiFi scan frequency and radius.</string>
-    <string name="answer_start_wifi_scan">To see scanned network, navigate to the Scanned Network List section, and press the button. The app will begin getting the data from the cloud to show in this list.</string>
-    <string name="answer_configure_wifi_settings">You can configure the WiFi scan settings by going to the Main page and clicking on the three dots at the top right corner of the header. Here you can adjust the scan frequency and radius according to your needs.</string>
+    <string name="answer_what_is_nsgs">The NSGS (Network Security Geo-Scanner) App is designed to capture local WiFi data, clean it, display progress to the user, and send the data for advanced visualizations such as graphs and maps.</string>
+    <string name="answer_start_wifi_scan">To see scanned network, navigate to the Scanned Network List section, and press the button. The app will begin fetching the data from the cloud to show in this list.</string>
+    <string name="answer_configure_wifi_settings">You can configure the WiFi scan settings by going to the Main page and clicking on the three dots at the top right corner of the header. Here you can adjust the scan frequency, units of temperature and language to your needs. Ensure that your Pi is powered on, and connected to a hotspot. You should status feedback on the Pi\'s LCD screen. Ensure that the GPS sensor is not close to the Pi during the booting for the first time or rebooting the Pi.</string>
     <string name="answer_view_scanned_data">The scanned WiFi data is displayed in the Scanned Network List section. This section provides a detailed view of the networks captured during the scan, including their BSSIDs, SSIDs, and security protocols.</string>
 
     <string name="title_activity_maps" translatable="false">MapsActivity</string>
