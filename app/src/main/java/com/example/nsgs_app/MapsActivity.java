@@ -159,10 +159,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 List<Network> networks = entry.getValue();
                 if (networks.size() == 1) {
                     Network network = networks.get(0);
+                    String securityLabel = String.format(getString(R.string.security_label), network.getSecurity());
                     mMap.addMarker(new MarkerOptions()
                             .position(location)
                             .title(network.getSsid())
-                            .snippet(getString(R.string.security_label) + ":" + network.getSecurity()));
+                            .snippet(securityLabel));
+
                 } else {
                     mMap.addMarker(new MarkerOptions()
                             .position(location)
