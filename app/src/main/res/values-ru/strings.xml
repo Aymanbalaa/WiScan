@@ -77,4 +77,10 @@
     <string name="you_are_here">Вы здесь</string>
     <string name="networks_at_this_location">Сети в этом месте</string>
 
+    //SSID Page
+    <string name="button_export_csv">Экспорт в CSV</string>
+    <string name="button_scroll_to_bottom">вниз</string>
+    <string name="button_scroll_to_top">вверх</string>
+    <string name="search_hint">Поиск по SSID</string>
+
 </resources>

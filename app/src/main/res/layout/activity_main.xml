@@ -74,7 +74,7 @@
             android:text="@string/activeActivity"
             android:textSize="18sp"
             android:textColor="@android:color/white"
-            android:drawableLeft="@drawable/ic_location"
+            android:drawableLeft="@drawable/ic_active"
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
             android:lines="2"/>

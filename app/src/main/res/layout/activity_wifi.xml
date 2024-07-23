@@ -20,7 +20,7 @@
         android:id="@+id/search_ssid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Search for SSID"
+        android:queryHint="@string/search_hint"
         android:layout_below="@id/totalNetworksTextView"
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
@@ -50,14 +50,15 @@
             android:id="@+id/btn_export_csv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Export to CSV"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="8dp"
+            android:text="@string/button_export_csv" />
 
         <Button
             android:id="@+id/btn_scroll_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scroll to Bottom" />
+            android:text="@string/button_scroll_to_bottom" />
+
     </LinearLayout>
 
     <LinearLayout
