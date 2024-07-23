@@ -105,32 +105,26 @@ public class HelpActivity extends AppCompatActivity {
 
         @Override
         public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            String headerTitle = (String) getGroup(groupPosition);
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(android.R.layout.simple_expandable_list_item_1, null);
+                convertView = inflater.inflate(R.layout.faq_group_item, null);
             }
 
-            TextView lblListHeader = convertView.findViewById(android.R.id.text1);
-            lblListHeader.setText(headerTitle);
-            lblListHeader.setTextSize(20);  // Increase text size for group items
-            lblListHeader.setPadding(0, 20, 50, 20);  // Increase padding for group items
+            TextView lblListHeader = convertView.findViewById(R.id.faq_group_title);
+            lblListHeader.setText((String) getGroup(groupPosition));
 
             return convertView;
         }
 
         @Override
         public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-            final String childText = (String) getChild(groupPosition, childPosition);
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(android.R.layout.simple_expandable_list_item_2, null);
+                convertView = inflater.inflate(R.layout.faq_child_item, null);
             }
 
-            TextView txtListChild = convertView.findViewById(android.R.id.text2);
-            txtListChild.setText(childText);
-            txtListChild.setTextSize(18);  // Set text size for child items
-            txtListChild.setPadding(0, 0, 0, 5);  // Increase padding for child items
+            TextView txtListChild = convertView.findViewById(R.id.faq_child_text);
+            txtListChild.setText((String) getChild(groupPosition, childPosition));
 
             return convertView;
         }
