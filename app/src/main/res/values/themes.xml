@@ -5,4 +5,32 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+
+    <style name="color_palette_1" parent="Theme.AppCompat">
+        <item name = "colorPrimary">@color/color_palette_1_1</item>
+        <item name = "colorPrimaryDark">@color/color_palette_1_2</item>
+        <item name = "colorAccent">@color/color_palette_1_3</item>
+        <item name = "buttonStyle">@style/ButtonStyle</item>
+        <item name = "android:textColor">@color/color_palette_1_4</item>"
+        <item name = "android:background">@color/color_palette_1_5</item>
+    </style>
+
+    <style  name = "ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name = "android:textColor">@color/color_palette_1_4</item>
+        <item name = "android:background">@color/color_palette_1_5</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

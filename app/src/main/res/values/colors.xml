@@ -40,11 +40,19 @@
     <color name="color_palette_3_5">#619B8A</color>
 
     <!--color palette 4 -->
-    <color name="color_palette_4_1">#</color>
-    <color name="color_palette_4_2">#FFFFFF</color>
-    <color name="color_palette_4_3">#333333</color>
-    <color name="color_palette_4_4">#666666</color>
-    <color name="color_palette_4_5">#999999</color>
+    <color name="color_palette_4_1">#29BF12</color>
+    <color name="color_palette_4_2">#ABFF4F</color>
+    <color name="color_palette_4_3">#08BDBD</color>
+    <color name="color_palette_4_4">#F21B3F</color>
+    <color name="color_palette_4_5">#FF9914</color>
+
+
+    <!--color palette 5 -->
+    <color name="color_palette_5_1">#06AED5</color>
+    <color name="color_palette_5_2">#086788</color>
+    <color name="color_palette_5_3">#F0C808</color>
+    <color name="color_palette_5_4">#FFF1D0</color>
+    <color name="color_palette_5_5">#DD1C1A</color>
 
 
 
