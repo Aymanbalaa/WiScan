@@ -15,4 +15,40 @@
     <color name="receiver_text_color">#000000</color>
     <color name="sender_background">#007AFF</color> <!-- iMessage blue -->
     <color name="receiver_background">#E5E5EA</color>
+
+    <!--color palette 1 -->
+    <color name="color_palette_1_1">#313715</color>
+    <color name="color_palette_1_2">#D16014</color>
+    <color name="color_palette_1_3">#939F5C</color>
+    <color name="color_palette_1_4">#BBCE8A</color>
+    <color name="color_palette_1_5">#E2F9B8</color>
+
+
+    <!--color palette 2 -->
+    <color name="color_palette_2_1">#0FA3B1</color>
+    <color name="color_palette_2_2">#B5E2FA</color>
+    <color name="color_palette_2_3">#F9F7F3</color>
+    <color name="color_palette_2_4">#EDDEA4</color>
+    <color name="color_palette_2_5">#F7A072</color>
+
+
+    <!--color palette 3 -->
+    <color name="color_palette_3_1">#233D4D</color>
+    <color name="color_palette_3_2">#FE7F2D</color>
+    <color name="color_palette_3_3">#FCCA46</color>
+    <color name="color_palette_3_4">#A1C181</color>
+    <color name="color_palette_3_5">#619B8A</color>
+
+    <!--color palette 4 -->
+    <color name="color_palette_4_1">#</color>
+    <color name="color_palette_4_2">#FFFFFF</color>
+    <color name="color_palette_4_3">#333333</color>
+    <color name="color_palette_4_4">#666666</color>
+    <color name="color_palette_4_5">#999999</color>
+
+
+
+
+
+
 </resources>
