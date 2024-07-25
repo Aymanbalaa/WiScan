@@ -42,21 +42,21 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/color_palette_1_2"
             android:text="@string/wifi"
             android:textSize="18sp"
             android:textColor="@android:color/white"
             android:drawableLeft="@drawable/ic_wifi"
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
-            android:lines="2"
-            style="?attr/buttonStyle"/>
+            android:lines="2"/>
 
         <Button
             android:id="@+id/location_button"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@android:color/holo_green_light"
+            android:backgroundTint="@color/color_palette_1_3"
             android:text="@string/location"
             android:textSize="18sp"
             android:textColor="@android:color/white"
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@android:color/holo_purple"
+            android:backgroundTint="@color/color_palette_1_4"
             android:text="@string/activeActivity"
             android:textSize="18sp"
             android:textColor="@android:color/white"

@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         Button locationButton = findViewById(R.id.location_button);
         Button activeButton = findViewById(R.id.active_button);
 
-        setTheme(R.style.color_palette_1);
-
         wifiButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, WiFiActivity.class);
             startActivity(intent);
