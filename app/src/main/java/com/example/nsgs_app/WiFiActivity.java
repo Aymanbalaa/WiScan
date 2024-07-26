@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -164,8 +165,8 @@ public class WiFiActivity extends AppCompatActivity {
 
     private void backgroundUI(){
 
-        View view = findViewById(R.id.wifi_activity_layout);
-        BackgroundUI.backgroundUI(this,view);
+        ViewGroup view = findViewById(R.id.wifi_activity_layout);
+        BackgroundUI.backgroundPage(view,this);
     }
 
     @Override

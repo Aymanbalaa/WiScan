@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,8 +51,8 @@ public class ActiveNetworkDetailsActivity extends AppCompatActivity {
 
     private void backgroundUI() {
 
-        View view = findViewById(R.id.active_network_details_layout);
-        BackgroundUI.backgroundUI(this,view);
+        ViewGroup view = findViewById(R.id.active_network_details_layout);
+        BackgroundUI.backgroundPage(view,this);
     }
 
 

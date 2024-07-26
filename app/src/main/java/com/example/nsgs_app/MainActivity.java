@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -71,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void backgroundUI() {
 
-        View view = findViewById(R.id.main);
-        BackgroundUI.backgroundUI(this,view);
+        ViewGroup view = findViewById(R.id.main);
+        BackgroundUI.backgroundPage(view, this);
+
     }
 
     private void fetchSystemStats() {

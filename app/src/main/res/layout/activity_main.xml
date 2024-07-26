@@ -27,7 +27,6 @@
         android:layout_marginTop="13dp"
         android:layout_toEndOf="@id/profile_image"
         android:text="@string/hi"
-        android:textColor="@android:color/black"
         android:textSize="18sp" />
 
     <LinearLayout

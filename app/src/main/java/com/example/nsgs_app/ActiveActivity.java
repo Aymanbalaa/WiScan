@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -54,6 +55,7 @@ public class ActiveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_active);
 
         backgroundUI();
+
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,8 +93,8 @@ public class ActiveActivity extends AppCompatActivity {
 
 
     private void backgroundUI(){
-        View view = findViewById(R.id.active_networks_layout);
-        BackgroundUI.backgroundUI(this,view);
+        ViewGroup view = findViewById(R.id.active_networks_layout);
+        BackgroundUI.backgroundPage(view,this);
     }
 
     @Override

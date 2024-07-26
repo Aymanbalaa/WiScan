@@ -40,8 +40,8 @@ public class HelpActivity extends AppCompatActivity {
 
     private void backgroundUI() {
 
-        View view = findViewById(R.id.faq_layout);
-        BackgroundUI.backgroundUI(this,view);
+        ViewGroup view = findViewById(R.id.faq_layout);
+        BackgroundUI.backgroundPage(view, this);
 
     }
 

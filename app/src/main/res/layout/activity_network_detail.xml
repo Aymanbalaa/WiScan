@@ -3,7 +3,6 @@
     android:id="@+id/network_details_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_list"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -21,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
-            android:textColor="@android:color/black"
             android:textSize="18sp"
+            android:textColor="@android:color/darker_gray"
             android:textStyle="bold" />
 
         <TextView

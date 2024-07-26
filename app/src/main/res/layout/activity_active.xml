@@ -3,13 +3,18 @@
     android:id="@+id/active_networks_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_list"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        />
+
 </LinearLayout>
