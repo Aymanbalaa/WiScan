@@ -164,16 +164,8 @@ public class WiFiActivity extends AppCompatActivity {
 
     private void backgroundUI(){
 
-        RelativeLayout relativeLayout = findViewById(R.id.wifi_activity_layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
-
-        if(animationDrawable != null){
-            animationDrawable.setEnterFadeDuration(2500);
-            animationDrawable.setExitFadeDuration(5000);
-            animationDrawable.start();
-        } else{
-            System.out.println("AnimationDrawable is null");
-        }
+        View view = findViewById(R.id.wifi_activity_layout);
+        BackgroundUI.backgroundUI(this,view);
     }
 
     @Override

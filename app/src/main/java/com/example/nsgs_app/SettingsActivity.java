@@ -109,20 +109,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void backgroundUI() {
 
-        ConstraintLayout constraintLayout = findViewById(R.id.settingsBackground);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-
-        if(animationDrawable != null){
-            animationDrawable.setEnterFadeDuration(2500);
-            animationDrawable.setExitFadeDuration(5000);
-            animationDrawable.start();
-        } else{
-            System.out.println("AnimationDrawable is null");
-        }
-
+        View view = findViewById(R.id.settingsBackground);
+        BackgroundUI.backgroundUI(this,view);
     }
-
-
 
 
     private void dbSelector() {

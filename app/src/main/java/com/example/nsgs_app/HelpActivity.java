@@ -40,16 +40,8 @@ public class HelpActivity extends AppCompatActivity {
 
     private void backgroundUI() {
 
-        LinearLayout linearLayout = findViewById(R.id.faq_layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
-
-        if(animationDrawable != null){
-            animationDrawable.setEnterFadeDuration(2500);
-            animationDrawable.setExitFadeDuration(5000);
-            animationDrawable.start();
-        } else{
-            System.out.println("AnimationDrawable is null");
-        }
+        View view = findViewById(R.id.faq_layout);
+        BackgroundUI.backgroundUI(this,view);
 
     }
 

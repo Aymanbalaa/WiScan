@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -70,11 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void backgroundUI() {
 
-        RelativeLayout relativeLayout = findViewById(R.id.main);
-        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(2500);
-        animationDrawable.setExitFadeDuration(5000);
-        animationDrawable.start();
+        View view = findViewById(R.id.main);
+        BackgroundUI.backgroundUI(this,view);
     }
 
     private void fetchSystemStats() {
