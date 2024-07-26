@@ -7,9 +7,11 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,16 +21,19 @@ import androidx.core.content.ContextCompat;
 public class SettingsActivity extends AppCompatActivity {
 
     private Spinner languageSpinner, temperatureSpinner, dbSpinner, themeSpinner;
+    private ViewGroup view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
+        setupUI();
+        backgroundPage();
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        setupUI();
+
 
         languageSelector();
         measurementSelector();
@@ -146,34 +151,16 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
 
-                String[] themeArray = getResources().getStringArray(R.array.theme_array);
-                String selectedTheme = themeArray[i];
-                String currentTheme = getSharedPreferences("prefs", MODE_PRIVATE).getString("Theme", "Light");
+                String selectedTheme = getResources().getStringArray(R.array.theme_array)[i];
+                SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("Theme", selectedTheme);
+                editor.apply();
+                backgroundPage();
 
-                if (!selectedTheme.equals(currentTheme)) {
-                    BackgroundUI.setBackground(SettingsActivity.this, selectedTheme);
-
-                    switch (selectedTheme) {
-                        case "Dark":
-                            set(R.style.Theme_Warm);
-                            break;
-                        case "Warm":
-                            setTheme(R.style.Theme_Warm);
-                            break;
-                        case "Cool":
-                            setTheme(R.style.Theme_Cool);
-                            break;
-                        default:
-                            setTheme(R.style.Theme_NSGSApp);
-                    }
-                    recreate();
-                }
             }
-
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -187,6 +174,26 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+
+    private void backgroundPage(){
+
+        String currentBackground = getSharedPreferences("prefs", MODE_PRIVATE).getString("Theme", "Light");
+            switch(currentBackground){
+                case "Dark":
+                    view.setBackgroundResource(R.drawable.gradient_list_2);
+                    break;
+                case "Warm":
+                    view.setBackgroundResource(R.drawable.gradient_list);
+                    break;
+                case "Cool":
+                    view.setBackgroundResource(R.drawable.gradient_background_4);
+                    break;
+                default:
+                    view.setBackgroundResource(R.drawable.gradient_background_5);
+                    break;
+            }
     }
 
 
@@ -209,6 +216,6 @@ public class SettingsActivity extends AppCompatActivity {
         temperatureSpinner = findViewById(R.id.spinnerMetric);
         dbSpinner = findViewById(R.id.spinnerDB);
         themeSpinner = findViewById(R.id.spinner_theme);
-
+        view = findViewById(R.id.settingsBackground);
     }
 }
