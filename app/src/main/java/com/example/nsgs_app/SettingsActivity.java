@@ -15,13 +15,14 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private Spinner languageSpinner, temperatureSpinner, dbSpinner, themeSpinner;
-    private ViewGroup view;
+    private ViewGroup viewGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setupUI();
-        backgroundPage();
+        BackgroundUI.backgroundPage(viewGroup,this);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -147,7 +148,6 @@ public class SettingsActivity extends AppCompatActivity {
     private void themeSelector(){
 
         themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @SuppressLint("ResourceType")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
 
@@ -156,7 +156,7 @@ public class SettingsActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("Theme", selectedTheme);
                 editor.apply();
-                backgroundPage();
+                BackgroundUI.backgroundPage(viewGroup,SettingsActivity.this);
 
             }
             @Override
@@ -175,27 +175,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
     }
-
-
-    private void backgroundPage(){
-
-        String currentBackground = getSharedPreferences("prefs", MODE_PRIVATE).getString("Theme", "Light");
-            switch(currentBackground){
-                case "Dark":
-                    view.setBackgroundResource(R.drawable.gradient_list_2);
-                    break;
-                case "Warm":
-                    view.setBackgroundResource(R.drawable.gradient_list);
-                    break;
-                case "Cool":
-                    view.setBackgroundResource(R.drawable.gradient_background_4);
-                    break;
-                default:
-                    view.setBackgroundResource(R.drawable.gradient_background_5);
-                    break;
-            }
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -216,6 +195,6 @@ public class SettingsActivity extends AppCompatActivity {
         temperatureSpinner = findViewById(R.id.spinnerMetric);
         dbSpinner = findViewById(R.id.spinnerDB);
         themeSpinner = findViewById(R.id.spinner_theme);
-        view = findViewById(R.id.settingsBackground);
+        viewGroup = findViewById(R.id.settingsBackground);
     }
 }
