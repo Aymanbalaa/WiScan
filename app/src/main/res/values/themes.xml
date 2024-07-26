@@ -6,29 +6,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
-    <style name="color_palette_1" parent="Theme.AppCompat">
-        <item name = "colorPrimary">@color/color_palette_1_1</item>
-        <item name = "colorPrimaryDark">@color/color_palette_1_2</item>
-        <item name = "colorAccent">@color/color_palette_1_3</item>
-        <item name = "buttonStyle">@style/ButtonStyle</item>
-        <item name = "android:textColor">@color/color_palette_1_4</item>"
-        <item name = "android:background">@color/color_palette_1_5</item>
+    <style name = "Theme.Light" parent ="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:background">@color/background_color</item>
     </style>
 
-    <style  name = "ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name = "android:textColor">@color/color_palette_1_4</item>
-        <item name = "android:background">@color/color_palette_1_5</item>
+    <style name ="Theme.Dark" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:background">@color/receiver_text_color</item>
     </style>
 
+    <style name ="Theme.Warm" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:background">@drawable/gradient_list</item>
+    </style>
 
-
-
-
-
-
-
-
+    <style name ="Theme.Cool" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:background">@drawable/gradient_list_2</item>
+    </style>
 
 
 

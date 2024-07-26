@@ -56,6 +56,7 @@
     <string name="temperature_unit_text_view">Temperature Unit</string>
     <string name="Celsius" translatable="false">Celsius</string>
     <string name="Fahrenheit" translatable="false">Fahrenheit</string>
+
     <string-array name="measurementsArray">
         <item>@string/Celsius</item>
         <item>@string/Fahrenheit</item>
@@ -81,17 +82,34 @@
         <item>10</item>
     </string-array>
 
+    <string-array name="languageCode">
+        <item>en</item>
+        <item>fr</item>
+        <item>ru</item>
+    </string-array>
+    
+    <string name="theme_text_view">Theme</string>
+    <string name="light_theme">Light</string>
+    <string name="dark_theme">Dark</string>
+    <string name="warm_theme">Warm</string>
+    <string name="cool_theme">Cool</string>
+
+    <string-array name="theme_array">
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
+        <item>@string/warm_theme</item>
+        <item>@string/cool_theme</item>
+    </string-array>
+
+
+
     <string name="buttonSave">Save</string>
     <string name="multiple_networks">Multiple Networks</string>
     <string name="location_permission_is_required_to_use_this_feature">Location permission is required to use this feature</string>
     <string name="you_are_here">You are here</string>
     <string name="networks_at_this_location">Networks at this location</string>
 
-    <string-array name="languageCode">
-        <item>en</item>
-        <item>fr</item>
-        <item>ru</item>
-    </string-array>
+   
 
 
 

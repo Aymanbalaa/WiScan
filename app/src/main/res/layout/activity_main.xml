@@ -6,7 +6,7 @@
     tools:context=".MainActivity"
     android:padding="16dp"
     android:id="@+id/main"
-    android:background="@drawable/gradient_list"
+    android:background="@drawable/gradient_list_2"
 
     >
 
