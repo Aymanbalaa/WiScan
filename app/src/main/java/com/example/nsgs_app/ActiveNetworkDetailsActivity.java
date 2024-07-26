@@ -2,8 +2,11 @@ package com.example.nsgs_app;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -18,6 +21,7 @@ public class ActiveNetworkDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active_network_details);
 
+        backgroundUI();
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,6 +45,24 @@ public class ActiveNetworkDetailsActivity extends AppCompatActivity {
         neighborhood.setText(getString(R.string.neighborhood_label, intent.getStringExtra("neighborhood")));
         provider.setText(getString(R.string.provider_label, NetworkProviderGuesser.getNetworkProvider(intent.getStringExtra("ssid"))));
     }
+
+
+    private void backgroundUI() {
+
+        LinearLayout linearLayout = findViewById(R.id.active_network_details_layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+
+        if(animationDrawable != null){
+            animationDrawable.setEnterFadeDuration(2500);
+            animationDrawable.setExitFadeDuration(5000);
+            animationDrawable.start();
+        } else{
+            System.out.println("AnimationDrawable is null");
+        }
+
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

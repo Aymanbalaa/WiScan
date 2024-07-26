@@ -6,7 +6,9 @@
     tools:context=".MainActivity"
     android:padding="16dp"
     android:id="@+id/main"
-    android:background="@android:color/white">
+    android:background="@drawable/gradient_list"
+
+    >
 
     <ImageView
         android:id="@+id/profile_image"

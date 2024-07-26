@@ -2,11 +2,13 @@ package com.example.nsgs_app;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,6 +53,7 @@ public class ActiveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active);
 
+        backgroundUI();
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,6 +87,23 @@ public class ActiveActivity extends AppCompatActivity {
         fetchActiveNetworks(); // Initial fetch on create
 
         handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
+    }
+
+
+    private void backgroundUI(){
+
+        LinearLayout linearLayout = findViewById(R.id.active_networks_layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+
+        if(animationDrawable != null){
+            animationDrawable.setEnterFadeDuration(2500);
+            animationDrawable.setExitFadeDuration(5000);
+            animationDrawable.start();
+        } else{
+            System.out.println("AnimationDrawable is null");
+        }
+
+
     }
 
     @Override

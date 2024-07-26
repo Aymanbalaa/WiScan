@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:usesCleartextTraffic="true"
-    tools:context=".WiFiActivity">
+    tools:context=".WiFiActivity"
+    android:id ="@+id/wifi_activity_layout"
+    android:background="@drawable/gradient_list">
+
 
     <TextView
         android:id="@+id/totalNetworksTextView"

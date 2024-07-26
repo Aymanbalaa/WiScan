@@ -3,12 +3,14 @@ package com.example.nsgs_app;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_main);
+        backgroundUI();
         Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
         Button activeButton = findViewById(R.id.active_button);
@@ -63,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
         scanningStatusTextView = findViewById(R.id.scanningStatusTextView);
 
         fetchSystemStats();
+    }
+
+    private void backgroundUI() {
+
+        RelativeLayout relativeLayout = findViewById(R.id.main);
+        AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
     }
 
     private void fetchSystemStats() {

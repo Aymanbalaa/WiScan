@@ -6,8 +6,10 @@ import static com.example.nsgs_app.NetworkProviderGuesser.getNetworkProvider;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -23,6 +25,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_detail);
 
+        backgroundUI();
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -47,6 +50,22 @@ public class NetworkDetailActivity extends AppCompatActivity {
         neighborhood.setText(getString(R.string.neighborhood_label,intent.getStringExtra("neighborhood")));
         provider.setText(getString(R.string.provider_label,getNetworkProvider(intent.getStringExtra("ssid"))));
     }
+
+    private void backgroundUI(){
+
+        LinearLayout linearLayout = findViewById(R.id.network_details_layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+
+        if(animationDrawable != null){
+            animationDrawable.setEnterFadeDuration(2500);
+            animationDrawable.setExitFadeDuration(5000);
+            animationDrawable.start();
+        } else{
+            System.out.println("AnimationDrawable is null");
+        }
+
+    }
+
 
     // Static method to start this activity with network details
 

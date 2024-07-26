@@ -1,6 +1,7 @@
 package com.example.nsgs_app;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -24,6 +27,7 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
+        backgroundUI();
 
         faqListView = findViewById(R.id.faqListView);
         prepareListData();
@@ -33,6 +37,22 @@ public class HelpActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    private void backgroundUI() {
+
+        LinearLayout linearLayout = findViewById(R.id.faq_layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+
+        if(animationDrawable != null){
+            animationDrawable.setEnterFadeDuration(2500);
+            animationDrawable.setExitFadeDuration(5000);
+            animationDrawable.start();
+        } else{
+            System.out.println("AnimationDrawable is null");
+        }
+
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {

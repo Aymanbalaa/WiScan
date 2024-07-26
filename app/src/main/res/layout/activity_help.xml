@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/faq_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_list"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/background_color">
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:paddingBottom="16dp"
         android:text="FAQ"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:textColor="@color/primary_text_color"
-        android:paddingBottom="16dp" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <ExpandableListView
         android:id="@+id/faqListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_margin="0dp"
+        android:layout_weight="1"
         android:childDivider="@android:color/transparent"
         android:divider="@android:color/transparent"
         android:dividerHeight="15dp"
