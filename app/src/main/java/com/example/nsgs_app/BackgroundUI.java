@@ -36,11 +36,11 @@ public class BackgroundUI {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 break;
             case "Warm":
-                viewGroup.setBackgroundResource(R.drawable.gradient_list);
+                viewGroup.setBackgroundResource(R.drawable.gradient_background_2);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
             case "Cool":
-                viewGroup.setBackgroundResource(R.drawable.gradient_background_4);
+                viewGroup.setBackgroundResource(R.drawable.gradient_background);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
             default:

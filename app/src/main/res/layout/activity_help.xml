@@ -12,7 +12,6 @@
         android:gravity="center"
         android:paddingBottom="16dp"
         android:text="FAQ"
-        android:textColor="@color/primary_text_color"
         android:textSize="24sp"
         android:textStyle="bold" />
 

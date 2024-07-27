@@ -55,8 +55,9 @@
     <color name="color_palette_5_5">#DD1C1A</color>
 
 
-
-
-
+    <color name="color_palette_6_1">#FFA31D</color>
+    <color name="color_palette_6_2">#EF5454</color>
+    <color name="color_palette_6_3">#4CA1AF</color>
+    <color name="color_palette_6_4">#C4E0E5</color>
 
 </resources>
