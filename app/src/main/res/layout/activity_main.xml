@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@android:color/holo_blue_light"
+            android:backgroundTint="@color/buttonColor1"
             android:text="@string/wifi"
             android:textSize="18sp"
             android:textColor="@android:color/white"
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@android:color/holo_green_light"
+            android:backgroundTint="@color/buttonColor2"
             android:text="@string/location"
             android:textSize="18sp"
             android:textColor="@android:color/white"
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@android:color/holo_purple"
+            android:backgroundTint="@color/buttonColor3"
             android:text="@string/activeActivity"
             android:textSize="18sp"
             android:textColor="@android:color/white"
@@ -111,50 +111,4 @@
             android:textSize="18sp" />
 
     </LinearLayout>
-
-    <!--@TODO CHECK IF TEAM AGREES TO DELETE ALL WHAT IS BELOW -->
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="56dp"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:background="@android:color/holo_orange_light"-->
-    <!--        android:gravity="center">-->
-    <!--    -->
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/home_button"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:src="@drawable/ic_home"-->
-    <!--            android:background="?attr/selectableItemBackground"-->
-    <!--            android:contentDescription="Home"/>-->
-
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/signal_button"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:src="@drawable/ic_signal"-->
-    <!--            android:background="?attr/selectableItemBackground"-->
-    <!--            android:contentDescription="Signal"/>-->
-
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/location_icon_button"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:src="@drawable/ic_location"-->
-    <!--            android:background="?attr/selectableItemBackground"-->
-    <!--            android:contentDescription="Location"/>-->
-
-    <!--        <ImageButton-->
-    <!--            android:id="@+id/settings_button"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:src="@drawable/ic_settings"-->
-    <!--            android:background="?attr/selectableItemBackground"-->
-    <!--            android:contentDescription="Settings"/>-->
-    <!--    </LinearLayout>-->
 </RelativeLayout>
