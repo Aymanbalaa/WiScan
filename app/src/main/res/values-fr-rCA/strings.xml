@@ -48,7 +48,17 @@
         <item>10</item>
     </string-array>
 
+    <string name="theme_text_view">Thème</string>
+    <string name="light_theme">Blanc</string>
+    <string name="dark_theme">Sombre</string>
+    <string name="warm_theme">Amical</string>
+    <string name="cool_theme">Calme</string>
+
+
+
+
     <string name="activeActivity">Liste des réseaux actifs</string>
+
 
     <string name="buttonSave">Sauvegarder</string>
     <string name="cpu_time">Temps du CPU: </string>

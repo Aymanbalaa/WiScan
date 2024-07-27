@@ -12,34 +12,25 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 public class BackgroundUI {
 
-    private static AnimationDrawable animationDrawable;
-
-    public static void backgroundUI(Context context, View view){
-
-        animationDrawable = (AnimationDrawable) view.getBackground();
-
-        view.setBackground(animationDrawable);
-        if(animationDrawable != null){
-            animationDrawable.setEnterFadeDuration(2500);
-            animationDrawable.setExitFadeDuration(5000);
-            animationDrawable.start();
-        } else{
-            System.out.println("AnimationDrawable is null");
-        }
-    }
-
     public static void backgroundPage(ViewGroup viewGroup, Context context){
 
         String currentBackground = context.getSharedPreferences("prefs", MODE_PRIVATE).getString("Theme", "Light");
         switch(currentBackground){
             case "Dark":
+            case "Sombre":
+            case "Темный":
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 break;
+
             case "Warm":
+            case "Amical":
+            case "Теплый":
                 viewGroup.setBackgroundResource(R.drawable.gradient_background_2);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
             case "Cool":
+            case "Calme":
+            case "Прохладный":
                 viewGroup.setBackgroundResource(R.drawable.gradient_background);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
@@ -49,13 +40,4 @@ public class BackgroundUI {
                 break;
         }
     }
-
-
-    public static void setBackground(Context context, String backgroundTheme){
-        SharedPreferences sharedPreferences = context.getSharedPreferences("prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("backgroundTheme", backgroundTheme);
-        editor.apply();
-    }
-
 }

@@ -49,7 +49,18 @@
         <item>10</item>
     </string-array>
 
+
+    <string name="theme_text_view">Тема</string>
+    <string name="light_theme">Свет</string>
+    <string name="dark_theme">Темный</string>
+    <string name="warm_theme">Теплый</string>
+    <string name="cool_theme">Прохладный</string>
+
+
+
+
     <string name="activeActivity">Список активных сетей</string>
+
 
     <string name="buttonSave">Сохранять</string>
     <string name="cpuTemperature">Температура процессора:</string>
