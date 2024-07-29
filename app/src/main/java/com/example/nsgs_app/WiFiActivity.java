@@ -274,7 +274,11 @@ public class WiFiActivity extends AppCompatActivity {
             isFilteringMode = false;
             sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
             return true;
+        }else if(itemId == R.id.action_default_view){
+            resetFiltersAndSort();
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
