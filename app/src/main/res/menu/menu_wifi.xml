@@ -14,22 +14,20 @@
                 android:id="@+id/sort_by_security"
                 android:title="@string/sort_by_security_protocol" />
 
-            <item android:id="@+id/action_filter_wep"
-                  android:title="Filter by WEP" />
-            <item android:id="@+id/action_filter_wpa"
-                  android:title="Filter by WPA" />
-            <item android:id="@+id/action_filter_wpa2"
-                  android:title="Filter by WPA2" />
-            <item android:id="@+id/action_filter_wpa3"
-                  android:title="Filter by WPA3" />
-            <item android:id="@+id/action_filter_unprotected"
-                android:title="Filter by unprotected" />
+            <item
+                android:id="@+id/action_filter_submenu"
+                android:title="Filter by Security">
+
+                 <menu>
+                <!-- Dynamic filter options will be added here -->
+                </menu>
+
+            </item>
+
             <item
                 android:id="@+id/action_default_view"
                 android:title="Default View"/>
         </menu>
-
-
 
 
     </item>

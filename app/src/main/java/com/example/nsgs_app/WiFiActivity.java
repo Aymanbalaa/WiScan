@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
@@ -37,7 +38,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import okhttp3.Call;
@@ -192,6 +195,7 @@ public class WiFiActivity extends AppCompatActivity {
         networkManager.fetchNetworks();
         networkList = networkManager.getNetworkList();
         applyCurrentSortOrFilter();
+        invalidateOptionsMenu(); // Refresh Filter Listtt
     }
 
     private void exportToCsv() {
@@ -235,6 +239,20 @@ public class WiFiActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_wifi, menu);
+
+        // Clear existing items in the filter submenu before adding new ones AVOIDING DUPLICATES
+        SubMenu filterSubMenu = menu.findItem(R.id.action_filter_submenu).getSubMenu();
+        filterSubMenu.clear(); // clearrrr
+        Set<String> securityProtocols = getUniqueSecurityProtocols(networkList); // refill the list and get all protocols
+
+        for (String protocol : securityProtocols) {
+            filterSubMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, protocol).setOnMenuItemClickListener(item -> {
+                isFilteringMode = true;
+                filterNetworkList(protocol);
+                return true;
+            });
+        }
+
         return true;
     }
 
@@ -258,30 +276,11 @@ public class WiFiActivity extends AppCompatActivity {
             isFilteringMode = false;
             sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
             return true;
-        } else if (itemId == R.id.action_filter_wep) { // Filter by WEP
-            isFilteringMode = true;
-            filterNetworkList("WEP");
-            return true;
-        } else if (itemId == R.id.action_filter_wpa) { // Filter by WPA
-            isFilteringMode = true;
-            filterNetworkList("WPA");
-            return true;
-        } else if (itemId == R.id.action_filter_wpa2) { // Filter by WPA2
-            isFilteringMode = true;
-            filterNetworkList("WPA2");
-            return true;
-        } else if (itemId == R.id.action_filter_wpa3) { // Filter by WPA3
-            isFilteringMode = true;
-            filterNetworkList("WPA3");
-            return true;
-        } else if (itemId == R.id.action_filter_unprotected) { // Filter by unprotected
-            isFilteringMode = true;
-            filterNetworkList("unprotected");
-            return true;
-        } else if (itemId == R.id.action_default_view) { // Default View
+        }else if(itemId == R.id.action_default_view){
             resetFiltersAndSort();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -400,6 +399,15 @@ public class WiFiActivity extends AppCompatActivity {
         if (networkAdapter != null) {
             networkAdapter.notifyDataSetChanged();
         }
+    }
+
+    private Set<String> getUniqueSecurityProtocols(List<Network> networks) {
+        //Function to retrieve the unique protocols from the fetched networks list
+        Set<String> securityProtocols = new HashSet<>();
+        for (Network network : networks) {
+            securityProtocols.add(network.getSecurity());
+        }
+        return securityProtocols;
     }
 
     private String escapeCsvValue(String value) { // because of Security = (WEP, XXXX) and coordinates = [34.34,47.74]
