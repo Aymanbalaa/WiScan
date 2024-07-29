@@ -195,6 +195,7 @@ public class WiFiActivity extends AppCompatActivity {
         networkManager.fetchNetworks();
         networkList = networkManager.getNetworkList();
         applyCurrentSortOrFilter();
+        invalidateOptionsMenu(); // Refresh Filter Listtt
     }
 
     private void exportToCsv() {
@@ -239,9 +240,10 @@ public class WiFiActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_wifi, menu);
 
-        // Add dynamic filter menu items
+        // Clear existing items in the filter submenu before adding new ones AVOIDING DUPLICATES
         SubMenu filterSubMenu = menu.findItem(R.id.action_filter_submenu).getSubMenu();
-        Set<String> securityProtocols = getUniqueSecurityProtocols(networkList);
+        filterSubMenu.clear(); // clearrrr
+        Set<String> securityProtocols = getUniqueSecurityProtocols(networkList); // refill the list and get all protocols
 
         for (String protocol : securityProtocols) {
             filterSubMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, protocol).setOnMenuItemClickListener(item -> {
