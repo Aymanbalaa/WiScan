@@ -3,6 +3,7 @@ package com.example.nsgs_app;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_main);
-        backgroundUI();
+        String theme = backgroundUI();
         Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
         Button activeButton = findViewById(R.id.active_button);
@@ -63,6 +65,38 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        switch (theme) {
+            case "Dark":
+            case "Sombre":
+            case "Темный":
+                wifiButton.setBackgroundColor(Color.parseColor("#424949"));
+                locationButton.setBackgroundColor(Color.parseColor("#7f8c8d"));
+                activeButton.setBackgroundColor(Color.parseColor("#ccd1d1"));
+                break;
+
+            case "Warm":
+            case "Amical":
+            case "Теплый":
+                wifiButton.setBackgroundColor(Color.parseColor("#922b21"));
+                locationButton.setBackgroundColor(Color.parseColor("#b03a2e"));
+                activeButton.setBackgroundColor(Color.parseColor("#f1948a"));
+                break;
+
+            case "Cool":
+            case "Calme":
+            case "Прохладный":
+                wifiButton.setBackgroundColor(Color.BLUE);
+                locationButton.setBackgroundColor(Color.RED);
+                activeButton.setBackgroundColor(Color.GREEN);
+                break;
+
+            default:
+                wifiButton.setBackgroundColor(Color.parseColor("#1b4f72"));
+                locationButton.setBackgroundColor(Color.parseColor("#2471a3"));
+                activeButton.setBackgroundColor(Color.parseColor("#aed6f1"));
+                break;
+        }
+
         cpuTempTextView = findViewById(R.id.cpuTempTextView);
         cpuTimeTextView = findViewById(R.id.cpuTimeTextView);
         scanningStatusTextView = findViewById(R.id.scanningStatusTextView);
@@ -70,11 +104,9 @@ public class MainActivity extends AppCompatActivity {
         fetchSystemStats();
     }
 
-    private void backgroundUI() {
-
+    private String backgroundUI() {
         ViewGroup view = findViewById(R.id.main);
-        BackgroundUI.backgroundPage(view, this);
-
+        return BackgroundUI.backgroundPage(view, this);
     }
 
     private void fetchSystemStats() {

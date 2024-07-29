@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 public class BackgroundUI {
 
-    public static void backgroundPage(ViewGroup viewGroup, Context context){
+    public static String backgroundPage(ViewGroup viewGroup, Context context){
 
         String currentBackground = context.getSharedPreferences("prefs", MODE_PRIVATE).getString("Theme", "Light");
         switch(currentBackground){
@@ -39,5 +39,6 @@ public class BackgroundUI {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
         }
+        return currentBackground;
     }
 }
