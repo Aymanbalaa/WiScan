@@ -13,6 +13,12 @@
     <string name="guidance">Aide</string>
     <string name="wifi">Liste des Réseaux Analysés</string>
     <string name="location">Map</string>
+
+    <string name="change_language">Modifier la langue</string>
+    <string name="disclaimer_title">Avertissement</string>
+    <string name="disclaimer_text">L\'application « Network Security Geo-Scanner » (NSGS) est conçue uniquement dans le but de capturer des données WiFi locales (BSSID, SSID, protocoles de sécurité et données de localisation correspondantes), de nettoyer les données, d\'afficher les progrès pour l\'utilisateur et d\'envoyer les données pour des visualisations avancées telles que des graphiques et des cartes. L\'application permet la configuration via des contrôles utilisateur tels que la fréquence et le rayon de scan WiFi.\n\nAvis Important :\n\n- L\'application NSGS doit être utilisée exclusivement à des fins prévues, comme décrit ci-dessus.\n\n- Il est interdit aux utilisateurs d\'utiliser l\'application pour toute activité malveillante, y compris, mais sans s\'y limiter, l\'accès non autorisé, l\'interférence avec la sécurité du réseau ou la violation de la confidentialité.\n\n- En utilisant l\'application NSGS, vous acceptez de respecter toutes les lois et réglementations applicables concernant la collecte de données et la confidentialité.\n\n- Les développeurs de NSGS ne sont pas responsables de toute mauvaise utilisation de l\'application.</string>
+    <string name="accept">Accepter</string>
+    <string name="decline">Refuser</string>
     <string name="provider_label">Fournisseur: %1s</string>
     <string name="settings">PARAMÈTRES</string>
     <string name="sort_by_ssid">Trier par SSID</string>

@@ -13,6 +13,9 @@
     <color name="accent_light_color">#B2DFDB</color>
     <color name="sender_text_color">#ffffff</color>
     <color name="receiver_text_color">#000000</color>
-    <color name="sender_background">#007AFF</color> <!-- iMessage blue -->
+    <color name="sender_background">#007AFF</color>
     <color name="receiver_background">#E5E5EA</color>
+    <color name="real_green">#4CAF50</color>
+    <color name="red">#F44336</color>
+
 </resources>
