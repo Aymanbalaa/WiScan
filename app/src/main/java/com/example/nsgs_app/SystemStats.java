@@ -16,14 +16,15 @@ public class SystemStats {
     @SerializedName("scannerStatus")
     private int scannerStatus;
 
-    @SerializedName("id")
-    private int id;
-
     public String getTemperatureString(){
         return temperatureString;
     }
 
-    public String getTime(){
+    public String getTime() {
+        if (time == null || time.isEmpty()) {
+            return "Time data unavailable";
+        }
+
         return time;
     }
 
@@ -31,22 +32,28 @@ public class SystemStats {
         return scannerStatus;
     }
 
-    public int getId(){
-        return id;
+    public String getTemperature(String metric) {
+        String temperatureString = getTemperatureString().replace("'C", "");
+        double temperatureCelsius;
+
+        try {
+            temperatureCelsius = Double.parseDouble(temperatureString);
+        } catch (NumberFormatException e) {
+            return "Invalid temperature format";
+        }
+
+        if (metric == null) {
+            return temperatureCelsius + "°C"; // Default to Celsius if metric is null
+        }
+
+        switch (metric.toLowerCase()) {
+            case "fahrenheit":
+                return String.format("%.2f°F", (temperatureCelsius * 1.8) + 32);
+            case "celsius":
+                return String.format("%.2f°C", temperatureCelsius);
+            default:
+                return "Unknown metric";
+        }
     }
 
-
-    // metric will be fetched from sharedPref or something similar from the settings page!!!
-    public String getTemperature(String metric){
-        double temperatureCelsius = Double.parseDouble(getTemperatureString().replace("'C",""));
-
-        if (Objects.equals(metric, "Fahrenheit"))
-        {
-            return (temperatureCelsius*(1.8)+32) + "°F";  // formula is (0°C × 9/5) + 32 = 32°F
-        }
-        else
-        {
-            return temperatureCelsius + "°C";
-        }
-    }
 }
