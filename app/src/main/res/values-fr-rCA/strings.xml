@@ -13,6 +13,8 @@
     <string name="guidance">Aide</string>
     <string name="wifi">Liste des Réseaux Analysés</string>
     <string name="location">Map</string>
+    <string name="additional_information">Informations supplémentaires</string>
+
 
     <string name="change_language">Modifier la langue</string>
     <string name="disclaimer_title">Avertissement</string>
@@ -97,5 +99,23 @@
     <string name="timed_out">" a expiré"</string>
     <string name="state">" état"</string>
     <string name="unknown">"Inconnu "</string>
+
+    //ADDITIONAL INFO PAGE
+    <string name="types_of_security">Types de sécurité</string>
+    <string name="wifi_networks">Réseaux WiFi</string>
+    <string name="WPA2">WPA2</string>
+    <string name="WPA3">WPA3</string>
+    <string name="WEP">WEP</string>
+    <string name="a_802_1X">802.1X</string>
+    <string name="a_4GHZ">4GHz</string>
+    <string name="a_5GHZ">5GHz</string>
+    <string name="type">Type</string>
+    <string name="description">Description</string>
+    <string name="wpa2_description">Wi-Fi Protected Access II (WPA2) est une technologie de sécurité réseau couramment utilisée sur les réseaux sans fil Wi-Fi. C est une amélioration par rapport à WPA et offre une meilleure protection des données et un meilleur contrôle d accès réseau.</string>
+    <string name="wpa3_description">Wi-Fi Protected Access III (WPA3) est la dernière génération de sécurité Wi-Fi, offrant une authentification plus robuste et une meilleure force cryptographique.</string>
+    <string name="wep_description">Wired Equivalent Privacy (WEP) est un protocole de sécurité pour les réseaux sans fil qui offre une confidentialité des données comparable à un réseau câblé traditionnel. Cependant, il est considéré comme le moins sécurisé en raison de diverses vulnérabilités.</string>
+    <string name="a_802_1X_description">IEEE 802.1X est un protocole de contrôle d accès réseau qui fournit une authentification aux appareils souhaitant se connecter à un réseau LAN ou WLAN. Il est utilisé pour une communication sécurisée dans les réseaux filaires et sans fil.</string>
+    <string name="a_4ghz_description">4GHz fait référence à la bande de fréquence utilisée par certains réseaux Wi-Fi. Elle est couramment utilisée en raison de sa compatibilité avec un large éventail d appareils, bien qu elle soit susceptible aux interférences.</string>
+    <string name="a_5ghz_description">5GHz est une autre bande de fréquence utilisée par les réseaux Wi-Fi. Elle offre des vitesses plus rapides et moins d interférences par rapport à la bande de 2,4GHz, mais a une portée plus courte.</string>
 
 </resources>
