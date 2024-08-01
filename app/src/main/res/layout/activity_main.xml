@@ -15,7 +15,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"
         android:text="@string/hi"
-        android:textColor="@android:color/black"
         android:textSize="24sp"
         android:fontFamily="@font/roboto_regular"
         android:textStyle="bold"/>

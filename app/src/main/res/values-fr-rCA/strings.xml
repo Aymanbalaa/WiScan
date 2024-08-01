@@ -123,4 +123,5 @@
     <string name="dark_theme">Sombre</string>
     <string name="warm_theme">Amical</string>
     <string name="theme_selection">Sélection du thème</string>
+    <string name="unknown_values">" Valeurs inconnues"</string>
 </resources>

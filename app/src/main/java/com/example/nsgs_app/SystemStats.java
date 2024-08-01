@@ -2,7 +2,6 @@ package com.example.nsgs_app;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Objects;
 
 public class SystemStats {
     @SerializedName("cpuTemp")
@@ -39,7 +38,7 @@ public class SystemStats {
         try {
             temperatureCelsius = Double.parseDouble(temperatureString);
         } catch (NumberFormatException e) {
-            return "Invalid temperature format";
+            return String.valueOf(R.string.unknown_values);
         }
 
         if (metric == null) {
