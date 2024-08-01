@@ -3,13 +3,13 @@ package com.example.nsgs_app;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -19,7 +19,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -46,10 +45,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_main);
+        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.main), this);
+
         Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
         Button activeButton = findViewById(R.id.active_button);
-        Button additionalInfoButton = findViewById(R.id.additional_info_button);
+        Button infoButton = findViewById(R.id.additional_info_button);
+
+        setButtonColor(currentTheme, wifiButton, locationButton, activeButton, infoButton);
 
 
         if (!disclaimerShown) {
@@ -72,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        additionalInfoButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, AdditionalInfoActivity.class); // You need to create this activity
+        infoButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, InfoActivity.class);
             startActivity(intent);
         });
 
@@ -231,5 +234,34 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.setCancelable(false);
         dialog.show();
+    }
+
+    private static void setButtonColor(String theme, Button wifiButton, Button locationButton, Button activeButton , Button infoButton) {
+        switch (theme) {
+            case "Dark":
+            case "Sombre":
+            case "Темный":
+                wifiButton.setBackgroundColor(Color.parseColor("#424949"));
+                locationButton.setBackgroundColor(Color.parseColor("#7f8c8d"));
+                activeButton.setBackgroundColor(Color.parseColor("#ccd1d1"));
+                infoButton.setBackgroundColor(Color.parseColor("#ccd1d1"));
+                break;
+
+            case "Warm":
+            case "Amical":
+            case "Теплый":
+                wifiButton.setBackgroundColor(Color.parseColor("#922b21"));
+                locationButton.setBackgroundColor(Color.parseColor("#b03a2e"));
+                activeButton.setBackgroundColor(Color.parseColor("#f1948a"));
+                infoButton.setBackgroundColor(Color.parseColor("#ccd1d1"));
+                break;
+
+            default:
+                wifiButton.setBackgroundColor(Color.parseColor("#1b4f72"));
+                locationButton.setBackgroundColor(Color.parseColor("#2471a3"));
+                activeButton.setBackgroundColor(Color.parseColor("#aed6f1"));
+                infoButton.setBackgroundColor(Color.parseColor("#ccd1d1"));
+                break;
+        }
     }
 }

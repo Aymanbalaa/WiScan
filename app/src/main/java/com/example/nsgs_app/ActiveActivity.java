@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,9 @@ public class ActiveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active);
+
+        ViewGroup view = findViewById(R.id.active_networks_layout);
+        ThemeSelection.themeInitializer(view,this);
 
         // Enable the Up button
         if (getSupportActionBar() != null) {

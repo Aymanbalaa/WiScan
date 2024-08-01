@@ -26,12 +26,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class SettingsDialogFragment extends DialogFragment {
 
-    private Spinner languageSpinner, temperatureSpinner, dbSpinner;
+    private Spinner languageSpinner, temperatureSpinner, dbSpinner, themeSpinner;
     private Button shutdownButton;
     private TextView statusTextView;
+    private ViewGroup viewGroup;
 
     private static final String SHUTDOWN_URL = "http://217.15.171.225:5000/request_shutdown";
     private static final String CMDS_URL = "http://217.15.171.225:5000/cmds";
@@ -49,11 +51,21 @@ public class SettingsDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setupUI(view);
+        languageSpinner = view.findViewById(R.id.spinnerLanguage);
+        temperatureSpinner = view.findViewById(R.id.spinnerMetric);
+        dbSpinner = view.findViewById(R.id.spinnerDB);
+        shutdownButton = view.findViewById(R.id.buttonShutdown);
+        statusTextView = view.findViewById(R.id.statusTextView);
+        themeSpinner = view.findViewById(R.id.spinnerTheme);
+        viewGroup = view.findViewById(R.id.settingsLayout);
+
+        ThemeSelection.themeInitializer(viewGroup,getActivity());
 
         languageSelector();
         measurementSelector();
         dbSelector();
+        themeSelector();
+
 
         shutdownButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,13 +85,7 @@ public class SettingsDialogFragment extends DialogFragment {
         handler.post(commandPoller);
     }
 
-    private void setupUI(View view) {
-        languageSpinner = view.findViewById(R.id.spinnerLanguage);
-        temperatureSpinner = view.findViewById(R.id.spinnerMetric);
-        dbSpinner = view.findViewById(R.id.spinnerDB);
-        shutdownButton = view.findViewById(R.id.buttonShutdown);
-        statusTextView = view.findViewById(R.id.statusTextView);
-    }
+
 
     private void languageSelector() {
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -185,6 +191,37 @@ public class SettingsDialogFragment extends DialogFragment {
         }
     }
 
+    private void themeSelector(){
+
+        themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+
+                String selectedTheme = getResources().getStringArray(R.array.theme_array)[i];
+                SharedPreferences preferences = getActivity().getSharedPreferences("prefs", getActivity().MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("Theme", selectedTheme);
+                editor.apply();
+                ThemeSelection.themeInitializer(viewGroup,getActivity());
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        String currentTheme = getActivity().getSharedPreferences("prefs", getActivity().MODE_PRIVATE).getString("Theme", "Light");
+        String[] themeArray = getResources().getStringArray(R.array.theme_array);
+
+        for (int i = 0; i < themeArray.length; i++) {
+            if (themeArray[i].equals(currentTheme)) {
+                themeSpinner.setSelection(i);
+                break;
+            }
+        }
+
+    }
+
     private void sendShutdownRequest() {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
@@ -195,15 +232,15 @@ public class SettingsDialogFragment extends DialogFragment {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(() -> updateStatus("Failed to send shutdown request"));
+                requireActivity().runOnUiThread(() -> updateStatus("Failed to send shutdown request"));
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    getActivity().runOnUiThread(() -> updateStatus("Shutdown request sent successfully"));
+                    requireActivity().runOnUiThread(() -> updateStatus("Shutdown request sent successfully"));
                 } else {
-                    getActivity().runOnUiThread(() -> updateStatus("Failed to send shutdown request"));
+                    requireActivity().runOnUiThread(() -> updateStatus("Failed to send shutdown request"));
                 }
             }
         });
@@ -219,7 +256,7 @@ public class SettingsDialogFragment extends DialogFragment {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(() -> updateStatus("Failed to poll command state"));
+                requireActivity().runOnUiThread(() -> updateStatus("Failed to poll command state"));
             }
 
             @Override
@@ -228,12 +265,12 @@ public class SettingsDialogFragment extends DialogFragment {
                     try {
                         JSONObject jsonResponse = new JSONObject(response.body().string());
                         String shutdownState = jsonResponse.getString("cmd_shutdown");
-                        getActivity().runOnUiThread(() -> handleCommandState(shutdownState));
+                        requireActivity().runOnUiThread(() -> handleCommandState(shutdownState));
                     } catch (JSONException e) {
-                        getActivity().runOnUiThread(() -> updateStatus("Error parsing command state"));
+                        requireActivity().runOnUiThread(() -> updateStatus("Error parsing command state"));
                     }
                 } else {
-                    getActivity().runOnUiThread(() -> updateStatus("Failed to poll command state"));
+                    requireActivity().runOnUiThread(() -> updateStatus("Failed to poll command state"));
                 }
             }
         });

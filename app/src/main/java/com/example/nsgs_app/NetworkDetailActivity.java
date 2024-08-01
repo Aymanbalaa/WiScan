@@ -22,6 +22,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_detail);
+        ThemeSelection.themeInitializer(findViewById(R.id.network_details_layout), this);
 
         // Enable the Up button
         if (getSupportActionBar() != null) {
