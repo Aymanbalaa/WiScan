@@ -142,9 +142,9 @@ public class MainActivity extends AppCompatActivity {
                                 SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
                                 String temperatureUnit = preferences.getString("temperature_unit", "Celsius");
 
-                                cpuTempTextView.setText(getString(R.string.cpuTemperature) + stats.getTemperature(temperatureUnit));
-                                cpuTimeTextView.setText(getString(R.string.cpu_time) + stats.getTime());
-                                scanningStatusTextView.setText(getString(R.string.scanning_status) + (stats.getStatus() == 1 ? getString(R.string.active) : getString(R.string.inactive)));
+                                cpuTempTextView.setText(getString(R.string.cpuTemperature)+ " " + stats.getTemperature(temperatureUnit));
+                                cpuTimeTextView.setText(getString(R.string.cpu_time)+ " " + stats.getTime());
+                                scanningStatusTextView.setText(getString(R.string.scanning_status) + " " + (stats.getStatus() == 1 ? getString(R.string.active) : getString(R.string.inactive)));
                             }
                         });
                     } catch (Exception e) {

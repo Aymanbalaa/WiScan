@@ -38,7 +38,7 @@ public class SystemStats {
         try {
             temperatureCelsius = Double.parseDouble(temperatureString);
         } catch (NumberFormatException e) {
-            return String.valueOf(R.string.unknown_values);
+            return "Unknown values";
         }
 
         if (metric == null) {
