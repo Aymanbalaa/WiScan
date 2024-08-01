@@ -1,18 +1,27 @@
 package com.example.nsgs_app;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
@@ -22,6 +31,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Call;
@@ -33,6 +43,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
     private TextView cpuTempTextView, cpuTimeTextView, scanningStatusTextView;
     private List<SystemStats> systemStats;
+    private static boolean disclaimerShown = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
         Button activeButton = findViewById(R.id.active_button);
+
+        if (!disclaimerShown) {
+            showDisclaimer(); // starts the disclaimer
+            disclaimerShown = true;
+        }
 
         wifiButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, WiFiActivity.class);
@@ -63,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         scanningStatusTextView = findViewById(R.id.scanningStatusTextView);
 
         fetchSystemStats();
+
     }
 
     private void fetchSystemStats() {
@@ -149,4 +166,70 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void showDisclaimer() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        @SuppressLint("InflateParams") LinearLayout disclaimerLayout = (LinearLayout) inflater.inflate(R.layout.dialog_disclaimer, null);
+
+        // Adding language change button and functionality
+        ImageButton languageButton = disclaimerLayout.findViewById(R.id.language_button);
+        languageButton.setOnClickListener(v -> {
+            SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+            String currentLanguage = preferences.getString("language", "en");
+
+            String newLanguage;
+            switch (currentLanguage) {
+                case "en":
+                    newLanguage = "fr";
+                    break;
+                case "fr":
+                    newLanguage = "ru";
+                    break;
+                default:
+                    newLanguage = "en";
+            }
+
+            Language.setLanguage(this, newLanguage);
+            Language.saveLanguage(this, newLanguage);
+
+            // Update the disclaimer text
+            TextView disclaimerText = disclaimerLayout.findViewById(R.id.disclaimer_text);
+            disclaimerText.setText(R.string.disclaimer_text);
+
+            // Update title if necessary
+            TextView disclaimerTitle = disclaimerLayout.findViewById(R.id.disclaimer_title);
+            disclaimerTitle.setText(R.string.disclaimer_title);
+
+            // Update buttons text
+            Button acceptButton = disclaimerLayout.findViewById(R.id.accept_button);
+            Button declineButton = disclaimerLayout.findViewById(R.id.decline_button);
+            acceptButton.setText(R.string.accept);
+            declineButton.setText(R.string.decline);
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(disclaimerLayout);
+
+        AlertDialog dialog = builder.create();
+
+        Button acceptButton = disclaimerLayout.findViewById(R.id.accept_button);
+        Button declineButton = disclaimerLayout.findViewById(R.id.decline_button);
+
+        acceptButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            // activity is now restarted with the new language
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        });
+
+        declineButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            System.exit(0);
+        });
+
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
 }
