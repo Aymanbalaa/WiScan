@@ -23,8 +23,9 @@
 
     <Spinner
         android:id="@+id/spinnerMetric"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="337dp"
+        android:layout_height="37dp"
+        android:background="#D3D3D3"
         android:entries="@array/measurementsArray" />
 
     <TextView
@@ -37,8 +38,9 @@
 
     <Spinner
         android:id="@+id/spinnerLanguage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="337dp"
+        android:layout_height="37dp"
+        android:background="#D3D3D3"
         android:entries="@array/languageArray" />
 
     <TextView
@@ -51,8 +53,9 @@
 
     <Spinner
         android:id="@+id/spinnerDB"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="337dp"
+        android:layout_height="37dp"
+        android:background="#D3D3D3"
         android:entries="@array/databaseArray" />
 
     <Button
