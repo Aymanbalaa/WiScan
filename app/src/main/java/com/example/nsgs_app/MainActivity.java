@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -141,12 +142,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(helpIntent);
             return true;
         } else if (id == R.id.settings) {
-            Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            settingsIntent.putExtra("isDialog", true);
-            startActivity(settingsIntent);
+            showSettingsDialog();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showSettingsDialog() {
+        SettingsDialogFragment settingsDialogFragment = new SettingsDialogFragment();
+        settingsDialogFragment.show(getSupportFragmentManager(), "SettingsDialogFragment");
     }
 }

@@ -1,5 +1,4 @@
 <resources>
-
     //MAIN PAGE
     <string name="app_name">NSGS-App</string>
     <string name="ssid_label">SSID: %1$s</string>
@@ -14,7 +13,6 @@
     <string name="guidance">Help</string>
     <string name="wifi">Scanned Network List</string>
     <string name="location">Map</string>
-
 
     // SSID PAGE
     <string name="provider_label">Provider : %1s</string>
@@ -33,7 +31,6 @@
     <string name="button_scroll_to_top">Scroll to Top</string>
     <string name="search_hint">Search for SSID</string>
 
-
     // FAQ QUESTIONS
     <string name="faq_what_is_nsgs">What is NSGS App?</string>
     <string name="faq_start_wifi_scan">How do I see a WiFi scan?</string>
@@ -47,7 +44,6 @@
     <string name="answer_view_scanned_data">The scanned WiFi data is displayed in the Scanned Network List section. This section provides a detailed view of the networks captured during the scan, including their BSSIDs, SSIDs, and security protocols.</string>
 
     <string name="title_activity_maps" translatable="false">MapsActivity</string>
-
 
     <string name="settingsTitle">Settings</string>
     <string name="help_title">Help</string>
@@ -66,7 +62,6 @@
     <string name="language2">Français</string>
     <string name="language3">Русский</string>
 
-    
     <string-array name="languageArray">
         <item>@string/language1</item>
         <item>@string/language2</item>
@@ -74,7 +69,6 @@
     </string-array>
 
     <string name="db_text_view">Database Refresh Interval</string>
-
     <string-array name="databaseArray">
         <item>3</item>
         <item>5</item>
@@ -92,9 +86,4 @@
         <item>fr</item>
         <item>ru</item>
     </string-array>
-
-
-
-
-
 </resources>
