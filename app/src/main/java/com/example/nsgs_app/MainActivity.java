@@ -255,26 +255,26 @@ public class MainActivity extends AppCompatActivity {
             case "Dark":
             case "Sombre":
             case "Темный":
-                wifiButton.setBackgroundColor(Color.parseColor("#424949"));
-                locationButton.setBackgroundColor(Color.parseColor("#7f8c8d"));
-                activeButton.setBackgroundColor(Color.parseColor("#ccd1d1"));
-                infoButton.setBackgroundColor(Color.parseColor("#ccd1d1"));
+                wifiButton.setBackgroundColor(Color.parseColor("#153448"));
+                locationButton.setBackgroundColor(Color.parseColor("#3C5B6F"));
+                activeButton.setBackgroundColor(Color.parseColor("#948979"));
+                infoButton.setBackgroundColor(Color.parseColor("#DFD0B8"));
                 break;
 
             case "Warm":
             case "Amical":
             case "Теплый":
-                wifiButton.setBackgroundColor(Color.parseColor("#922b21"));
-                locationButton.setBackgroundColor(Color.parseColor("#b03a2e"));
-                activeButton.setBackgroundColor(Color.parseColor("#f1948a"));
-                infoButton.setBackgroundColor(Color.parseColor("#ccd1d1"));
+                wifiButton.setBackgroundColor(Color.parseColor("#C40C0C"));
+                locationButton.setBackgroundColor(Color.parseColor("#FF6500"));
+                activeButton.setBackgroundColor(Color.parseColor("#FF8A08"));
+                infoButton.setBackgroundColor(Color.parseColor("#FFC100"));
                 break;
 
             default:
-                wifiButton.setBackgroundColor(Color.parseColor("#1b4f72"));
-                locationButton.setBackgroundColor(Color.parseColor("#2471a3"));
-                activeButton.setBackgroundColor(Color.parseColor("#aed6f1"));
-                infoButton.setBackgroundColor(Color.parseColor("#ccd1d1"));
+                wifiButton.setBackgroundColor(Color.parseColor("#4535C1"));
+                locationButton.setBackgroundColor(Color.parseColor("#478CCF"));
+                activeButton.setBackgroundColor(Color.parseColor("#36C2CE"));
+                infoButton.setBackgroundColor(Color.parseColor("#77E4C8"));
                 break;
         }
     }
