@@ -1,17 +1,20 @@
 package com.example.nsgs_app;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -24,7 +27,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsDialogFragment extends DialogFragment {
 
     private Spinner languageSpinner, temperatureSpinner, dbSpinner;
     private Button shutdownButton;
@@ -34,17 +37,19 @@ public class SettingsActivity extends AppCompatActivity {
     private static final String CMDS_URL = "http://217.15.171.225:5000/cmds";
     private Handler handler;
     private Runnable commandPoller;
-    private static final int POLL_INTERVAL = 1000; // 1 seconds
+    private static final int POLL_INTERVAL = 1000; // 1 second
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.dialog_settings, container, false);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-        setupUI();
+        setupUI(view);
 
         languageSelector();
         measurementSelector();
@@ -68,28 +73,49 @@ public class SettingsActivity extends AppCompatActivity {
         handler.post(commandPoller);
     }
 
+    private void setupUI(View view) {
+        languageSpinner = view.findViewById(R.id.spinnerLanguage);
+        temperatureSpinner = view.findViewById(R.id.spinnerMetric);
+        dbSpinner = view.findViewById(R.id.spinnerDB);
+        shutdownButton = view.findViewById(R.id.buttonShutdown);
+        statusTextView = view.findViewById(R.id.statusTextView);
+    }
+
     private void languageSelector() {
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String[] langCode = getResources().getStringArray(R.array.languageCode);
                 String selectedLanguage = langCode[i];
-                String currentLanguage = getSharedPreferences("prefs", MODE_PRIVATE).getString("language", "en");
+                String currentLanguage = getActivity().getSharedPreferences("prefs", getActivity().MODE_PRIVATE).getString("language", "en");
 
                 if (!selectedLanguage.equals(currentLanguage)) {
-                    Language.setLanguage(SettingsActivity.this, selectedLanguage);
-                    Language.saveLanguage(SettingsActivity.this, selectedLanguage);
-                    recreate();
+                    Language.setLanguage(getActivity(), selectedLanguage);
+                    Language.saveLanguage(getActivity(), selectedLanguage);
+
+                    String toastMessage;
+                    switch (selectedLanguage) {
+                        case "fr":
+                            toastMessage = "Language set to French";
+                            break;
+                        case "ru":
+                            toastMessage = "Language set to Russian";
+                            break;
+                        default:
+                            toastMessage = "Language set to English";
+                    }
+                    Toast.makeText(getActivity(), toastMessage, Toast.LENGTH_SHORT).show();
+                    getActivity().recreate();
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                // No action needed
+
             }
         });
 
-        String currentLanguage = getSharedPreferences("prefs", MODE_PRIVATE).getString("language", "en");
+        String currentLanguage = getActivity().getSharedPreferences("prefs", getActivity().MODE_PRIVATE).getString("language", "en");
         String[] langCode = getResources().getStringArray(R.array.languageCode);
 
         for (int i = 0; i < langCode.length; i++) {
@@ -105,7 +131,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedUnit = getResources().getStringArray(R.array.measurementsArray)[i];
-                SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+                SharedPreferences preferences = getActivity().getSharedPreferences("prefs", getActivity().MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("temperature_unit", selectedUnit);
                 editor.apply();
@@ -113,11 +139,11 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                // No action needed
+
             }
         });
 
-        String currentUnit = getSharedPreferences("prefs", MODE_PRIVATE).getString("temperature_unit", "Celsius");
+        String currentUnit = getActivity().getSharedPreferences("prefs", getActivity().MODE_PRIVATE).getString("temperature_unit", "Celsius");
         String[] temperatureUnits = getResources().getStringArray(R.array.measurementsArray);
 
         for (int i = 0; i < temperatureUnits.length; i++) {
@@ -133,7 +159,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedUnit = getResources().getStringArray(R.array.databaseArray)[i];
-                SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+                SharedPreferences preferences = getActivity().getSharedPreferences("prefs", getActivity().MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("fetch_unit", selectedUnit);
                 editor.apply();
@@ -141,11 +167,11 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                // No action needed
+
             }
         });
 
-        String currentUnit = getSharedPreferences("prefs", MODE_PRIVATE).getString("fetch_unit", "10");
+        String currentUnit = getActivity().getSharedPreferences("prefs", getActivity().MODE_PRIVATE).getString("fetch_unit", "10");
         String[] dbUnits = getResources().getStringArray(R.array.databaseArray);
 
         for (int i = 0; i < dbUnits.length; i++) {
@@ -166,15 +192,15 @@ public class SettingsActivity extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                runOnUiThread(() -> updateStatus("Failed to send shutdown request"));
+                getActivity().runOnUiThread(() -> updateStatus("Failed to send shutdown request"));
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    runOnUiThread(() -> updateStatus("Shutdown request sent successfully"));
+                    getActivity().runOnUiThread(() -> updateStatus("Shutdown request sent successfully"));
                 } else {
-                    runOnUiThread(() -> updateStatus("Failed to send shutdown request"));
+                    getActivity().runOnUiThread(() -> updateStatus("Failed to send shutdown request"));
                 }
             }
         });
@@ -190,7 +216,7 @@ public class SettingsActivity extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                runOnUiThread(() -> updateStatus("Failed to poll command state"));
+                getActivity().runOnUiThread(() -> updateStatus("Failed to poll command state"));
             }
 
             @Override
@@ -199,12 +225,12 @@ public class SettingsActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonResponse = new JSONObject(response.body().string());
                         String shutdownState = jsonResponse.getString("cmd_shutdown");
-                        runOnUiThread(() -> handleCommandState(shutdownState));
+                        getActivity().runOnUiThread(() -> handleCommandState(shutdownState));
                     } catch (JSONException e) {
-                        runOnUiThread(() -> updateStatus("Error parsing command state"));
+                        getActivity().runOnUiThread(() -> updateStatus("Error parsing command state"));
                     }
                 } else {
-                    runOnUiThread(() -> updateStatus("Failed to poll command state"));
+                    getActivity().runOnUiThread(() -> updateStatus("Failed to poll command state"));
                 }
             }
         });
@@ -240,27 +266,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void setupUI() {
-        languageSpinner = findViewById(R.id.spinnerLanguage);
-        temperatureSpinner = findViewById(R.id.spinnerMetric);
-        dbSpinner = findViewById(R.id.spinnerDB);
-        shutdownButton = findViewById(R.id.buttonShutdown);
-        statusTextView = findViewById(R.id.statusTextView);
-    }
-
-    @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(commandPoller);
     }

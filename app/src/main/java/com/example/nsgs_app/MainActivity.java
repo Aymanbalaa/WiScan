@@ -1,7 +1,6 @@
 package com.example.nsgs_app;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,18 +10,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,7 +28,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Call;
@@ -79,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         scanningStatusTextView = findViewById(R.id.scanningStatusTextView);
 
         fetchSystemStats();
-
     }
 
     private void fetchSystemStats() {
@@ -158,13 +153,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(helpIntent);
             return true;
         } else if (id == R.id.settings) {
-            Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            settingsIntent.putExtra("isDialog", true);
-            startActivity(settingsIntent);
+            showSettingsDialog();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showSettingsDialog() {
+        SettingsDialogFragment settingsDialogFragment = new SettingsDialogFragment();
+        settingsDialogFragment.show(getSupportFragmentManager(), "SettingsDialogFragment");
     }
 
     private void showDisclaimer() {
@@ -231,5 +229,4 @@ public class MainActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
     }
-
 }
