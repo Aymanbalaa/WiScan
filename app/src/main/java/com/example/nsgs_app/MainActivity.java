@@ -174,8 +174,6 @@ public class MainActivity extends AppCompatActivity {
         // Adding language change button and functionality
         ImageButton languageButton = disclaimerLayout.findViewById(R.id.language_button);
         languageButton.setOnClickListener(v -> {
-            // Change language logic here
-            // For simplicity, let's cycle through English, French, and Russian
             SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
             String currentLanguage = preferences.getString("language", "en");
 
@@ -217,7 +215,14 @@ public class MainActivity extends AppCompatActivity {
         Button acceptButton = disclaimerLayout.findViewById(R.id.accept_button);
         Button declineButton = disclaimerLayout.findViewById(R.id.decline_button);
 
-        acceptButton.setOnClickListener(v -> dialog.dismiss());
+        acceptButton.setOnClickListener(v -> {
+            dialog.dismiss();
+            // activity is now restarted with the new language
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        });
+
         declineButton.setOnClickListener(v -> {
             dialog.dismiss();
             System.exit(0);
