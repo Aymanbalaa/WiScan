@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView cpuTempTextView, cpuTimeTextView, scanningStatusTextView;
     private List<SystemStats> systemStats;
     private static boolean disclaimerShown = false;
+    private AlertDialog disclaimerDialog;
+    private boolean isActivityRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +49,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.main), this);
 
+        isActivityRunning = true;
+
         Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
         Button activeButton = findViewById(R.id.active_button);
         Button infoButton = findViewById(R.id.additional_info_button);
 
         setButtonColor(currentTheme, wifiButton, locationButton, activeButton, infoButton);
-
 
         if (!disclaimerShown) {
             showDisclaimer(); // starts the disclaimer
@@ -85,6 +88,15 @@ public class MainActivity extends AppCompatActivity {
         scanningStatusTextView = findViewById(R.id.scanningStatusTextView);
 
         fetchSystemStats();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isActivityRunning = false;
+        if (disclaimerDialog != null && disclaimerDialog.isShowing()) {
+            disclaimerDialog.dismiss();
+        }
     }
 
     public void fetchSystemStats() {
@@ -176,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showDisclaimer() {
+        if (!isActivityRunning) return;
+
         LayoutInflater inflater = LayoutInflater.from(this);
         @SuppressLint("InflateParams") LinearLayout disclaimerLayout = (LinearLayout) inflater.inflate(R.layout.dialog_disclaimer, null);
 
@@ -218,22 +232,22 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(disclaimerLayout);
 
-        AlertDialog dialog = builder.create();
+        disclaimerDialog = builder.create();
 
         Button acceptButton = disclaimerLayout.findViewById(R.id.accept_button);
         Button declineButton = disclaimerLayout.findViewById(R.id.decline_button);
 
         acceptButton.setOnClickListener(v -> {
-            dialog.dismiss();
+            disclaimerDialog.dismiss();
         });
 
         declineButton.setOnClickListener(v -> {
-            dialog.dismiss();
+            disclaimerDialog.dismiss();
             System.exit(0);
         });
 
-        dialog.setCancelable(false);
-        dialog.show();
+        disclaimerDialog.setCancelable(false);
+        disclaimerDialog.show();
     }
 
     private static void setButtonColor(String theme, Button wifiButton, Button locationButton, Button activeButton , Button infoButton) {
