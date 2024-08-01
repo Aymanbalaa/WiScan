@@ -84,5 +84,12 @@
     <string name="button_scroll_to_bottom">Vers le bas</string>
     <string name="button_scroll_to_top">Vers le haut</string>
     <string name="search_hint">Rechercher un SSID</string>
+    <string name="shutdown_command">Commande d\'arrêt</string>
+    <string name="is_currently_inactive_you_can_safely_click_the_button">" est actuellement inactif. Vous pouvez cliquer sur le bouton en toute sécurité."</string>
+    <string name="in_progress">" en cours"</string>
+    <string name="acknowledged_by_device_and_is_in_progress">" reconnu par l'appareil et est en cours"</string>
+    <string name="timed_out">" a expiré"</string>
+    <string name="state">" état"</string>
+    <string name="unknown">"Inconnu "</string>
 
 </resources>

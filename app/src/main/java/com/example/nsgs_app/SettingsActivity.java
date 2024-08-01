@@ -34,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
     private static final String CMDS_URL = "http://217.15.171.225:5000/cmds";
     private Handler handler;
     private Runnable commandPoller;
-    private static final int POLL_INTERVAL = 10000; // 10 seconds
+    private static final int POLL_INTERVAL = 1000; // 1 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,20 +213,24 @@ public class SettingsActivity extends AppCompatActivity {
     private void handleCommandState(String state) {
         switch (state) {
             case "INACTIVE":
-                shutdownButton.setEnabled(true);
-                updateStatus("Shutdown command inactive");
+                shutdownButton.setEnabled(true); // Default you can click now/ Safe
+                updateStatus(getString(R.string.shutdown_command) + getString(R.string.is_currently_inactive_you_can_safely_click_the_button));
                 break;
             case "ACTIVE":
-                updateStatus("Shutdown command active");
+                shutdownButton.setEnabled(false);
+                updateStatus(getString(R.string.shutdown_command)+getString(R.string.in_progress)); // Don't want to click on button , shutdowennnnn in progress
                 break;
-            case "ACK-ACTIVE":
-                updateStatus("Shutdown acknowledged by Pi");
+            case "ACTIVE-ACK":
+                shutdownButton.setEnabled(false);
+                updateStatus(getString(R.string.shutdown_command)+getString(R.string.acknowledged_by_device_and_is_in_progress));
                 break;
             case "TIMEOUT-ACTIVE":
-                updateStatus("Shutdown request timed out");
+                shutdownButton.setEnabled(false);
+                updateStatus(getString(R.string.shutdown_command)+getString(R.string.timed_out));
                 break;
             default:
-                updateStatus("Unknown command state");
+                shutdownButton.setEnabled(false);
+                updateStatus(getString(R.string.unknown) + getString(R.string.shutdown_command) +getString(R.string.state));
                 break;
         }
     }

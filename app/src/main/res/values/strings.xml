@@ -87,6 +87,13 @@
     <string name="you_are_here">You are here</string>
     <string name="networks_at_this_location">Networks at this location</string>
     <string name="shutdown_button">Shutdown Button</string>
+    <string name="shutdown_command">Shutdown command</string>
+    <string name="is_currently_inactive_you_can_safely_click_the_button">" is currently inactive. You can safely click the button."</string>
+    <string name="in_progress">"  in progress"</string>
+    <string name="acknowledged_by_device_and_is_in_progress">"  acknowledged by device and is in progress"</string>
+    <string name="timed_out">"  timed out"</string>
+    <string name="state">" state"</string>
+    <string name="unknown">"Unknown "</string>
 
     <string-array name="languageCode">
         <item>en</item>

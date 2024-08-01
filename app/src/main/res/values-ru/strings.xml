@@ -83,5 +83,12 @@
     <string name="button_scroll_to_bottom">вниз</string>
     <string name="button_scroll_to_top">вверх</string>
     <string name="search_hint">Поиск по SSID</string>
+    <string name="shutdown_command">Команда завершения работы</string>
+    <string name="is_currently_inactive_you_can_safely_click_the_button">в данный момент неактивна. Вы можете безопасно нажать на кнопку.</string>
+    <string name="in_progress">в процессе</string>
+    <string name="acknowledged_by_device_and_is_in_progress">подтверждено устройством и находится в процессе</string>
+    <string name="timed_out">время вышло</string>
+    <string name="state">состояние</string>
+    <string name="unknown">Неизвестное </string>
 
 </resources>
