@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="@string/settingsTitle"
         android:textSize="28sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Temperature Unit"
+        android:text="@string/temperature_unit_text_view"
         android:paddingBottom="16dp"
         android:textSize="20sp" />
 
@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Language"
+        android:text="@string/language_text_view"
         android:paddingTop="24dp"
         android:paddingBottom="16dp"
         android:textSize="20sp" />
@@ -44,7 +44,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Database Refresh Interval"
+        android:text="@string/db_text_view"
         android:paddingTop="24dp"
         android:paddingBottom="16dp"
         android:textSize="20sp" />
@@ -59,7 +59,7 @@
         android:id="@+id/buttonShutdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Shutdown"
+        android:text="@string/shutdown_button"
         android:textSize="18sp"
         android:layout_marginTop="32dp"
         android:layout_gravity="center_horizontal" />
@@ -71,5 +71,4 @@
         android:textSize="16sp"
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal" />
-
 </LinearLayout>
