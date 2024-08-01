@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         fetchSystemStats();
     }
 
-    private void fetchSystemStats() {
+    public void fetchSystemStats() {
         OkHttpClient client2 = new OkHttpClient();
 
         // DO NOT CHANGE
@@ -215,10 +215,6 @@ public class MainActivity extends AppCompatActivity {
 
         acceptButton.setOnClickListener(v -> {
             dialog.dismiss();
-            // activity is now restarted with the new language
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
         });
 
         declineButton.setOnClickListener(v -> {

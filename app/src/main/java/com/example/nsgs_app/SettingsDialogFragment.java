@@ -135,6 +135,9 @@ public class SettingsDialogFragment extends DialogFragment {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("temperature_unit", selectedUnit);
                 editor.apply();
+
+                // Update temperature immediately
+                updateTemperature();
             }
 
             @Override
@@ -263,6 +266,13 @@ public class SettingsDialogFragment extends DialogFragment {
 
     private void updateStatus(String status) {
         statusTextView.setText(status);
+    }
+
+    private void updateTemperature() {
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) {
+            mainActivity.fetchSystemStats();
+        }
     }
 
     @Override
