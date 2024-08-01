@@ -6,12 +6,9 @@ import static com.example.nsgs_app.NetworkProviderGuesser.getNetworkProvider;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -56,7 +53,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
     private void backgroundUI(){
 
         ViewGroup view = findViewById(R.id.network_details_layout);
-        BackgroundUI.backgroundPage(view, this);
+        ThemeSelection.themeInitializer(view, this);
     }
 
 

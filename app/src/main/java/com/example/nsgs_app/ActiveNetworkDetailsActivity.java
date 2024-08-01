@@ -2,13 +2,9 @@ package com.example.nsgs_app;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -23,7 +19,8 @@ public class ActiveNetworkDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active_network_details);
 
-        backgroundUI();
+        ThemeSelection.themeInitializer(findViewById(R.id.active_network_details_layout),this);
+
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -47,14 +44,6 @@ public class ActiveNetworkDetailsActivity extends AppCompatActivity {
         neighborhood.setText(getString(R.string.neighborhood_label, intent.getStringExtra("neighborhood")));
         provider.setText(getString(R.string.provider_label, NetworkProviderGuesser.getNetworkProvider(intent.getStringExtra("ssid"))));
     }
-
-
-    private void backgroundUI() {
-
-        ViewGroup view = findViewById(R.id.active_network_details_layout);
-        BackgroundUI.backgroundPage(view,this);
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

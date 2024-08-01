@@ -1,7 +1,6 @@
 package com.example.nsgs_app;
 
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -9,11 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +23,8 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-        backgroundUI();
+
+        ThemeSelection.themeInitializer(findViewById(R.id.faq_layout), this);
 
         faqListView = findViewById(R.id.faqListView);
         prepareListData();
@@ -37,14 +34,6 @@ public class HelpActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-    private void backgroundUI() {
-
-        ViewGroup view = findViewById(R.id.faq_layout);
-        BackgroundUI.backgroundPage(view, this);
-
-    }
-
 
     @Override
     public boolean onSupportNavigateUp() {

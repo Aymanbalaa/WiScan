@@ -2,14 +2,11 @@ package com.example.nsgs_app;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,7 +51,8 @@ public class ActiveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active);
 
-        backgroundUI();
+        ViewGroup view = findViewById(R.id.active_networks_layout);
+        ThemeSelection.themeInitializer(view,this);
 
         // Enable the Up button
         if (getSupportActionBar() != null) {
@@ -89,12 +87,6 @@ public class ActiveActivity extends AppCompatActivity {
         fetchActiveNetworks(); // Initial fetch on create
 
         handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
-    }
-
-
-    private void backgroundUI(){
-        ViewGroup view = findViewById(R.id.active_networks_layout);
-        BackgroundUI.backgroundPage(view,this);
     }
 
     @Override
