@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
         Button activeButton = findViewById(R.id.active_button);
+        Button additionalInfoButton = findViewById(R.id.additional_info_button);
+
 
         if (!disclaimerShown) {
             showDisclaimer(); // starts the disclaimer
@@ -67,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
         activeButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ActiveActivity.class);
+            startActivity(intent);
+        });
+
+        additionalInfoButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AdditionalInfoActivity.class); // You need to create this activity
             startActivity(intent);
         });
 
