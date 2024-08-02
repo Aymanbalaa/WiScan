@@ -26,7 +26,7 @@ public class ThemeSelection {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
             default:
-                //viewGroup.setBackgroundResource(R.drawable.gradient_background_light);
+                //viewGroup.setBackgroundResource(R.drawable.item_background);
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
         }

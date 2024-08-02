@@ -159,6 +159,13 @@ public class WiFiActivity extends AppCompatActivity {
                 return true;
             }
         });
+        reverseList(true);
+    }
+
+    private void reverseList(boolean reverse){
+        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        assert linearLayoutManager != null;
+        linearLayoutManager.setReverseLayout(reverse);
     }
 
     @Override
@@ -167,6 +174,8 @@ public class WiFiActivity extends AppCompatActivity {
         // Save the current scroll position and offset
         saveScrollPosition();
     }
+
+
 
     @Override
     protected void onResume() {
@@ -298,6 +307,7 @@ public class WiFiActivity extends AppCompatActivity {
             filteredNetworkList = new ArrayList<>(networkList);
             filteredNetworkList.sort(comparator);
             updateAdapter(filteredNetworkList);
+            reverseList(false);
         }
     }
 
@@ -311,6 +321,7 @@ public class WiFiActivity extends AppCompatActivity {
                         .filter(network -> network.getSecurity().equalsIgnoreCase(securityType))
                         .collect(Collectors.toList());
             }
+            reverseList(false);
             updateAdapter(filteredNetworkList);
         }
     }
@@ -325,12 +336,15 @@ public class WiFiActivity extends AppCompatActivity {
             filteredNetworkList = networkList.stream()
                     .filter(network -> network.getSecurity().equalsIgnoreCase(currentFilter))
                     .collect(Collectors.toList());
+            reverseList(false);
         } else if (!isFilteringMode && currentComparator != null) {
             // Apply the current sort
             filteredNetworkList = new ArrayList<>(networkList);
             filteredNetworkList.sort(currentComparator);
+            reverseList(false);
         } else {
             filteredNetworkList = new ArrayList<>(networkList);
+            reverseList(true);
         }
 
         updateAdapter(filteredNetworkList);
