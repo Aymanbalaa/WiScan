@@ -47,12 +47,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private List<Network> networkList;
-    private static final String PREFS_NAME = "WiFiActivityPrefs";
-    private static final String NETWORK_LIST_KEY = "network_list";
+    private List<Network> triangulatedList;
     private Map<LatLng, List<Network>> locationNetworkMap;
     private Handler handler;
     private Runnable refreshRunnable;
-    private static final int REFRESH_INTERVAL = 10000; // 10 seconds
+    private static final int REFRESH_INTERVAL = 1000; // 10 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,14 +133,29 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void fetchNetworkList() {
         NetworkManager networkManager = NetworkManager.getInstance(this);
-        networkManager.fetchNetworks();
+        String networksUrl = "http://217.15.171.225:5000/get_all_networks";
+        String triangulatedUrl = "http://217.15.171.225:6000/get_all_triangulated";
+
+        networkManager.fetchNetworks(networksUrl, false);
+        networkManager.fetchNetworks(triangulatedUrl, true);
+
         networkList = networkManager.getNetworkList();
+        triangulatedList = networkManager.getTriangulatedList();
     }
 
     private void groupNetworksByLocation() {
         locationNetworkMap = new HashMap<>();
         if (networkList != null) {
             for (Network network : networkList) {
+                LatLng location = new LatLng(network.getLatitude(), network.getLongitude());
+                if (!locationNetworkMap.containsKey(location)) {
+                    locationNetworkMap.put(location, new ArrayList<>());
+                }
+                locationNetworkMap.get(location).add(network);
+            }
+        }
+        if (triangulatedList != null) {
+            for (Network network : triangulatedList) {
                 LatLng location = new LatLng(network.getLatitude(), network.getLongitude());
                 if (!locationNetworkMap.containsKey(location)) {
                     locationNetworkMap.put(location, new ArrayList<>());

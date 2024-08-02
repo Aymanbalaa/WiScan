@@ -193,7 +193,7 @@ public class WiFiActivity extends AppCompatActivity {
 
     private void fetchNetworks() {
         NetworkManager networkManager = NetworkManager.getInstance(this);
-        networkManager.fetchNetworks();
+        networkManager.fetchNetworks("http://217.15.171.225:5000/get_all_networks",false);
         networkList = networkManager.getNetworkList();
         applyCurrentSortOrFilter();
         invalidateOptionsMenu(); // Refresh Filter Listtt
