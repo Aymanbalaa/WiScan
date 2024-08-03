@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +44,7 @@ public class StatsActivity extends AppCompatActivity {
     private TextView textViewToRightOfPieTitle;
     private TextView textViewBelowPieTitle;
     private String neighborhood;
-//    private Button buttonSaveChart;
+    //    private Button buttonSaveChart;
     private Button buttonPieChart1;
     private Button buttonPieChart2;
     private static final int PERMISSION_REQUEST_CODE = 1;
@@ -55,6 +56,13 @@ public class StatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+        ThemeSelection.themeInitializer(findViewById(R.id.activity_stats), this);
+
+        // Enable the Up button
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_stats), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -109,6 +117,15 @@ public class StatsActivity extends AppCompatActivity {
 //                saveChart(pieChartNetworksDistribution, "networks_chart", "Download");
 //            }
 //        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setUpPieChart() {
