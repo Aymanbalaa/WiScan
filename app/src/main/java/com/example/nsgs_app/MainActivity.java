@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_main);
-        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.main), this);
+        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.statisticsView), this);
 
         isActivityRunning = true;
 

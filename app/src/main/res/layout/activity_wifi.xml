@@ -70,4 +70,12 @@
         android:orientation="vertical"
         android:padding="0dp">
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonShowStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="6dp"
+        android:text="@string/button_show_statistics" />
 </RelativeLayout>

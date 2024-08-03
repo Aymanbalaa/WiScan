@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.mikephil.charting.charts.PieChart;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -35,6 +36,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -73,6 +75,13 @@ public class WiFiActivity extends AppCompatActivity {
     private static final String SCROLL_OFFSET_KEY = "scroll_offset";
     private static final String NETWORK_LIST_KEY = "network_list";
 
+    public Set<String> securityProtocols;
+
+
+
+    private Button buttonShowStatistics;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +97,11 @@ public class WiFiActivity extends AppCompatActivity {
         totalNetworksTextView = findViewById(R.id.totalNetworksTextView);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        buttonShowStatistics = findViewById(R.id.buttonShowStatistics);
+
+
 
         btnExportCsv = findViewById(R.id.btn_export_csv);
         btnScrollBottom = findViewById(R.id.btn_scroll_bottom);
@@ -159,6 +173,21 @@ public class WiFiActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        buttonShowStatistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //sending list of networks and protocol lists to Statistics page
+                Intent intent = new Intent(WiFiActivity.this, StatisticsActivity.class);
+                Gson gson = new Gson();
+                String networkListJson = gson.toJson(networkList);
+                intent.putExtra("networkList", networkListJson);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
@@ -244,7 +273,7 @@ public class WiFiActivity extends AppCompatActivity {
         // Clear existing items in the filter submenu before adding new ones AVOIDING DUPLICATES
         SubMenu filterSubMenu = menu.findItem(R.id.action_filter_submenu).getSubMenu();
         filterSubMenu.clear(); // clearrrr
-        Set<String> securityProtocols = getUniqueSecurityProtocols(networkList); // refill the list and get all protocols
+        securityProtocols = getUniqueSecurityProtocols(networkList); // refill the list and get all protocols
 
         for (String protocol : securityProtocols) {
             filterSubMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, protocol).setOnMenuItemClickListener(item -> {

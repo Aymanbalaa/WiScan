@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:padding="16dp"
-    android:id="@+id/main">
+    android:id="@+id/statisticsView">
 
     <TextView
         android:id="@+id/hi_text"

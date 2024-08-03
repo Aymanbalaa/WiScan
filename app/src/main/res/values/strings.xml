@@ -16,6 +16,9 @@
     <string name="location">Map</string>
     <string name="additional_information">Additional Information</string>
 
+    //WIFI PAGE
+    <string name="button_show_statistics" translatable="false">Statistics</string>
+
     //DISCLAIMER
     <string name="change_language">Change Language</string>
     <string name="disclaimer_title">Disclaimer</string>
@@ -26,8 +29,8 @@
     - Users are prohibited from using the app for any malicious activities, including but not limited to unauthorized access, interference with network security, or privacy violations.\n\n
     - By using the NSGS app, you agree to abide by all applicable laws and regulations regarding data collection and privacy.\n\n
     - The developers of NSGS are not responsible for any misuse of the app.
-<!--    <string name="disclaimer_text_fr">L\'application « Network Security Geo-Scanner » (NSGS) est conçue uniquement dans le but de capturer des données WiFi locales (BSSID, SSID, protocoles de sécurité et données de localisation correspondantes), de nettoyer les données, d\'afficher les progrès pour l\'utilisateur et d\'envoyer les données pour des visualisations avancées telles que des graphiques et des cartes. L\'application permet la configuration via des contrôles utilisateur tels que la fréquence et le rayon de scan WiFi.\n\nAvis Important :\n\n- L\'application NSGS doit être utilisée exclusivement à des fins prévues, comme décrit ci-dessus.\n- Il est interdit aux utilisateurs d\'utiliser l\'application pour toute activité malveillante, y compris, mais sans s\'y limiter, l\'accès non autorisé, l\'interférence avec la sécurité du réseau ou la violation de la confidentialité.\n- En utilisant l\'application NSGS, vous acceptez de respecter toutes les lois et réglementations applicables concernant la collecte de données et la confidentialité.\n- Les développeurs de NSGS ne sont pas responsables de toute mauvaise utilisation de l\'application.</string>-->
-<!--    <string name="disclaimer_text_ru">Приложение «Network Security Geo-Scanner» (NSGS) предназначено исключительно для захвата данных о локальной сети WiFi (BSSID, SSID, протоколы безопасности и соответствующие данные о местоположении), очистки данных, отображения прогресса для пользователя и отправки данных для расширенной визуализации, такой как графики и карты. Приложение позволяет настраивать частоту и радиус сканирования WiFi через элементы управления.\n\nВажное уведомление: \n\n- Приложение NSGS должно использоваться исключительно для его предусмотренного назначения, как описано выше.\n- Пользователям запрещено использовать приложение для любых вредоносных действий, включая, но не ограничиваясь, несанкционированный доступ, вмешательство в безопасность сети или нарушение конфиденциальности.\n- Используя приложение NSGS, вы соглашаетесь соблюдать все применимые законы и правила, касающиеся сбора данных и конфиденциальности.\n- Разработчики NSGS не несут ответственности за любое неправильное использование приложения.</string>-->
+        <!--    <string name="disclaimer_text_fr">L\'application « Network Security Geo-Scanner » (NSGS) est conçue uniquement dans le but de capturer des données WiFi locales (BSSID, SSID, protocoles de sécurité et données de localisation correspondantes), de nettoyer les données, d\'afficher les progrès pour l\'utilisateur et d\'envoyer les données pour des visualisations avancées telles que des graphiques et des cartes. L\'application permet la configuration via des contrôles utilisateur tels que la fréquence et le rayon de scan WiFi.\n\nAvis Important :\n\n- L\'application NSGS doit être utilisée exclusivement à des fins prévues, comme décrit ci-dessus.\n- Il est interdit aux utilisateurs d\'utiliser l\'application pour toute activité malveillante, y compris, mais sans s\'y limiter, l\'accès non autorisé, l\'interférence avec la sécurité du réseau ou la violation de la confidentialité.\n- En utilisant l\'application NSGS, vous acceptez de respecter toutes les lois et réglementations applicables concernant la collecte de données et la confidentialité.\n- Les développeurs de NSGS ne sont pas responsables de toute mauvaise utilisation de l\'application.</string>-->
+        <!--    <string name="disclaimer_text_ru">Приложение «Network Security Geo-Scanner» (NSGS) предназначено исключительно для захвата данных о локальной сети WiFi (BSSID, SSID, протоколы безопасности и соответствующие данные о местоположении), очистки данных, отображения прогресса для пользователя и отправки данных для расширенной визуализации, такой как графики и карты. Приложение позволяет настраивать частоту и радиус сканирования WiFi через элементы управления.\n\nВажное уведомление: \n\n- Приложение NSGS должно использоваться исключительно для его предусмотренного назначения, как описано выше.\n- Пользователям запрещено использовать приложение для любых вредоносных действий, включая, но не ограничиваясь, несанкционированный доступ, вмешательство в безопасность сети или нарушение конфиденциальности.\n- Используя приложение NSGS, вы соглашаетесь соблюдать все применимые законы и правила, касающиеся сбора данных и конфиденциальности.\n- Разработчики NSGS не несут ответственности за любое неправильное использование приложения.</string>-->
 </string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
@@ -87,7 +90,7 @@
     <string name="language2">Français</string>
     <string name="language3">Русский</string>
 
-    
+
     <string-array name="languageArray">
         <item>@string/language1</item>
         <item>@string/language2</item>
@@ -140,7 +143,6 @@
     <string name="a_802_1X_description">IEEE 802.1X is a network access control protocol that provides authentication to devices wishing to attach to a LAN or WLAN. It is used for secure communication in wired and wireless networks.</string>
     <string name="a_4ghz_description">4GHz refers to the frequency band used by some Wi-Fi networks. It is commonly used due to its compatibility with a wide range of devices, though it is susceptible to interference.</string>
     <string name="a_5ghz_description">5GHz is another frequency band used by Wi-Fi networks. It provides faster speeds and less interference compared to the 2.4GHz band but has a shorter range.</string>
-
 
 
     <string name="theme_text_view">Theme</string>

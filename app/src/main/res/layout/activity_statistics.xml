@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/statisticsView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".StatisticsActivity">
+
+
+    <TextView
+        android:id="@+id/chart_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="8dp"
+        android:text="Network Security Protocols Distribution:"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <!-- TextView to the right of the chart title -->
+    <TextView
+        android:id="@+id/text_right_of_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/chart_title"
+        android:layout_marginStart="8dp"
+        android:text="Additional Info"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:paddingStart="8dp" />
+
+    <!-- TextView below the chart title -->
+    <TextView
+        android:id="@+id/text_below_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chart_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:text="-"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie_chart_networks_distribution"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@id/save_chart_button"
+        android:layout_below="@id/chart_title"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1" />
+    <!-- Save button for chart -->
+    <Button
+        android:id="@+id/save_chart_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Save Chart"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp" />
+
+
+</RelativeLayout>
