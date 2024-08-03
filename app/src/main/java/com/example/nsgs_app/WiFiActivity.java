@@ -131,11 +131,15 @@ public class WiFiActivity extends AppCompatActivity {
         btnScrollBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                boolean reverse = layoutManager.getReverseLayout();
+
                 if (isAtBottom) {
-                    recyclerView.scrollToPosition(0);
+                    recyclerView.scrollToPosition(reverse ? networkAdapter.getItemCount() - 1 : 0);
                     btnScrollBottom.setText(getString(R.string.button_scroll_to_bottom));
                 } else {
-                    recyclerView.scrollToPosition(networkList.size() - 1);
+                    recyclerView.scrollToPosition(reverse ? 0 : networkAdapter.getItemCount() - 1);
                     btnScrollBottom.setText(getString(R.string.button_scroll_to_top));
                 }
                 isAtBottom = !isAtBottom;
@@ -159,10 +163,12 @@ public class WiFiActivity extends AppCompatActivity {
                 return true;
             }
         });
-       // reverseList(true);
+
+
+        reverseList(true);
     }
 
-    /*
+
     private void reverseList(boolean reverse){
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         assert linearLayoutManager != null;
@@ -170,7 +176,7 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
 
-     */
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -284,12 +290,15 @@ public class WiFiActivity extends AppCompatActivity {
                 if (!ssid1HasNumbers && ssid2HasNumbers) return -1;
                 return ssid1.compareToIgnoreCase(ssid2);
             }));
+            reverseList(false);
             return true;
         } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
             isFilteringMode = false;
             sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
+            reverseList(false);
             return true;
         }else if(itemId == R.id.action_default_view){
+            reverseList(true);
             resetFiltersAndSort();
             return true;
         }
@@ -310,7 +319,6 @@ public class WiFiActivity extends AppCompatActivity {
             filteredNetworkList = new ArrayList<>(networkList);
             filteredNetworkList.sort(comparator);
             updateAdapter(filteredNetworkList);
-          //  reverseList(false);
         }
     }
 
@@ -324,7 +332,6 @@ public class WiFiActivity extends AppCompatActivity {
                         .filter(network -> network.getSecurity().equalsIgnoreCase(securityType))
                         .collect(Collectors.toList());
             }
-          //  reverseList(false);
             updateAdapter(filteredNetworkList);
         }
     }
@@ -339,15 +346,12 @@ public class WiFiActivity extends AppCompatActivity {
             filteredNetworkList = networkList.stream()
                     .filter(network -> network.getSecurity().equalsIgnoreCase(currentFilter))
                     .collect(Collectors.toList());
-           // reverseList(false);
         } else if (!isFilteringMode && currentComparator != null) {
             // Apply the current sort
             filteredNetworkList = new ArrayList<>(networkList);
             filteredNetworkList.sort(currentComparator);
-         //   reverseList(false);
         } else {
             filteredNetworkList = new ArrayList<>(networkList);
-          //  reverseList(true);
         }
 
         updateAdapter(filteredNetworkList);
