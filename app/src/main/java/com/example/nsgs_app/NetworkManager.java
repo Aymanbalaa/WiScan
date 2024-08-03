@@ -2,6 +2,8 @@ package com.example.nsgs_app;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -62,30 +64,40 @@ public class NetworkManager {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.e("NetworkManager", "Error fetching data: " + e.getMessage());
-                Toast.makeText(context, "Error fetching data", Toast.LENGTH_SHORT).show();
+                new Handler(Looper.getMainLooper()).post(() ->
+                        Toast.makeText(context, "Error fetching data", Toast.LENGTH_SHORT).show()
+                );
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     String responseData = response.body().string();
                     try {
                         JSONObject jsonObject = new JSONObject(responseData);
                         Gson gson = new Gson();
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
                         if (isTriangulated) {
-                            triangulatedList = gson.fromJson(jsonObject.getJSONArray("triangulated_networks").toString(), networkListType);
+                            List<Network> fetchedTriangulatedList = gson.fromJson(jsonObject.getJSONArray("networks_triangulated").toString(), networkListType);
+                            triangulatedList.clear();
+                            triangulatedList.addAll(fetchedTriangulatedList);
                             saveTriangulatedListToPreferences();
                         } else {
-                            networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
+                            List<Network> fetchedNetworkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
+                            networkList.clear();
+                            networkList.addAll(fetchedNetworkList);
                             saveNetworkListToPreferences();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Toast.makeText(context, "Error parsing data", Toast.LENGTH_SHORT).show();
+                        new Handler(Looper.getMainLooper()).post(() ->
+                                Toast.makeText(context, "Error parsing data", Toast.LENGTH_SHORT).show()
+                        );
                     }
                 } else {
-                    Toast.makeText(context, "Error fetching data", Toast.LENGTH_SHORT).show();
+                    new Handler(Looper.getMainLooper()).post(() ->
+                            Toast.makeText(context, "Error fetching data", Toast.LENGTH_SHORT).show()
+                    );
                 }
             }
         });
@@ -119,6 +131,22 @@ public class NetworkManager {
         if (networkListJson != null) {
             networkList = gson.fromJson(networkListJson, listType);
         }
+
+        if (triangulatedListJson != null) {
+            triangulatedList = gson.fromJson(triangulatedListJson, listType);
+        }
+    }
+
+    public void refreshLists() {
+        loadNetworkListFromPreferences();
+        loadTriangulatedListFromPreferences();
+    }
+
+    private void loadTriangulatedListFromPreferences() {
+        SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String triangulatedListJson = preferences.getString(TRIANGULATED_LIST_KEY, null);
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Network>>() {}.getType();
 
         if (triangulatedListJson != null) {
             triangulatedList = gson.fromJson(triangulatedListJson, listType);
