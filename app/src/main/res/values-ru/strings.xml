@@ -122,4 +122,5 @@
     <string name="warm_theme">Теплый</string>
     <string name="theme_selection">Выбор темы</string>
     <string name="unknown_values">" Неизвестные значения"</string>
+    <string name="Statistics">"Статистика" </string>
 </resources>
