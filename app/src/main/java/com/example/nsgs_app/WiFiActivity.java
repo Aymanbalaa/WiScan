@@ -159,15 +159,18 @@ public class WiFiActivity extends AppCompatActivity {
                 return true;
             }
         });
-        reverseList(true);
+       // reverseList(true);
     }
 
+    /*
     private void reverseList(boolean reverse){
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         assert linearLayoutManager != null;
         linearLayoutManager.setReverseLayout(reverse);
     }
 
+
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -307,7 +310,7 @@ public class WiFiActivity extends AppCompatActivity {
             filteredNetworkList = new ArrayList<>(networkList);
             filteredNetworkList.sort(comparator);
             updateAdapter(filteredNetworkList);
-            reverseList(false);
+          //  reverseList(false);
         }
     }
 
@@ -321,7 +324,7 @@ public class WiFiActivity extends AppCompatActivity {
                         .filter(network -> network.getSecurity().equalsIgnoreCase(securityType))
                         .collect(Collectors.toList());
             }
-            reverseList(false);
+          //  reverseList(false);
             updateAdapter(filteredNetworkList);
         }
     }
@@ -336,15 +339,15 @@ public class WiFiActivity extends AppCompatActivity {
             filteredNetworkList = networkList.stream()
                     .filter(network -> network.getSecurity().equalsIgnoreCase(currentFilter))
                     .collect(Collectors.toList());
-            reverseList(false);
+           // reverseList(false);
         } else if (!isFilteringMode && currentComparator != null) {
             // Apply the current sort
             filteredNetworkList = new ArrayList<>(networkList);
             filteredNetworkList.sort(currentComparator);
-            reverseList(false);
+         //   reverseList(false);
         } else {
             filteredNetworkList = new ArrayList<>(networkList);
-            reverseList(true);
+          //  reverseList(true);
         }
 
         updateAdapter(filteredNetworkList);
