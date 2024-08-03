@@ -43,7 +43,7 @@ public class StatsActivity extends AppCompatActivity {
     private TextView textViewToRightOfPieTitle;
     private TextView textViewBelowPieTitle;
     private String neighborhood;
-    private Button buttonSaveChart;
+//    private Button buttonSaveChart;
     private Button buttonPieChart1;
     private Button buttonPieChart2;
     private static final int PERMISSION_REQUEST_CODE = 1;
@@ -64,7 +64,7 @@ public class StatsActivity extends AppCompatActivity {
         pieChartNetworksDistribution = findViewById(R.id.pie_chart_networks_distribution);
         textViewToRightOfPieTitle = findViewById(R.id.text_right_of_title);
         textViewBelowPieTitle = findViewById(R.id.text_below_title);
-        buttonSaveChart = findViewById(R.id.save_chart_button);
+//        buttonSaveChart = findViewById(R.id.save_chart_button);
         buttonPieChart1 = findViewById(R.id.button_pie_chart_1);
         buttonPieChart2 = findViewById(R.id.button_pie_chart_2);
 
@@ -101,14 +101,14 @@ public class StatsActivity extends AppCompatActivity {
             pieChartNetworksDistribution.clear();
             loadPieChartData2();
         });
-
-        buttonSaveChart.setOnClickListener(v -> {
-            if (ContextCompat.checkSelfPermission(StatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(StatsActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-            } else {
-                saveChart(pieChartNetworksDistribution, "networks_chart", "Download");
-            }
-        });
+//
+//        buttonSaveChart.setOnClickListener(v -> {
+//            if (ContextCompat.checkSelfPermission(StatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(StatsActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+//            } else {
+//                saveChart(pieChartNetworksDistribution, "networks_chart", "Download");
+//            }
+//        });
     }
 
     private void setUpPieChart() {
@@ -252,29 +252,29 @@ public class StatsActivity extends AppCompatActivity {
         return providers;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                saveChart(pieChartNetworksDistribution, "networks_chart", "Download");
-            } else {
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (requestCode == PERMISSION_REQUEST_CODE) {
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                saveChart(pieChartNetworksDistribution, "networks_chart", "Download");
+//            } else {
+//                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
 
-    private void saveChart(PieChart pieChart, String fileName, String folderName) {
-        String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + folderName;
-        File dir = new File(filePath);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        File file = new File(dir, fileName + ".png");
-        if (pieChart.saveToPath(file.getName(), file.getParent())) {
-            Toast.makeText(this, "Chart saved to " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Failed to save chart", Toast.LENGTH_LONG).show();
-        }
-    }
+//    private void saveChart(PieChart pieChart, String fileName, String folderName) {
+//        String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + folderName;
+//        File dir = new File(filePath);
+//        if (!dir.exists()) {
+//            dir.mkdirs();
+//        }
+//        File file = new File(dir, fileName + ".png");
+//        if (pieChart.saveToPath(file.getName(), file.getParent())) {
+//            Toast.makeText(this, "Chart saved to " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
+//        } else {
+//            Toast.makeText(this, "Failed to save chart", Toast.LENGTH_LONG).show();
+//        }
+//    }
 }
