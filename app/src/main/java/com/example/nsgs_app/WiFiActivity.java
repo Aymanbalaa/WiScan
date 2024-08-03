@@ -108,7 +108,7 @@ public class WiFiActivity extends AppCompatActivity {
                 handler.postDelayed(this, fetchInterval);
             }
         };
-
+        reverseList(true);
         fetchNetworks(); // Initial fetch on create
 
         handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
@@ -164,14 +164,13 @@ public class WiFiActivity extends AppCompatActivity {
             }
         });
 
-
-        reverseList(true);
     }
 
 
     private void reverseList(boolean reverse){
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         assert linearLayoutManager != null;
+        linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(reverse);
     }
 
