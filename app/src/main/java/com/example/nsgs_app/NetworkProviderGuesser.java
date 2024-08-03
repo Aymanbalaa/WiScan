@@ -21,6 +21,7 @@ public class NetworkProviderGuesser {
         providers.put("Freedom Mobile", ".*Freedom.*|.*FREEDOM.*|.*freedom.*|.*Freedom Mobile.*|.*FREEDOM MOBILE.*|.*freedom mobile.*"); // no spaces in ssid lol
         providers.put("Virgin Mobile", ".*Virgin.*|.*VIRGIN.*|.*virgin.*|.*Virgin Mobile.*|.*VIRGIN MOBILE.*|.*virgin mobile.*");
         providers.put("Public Mobile", ".*Public.*|.*PUBLIC.*|.*public.*|.*Public Mobile.*|.*PUBLIC MOBILE.*|.*public mobile.*");
+        providers.put("Helix", ".*Helix.*|.*HELIX.*|.*helix.*");
     }
 
     public static String getNetworkProvider(String ssid) {
