@@ -177,10 +177,12 @@ public class WiFiActivity extends AppCompatActivity {
            linearLayoutManager.setStackFromEnd(reverse);
 
            recyclerView.post(() ->  {
-               if (scrollPosition != RecyclerView.NO_POSITION) {
-                   linearLayoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
-               }
+                   if (scrollPosition != RecyclerView.NO_POSITION) {
+                       linearLayoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
+                   }
            });
+
+           restoreScrollPosition();
        }
 
     }
@@ -299,6 +301,7 @@ public class WiFiActivity extends AppCompatActivity {
         } else if (itemId == R.id.sort_by_ssid) {// Sort by SSID
             isFilteringMode = false;
             sortNetworkList(Comparator.comparing(network -> network.getSsid().toLowerCase()));
+            reverseList(false);
             return true;
         } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
             isFilteringMode = false;
@@ -306,8 +309,9 @@ public class WiFiActivity extends AppCompatActivity {
             reverseList(false);
             return true;
         }else if(itemId == R.id.action_default_view){
-            reverseList(true);
             resetFiltersAndSort();
+            recyclerView.scrollToPosition(0);
+            reverseList(true);
             return true;
         }
 
