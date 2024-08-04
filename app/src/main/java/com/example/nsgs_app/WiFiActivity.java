@@ -182,9 +182,7 @@ public class WiFiActivity extends AppCompatActivity {
                    }
            });
 
-           restoreScrollPosition();
        }
-
     }
 
     @Override
@@ -310,7 +308,6 @@ public class WiFiActivity extends AppCompatActivity {
             return true;
         }else if(itemId == R.id.action_default_view){
             resetFiltersAndSort();
-            recyclerView.scrollToPosition(0);
             reverseList(true);
             return true;
         }
