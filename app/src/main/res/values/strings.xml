@@ -122,6 +122,31 @@
         <item>ru</item>
     </string-array>
 
+    <string name="theme_text_view">Theme</string>
+    <string name="light_theme">Light</string>
+    <string name="dark_theme">Dark</string>
+    <string name="warm_theme">Warm</string>
+
+    <string-array name="theme_array">
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
+        <item>@string/warm_theme</item>
+    </string-array>
+
+
+    <string name="color_correction_text_view">Color Correction</string>
+    <string name="default_color_correction">Default</string>
+    <string name="protanopia">Protanopia (Red-Green)</string>
+    <string name="deuteranopia">Deuteranopia (Red-Green)</string>
+    <string name="tritanopia">Tritanopia (Blue-Yellow)</string>
+
+    <string-array name="color_correction_array">
+        <item>@string/default_color_correction</item>
+        <item>@string/protanopia</item>
+        <item>@string/deuteranopia</item>
+        <item>@string/tritanopia</item>
+    </string-array>
+
 
     //ADDITIONAL INFORMATION PAGE
     <string name="types_of_security">Types of Security</string>
@@ -142,18 +167,11 @@
     <string name="a_5ghz_description">5GHz is another frequency band used by Wi-Fi networks. It provides faster speeds and less interference compared to the 2.4GHz band but has a shorter range.</string>
 
 
-    <string name="theme_text_view">Theme</string>
-    <string name="light_theme">Light</string>
-    <string name="dark_theme">Dark</string>
-    <string name="warm_theme">Warm</string>
+
     <string name="theme_selection">Theme Selection</string>
     <string name="unknown_values">" Unknown Values"</string>
     <string name="Statistics" >"Statistics"</string>
 
-    <string-array name="theme_array">
-        <item>@string/light_theme</item>
-        <item>@string/dark_theme</item>
-        <item>@string/warm_theme</item>
-    </string-array>
+
 
 </resources>

@@ -75,13 +75,31 @@
         android:background="#D3D3D3"
         android:entries="@array/theme_array" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "@string/color_correction_text_view"
+        android:paddingTop="24dp"
+        android:paddingBottom="16dp"
+        android:textSize="20sp" />
+
+
+    <Spinner
+        android:id="@+id/spinner_color_correction"
+        android:layout_width="337dp"
+        android:layout_height="37dp"
+        android:background="#D3D3D3"
+        android:entries = "@array/color_correction_array"
+        />
+
     <Button
         android:id="@+id/buttonShutdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/shutdown_button"
         android:textSize="18sp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal" />
 
     <TextView

@@ -101,6 +101,11 @@
     <string name="unknown">"Inconnu "</string>
 
     //ADDITIONAL INFO PAGE
+    <string name="color_correction_text_view">Correction de couleur</string>
+    <string name="default_color_correction">Défaut</string>
+    <string name="protanopia">Protanopie (Rouge-Vert)</string>
+    <string name="deuteranopia">Deutéranopie (Rouge-Vert)</string>
+    <string name="tritanopia">Tritanopie (Bleu-Jaune)</string>
     <string name="types_of_security">Types de sécurité</string>
     <string name="wifi_networks">Réseaux WiFi</string>
     <string name="WPA2">WPA2</string>

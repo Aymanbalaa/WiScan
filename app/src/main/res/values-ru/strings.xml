@@ -99,6 +99,8 @@
     <string name="unknown">Неизвестное </string>
 
     //ADDITIONAL INFO PAGE
+    <string name="color_correction_text_view">Коррекция цвета</string>
+    <string name="default_color_correction">По умолчанию</string>
     <string name="types_of_security">Типы безопасности</string>
     <string name="wifi_networks">WiFi сети</string>
     <string name="WPA2">WPA2</string>
@@ -123,4 +125,7 @@
     <string name="theme_selection">Выбор темы</string>
     <string name="unknown_values">" Неизвестные значения"</string>
     <string name="Statistics">"Статистика" </string>
+    <string name="protanopia">Протанопия (красно-зеленый)</string>
+    <string name="deuteranopia">Дейтеранопия (красно-зеленая)</string>
+    <string name="tritanopia">Тританопия (сине-желтая)</string>
 </resources>
