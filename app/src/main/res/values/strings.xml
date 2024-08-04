@@ -50,8 +50,6 @@
     <string name="inactive">Inactive</string>
     <string name="activeActivity">Active Networks List</string>
     <string name="button_export_csv">Export to CSV</string>
-    <string name="button_scroll_to_bottom">Scroll to Bottom</string>
-    <string name="button_scroll_to_top">Scroll to Top</string>
     <string name="search_hint">Search for SSID</string>
 
 

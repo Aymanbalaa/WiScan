@@ -89,8 +89,6 @@
 
     //SSID Page
     <string name="button_export_csv">Exporter en CSV</string>
-    <string name="button_scroll_to_bottom">Vers le bas</string>
-    <string name="button_scroll_to_top">Vers le haut</string>
     <string name="search_hint">Rechercher un SSID</string>
     <string name="shutdown_command">Commande d\'arrêt</string>
     <string name="is_currently_inactive_you_can_safely_click_the_button">" est actuellement inactif. Vous pouvez cliquer sur le bouton en toute sécurité."</string>
