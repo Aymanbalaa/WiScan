@@ -30,7 +30,7 @@ import java.util.Objects;
 
 public class SettingsDialogFragment extends DialogFragment {
 
-    private Spinner languageSpinner, temperatureSpinner, dbSpinner, themeSpinner;
+    private Spinner languageSpinner, temperatureSpinner, dbSpinner, themeSpinner, colorCorrectionSpinner;
     private Button shutdownButton;
     private TextView statusTextView;
     private ViewGroup viewGroup;
@@ -58,6 +58,7 @@ public class SettingsDialogFragment extends DialogFragment {
         statusTextView = view.findViewById(R.id.statusTextView);
         themeSpinner = view.findViewById(R.id.spinnerTheme);
         viewGroup = view.findViewById(R.id.settingsLayout);
+        colorCorrectionSpinner = view.findViewById(R.id.spinner_color_correction);
 
         ThemeSelection.themeInitializer(viewGroup,getActivity());
 
@@ -65,7 +66,7 @@ public class SettingsDialogFragment extends DialogFragment {
         measurementSelector();
         dbSelector();
         themeSelector();
-
+        colorCorrectionSelector();
 
         shutdownButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,6 +220,36 @@ public class SettingsDialogFragment extends DialogFragment {
         }
 
     }
+
+    private void colorCorrectionSelector(){
+
+        colorCorrectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+
+                String selectedColorCorrection = getResources().getStringArray(R.array.color_correction_array)[i];
+                SharedPreferences preferences = getActivity().getSharedPreferences("prefs", getActivity().MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("color_correction", selectedColorCorrection);
+                editor.apply();
+
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+    }
+
+
+
+
 
     private void sendShutdownRequest() {
         OkHttpClient client = new OkHttpClient();
