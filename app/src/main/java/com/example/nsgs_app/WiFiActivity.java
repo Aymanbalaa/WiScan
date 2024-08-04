@@ -274,13 +274,7 @@ public class WiFiActivity extends AppCompatActivity {
             return true;
         } else if (itemId == R.id.sort_by_ssid) {// Sort by SSID
             isFilteringMode = false;
-            sortNetworkList(Comparator.comparing(Network::getSsid, (ssid1, ssid2) -> {
-                boolean ssid1HasNumbers = ssid1.matches(".*\\d.*");
-                boolean ssid2HasNumbers = ssid2.matches(".*\\d.*");
-                if (ssid1HasNumbers && !ssid2HasNumbers) return 1;
-                if (!ssid1HasNumbers && ssid2HasNumbers) return -1;
-                return ssid1.compareToIgnoreCase(ssid2);
-            }));
+            sortNetworkList(Comparator.comparing(network -> network.getSsid().toLowerCase()));
             return true;
         } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
             isFilteringMode = false;
