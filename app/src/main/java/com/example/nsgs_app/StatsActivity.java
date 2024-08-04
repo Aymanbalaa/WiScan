@@ -51,7 +51,7 @@ public class StatsActivity extends AppCompatActivity {
 
     public Set<String> protocols;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "StringFormatMatches"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +91,7 @@ public class StatsActivity extends AppCompatActivity {
         }
 
         textViewToRightOfPieTitle.setText(neighborhood);
-        textViewBelowPieTitle.setText("Total Networks: " + networkList.size());
+        textViewBelowPieTitle.setText(getString(R.string.total_networks_label, networkList.size()));
 
         if (networkList != null && protocols != null) {
             setUpPieChart();
