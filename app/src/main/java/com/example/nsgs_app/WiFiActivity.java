@@ -77,6 +77,7 @@ public class WiFiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_wifi);
         ThemeSelection.themeInitializer(findViewById(R.id.wifi_activity_layout),this);
 

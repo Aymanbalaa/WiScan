@@ -9,6 +9,7 @@ public class InfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_additional_info);
         ThemeSelection.themeInitializer(findViewById(R.id.additional_activity_layout),this);
 

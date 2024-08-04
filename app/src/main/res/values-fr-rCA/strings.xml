@@ -48,7 +48,11 @@
         <item>@string/language3</item>
     </string-array>
 
-
+    <string-array name="languageCode">
+        <item>en</item>
+        <item>fr</item>
+        <item>ru</item>
+    </string-array>
 
     <string-array name="databaseArray">
         <item>3</item>
@@ -118,6 +122,8 @@
     <string name="a_4ghz_description">4GHz fait référence à la bande de fréquence utilisée par certains réseaux Wi-Fi. Elle est couramment utilisée en raison de sa compatibilité avec un large éventail d appareils, bien qu elle soit susceptible aux interférences.</string>
     <string name="a_5ghz_description">5GHz est une autre bande de fréquence utilisée par les réseaux Wi-Fi. Elle offre des vitesses plus rapides et moins d interférences par rapport à la bande de 2,4GHz, mais a une portée plus courte.</string>
 
+    <string name="pie_chart_1">Diagramme Circulaire 1</string>
+    <string name="pie_chart_2">Diagramme Circulaire 2</string>
     <string name="theme_text_view">Thème</string>
     <string name="light_theme">Blanc</string>
     <string name="dark_theme">Sombre</string>
@@ -125,4 +131,6 @@
     <string name="theme_selection">Sélection du thème</string>
     <string name="unknown_values">" Valeurs inconnues"</string>
     <string name="Statistics">"Statistiques" </string>
+    <string name="filter_security">Filtrer la sécurité</string>
+    <string name="default_view">Vue par défaut</string>
 </resources>

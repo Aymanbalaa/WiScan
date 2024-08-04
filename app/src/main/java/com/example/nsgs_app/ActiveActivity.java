@@ -51,10 +51,8 @@ public class ActiveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active);
-
         ViewGroup view = findViewById(R.id.active_networks_layout);
         ThemeSelection.themeInitializer(view,this);
-
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

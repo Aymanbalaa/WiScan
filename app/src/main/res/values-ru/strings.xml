@@ -49,6 +49,12 @@
         <item>@string/language3</item>
     </string-array>
 
+    <string-array name="languageCode">
+        <item>en</item>
+        <item>fr</item>
+        <item>ru</item>
+    </string-array>
+
 
     <string-array name="databaseArray">
         <item>3</item>
@@ -123,4 +129,8 @@
     <string name="theme_selection">Выбор темы</string>
     <string name="unknown_values">" Неизвестные значения"</string>
     <string name="Statistics">"Статистика" </string>
+    <string name="pie_chart_1">круговая диаграмма 1</string>
+    <string name="pie_chart_2">круговая диаграмма 2</string>
+    <string name="filter_security">Фильтр безопасности</string>
+    <string name="default_view">Вид по умолчанию</string>
 </resources>

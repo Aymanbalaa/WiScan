@@ -55,6 +55,7 @@ public class StatsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_stats);
         ThemeSelection.themeInitializer(findViewById(R.id.activity_stats), this);
 

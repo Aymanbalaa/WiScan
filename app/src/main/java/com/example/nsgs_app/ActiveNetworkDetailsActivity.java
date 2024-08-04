@@ -16,6 +16,7 @@ public class ActiveNetworkDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_active_network_details);
         ThemeSelection.themeInitializer(findViewById(R.id.active_network_details_layout),this);
 

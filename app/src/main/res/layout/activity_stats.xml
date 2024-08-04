@@ -18,20 +18,20 @@
             android:id="@+id/button_pie_chart_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pie Chart 1" />
+            android:text="@string/pie_chart_1"/>
 
         <Button
             android:id="@+id/button_pie_chart_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pie Chart 2" />
+            android:text="@string/pie_chart_2" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/text_right_of_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Neighborhood"
+        android:text="@string/neighborhood_label"
         android:textSize="18sp"
         android:layout_gravity="center_horizontal"
         android:paddingTop="16dp"/>
@@ -40,7 +40,7 @@
         android:id="@+id/text_below_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Networks: 0"
+        android:text="@string/total_networks_label"
         android:textSize="18sp"
         android:layout_gravity="center_horizontal"
         android:paddingTop="8dp"/>
