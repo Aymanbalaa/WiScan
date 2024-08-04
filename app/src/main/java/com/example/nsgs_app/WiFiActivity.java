@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -92,6 +93,8 @@ public class WiFiActivity extends AppCompatActivity {
         btnExportCsv = findViewById(R.id.btn_export_csv);
         btnScrollBottom = findViewById(R.id.btn_scroll_bottom);
 
+        reverseList(true);
+
         handler = new Handler();
 
         // Retrieve the fetch interval from SharedPreferences
@@ -108,7 +111,6 @@ public class WiFiActivity extends AppCompatActivity {
                 handler.postDelayed(this, fetchInterval);
             }
         };
-        reverseList(true);
         fetchNetworks(); // Initial fetch on create
 
         handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
@@ -167,11 +169,22 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
 
-    private void reverseList(boolean reverse){
-        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-        assert linearLayoutManager != null;
-        linearLayoutManager.setStackFromEnd(true);
-        linearLayoutManager.setReverseLayout(reverse);
+    private void reverseList(boolean reverse) {
+       LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+       if (linearLayoutManager != null) {
+           final int scrollPosition = linearLayoutManager.findFirstVisibleItemPosition();
+           final int scrollOffset = (scrollPosition != RecyclerView.NO_POSITION) ? linearLayoutManager.findViewByPosition(scrollPosition).getTop():0;
+
+           linearLayoutManager.setReverseLayout(reverse);
+           linearLayoutManager.setStackFromEnd(reverse);
+
+           recyclerView.post(() ->  {
+               if (scrollPosition != RecyclerView.NO_POSITION) {
+                   linearLayoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
+               }
+           });
+       }
+
     }
 
 
@@ -294,9 +307,11 @@ public class WiFiActivity extends AppCompatActivity {
         } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
             isFilteringMode = false;
             sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
+
             reverseList(false);
             return true;
         }else if(itemId == R.id.action_default_view){
+
             reverseList(true);
             resetFiltersAndSort();
             return true;
@@ -367,11 +382,11 @@ public class WiFiActivity extends AppCompatActivity {
     private void updateAdapter(List<Network> networkList) {
         // Update the total networks count (Top Page)
         totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
-
         if (networkAdapter == null) {
             networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList, currentFilter);
             recyclerView.setAdapter(networkAdapter);
         } else {
+
             networkAdapter.updateNetworkList(networkList);
             networkAdapter.notifyDataSetChanged();
         }
