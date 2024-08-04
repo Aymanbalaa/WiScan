@@ -92,7 +92,6 @@ public class WiFiActivity extends AppCompatActivity {
 
         btnExportCsv = findViewById(R.id.btn_export_csv);
         btnScrollBottom = findViewById(R.id.btn_scroll_bottom);
-
         reverseList(true);
 
         handler = new Handler();
@@ -168,7 +167,6 @@ public class WiFiActivity extends AppCompatActivity {
 
     }
 
-
     private void reverseList(boolean reverse) {
        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
        if (linearLayoutManager != null) {
@@ -187,16 +185,12 @@ public class WiFiActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     protected void onPause() {
         super.onPause();
         // Save the current scroll position and offset
         saveScrollPosition();
     }
-
-
 
     @Override
     protected void onResume() {
@@ -307,11 +301,9 @@ public class WiFiActivity extends AppCompatActivity {
         } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
             isFilteringMode = false;
             sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
-
             reverseList(false);
             return true;
         }else if(itemId == R.id.action_default_view){
-
             reverseList(true);
             resetFiltersAndSort();
             return true;
@@ -386,7 +378,6 @@ public class WiFiActivity extends AppCompatActivity {
             networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList, currentFilter);
             recyclerView.setAdapter(networkAdapter);
         } else {
-
             networkAdapter.updateNetworkList(networkList);
             networkAdapter.notifyDataSetChanged();
         }
