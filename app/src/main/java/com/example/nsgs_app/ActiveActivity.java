@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import okhttp3.Call;
@@ -139,6 +140,7 @@ public class ActiveActivity extends AppCompatActivity {
                         // Filtering JSON data and feeding it into List of ActiveNetworks
                         Type activeNetworkListType = new TypeToken<List<ActiveNetwork>>() {}.getType();
                         activeNetworkList = gson.fromJson(jsonObject.getJSONArray("activeScanNetworks").toString(), activeNetworkListType);
+                        activeNetworkList.sort(Comparator.comparing(ActiveNetwork::getSignalStrength).reversed());
 
                         runOnUiThread(() -> {
                             // Update filtered active network list
