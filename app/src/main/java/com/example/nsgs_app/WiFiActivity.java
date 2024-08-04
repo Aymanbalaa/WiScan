@@ -38,6 +38,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -92,7 +93,8 @@ public class WiFiActivity extends AppCompatActivity {
 
         btnExportCsv = findViewById(R.id.btn_export_csv);
         btnScrollBottom = findViewById(R.id.btn_scroll_bottom);
-        reverseList(true);
+
+
 
         handler = new Handler();
 
@@ -112,8 +114,9 @@ public class WiFiActivity extends AppCompatActivity {
         };
         fetchNetworks(); // Initial fetch on create
 
-        handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
+        reverseList();
 
+        handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
         // Check for write permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -165,24 +168,29 @@ public class WiFiActivity extends AppCompatActivity {
             }
         });
 
+        recyclerView.scrollToPosition(0);
+
+
     }
 
-    private void reverseList(boolean reverse) {
-       LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-       if (linearLayoutManager != null) {
-           final int scrollPosition = linearLayoutManager.findFirstVisibleItemPosition();
-           final int scrollOffset = (scrollPosition != RecyclerView.NO_POSITION) ? linearLayoutManager.findViewByPosition(scrollPosition).getTop():0;
+    @SuppressLint("NotifyDataSetChanged")
+    private void reverseList() {
 
-           linearLayoutManager.setReverseLayout(reverse);
-           linearLayoutManager.setStackFromEnd(reverse);
+        if(networkList != null && !networkList.isEmpty()){
 
-           recyclerView.post(() ->  {
-                   if (scrollPosition != RecyclerView.NO_POSITION) {
-                       linearLayoutManager.scrollToPositionWithOffset(scrollPosition, scrollOffset);
-                   }
-           });
+            Collections.reverse(networkList);
+            if(networkList != null){
+                networkAdapter.updateNetworkList(networkList);
+                networkAdapter.notifyDataSetChanged();
+            }
+        }
 
-       }
+        SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("isReversed", false);
+        editor.apply();
+
+        recyclerView.scrollToPosition(0);
     }
 
     @Override
@@ -299,16 +307,13 @@ public class WiFiActivity extends AppCompatActivity {
         } else if (itemId == R.id.sort_by_ssid) {// Sort by SSID
             isFilteringMode = false;
             sortNetworkList(Comparator.comparing(network -> network.getSsid().toLowerCase()));
-            reverseList(false);
             return true;
         } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
             isFilteringMode = false;
             sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
-            reverseList(false);
             return true;
         }else if(itemId == R.id.action_default_view){
             resetFiltersAndSort();
-            reverseList(true);
             return true;
         }
 
