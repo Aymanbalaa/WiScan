@@ -1,6 +1,9 @@
 package com.example.nsgs_app;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -233,8 +236,7 @@ public class SettingsDialogFragment extends DialogFragment {
                 editor.putString("color_correction", selectedColorCorrection);
                 editor.apply();
 
-
-
+                applyColorSelection(i, viewGroup);
 
             }
 
@@ -243,11 +245,31 @@ public class SettingsDialogFragment extends DialogFragment {
 
             }
         });
-
-
     }
 
 
+    public static void applyColorSelection(int positionSpinner, ViewGroup view) {
+        ColorMatrix colorMatrix;
+        switch (positionSpinner) {
+            case 1:
+                colorMatrix = ColorCorrection.Protanopia();
+                break;
+            case 2:
+                colorMatrix = ColorCorrection.Tritanopia();
+                break;
+            case 3:
+                colorMatrix = ColorCorrection.Deuteranopia();
+                break;
+            default:
+                colorMatrix = new ColorMatrix();
+                break;
+        }
+        applyColorFilterToViewGroup(view, colorMatrix);
+    }
+
+    private static void applyColorFilterToViewGroup(ViewGroup viewGroup, ColorMatrix colorMatrix) {
+
+    }
 
 
 
