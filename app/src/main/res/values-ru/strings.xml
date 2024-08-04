@@ -121,4 +121,6 @@
     <string name="theme_selection">Выбор темы</string>
     <string name="unknown_values">" Неизвестные значения"</string>
     <string name="Statistics">"Статистика" </string>
+    <string name="security_protocol">Протоколы безопасности</string>
+    <string name="network_provider">Сетевые провайдеры</string>
 </resources>

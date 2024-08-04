@@ -123,4 +123,6 @@
     <string name="theme_selection">Sélection du thème</string>
     <string name="unknown_values">" Valeurs inconnues"</string>
     <string name="Statistics">"Statistiques" </string>
+    <string name="security_protocol">Protocole de sécurité</string>
+    <string name="network_provider">Fournisseurs de réseau</string>
 </resources>

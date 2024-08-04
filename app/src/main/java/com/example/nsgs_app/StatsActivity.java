@@ -153,7 +153,7 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private void loadPieChartData1() {
-        pieChartNetworksDistribution.setCenterText("Security Protocols");
+        pieChartNetworksDistribution.setCenterText(getString(R.string.security_protocol));
         ArrayList<PieEntry> pieEntriesNetworkDistribution = new ArrayList<>();
         List<String> customLegendEntries = new ArrayList<>();
 
@@ -185,7 +185,7 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private void loadPieChartData2() {
-        pieChartNetworksDistribution.setCenterText("Network Providers");
+        pieChartNetworksDistribution.setCenterText(getString(R.string.network_provider));
         ArrayList<PieEntry> pieEntriesNetworkDistribution = new ArrayList<>();
         List<String> customLegendEntries = new ArrayList<>();
 

@@ -143,6 +143,8 @@
     <string name="Statistics" >"Statistics"</string>
     <string name="pie_chart_1" >"Pie Chart 1"</string>
     <string name="pie_chart_2" >"Pie Chart 2"</string>
+    <string name="security_protocol">Security Protocols</string>
+    <string name="network_provider">Network Providers"</string>
 
 
     //
