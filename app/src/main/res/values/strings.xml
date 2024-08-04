@@ -138,13 +138,21 @@
     <string name="a_5ghz_description">5GHz is another frequency band used by Wi-Fi networks. It provides faster speeds and less interference compared to the 2.4GHz band but has a shorter range.</string>
 
 
+    //Statistics Page
+
+    <string name="Statistics" >"Statistics"</string>
+    <string name="pie_chart_1" >"Pie Chart 1"</string>
+    <string name="pie_chart_2" >"Pie Chart 2"</string>
+
+
+    //
     <string name="theme_text_view">Theme</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
     <string name="warm_theme">Warm</string>
     <string name="theme_selection">Theme Selection</string>
     <string name="unknown_values">" Unknown Values"</string>
-    <string name="Statistics" >"Statistics"</string>
+
 
     <string-array name="theme_array">
         <item>@string/light_theme</item>
