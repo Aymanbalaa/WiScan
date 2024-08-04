@@ -1,5 +1,7 @@
 package com.example.nsgs_app;
 
+import java.util.List;
+
 public class Network {
     private String ssid;
     private String bssid;
@@ -7,7 +9,7 @@ public class Network {
     private String coordinates;
     private String postalCode;
     private String neighborhood;
-
+    private List<Network> networks;
     // Constructor
     public Network(String ssid, String bssid, String security, String coordinates, String postalCode, String neighborhood) {
         this.ssid = ssid;
@@ -16,6 +18,15 @@ public class Network {
         this.coordinates = coordinates;
         this.postalCode = postalCode;
         this.neighborhood = neighborhood;
+    }
+
+    public Network findNetworkByBssid(String bssid) {
+        for (Network network : networks) {
+            if (network.getBssid().equals(bssid)) {
+                return network;
+            }
+        }
+        return null; // Return null if no network is found with the given BSSID
     }
 
     // Getter methods

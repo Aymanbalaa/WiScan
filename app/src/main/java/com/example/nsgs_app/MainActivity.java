@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
         Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
         Button activeButton = findViewById(R.id.active_button);
-        Button infoButton = findViewById(R.id.additional_info_button);
+        Button statsButton = findViewById(R.id.stats_button);
 
-        setButtonColor(currentTheme, wifiButton, locationButton, activeButton, infoButton);
+        setButtonColor(currentTheme, wifiButton, locationButton, activeButton, statsButton);
 
         if (!disclaimerShown) {
             showDisclaimer(); // starts the disclaimer
@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        infoButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+        statsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, StatsActivity.class);
             startActivity(intent);
         });
 
@@ -177,6 +177,11 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.settings) {
             showSettingsDialog();
             return true;
+        }
+        else if (id ==R.id.additional_info)
+        {
+            Intent infoIntent = new Intent(this, InfoActivity.class);
+            startActivity(infoIntent);
         }
 
         return super.onOptionsItemSelected(item);

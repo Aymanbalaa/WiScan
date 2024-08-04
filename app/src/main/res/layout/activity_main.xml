@@ -69,12 +69,12 @@
             android:lines="2"/>
 
         <Button
-            android:id="@+id/additional_info_button"
+            android:id="@+id/stats_button"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@android:color/holo_orange_light"
-            android:text="@string/additional_information"
+            android:text="@string/Statistics"
             android:textSize="18sp"
             android:textColor="@android:color/white"
             android:drawableLeft="@drawable/ic_info"

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_stats"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".StatsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/button_pie_chart_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pie Chart 1" />
+
+        <Button
+            android:id="@+id/button_pie_chart_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pie Chart 2" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_right_of_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Neighborhood"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="16dp"/>
+
+    <TextView
+        android:id="@+id/text_below_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Networks: 0"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="8dp"/>
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie_chart_networks_distribution"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp" />
+
+<!--    <Button-->
+<!--        android:id="@+id/save_chart_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Save Chart"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:padding="16dp" />-->
+
+</LinearLayout>

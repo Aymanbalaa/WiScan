@@ -2,6 +2,8 @@ package com.example.nsgs_app;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,13 +27,16 @@ public class NetworkManager {
 
     private static NetworkManager instance;
     private List<Network> networkList;
+    private List<Network> triangulatedList;
     private static final String PREFS_NAME = "WiFiActivityPrefs";
     private static final String NETWORK_LIST_KEY = "network_list";
+    private static final String TRIANGULATED_LIST_KEY = "triangulated_list";
     private Context context;
 
     private NetworkManager(Context context) {
         this.context = context;
         networkList = new ArrayList<>();
+        triangulatedList = new ArrayList<>();
         loadNetworkListFromPreferences();
     }
 
@@ -46,9 +51,12 @@ public class NetworkManager {
         return networkList;
     }
 
-    public void fetchNetworks() {
+    public List<Network> getTriangulatedList() {
+        return triangulatedList;
+    }
+
+    public void fetchNetworks(String url, boolean isTriangulated) {
         OkHttpClient client = new OkHttpClient();
-        String url = "http://217.15.171.225:5000/get_all_networks";
 
         Request request = new Request.Builder().url(url).build();
 
@@ -56,25 +64,40 @@ public class NetworkManager {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.e("NetworkManager", "Error fetching data: " + e.getMessage());
-                Toast.makeText(context, "Error fetching data", Toast.LENGTH_SHORT).show();
+                new Handler(Looper.getMainLooper()).post(() ->
+                        Toast.makeText(context, "Error fetching data", Toast.LENGTH_SHORT).show()
+                );
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     String responseData = response.body().string();
                     try {
                         JSONObject jsonObject = new JSONObject(responseData);
                         Gson gson = new Gson();
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
-                        networkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
-                        saveNetworkListToPreferences();
+                        if (isTriangulated) {
+                            List<Network> fetchedTriangulatedList = gson.fromJson(jsonObject.getJSONArray("records").toString(), networkListType);
+                            triangulatedList.clear();
+                            triangulatedList.addAll(fetchedTriangulatedList);
+                            saveTriangulatedListToPreferences();
+                        } else {
+                            List<Network> fetchedNetworkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
+                            networkList.clear();
+                            networkList.addAll(fetchedNetworkList);
+                            saveNetworkListToPreferences();
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Toast.makeText(context, "Error parsing data", Toast.LENGTH_SHORT).show();
+                        new Handler(Looper.getMainLooper()).post(() ->
+                                Toast.makeText(context, "Error parsing data", Toast.LENGTH_SHORT).show()
+                        );
                     }
                 } else {
-                    Toast.makeText(context, "Error fetching data", Toast.LENGTH_SHORT).show();
+                    new Handler(Looper.getMainLooper()).post(() ->
+                            Toast.makeText(context, "Error fetching data", Toast.LENGTH_SHORT).show()
+                    );
                 }
             }
         });
@@ -89,13 +112,44 @@ public class NetworkManager {
         editor.apply();
     }
 
+    private void saveTriangulatedListToPreferences() {
+        SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String triangulatedListJson = gson.toJson(triangulatedList);
+        editor.putString(TRIANGULATED_LIST_KEY, triangulatedListJson);
+        editor.apply();
+    }
+
     private void loadNetworkListFromPreferences() {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String networkListJson = preferences.getString(NETWORK_LIST_KEY, null);
+        String triangulatedListJson = preferences.getString(TRIANGULATED_LIST_KEY, null);
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Network>>() {}.getType();
+
         if (networkListJson != null) {
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<Network>>() {}.getType();
             networkList = gson.fromJson(networkListJson, listType);
+        }
+
+        if (triangulatedListJson != null) {
+            triangulatedList = gson.fromJson(triangulatedListJson, listType);
+        }
+    }
+
+    public void refreshLists() {
+        loadNetworkListFromPreferences();
+        loadTriangulatedListFromPreferences();
+    }
+
+    private void loadTriangulatedListFromPreferences() {
+        SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        String triangulatedListJson = preferences.getString(TRIANGULATED_LIST_KEY, null);
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<Network>>() {}.getType();
+
+        if (triangulatedListJson != null) {
+            triangulatedList = gson.fromJson(triangulatedListJson, listType);
         }
     }
 }

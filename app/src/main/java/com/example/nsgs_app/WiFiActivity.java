@@ -217,10 +217,19 @@ public class WiFiActivity extends AppCompatActivity {
 
     private void fetchNetworks() {
         NetworkManager networkManager = NetworkManager.getInstance(this);
-        networkManager.fetchNetworks();
+        networkManager.fetchNetworks("http://217.15.171.225:5000/get_all_networks", false);
         networkList = networkManager.getNetworkList();
+
         applyCurrentSortOrFilter();
-        invalidateOptionsMenu(); // Refresh Filter Listtt
+
+        // Reapply search query after refresh
+        if (!TextUtils.isEmpty(currentQuery)) {
+            filterNetworks(currentQuery);
+        } else {
+            updateAdapter(filteredNetworkList);
+        }
+
+        invalidateOptionsMenu(); // Refresh Filter List
     }
 
     private void exportToCsv() {
@@ -289,14 +298,7 @@ public class WiFiActivity extends AppCompatActivity {
             return true;
         } else if (itemId == R.id.sort_by_ssid) {// Sort by SSID
             isFilteringMode = false;
-            sortNetworkList(Comparator.comparing(Network::getSsid, (ssid1, ssid2) -> {
-                boolean ssid1HasNumbers = ssid1.matches(".*\\d.*");
-                boolean ssid2HasNumbers = ssid2.matches(".*\\d.*");
-                if (ssid1HasNumbers && !ssid2HasNumbers) return 1;
-                if (!ssid1HasNumbers && ssid2HasNumbers) return -1;
-                return ssid1.compareToIgnoreCase(ssid2);
-            }));
-            reverseList(false);
+            sortNetworkList(Comparator.comparing(network -> network.getSsid().toLowerCase()));
             return true;
         } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
             isFilteringMode = false;

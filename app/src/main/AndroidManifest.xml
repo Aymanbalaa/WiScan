@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +21,6 @@
         android:theme="@style/Theme.NSGSApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -43,6 +41,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -51,6 +50,7 @@
         <activity android:name=".NetworkDetailActivity" />
         <activity android:name=".HelpActivity" />
         <activity android:name=".ActiveActivity" />
+        <activity android:name=".StatsActivity"/>
         <activity
             android:name=".MapsActivity"
             android:parentActivityName=".MainActivity">
@@ -58,9 +58,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ActiveNetworkDetailsActivity"/>
-
-
+        <activity android:name=".ActiveNetworkDetailsActivity" />
     </application>
 
 </manifest>

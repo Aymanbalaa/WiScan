@@ -2,7 +2,6 @@ package com.example.nsgs_app;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import androidx.annotation.NonNull;
@@ -30,14 +29,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -46,13 +44,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    private List<Network> networkList;
-    private static final String PREFS_NAME = "WiFiActivityPrefs";
-    private static final String NETWORK_LIST_KEY = "network_list";
-    private Map<LatLng, List<Network>> locationNetworkMap;
+    private List<Network> networkList = new ArrayList<>();
+    private List<Network> triangulatedList = new ArrayList<>();
+    private List<Network> finalNetworkList = new ArrayList<>();
+    private Map<LatLng, List<Network>> locationNetworkMap = new HashMap<>();
+    private Map<LatLng, Marker> currentMarkers = new HashMap<>();
     private Handler handler;
     private Runnable refreshRunnable;
-    private static final int REFRESH_INTERVAL = 10000; // 10 seconds
+    private static final int REFRESH_INTERVAL = 3000; // 10 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +74,54 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         refreshRunnable = new Runnable() {
             @Override
             public void run() {
-                fetchNetworkList();
-                groupNetworksByLocation();
-                updateNetworkPins();
+                refreshData();
                 handler.postDelayed(this, REFRESH_INTERVAL);
             }
         };
+    }
+
+    private void refreshData() {
+        fetchNetworkList();
+        addSecurityToTriangulated();
+        filterBothLists();
+        groupNetworksByLocation();
+        updateNetworkPins();
+    }
+
+    private void addSecurityToTriangulated() {
+        Map<String, String> bssidToSecurityMap = new HashMap<>();
+        for (Network network : networkList) {
+            if (network != null && network.getBssid() != null) {
+                bssidToSecurityMap.put(network.getBssid(), network.getSecurity());
+            }
+        }
+
+        for (Network network : triangulatedList) {
+            if (network != null && network.getBssid() != null) {
+                String security = bssidToSecurityMap.get(network.getBssid());
+                if (security != null) {
+                    network.setSecurity(security);
+                }
+            }
+        }
+    }
+
+    public void filterBothLists() {
+        Set<String> bssidSet = new HashSet<>();
+        finalNetworkList.clear();
+
+        for (Network network : triangulatedList) {
+            if (network != null && network.getBssid() != null) {
+                finalNetworkList.add(network);
+                bssidSet.add(network.getBssid());
+            }
+        }
+
+        for (Network network : networkList) {
+            if (network != null && network.getBssid() != null && !bssidSet.contains(network.getBssid())) {
+                finalNetworkList.add(network);
+            }
+        }
     }
 
     @Override
@@ -134,45 +175,66 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void fetchNetworkList() {
         NetworkManager networkManager = NetworkManager.getInstance(this);
-        networkManager.fetchNetworks();
+        String networksUrl = "http://217.15.171.225:5000/get_all_networks";
+        String triangulatedUrl = "http://217.15.171.225:6000/filtered_triangulated";
+
+        networkManager.fetchNetworks(networksUrl, false);
+        networkManager.fetchNetworks(triangulatedUrl, true);
+        networkManager.refreshLists();
+
         networkList = networkManager.getNetworkList();
+        triangulatedList = networkManager.getTriangulatedList();
     }
 
     private void groupNetworksByLocation() {
-        locationNetworkMap = new HashMap<>();
-        if (networkList != null) {
-            for (Network network : networkList) {
-                LatLng location = new LatLng(network.getLatitude(), network.getLongitude());
-                if (!locationNetworkMap.containsKey(location)) {
-                    locationNetworkMap.put(location, new ArrayList<>());
+        locationNetworkMap.clear();
+        if (finalNetworkList != null) {
+            for (Network network : finalNetworkList) {
+                if (network != null) {
+                    LatLng location = new LatLng(network.getLatitude(), network.getLongitude());
+                    locationNetworkMap.computeIfAbsent(location, k -> new ArrayList<>()).add(network);
                 }
-                locationNetworkMap.get(location).add(network);
             }
         }
     }
 
     private void updateNetworkPins() {
-        mMap.clear();
+        Set<LatLng> locationsToRemove = new HashSet<>(currentMarkers.keySet());
         if (locationNetworkMap != null) {
             for (Map.Entry<LatLng, List<Network>> entry : locationNetworkMap.entrySet()) {
                 LatLng location = entry.getKey();
                 List<Network> networks = entry.getValue();
+                String title;
+                String snippet = null;
                 if (networks.size() == 1) {
                     Network network = networks.get(0);
-                    String securityLabel = String.format(getString(R.string.security_label), network.getSecurity());
-                    mMap.addMarker(new MarkerOptions()
-                            .position(location)
-                            .title(network.getSsid())
-                            .snippet(securityLabel));
-
+                    title = network.getSsid();
+                    snippet = String.format(getString(R.string.security_label), network.getSecurity());
                 } else {
-                    mMap.addMarker(new MarkerOptions()
+                    title = getString(R.string.multiple_networks);
+                }
+
+                if (currentMarkers.containsKey(location)) {
+                    Marker marker = currentMarkers.get(location);
+                    marker.setTitle(title);
+                    marker.setSnippet(snippet);
+                    locationsToRemove.remove(location);
+                } else {
+                    Marker marker = mMap.addMarker(new MarkerOptions()
                             .position(location)
-                            .title(getString(R.string.multiple_networks)));
+                            .title(title)
+                            .snippet(snippet));
+                    currentMarkers.put(location, marker);
                 }
             }
-        } else {
-            Toast.makeText(this, "No network data available", Toast.LENGTH_SHORT).show();
+        }
+
+        // Remove markers that are no longer present
+        for (LatLng location : locationsToRemove) {
+            Marker marker = currentMarkers.remove(location);
+            if (marker != null) {
+                marker.remove();
+            }
         }
     }
 
