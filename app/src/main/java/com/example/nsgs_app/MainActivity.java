@@ -65,11 +65,13 @@ public class MainActivity extends AppCompatActivity {
 
         wifiButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, WiFiActivity.class);
+            Language.setLanguage(this, Language.getLanguage(this));
             startActivity(intent);
         });
 
         locationButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            Language.setLanguage(this, Language.getLanguage(this));
             startActivity(intent);
         });
 
@@ -172,15 +174,18 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.help) {
             Intent helpIntent = new Intent(this, HelpActivity.class);
+            Language.setLanguage(this, Language.getLanguage(this));
             startActivity(helpIntent);
             return true;
         } else if (id == R.id.settings) {
+            Language.setLanguage(this, Language.getLanguage(this));
             showSettingsDialog();
             return true;
         }
         else if (id ==R.id.additional_info)
         {
             Intent infoIntent = new Intent(this, InfoActivity.class);
+            Language.setLanguage(this, Language.getLanguage(this));
             startActivity(infoIntent);
         }
 

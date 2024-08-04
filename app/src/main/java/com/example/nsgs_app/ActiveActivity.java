@@ -50,6 +50,7 @@ public class ActiveActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_active);
         ViewGroup view = findViewById(R.id.active_networks_layout);
         ThemeSelection.themeInitializer(view,this);

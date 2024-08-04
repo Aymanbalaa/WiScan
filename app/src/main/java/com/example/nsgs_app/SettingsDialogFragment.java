@@ -51,6 +51,7 @@ public class SettingsDialogFragment extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         languageSpinner = view.findViewById(R.id.spinnerLanguage);
         temperatureSpinner = view.findViewById(R.id.spinnerMetric);
         dbSpinner = view.findViewById(R.id.spinnerDB);
