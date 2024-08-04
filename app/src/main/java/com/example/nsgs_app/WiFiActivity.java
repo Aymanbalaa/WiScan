@@ -114,7 +114,7 @@ public class WiFiActivity extends AppCompatActivity {
         };
         fetchNetworks(); // Initial fetch on create
 
-        reverseList();
+
 
         handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
         // Check for write permissions
@@ -168,6 +168,7 @@ public class WiFiActivity extends AppCompatActivity {
             }
         });
 
+        reverseList();
         recyclerView.scrollToPosition(0);
 
 
@@ -177,7 +178,6 @@ public class WiFiActivity extends AppCompatActivity {
     private void reverseList() {
 
         if(networkList != null && !networkList.isEmpty()){
-
             Collections.reverse(networkList);
             if(networkList != null){
                 networkAdapter.updateNetworkList(networkList);
@@ -314,6 +314,7 @@ public class WiFiActivity extends AppCompatActivity {
             return true;
         }else if(itemId == R.id.action_default_view){
             resetFiltersAndSort();
+            reverseList();
             return true;
         }
 
