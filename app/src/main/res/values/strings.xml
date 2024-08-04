@@ -127,7 +127,6 @@
     <string name="WPA2">WPA2</string>
     <string name="WPA3">WPA3</string>
     <string name="WEP">WEP</string>
-    <string name="a_802_1X">802.1X</string>
     <string name="a_4GHZ">4GHz</string>
     <string name="a_5GHZ">5GHz</string>
     <string name="type">Type</string>
@@ -135,7 +134,6 @@
     <string name="wpa2_description">Wi-Fi Protected Access II (WPA2) is a network security technology commonly used on Wi-Fi wireless networks. It is an improvement over WPA and provides stronger data protection and network access control.</string>
     <string name="wpa3_description">Wi-Fi Protected Access III (WPA3) is the latest generation of Wi-Fi security, providing more robust authentication and improved cryptographic strength.</string>
     <string name="wep_description">Wired Equivalent Privacy (WEP) is a security protocol for wireless networks that provides data confidentiality comparable to a traditional wired network. However, it is considered to be the least secure due to various vulnerabilities.</string>
-    <string name="a_802_1X_description">IEEE 802.1X is a network access control protocol that provides authentication to devices wishing to attach to a LAN or WLAN. It is used for secure communication in wired and wireless networks.</string>
     <string name="a_4ghz_description">4GHz refers to the frequency band used by some Wi-Fi networks. It is commonly used due to its compatibility with a wide range of devices, though it is susceptible to interference.</string>
     <string name="a_5ghz_description">5GHz is another frequency band used by Wi-Fi networks. It provides faster speeds and less interference compared to the 2.4GHz band but has a shorter range.</string>
 
