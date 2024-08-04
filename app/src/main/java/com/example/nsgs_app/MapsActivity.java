@@ -51,7 +51,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Map<LatLng, Marker> currentMarkers = new HashMap<>();
     private Handler handler;
     private Runnable refreshRunnable;
-    private static final int REFRESH_INTERVAL = 3; // 10 seconds
+    private static final int REFRESH_INTERVAL = 3000; // 10 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
