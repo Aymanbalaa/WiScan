@@ -64,7 +64,7 @@ public class WiFiActivity extends AppCompatActivity {
     private Comparator<Network> currentComparator; // Save the current comparator
     private String currentFilter; // Save the current filter
     private boolean isFilteringMode = false; // Track whether filtering mode is active
-    private Button btnExportCsv, btnScrollBottom;
+    private Button btnExportCsv, btnScroll;
     private boolean isAtBottom = false; // Track the current scroll position
     private String currentQuery = ""; // This will hold the current search query
 
@@ -78,7 +78,7 @@ public class WiFiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi);
-        ThemeSelection.themeInitializer(findViewById(R.id.wifi_activity_layout),this);
+        ThemeSelection.themeInitializer(findViewById(R.id.wifi_activity_layout), this);
 
         // Enable the Up button
         if (getSupportActionBar() != null) {
@@ -90,7 +90,7 @@ public class WiFiActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         btnExportCsv = findViewById(R.id.btn_export_csv);
-        btnScrollBottom = findViewById(R.id.btn_scroll_bottom);
+        btnScroll = findViewById(R.id.btn_scroll);
 
         handler = new Handler();
 
@@ -121,24 +121,16 @@ public class WiFiActivity extends AppCompatActivity {
                     REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
         }
 
-        btnExportCsv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                exportToCsv();
-            }
-        });
+        btnExportCsv.setOnClickListener(v -> exportToCsv());
 
-        btnScrollBottom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnScroll.setOnClickListener(v -> {
+            LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+            if (layoutManager != null) {
                 if (isAtBottom) {
                     recyclerView.scrollToPosition(0);
-                    btnScrollBottom.setText(getString(R.string.button_scroll_to_bottom));
                 } else {
                     recyclerView.scrollToPosition(networkList.size() - 1);
-                    btnScrollBottom.setText(getString(R.string.button_scroll_to_top));
                 }
-                isAtBottom = !isAtBottom;
             }
         });
 
@@ -157,6 +149,20 @@ public class WiFiActivity extends AppCompatActivity {
                 currentQuery = newText;
                 filterNetworks(newText);
                 return true;
+            }
+        });
+
+        // Add a scroll listener to the RecyclerView
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager != null) {
+                    int lastVisiblePosition = layoutManager.findLastCompletelyVisibleItemPosition();
+                    isAtBottom = lastVisiblePosition == networkList.size() - 1;
+                    updateScrollButton();
+                }
             }
         });
     }
@@ -419,5 +425,13 @@ public class WiFiActivity extends AppCompatActivity {
             return "\"\"";
         }
         return "\"" + value.replace("\"", "\"\"") + "\"";
+    }
+
+    private void updateScrollButton() {
+        if (isAtBottom) {
+            btnScroll.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_up, 0, 0, 0);
+        } else {
+            btnScroll.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_down, 0, 0, 0);
+        }
     }
 }

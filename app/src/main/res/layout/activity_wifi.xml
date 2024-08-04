@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -45,7 +44,7 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <Button
             android:id="@+id/btn_export_csv"
@@ -55,10 +54,16 @@
             android:text="@string/button_export_csv" />
 
         <Button
-            android:id="@+id/btn_scroll_bottom"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_scroll"
+            android:layout_width="56dp"
             android:layout_height="wrap_content"
-            android:text="@string/button_scroll_to_bottom" />
+            android:drawableLeft="@drawable/arrow_down"
+            android:drawablePadding="8dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="" />
 
     </LinearLayout>
 
