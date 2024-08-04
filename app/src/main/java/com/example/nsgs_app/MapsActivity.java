@@ -51,7 +51,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Map<LatLng, Marker> currentMarkers = new HashMap<>();
     private Handler handler;
     private Runnable refreshRunnable;
-    private static final int REFRESH_INTERVAL = 10000; // 10 seconds
+    private static final int REFRESH_INTERVAL = 3; // 10 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +176,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void fetchNetworkList() {
         NetworkManager networkManager = NetworkManager.getInstance(this);
         String networksUrl = "http://217.15.171.225:5000/get_all_networks";
-        String triangulatedUrl = "http://217.15.171.225:6000/get_all_triangulated";
+        String triangulatedUrl = "http://217.15.171.225:6000/filtered_triangulated";
 
         networkManager.fetchNetworks(networksUrl, false);
         networkManager.fetchNetworks(triangulatedUrl, true);

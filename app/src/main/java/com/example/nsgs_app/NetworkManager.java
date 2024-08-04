@@ -78,7 +78,7 @@ public class NetworkManager {
                         Gson gson = new Gson();
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
                         if (isTriangulated) {
-                            List<Network> fetchedTriangulatedList = gson.fromJson(jsonObject.getJSONArray("networks_triangulated").toString(), networkListType);
+                            List<Network> fetchedTriangulatedList = gson.fromJson(jsonObject.getJSONArray("records").toString(), networkListType);
                             triangulatedList.clear();
                             triangulatedList.addAll(fetchedTriangulatedList);
                             saveTriangulatedListToPreferences();
