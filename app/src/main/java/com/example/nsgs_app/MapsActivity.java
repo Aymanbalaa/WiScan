@@ -71,16 +71,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         getSupportActionBar().setTitle("Map");
 
-        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.map), this,this);
-        switch(currentTheme) {
-            case "Warm":
-            case "Amical":
-            case "Теплый":
-                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
-
-            case "Light":
-                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
-        }
+//        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.map), this,this);
+//        switch(currentTheme) {
+//            case "Warm":
+//            case "Amical":
+//            case "Теплый":
+//                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
+//
+//            case "Light":
+//                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
+//        }
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
