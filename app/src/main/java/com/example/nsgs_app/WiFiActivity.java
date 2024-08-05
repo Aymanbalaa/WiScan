@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -40,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -78,12 +80,22 @@ public class WiFiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi);
-        ThemeSelection.themeInitializer(findViewById(R.id.wifi_activity_layout), this);
+        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.wifi_activity_layout), this,this);
 
         getSupportActionBar().setTitle("Discovered Networks");
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        switch(currentTheme) {
+            case "Warm":
+            case "Amical":
+            case "Теплый":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
+
+            case "Light":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
         }
 
         totalNetworksTextView = findViewById(R.id.totalNetworksTextView);

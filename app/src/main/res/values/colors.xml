@@ -17,5 +17,6 @@
     <color name="receiver_background">#E5E5EA</color>
     <color name="real_green">#4CAF50</color>
     <color name="red">#F44336</color>
+    <color name="warm">#E49969</color>
 
 </resources>

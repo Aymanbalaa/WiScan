@@ -3,6 +3,7 @@ package com.example.nsgs_app;
 import static com.example.nsgs_app.NetworkProviderGuesser.getNetworkProvider;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -48,13 +50,25 @@ public class StatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
-        ThemeSelection.themeInitializer(findViewById(R.id.activity_stats), this);
+        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.activity_stats), this,this);
 
         getSupportActionBar().setTitle("Statistics");
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        switch(currentTheme) {
+            case "Warm":
+            case "Amical":
+            case "Теплый":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
+
+            case "Light":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
+        }
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_stats), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

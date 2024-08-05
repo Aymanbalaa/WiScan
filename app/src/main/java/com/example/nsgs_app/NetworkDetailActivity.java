@@ -2,16 +2,21 @@
 package com.example.nsgs_app;
 
 import static com.example.nsgs_app.NetworkProviderGuesser.getNetworkProvider;
+import static com.example.nsgs_app.ThemeSelection.themeInitializer;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import java.util.Objects;
 
 public class NetworkDetailActivity extends AppCompatActivity {
     private TextView ssid, bssid, security, coordinates, postalCode, neighborhood, provider;
@@ -22,12 +27,22 @@ public class NetworkDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_detail);
-        ThemeSelection.themeInitializer(findViewById(R.id.network_details_layout), this);
+        String currentTheme = themeInitializer(findViewById(R.id.network_details_layout), this,this);
 
         getSupportActionBar().setTitle("Details");
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        switch(currentTheme) {
+            case "Warm":
+            case "Amical":
+            case "Теплый":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
+
+            case "Light":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
         }
 
         ssid = findViewById(R.id.ssid);

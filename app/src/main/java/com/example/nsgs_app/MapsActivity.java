@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -41,6 +42,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -67,7 +69,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        getSupportActionBar().setTitle("Map Activity");
+        getSupportActionBar().setTitle("Map");
+
+        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.map), this,this);
+        switch(currentTheme) {
+            case "Warm":
+            case "Amical":
+            case "Теплый":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
+
+            case "Light":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
+        }
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

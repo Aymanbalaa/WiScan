@@ -1,8 +1,11 @@
 package com.example.nsgs_app;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class HelpActivity extends AppCompatActivity {
 
@@ -24,7 +28,7 @@ public class HelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-        ThemeSelection.themeInitializer(findViewById(R.id.help_Layout), this);
+        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.help_Layout), this,this);
 
         faqListView = findViewById(R.id.faqListView);
         prepareListData();
@@ -34,6 +38,16 @@ public class HelpActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Help");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        switch(currentTheme) {
+            case "Warm":
+            case "Amical":
+            case "Теплый":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
+
+            case "Light":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
+        }
     }
 
     @Override
