@@ -10,7 +10,7 @@ public class InfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_additional_info);
-        ThemeSelection.themeInitializer(findViewById(R.id.additional_activity_layout),this);
+        ThemeSelection.themeInitializer(findViewById(R.id.additional_activity_layout),this,this);
 
         getSupportActionBar().setTitle(getString(R.string.info_activity_bar_title));
         if (getSupportActionBar() != null) {

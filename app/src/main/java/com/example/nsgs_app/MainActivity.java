@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,8 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,6 +31,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -47,9 +51,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Language.setLanguage(this, Language.getLanguage(this));
         setContentView(R.layout.activity_main);
-        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.main), this);
+        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.main), this,this);
+
 
         getSupportActionBar().setTitle(getString(R.string.home_bar_title));
+        switch(currentTheme) {
+            case "Warm":
+            case "Amical":
+            case "Теплый":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
+
+            case "Light":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
+        }
+
         isActivityRunning = true;
 
         Button wifiButton = findViewById(R.id.wifi_button);
@@ -256,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
         disclaimerDialog.show();
     }
 
-    private static void setButtonColor(String theme, Button wifiButton, Button locationButton, Button activeButton , Button infoButton) {
+    private void setButtonColor(String theme, Button wifiButton, Button locationButton, Button activeButton, Button infoButton) {
         switch (theme) {
             case "Dark":
             case "Sombre":
@@ -265,6 +280,7 @@ public class MainActivity extends AppCompatActivity {
                 locationButton.setBackgroundColor(Color.parseColor("#3C5B6F"));
                 activeButton.setBackgroundColor(Color.parseColor("#948979"));
                 infoButton.setBackgroundColor(Color.parseColor("#DFD0B8"));
+
                 break;
 
             case "Warm":
@@ -274,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
                 locationButton.setBackgroundColor(Color.parseColor("#FF6500"));
                 activeButton.setBackgroundColor(Color.parseColor("#FF8A08"));
                 infoButton.setBackgroundColor(Color.parseColor("#FFC100"));
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
                 break;
 
             default:

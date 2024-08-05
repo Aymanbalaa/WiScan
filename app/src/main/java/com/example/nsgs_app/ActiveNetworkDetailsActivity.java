@@ -17,7 +17,7 @@ public class ActiveNetworkDetailsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active_network_details);
-        ThemeSelection.themeInitializer(findViewById(R.id.active_network_details_layout),this);
+        ThemeSelection.themeInitializer(findViewById(R.id.active_network_details_layout),this,this);
 
         getSupportActionBar().setTitle(getString(R.string.network_detail_activity_bar_title));
         // Enable the Up button

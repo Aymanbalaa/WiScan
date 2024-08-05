@@ -59,7 +59,7 @@ public class SettingsDialogFragment extends DialogFragment {
         themeSpinner = view.findViewById(R.id.spinnerTheme);
         viewGroup = view.findViewById(R.id.settingsLayout);
 
-        ThemeSelection.themeInitializer(viewGroup,getActivity());
+
 
         languageSelector();
         measurementSelector();
@@ -199,7 +199,7 @@ public class SettingsDialogFragment extends DialogFragment {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("Theme", selectedTheme);
                 editor.apply();
-                ThemeSelection.themeInitializer(viewGroup, getActivity());
+                ThemeSelection.themeInitializer(viewGroup, requireActivity(),requireActivity());
 
             }
 
