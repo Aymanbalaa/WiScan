@@ -15,13 +15,28 @@
         android:textStyle="bold"
         android:paddingBottom="16dp" />
 
-    <VideoView
-        android:id="@+id/tutorialVideoView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:layout_marginBottom="16dp"
-        android:layout_gravity="center"
-        />
+        android:layout_gravity="center">
+
+        <VideoView
+            android:id="@+id/tutorialVideoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <Button
+            android:id="@+id/fullscreenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Screen"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp" />
+    </FrameLayout>
 
     <TextView
         android:layout_width="match_parent"

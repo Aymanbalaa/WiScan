@@ -1,6 +1,7 @@
 package com.example.nsgs_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ public class HelpActivity extends AppCompatActivity {
     private List<String> listDataHeader;
     private Map<String, String> listDataChild;
     private VideoView tutorialVideoView;
+    private Button fullscreenButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class HelpActivity extends AppCompatActivity {
 
         // Initialize the VideoView
         tutorialVideoView = findViewById(R.id.tutorialVideoView);
+        fullscreenButton = findViewById(R.id.fullscreenButton);
 
         // Set up the video URI and media controller
         Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test);
@@ -53,6 +57,13 @@ public class HelpActivity extends AppCompatActivity {
         tutorialVideoView.setOnErrorListener((mp, what, extra) -> {
             // Handle the error here (you can show a Toast message or log the error)
             return true; // Returning true means we handled the error
+        });
+
+        // Set up the full-screen button
+        fullscreenButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HelpActivity.this, FullscreenVideoActivity.class);
+            intent.putExtra("videoUri", videoUri);
+            startActivity(intent);
         });
 
         faqListView = findViewById(R.id.faqListView);

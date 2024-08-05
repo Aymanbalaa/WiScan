@@ -52,6 +52,8 @@
         <activity android:name=".HelpActivity" />
         <activity android:name=".ActiveActivity" />
         <activity android:name=".StatsActivity"/>
+        <activity android:name=".FullscreenVideoActivity" />
+
         <activity
             android:name=".MapsActivity"
             android:parentActivityName=".MainActivity">
