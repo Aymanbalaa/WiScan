@@ -16,10 +16,4 @@
         <item name="android:background">@color/receiver_text_color</item>
         <item name="android:textColor">@color/textColorDark</item>
     </style>
-
-    <!-- Warm Theme -->
-    <style name="Theme.Warm" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="android:background">@drawable/warm_background</item>
-        <item name="android:textColor">@color/textColorLight</item>
-    </style>
 </resources>

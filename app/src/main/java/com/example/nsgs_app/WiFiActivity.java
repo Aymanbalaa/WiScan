@@ -89,11 +89,6 @@ public class WiFiActivity extends AppCompatActivity {
         }
 
         switch(currentTheme) {
-            case "Warm":
-            case "Amical":
-            case "Теплый":
-                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
-                break;
             case "Light":
             case "Clair":
             case "Свет":

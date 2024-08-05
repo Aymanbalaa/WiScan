@@ -132,7 +132,6 @@
     <string name="theme_text_view">Thème</string>
     <string name="light_theme">Clair</string>
     <string name="dark_theme">Sombre</string>
-    <string name="warm_theme">Chaud</string>
     <string name="theme_selection">Sélection du thème</string>
     <string name="unknown_values">Valeurs inconnues</string>
     <string name="Statistics">Statistiques</string>

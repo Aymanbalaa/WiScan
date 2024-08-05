@@ -177,14 +177,12 @@
     <string name="theme_text_view">Theme</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
-    <string name="warm_theme">Warm</string>
     <string name="theme_selection">Theme Selection</string>
     <string name="unknown_values">" Unknown Values"</string>
 
     <string-array name="theme_array">
         <item>@string/light_theme</item>
         <item>@string/dark_theme</item>
-        <item>@string/warm_theme</item>
     </string-array>
 
 </resources>

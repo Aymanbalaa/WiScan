@@ -28,16 +28,6 @@ public class ThemeSelection {
                 }
                 break;
 
-            case "Warm":
-            case "Amical":
-            case "Теплый":
-                viewGroup.setBackgroundResource(R.drawable.warm_background);
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                if (activity.getActionBar() != null) {
-                    Objects.requireNonNull(activity.getActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(context, R.color.warm)));
-                }
-                break;
-
             case "Light":
             case "Clair":
             case "Свет":

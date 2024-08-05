@@ -137,7 +137,6 @@
     <string name="theme_text_view">Тема</string>
     <string name="light_theme">Свет</string>
     <string name="dark_theme">Темный</string>
-    <string name="warm_theme">Теплый</string>
     <string name="theme_selection">Выбор темы</string>
     <string name="unknown_values">" Неизвестные значения"</string>
     <string name="Statistics">"Статистика" </string>

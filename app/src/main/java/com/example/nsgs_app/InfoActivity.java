@@ -24,10 +24,6 @@ public class InfoActivity extends AppCompatActivity {
         }
 
         switch(currentTheme) {
-            case "Warm":
-            case "Amical":
-            case "Теплый":
-                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
 
             case "Light":
             case "Clair":

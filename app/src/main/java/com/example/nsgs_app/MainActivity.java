@@ -56,10 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(getString(R.string.home_bar_title));
         switch(currentTheme) {
-            case "Warm":
-            case "Amical":
-            case "Теплый":
-                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
 
             case "Light":
             case "Clair":
@@ -283,16 +279,6 @@ public class MainActivity extends AppCompatActivity {
                 activeButton.setBackgroundColor(Color.parseColor("#948979"));
                 infoButton.setBackgroundColor(Color.parseColor("#DFD0B8"));
 
-                break;
-
-            case "Warm":
-            case "Amical":
-            case "Теплый":
-                wifiButton.setBackgroundColor(Color.parseColor("#C40C0C"));
-                locationButton.setBackgroundColor(Color.parseColor("#FF6500"));
-                activeButton.setBackgroundColor(Color.parseColor("#FF8A08"));
-                infoButton.setBackgroundColor(Color.parseColor("#FFC100"));
-                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
                 break;
 
             default:

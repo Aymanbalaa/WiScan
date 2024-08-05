@@ -60,7 +60,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Handler handler;
     private Runnable refreshRunnable;
     private static final int REFRESH_INTERVAL = 3000; // 3 seconds
-    private double clusterRadius = 0.0005;
+    private double clusterRadius = 0.00000005;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +74,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 //        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.map), this,this);
 //        switch(currentTheme) {
-//            case "Warm":
-//            case "Amical":
-//            case "Теплый":
-//                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
 //
 //            case "Light":
 //            case "Clair":
