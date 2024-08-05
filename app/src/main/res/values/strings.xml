@@ -153,6 +153,28 @@
     <string name="disable_wps">5. Disable WPS: Wi-Fi Protected Setup (WPS) can be a security risk. Disable it if not needed.</string>
 
 
+    //Map Page
+
+    <string name="cluster_radius_menu">Set Cluster Radius</string>
+    <string name="choose_cluster">Choose Cluster Radius</string>
+
+
+    <string name="set_cluster_very_small">Cluster Radius: Very Small (0.00005)</string>
+    <string name="set_cluster_small">Cluster Radius: Small (0.0001)</string>
+    <string name="set_cluster_medium">Cluster Radius: Medium (0.0005)</string>
+    <string name="set_cluster_large">Cluster Radius: Large (0.001)</string>
+
+
+    <string name="set_cluster_very_small_confirmed">Cluster Radius: Very Small</string>
+    <string name="set_cluster_small_confirmed">Cluster Radius: Small</string>
+    <string name="set_cluster_medium_confirmed">Cluster Radius: Medium</string>
+    <string name="set_cluster_large_confirmed">Cluster Radius: Large</string>
+    <string name="ok_button_confirmed">OK</string>
+    <string name="cancel_button_confirmed">Cancel</string>
+
+
+
+
 
     //Statistics Page
 
@@ -171,6 +193,7 @@
     <string name="map_activity_bar_title">Map Activity</string>
     <string name="network_detail_activity_bar_title">Details</string>
     <string name="wifi_activity_bar_title">Discovered Networks</string>
+    <string name="activity_networks_bar_title">Active Networks</string>
 
 
     //
@@ -184,5 +207,7 @@
         <item>@string/light_theme</item>
         <item>@string/dark_theme</item>
     </string-array>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
 
 </resources>

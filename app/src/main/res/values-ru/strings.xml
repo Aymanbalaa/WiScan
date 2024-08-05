@@ -145,4 +145,19 @@
     <string name="network_provider">Сетевые провайдеры</string>
     <string name="filter_by_security">Фильтровать по безопасности</string>
     <string name="default_view">Вид по умолчанию</string>
+    <string name="activity_networks_bar_title">Активные сети</string>
+    <string name="cluster_radius_menu">Установить радиус кластера</string>
+    <string name="choose_cluster">Выберите радиус кластера</string>
+    <string name="set_cluster_very_small">Радиус кластера: Очень маленький (0.00005)</string>
+    <string name="set_cluster_small">Радиус кластера: Маленький (0.0001)</string>
+    <string name="set_cluster_medium">Радиус кластера: Средний (0.0005)</string>
+    <string name="set_cluster_large">Радиус кластера: Большой (0.001)</string>
+    <string name="ok_button">Хорошо</string>
+    <string name="cancel_button">Отмена</string>
+    <string name="set_cluster_very_small_confirmed">Радиус кластера: Очень маленький</string>
+    <string name="set_cluster_small_confirmed">Радиус кластера: Маленький</string>
+    <string name="set_cluster_medium_confirmed">Радиус кластера: Средний</string>
+    <string name="set_cluster_large_confirmed">Радиус кластера: Большой</string>
+    <string name="ok_button_confirmed">Хорошо</string>
+    <string name="cancel_button_confirmed">Отмена</string>
 </resources>
