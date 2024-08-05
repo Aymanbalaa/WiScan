@@ -56,6 +56,7 @@ public class ActiveActivity extends AppCompatActivity {
         ViewGroup view = findViewById(R.id.active_networks_layout);
         ThemeSelection.themeInitializer(view,this);
 
+        getSupportActionBar().setTitle("Active Networks");
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

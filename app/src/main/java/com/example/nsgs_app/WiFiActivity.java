@@ -80,6 +80,7 @@ public class WiFiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wifi);
         ThemeSelection.themeInitializer(findViewById(R.id.wifi_activity_layout), this);
 
+        getSupportActionBar().setTitle("Discovered Networks");
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

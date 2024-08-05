@@ -12,6 +12,7 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_additional_info);
         ThemeSelection.themeInitializer(findViewById(R.id.additional_activity_layout),this);
 
+        getSupportActionBar().setTitle("Additional Information");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
