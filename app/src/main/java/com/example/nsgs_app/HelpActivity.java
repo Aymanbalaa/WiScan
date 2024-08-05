@@ -9,11 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -27,44 +24,12 @@ public class HelpActivity extends AppCompatActivity {
     private ExpandableListView faqListView;
     private List<String> listDataHeader;
     private Map<String, String> listDataChild;
-    private VideoView tutorialVideoView;
-    private Button fullscreenButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
         String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.help_Layout), this, this);
-
-        // Initialize the VideoView
-        tutorialVideoView = findViewById(R.id.tutorialVideoView);
-        fullscreenButton = findViewById(R.id.fullscreenButton);
-
-        // Set up the video URI and media controller
-        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test);
-        tutorialVideoView.setVideoURI(videoUri);
-        MediaController mediaController = new MediaController(this);
-        tutorialVideoView.setMediaController(mediaController);
-        mediaController.setAnchorView(tutorialVideoView);
-
-        // Ensure video playback starts
-        tutorialVideoView.setOnPreparedListener(mp -> {
-            mp.setLooping(true);
-            tutorialVideoView.start();
-        });
-
-        // Handle errors
-        tutorialVideoView.setOnErrorListener((mp, what, extra) -> {
-            // Handle the error here (you can show a Toast message or log the error)
-            return true; // Returning true means we handled the error
-        });
-
-        // Set up the full-screen button
-        fullscreenButton.setOnClickListener(v -> {
-            Intent intent = new Intent(HelpActivity.this, FullscreenVideoActivity.class);
-            intent.putExtra("videoUri", videoUri);
-            startActivity(intent);
-        });
 
         faqListView = findViewById(R.id.faqListView);
         prepareListData();
@@ -93,6 +58,13 @@ public class HelpActivity extends AppCompatActivity {
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
                 break;
         }
+    }
+
+    public void openTutorialVideo(View view) {
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test);
+        Intent intent = new Intent(HelpActivity.this, FullscreenVideoActivity.class);
+        intent.putExtra("videoUri", videoUri);
+        startActivity(intent);
     }
 
     @Override
