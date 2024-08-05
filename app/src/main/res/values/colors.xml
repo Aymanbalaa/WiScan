@@ -15,12 +15,14 @@
     <color name="receiver_text_color">#000000</color>
     <color name="sender_background">#007AFF</color>
     <color name="receiver_background">#E5E5EA</color>
+    <color name="tutorial_background">#9595CF</color>
     <color name="real_green">#4CAF50</color>
     <color name="red">#F44336</color>
     <color name="warm">#E49969</color>
-
     <color name="textColorLight">#000000</color>
     <color name="textColorDark">#FFFFFF</color>
     <color name="activeNetworkTextColor">#000000</color>
+
+    <color name="tutorial_button_color">#9595cf</color>
 
 </resources>
