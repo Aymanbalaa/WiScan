@@ -93,11 +93,10 @@ public class WiFiActivity extends AppCompatActivity {
             case "Amical":
             case "Теплый":
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
-
+                break;
             case "Light":
-            case "Clair":
-            case "Свет":
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
+                break;
         }
 
         totalNetworksTextView = findViewById(R.id.totalNetworksTextView);
@@ -144,7 +143,7 @@ public class WiFiActivity extends AppCompatActivity {
                 if (isAtBottom) {
                     recyclerView.scrollToPosition(0);
                 } else {
-                    recyclerView.scrollToPosition(networkList.size() - 1);
+                    recyclerView.scrollToPosition(filteredNetworkList.size() - 1); // Use filtered list size
                 }
             }
         });
@@ -175,7 +174,7 @@ public class WiFiActivity extends AppCompatActivity {
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager != null) {
                     int lastVisiblePosition = layoutManager.findLastCompletelyVisibleItemPosition();
-                    isAtBottom = lastVisiblePosition == networkList.size() - 1;
+                    isAtBottom = lastVisiblePosition == filteredNetworkList.size() - 1; // Use filtered list size
                     updateScrollButton();
                 }
             }
