@@ -113,6 +113,12 @@
     <string name="a_5ghz_description">5GHz — это другой частотный диапазон, используемый Wi-Fi сетями. Он обеспечивает более высокие скорости и меньшее количество помех по сравнению с диапазоном 2,4GHz, но имеет меньший радиус действия.</string>
 
     <string name="pie_chart_1">Круговая диаграмма протоколов</string>
+    <string name="home_bar_title">Главное меню</string>
+    <string name="stats_bar_title">Статистика</string>
+    <string name="info_activity_bar_title">Дополнительная информация</string>
+    <string name="map_activity_bar_title">Карта</string>
+    <string name="network_detail_activity_bar_title">Подробности</string>
+    <string name="wifi_activity_bar_title">Обнаруженные сети</string>
     <string name="theme_text_view">Тема</string>
     <string name="light_theme">Свет</string>
     <string name="dark_theme">Темный</string>
@@ -123,4 +129,6 @@
     <string name="pie_chart_2">Круговая диаграмма поставщиков</string>
     <string name="security_protocol">Протоколы безопасности</string>
     <string name="network_provider">Сетевые провайдеры</string>
+    <string name="filter_by_security">Фильтровать по безопасности</string>
+    <string name="default_view">Вид по умолчанию</string>
 </resources>

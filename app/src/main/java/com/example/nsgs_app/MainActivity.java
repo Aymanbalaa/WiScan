@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.main), this);
 
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle(getString(R.string.home_bar_title));
         isActivityRunning = true;
 
         Button wifiButton = findViewById(R.id.wifi_button);

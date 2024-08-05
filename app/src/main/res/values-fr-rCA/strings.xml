@@ -116,6 +116,12 @@
 
     <string name="pie_chart_1">Diagramme circulaire des protocoles</string>
     <string name="pie_chart_2">Diagramme circulaire des fournisseurs</string>
+    <string name="home_bar_title">Menu Principal</string>
+    <string name="stats_bar_title">Statistiques</string>
+    <string name="info_activity_bar_title">Informations supplémentaires</string>
+    <string name="map_activity_bar_title">Map</string>
+    <string name="network_detail_activity_bar_title">Détails</string>
+    <string name="wifi_activity_bar_title">Réseaux découverts</string>
     <string name="theme_text_view">Thème</string>
     <string name="light_theme">Blanc</string>
     <string name="dark_theme">Sombre</string>
@@ -125,4 +131,6 @@
     <string name="Statistics">"Statistiques" </string>
     <string name="security_protocol">Protocole de sécurité</string>
     <string name="network_provider">Fournisseurs de réseau</string>
+    <string name="filter_by_security">Filtrer par sécurité</string>
+    <string name="default_view">Vue par défaut</string>
 </resources>

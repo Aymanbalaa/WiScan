@@ -51,6 +51,8 @@
     <string name="activeActivity">Active Networks List</string>
     <string name="button_export_csv">Export to CSV</string>
     <string name="search_hint">Search for SSID</string>
+    <string name="filter_by_security">Filter by Security</string>
+    <string name="default_view">Default View</string>
 
 
     // FAQ QUESTIONS
@@ -145,6 +147,16 @@
     <string name="pie_chart_2" >Providers Chart</string>
     <string name="security_protocol">Security Protocols</string>
     <string name="network_provider">Network Providers"</string>
+
+
+    //Action Bar Titles
+
+    <string name="home_bar_title">Home</string>
+    <string name="stats_bar_title">Statistics</string>
+    <string name="info_activity_bar_title">Additional Information</string>
+    <string name="map_activity_bar_title">Map Activity</string>
+    <string name="network_detail_activity_bar_title">Details</string>
+    <string name="wifi_activity_bar_title">Discovered Networks</string>
 
 
     //

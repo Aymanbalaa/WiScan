@@ -16,7 +16,7 @@
 
             <item
                 android:id="@+id/action_filter_submenu"
-                android:title="Filter by Security">
+                android:title="@string/filter_by_security">
 
                  <menu>
                 <!-- Dynamic filter options will be added here -->
@@ -26,7 +26,7 @@
 
             <item
                 android:id="@+id/action_default_view"
-                android:title="Default View"/>
+                android:title="@string/default_view"/>
         </menu>
 
 
