@@ -2,21 +2,16 @@ package com.example.nsgs_app;
 
 import static com.example.nsgs_app.NetworkProviderGuesser.getNetworkProvider;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -29,7 +24,6 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,15 +34,13 @@ import java.util.stream.Collectors;
 public class StatsActivity extends AppCompatActivity {
 
     private List<Network> networkList;
-    private PieChart pieChartNetworksDistribution;
+    private PieChart pieChartProtocols;
+    private PieChart pieChartProviders;
     private TextView textViewToRightOfPieTitle;
     private TextView textViewBelowPieTitle;
     private String neighborhood;
-    //    private Button buttonSaveChart;
     private Button buttonPieChart1;
     private Button buttonPieChart2;
-    private static final int PERMISSION_REQUEST_CODE = 1;
-
     public Set<String> protocols;
 
     @SuppressLint("MissingInflatedId")
@@ -69,17 +61,17 @@ public class StatsActivity extends AppCompatActivity {
             return insets;
         });
 
-        pieChartNetworksDistribution = findViewById(R.id.pie_chart_networks_distribution);
+        pieChartProtocols = findViewById(R.id.pie_chart_protocols);
+        pieChartProviders = findViewById(R.id.pie_chart_providers);
         textViewToRightOfPieTitle = findViewById(R.id.text_right_of_title);
         textViewBelowPieTitle = findViewById(R.id.text_below_title);
-//        buttonSaveChart = findViewById(R.id.save_chart_button);
         buttonPieChart1 = findViewById(R.id.button_pie_chart_1);
         buttonPieChart2 = findViewById(R.id.button_pie_chart_2);
 
         // Fetching network list from NetworkManager
         NetworkManager networkManager = NetworkManager.getInstance(this);
         networkManager.fetchNetworks("http://217.15.171.225:5000/get_all_networks", false);
-        networkList = networkManager.getNetworkList();
+        networkList = new ArrayList<>(networkManager.getNetworkList()); // Ensure a local copy of the list
 
         protocols = getUniqueSecurityProtocols(networkList);
 
@@ -94,29 +86,24 @@ public class StatsActivity extends AppCompatActivity {
         textViewBelowPieTitle.setText("Total Networks: " + networkList.size());
 
         if (networkList != null && protocols != null) {
-            setUpPieChart();
-            loadPieChartData1();
+            setUpPieChart(pieChartProtocols, "Security Protocols");
+            setUpPieChart(pieChartProviders, "Network Providers");
+            loadPieChartDataProtocols();
+            loadPieChartDataProviders();
+            pieChartProtocols.setVisibility(View.VISIBLE);
         } else {
             Log.e("StatsActivity", "Network list or Protocols set is null");
         }
 
         buttonPieChart1.setOnClickListener(v -> {
-            pieChartNetworksDistribution.clear();
-            loadPieChartData1();
+            pieChartProtocols.setVisibility(View.VISIBLE);
+            pieChartProviders.setVisibility(View.GONE);
         });
 
         buttonPieChart2.setOnClickListener(v -> {
-            pieChartNetworksDistribution.clear();
-            loadPieChartData2();
+            pieChartProtocols.setVisibility(View.GONE);
+            pieChartProviders.setVisibility(View.VISIBLE);
         });
-//
-//        buttonSaveChart.setOnClickListener(v -> {
-//            if (ContextCompat.checkSelfPermission(StatsActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                ActivityCompat.requestPermissions(StatsActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-//            } else {
-//                saveChart(pieChartNetworksDistribution, "networks_chart", "Download");
-//            }
-//        });
     }
 
     @Override
@@ -128,18 +115,18 @@ public class StatsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setUpPieChart() {
-        pieChartNetworksDistribution.setUsePercentValues(true);
-        pieChartNetworksDistribution.setCenterText("Security Protocols");
-        pieChartNetworksDistribution.getDescription().setEnabled(false);
-        pieChartNetworksDistribution.setEntryLabelTextSize(12f);
-        pieChartNetworksDistribution.setCenterTextSize(22f);
-        pieChartNetworksDistribution.setDrawEntryLabels(false);
-        pieChartNetworksDistribution.setHoleRadius(45f);
-        pieChartNetworksDistribution.setTransparentCircleRadius(40f);
-        pieChartNetworksDistribution.setExtraOffsets(25, 10, 10, 5);
+    private void setUpPieChart(PieChart pieChart, String centerText) {
+        pieChart.setUsePercentValues(true);
+        pieChart.setCenterText(centerText);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setEntryLabelTextSize(12f);
+        pieChart.setCenterTextSize(22f);
+        pieChart.setDrawEntryLabels(false);
+        pieChart.setHoleRadius(45f);
+        pieChart.setTransparentCircleRadius(40f);
+        pieChart.setExtraOffsets(25, 10, 10, 5);
 
-        Legend legend = pieChartNetworksDistribution.getLegend();
+        Legend legend = pieChart.getLegend();
         legend.setEnabled(true);
         legend.setTextSize(14f);
         legend.setFormSize(14f);
@@ -152,9 +139,9 @@ public class StatsActivity extends AppCompatActivity {
         legend.setYEntrySpace(15f); // Increased vertical space to avoid overlapping
     }
 
-    private void loadPieChartData1() {
-        pieChartNetworksDistribution.setCenterText("Security Protocols");
-        ArrayList<PieEntry> pieEntriesNetworkDistribution = new ArrayList<>();
+    private void loadPieChartDataProtocols() {
+        pieChartProtocols.setCenterText("Security Protocols");
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
         List<String> customLegendEntries = new ArrayList<>();
 
         for (String protocol : protocols) {
@@ -162,31 +149,31 @@ public class StatsActivity extends AppCompatActivity {
                     .filter(network -> network.getSecurity().equalsIgnoreCase(protocol))
                     .collect(Collectors.toList());
 
-            pieEntriesNetworkDistribution.add(new PieEntry(((float) filteredNetworkList.size() / networkList.size()) * 100, protocol));
+            pieEntries.add(new PieEntry(((float) filteredNetworkList.size() / networkList.size()) * 100, protocol));
             customLegendEntries.add(protocol + " (" + String.format("%.1f", ((float) filteredNetworkList.size() / networkList.size()) * 100) + "%)");
         }
 
-        PieDataSet pieDataSetChartNetworkDistribution = new PieDataSet(pieEntriesNetworkDistribution, "");
-        pieDataSetChartNetworkDistribution.setColors(getColorList(customLegendEntries.size()));
+        PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+        pieDataSet.setColors(getColorList(customLegendEntries.size()));
 
-        if (customLegendEntries.size() == pieEntriesNetworkDistribution.size()) {
-            pieChartNetworksDistribution.setData(new PieData(pieDataSetChartNetworkDistribution));
-            pieDataSetChartNetworkDistribution.setValueTextSize(0f); // Hides the values
+        if (customLegendEntries.size() == pieEntries.size()) {
+            pieChartProtocols.setData(new PieData(pieDataSet));
+            pieDataSet.setValueTextSize(0f); // Hides the values
 
-            pieChartNetworksDistribution.animateXY(2000, 2000); // Faster animation
-            setCustomLegendEntries(customLegendEntries);
-            pieChartNetworksDistribution.invalidate();
+            pieChartProtocols.animateXY(2000, 2000); // Faster animation
+            setCustomLegendEntries(pieChartProtocols, customLegendEntries);
+            pieChartProtocols.invalidate();
 
             // Request layout pass to fix legend overlap
-            pieChartNetworksDistribution.requestLayout();
+            pieChartProtocols.requestLayout();
         } else {
             Log.e("StatsActivity", "Mismatch between legend entries and pie chart data entries.");
         }
     }
 
-    private void loadPieChartData2() {
-        pieChartNetworksDistribution.setCenterText("Network Providers");
-        ArrayList<PieEntry> pieEntriesNetworkDistribution = new ArrayList<>();
+    private void loadPieChartDataProviders() {
+        pieChartProviders.setCenterText("Network Providers");
+        ArrayList<PieEntry> pieEntries = new ArrayList<>();
         List<String> customLegendEntries = new ArrayList<>();
 
         Set<String> providers = getUniqueProviders(networkList);
@@ -195,31 +182,30 @@ public class StatsActivity extends AppCompatActivity {
                     .filter(network -> getNetworkProvider(network.getSsid()).equalsIgnoreCase(provider))
                     .collect(Collectors.toList());
 
-            pieEntriesNetworkDistribution.add(new PieEntry(((float) filteredNetworkList.size() / networkList.size()) * 100, provider));
+            pieEntries.add(new PieEntry(((float) filteredNetworkList.size() / networkList.size()) * 100, provider));
             customLegendEntries.add(provider + " (" + String.format("%.1f", ((float) filteredNetworkList.size() / networkList.size()) * 100) + "%)");
         }
 
-        PieDataSet pieDataSetChartNetworkDistribution = new PieDataSet(pieEntriesNetworkDistribution, "");
-        pieDataSetChartNetworkDistribution.setColors(getColorList(customLegendEntries.size()));
+        PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+        pieDataSet.setColors(getColorList(customLegendEntries.size()));
 
-        if (customLegendEntries.size() == pieEntriesNetworkDistribution.size()) {
-            pieChartNetworksDistribution.setData(new PieData(pieDataSetChartNetworkDistribution));
-            pieDataSetChartNetworkDistribution.setValueTextSize(0f); // Hides the values
+        if (customLegendEntries.size() == pieEntries.size()) {
+            pieChartProviders.setData(new PieData(pieDataSet));
+            pieDataSet.setValueTextSize(0f); // Hides the values
 
-            pieChartNetworksDistribution.animateXY(2000, 2000); // Faster animation
-            setCustomLegendEntries(customLegendEntries);
-            pieChartNetworksDistribution.invalidate();
+            pieChartProviders.animateXY(2000, 2000); // Faster animation
+            setCustomLegendEntries(pieChartProviders, customLegendEntries);
+            pieChartProviders.invalidate();
 
             // Request layout pass to fix legend overlap
-            pieChartNetworksDistribution.requestLayout();
+            pieChartProviders.requestLayout();
         } else {
             Log.e("StatsActivity", "Mismatch between legend entries and pie chart data entries.");
         }
     }
 
-
-    private void setCustomLegendEntries(List<String> customLegendEntries) {
-        Legend legend = pieChartNetworksDistribution.getLegend();
+    private void setCustomLegendEntries(PieChart pieChart, List<String> customLegendEntries) {
+        Legend legend = pieChart.getLegend();
         legend.setCustom(createLegendEntries(customLegendEntries));
         legend.setWordWrapEnabled(true);
         legend.setXEntrySpace(10f);
@@ -268,30 +254,4 @@ public class StatsActivity extends AppCompatActivity {
         }
         return providers;
     }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == PERMISSION_REQUEST_CODE) {
-//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                saveChart(pieChartNetworksDistribution, "networks_chart", "Download");
-//            } else {
-//                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-
-//    private void saveChart(PieChart pieChart, String fileName, String folderName) {
-//        String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + folderName;
-//        File dir = new File(filePath);
-//        if (!dir.exists()) {
-//            dir.mkdirs();
-//        }
-//        File file = new File(dir, fileName + ".png");
-//        if (pieChart.saveToPath(file.getName(), file.getParent())) {
-//            Toast.makeText(this, "Chart saved to " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
-//        } else {
-//            Toast.makeText(this, "Failed to save chart", Toast.LENGTH_LONG).show();
-//        }
-//    }
 }

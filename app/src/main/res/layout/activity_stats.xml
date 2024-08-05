@@ -6,25 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StatsActivity">
+    tools:context=".StatsActivity"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:paddingBottom="16dp">
 
         <Button
             android:id="@+id/button_pie_chart_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pie Chart 1" />
+            android:text="Pie Chart 1"
+            android:layout_marginEnd="8dp"/>
 
         <Button
             android:id="@+id/button_pie_chart_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pie Chart 2" />
+            android:text="Pie Chart 2"
+            android:layout_marginStart="8dp"/>
     </LinearLayout>
 
     <TextView
@@ -34,7 +38,8 @@
         android:text="Neighborhood"
         android:textSize="18sp"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="16dp"/>
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"/>
 
     <TextView
         android:id="@+id/text_below_title"
@@ -43,21 +48,22 @@
         android:text="Total Networks: 0"
         android:textSize="18sp"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="8dp"/>
+        android:paddingBottom="16dp"/>
 
     <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pie_chart_networks_distribution"
+        android:id="@+id/pie_chart_protocols"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:visibility="gone" />
 
-<!--    <Button-->
-<!--        android:id="@+id/save_chart_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Save Chart"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:padding="16dp" />-->
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pie_chart_providers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:visibility="gone" />
 
 </LinearLayout>
