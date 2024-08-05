@@ -43,7 +43,7 @@ public class StatsActivity extends AppCompatActivity {
     private Button buttonPieChart2;
     public Set<String> protocols;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "StringFormatMatches"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +83,7 @@ public class StatsActivity extends AppCompatActivity {
         }
 
         textViewToRightOfPieTitle.setText(neighborhood);
-        textViewBelowPieTitle.setText("Total Networks: " + networkList.size());
+        textViewBelowPieTitle.setText(getString(R.string.total_networks_label, networkList.size()));
 
         if (networkList != null && protocols != null) {
             setUpPieChart(pieChartProtocols, "Security Protocols");
@@ -140,7 +140,7 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private void loadPieChartDataProtocols() {
-        pieChartProtocols.setCenterText("Security Protocols");
+        pieChartProtocols.setCenterText(getString(R.string.security_protocol));
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
         List<String> customLegendEntries = new ArrayList<>();
 
@@ -172,7 +172,7 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private void loadPieChartDataProviders() {
-        pieChartProviders.setCenterText("Network Providers");
+        pieChartProviders.setCenterText(getString(R.string.network_provider));
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
         List<String> customLegendEntries = new ArrayList<>();
 

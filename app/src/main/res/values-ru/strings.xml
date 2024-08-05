@@ -112,6 +112,8 @@
     <string name="a_4ghz_description">4GHz относится к частотному диапазону, используемому некоторыми Wi-Fi сетями. Он часто используется из-за своей совместимости с широким спектром устройств, хотя он подвержен помехам.</string>
     <string name="a_5ghz_description">5GHz — это другой частотный диапазон, используемый Wi-Fi сетями. Он обеспечивает более высокие скорости и меньшее количество помех по сравнению с диапазоном 2,4GHz, но имеет меньший радиус действия.</string>
 
+    <string name="pie_chart_1">Круговая диаграмма 1</string>
+    <string name="pie_chart_2">Круговая диаграмма 2</string>
     <string name="theme_text_view">Тема</string>
     <string name="light_theme">Свет</string>
     <string name="dark_theme">Темный</string>
@@ -119,4 +121,6 @@
     <string name="theme_selection">Выбор темы</string>
     <string name="unknown_values">" Неизвестные значения"</string>
     <string name="Statistics">"Статистика" </string>
+    <string name="security_protocol">Протоколы безопасности</string>
+    <string name="network_provider">Сетевые провайдеры</string>
 </resources>
