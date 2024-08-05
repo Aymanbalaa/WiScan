@@ -17,7 +17,7 @@
 
     <string name="change_language">Modifier la langue</string>
     <string name="disclaimer_title">Avertissement</string>
-    <string name="disclaimer_text">L application WiScan est conçue uniquement dans le but de capturer des données WiFi locales BSSID SSID protocoles de sécurité et données de localisation correspondantes de nettoyer les données d afficher les progrès pour l utilisateur et d envoyer les données pour des visualisations avancées telles que des graphiques et des cartes L application permet la configuration via des contrôles utilisateur tels que la fréquence et le rayon de scan WiFi\n\nAvis Important \n\n- L application WiScan doit être utilisée exclusivement à des fins prévues comme décrit ci-dessus\n\n- Il est interdit aux utilisateurs d utiliser l application pour toute activité malveillante y compris mais sans s y limiter l accès non autorisé l interférence avec la sécurité du réseau ou la violation de la confidentialité\n\n- En utilisant l application WiScan vous acceptez de respecter toutes les lois et réglementations applicables concernant la collecte de données et la confidentialité\n\n- Les développeurs de WiScan ne sont pas responsables de toute mauvaise utilisation de l application</string>
+    <string name="disclaimer_text">L\'application WiScan est conçue uniquement dans le but de capturer des données WiFi locales BSSID SSID protocoles de sécurité et données de localisation correspondantes de nettoyer les données d afficher les progrès pour l\'utilisateur et d\'envoyer les données pour des visualisations avancées telles que des graphiques et des cartes. L\'application permet la configuration via des contrôles utilisateur tels que la fréquence et le rayon de scan WiFi.\n\nAvis Important: \n\n- L\'application WiScan doit être utilisée exclusivement à des fins prévues comme décrit ci-dessus.\n\n- Il est interdit aux utilisateurs d\'utiliser l\'application pour toute activité malveillante y compris mais sans s y limiter l\'accès non autorisé l\'interférence avec la sécurité du réseau ou la violation de la confidentialité.\n\n- En utilisant l\'application WiScan vous acceptez de respecter toutes les lois et réglementations applicables concernant la collecte de données et la confidentialité.\n\n- Les développeurs de WiScan ne sont pas responsables de toute mauvaise utilisation de l\'application.</string>
     <string name="accept">Accepter</string>
     <string name="decline">Refuser</string>
     <string name="provider_label">Fournisseur: %1$s</string>
@@ -63,16 +63,16 @@
     <string name="db_text_view">Intervalle d actualisation de la base de données</string>
 
     <!-- FAQ Questions -->
-    <string name="faq_what_is_nsgs">Qu est-ce que l application WiScan</string>
+    <string name="faq_what_is_nsgs">Qu est-ce que l\'application WiScan</string>
     <string name="faq_start_wifi_scan">Comment puis-je voir un scan WiFi</string>
     <string name="faq_configure_wifi_settings">Comment configurer les paramètres de scan WiFi</string>
     <string name="faq_view_scanned_data">Où puis-je voir les données scannées du WiFi</string>
 
     <!-- FAQ Answers -->
-    <string name="answer_what_is_nsgs">L application WiScan (Oui Scan) est conçue pour capturer les données locales WiFi les nettoyer afficher la progression à l utilisateur et envoyer les données pour des visualisations avancées telles que des graphiques et des cartes</string>
-    <string name="answer_start_wifi_scan">Pour voir les réseaux scannés allez dans la section Liste des réseaux scannés et appuyez sur le bouton L application commencera à récupérer les données depuis le cloud pour les afficher dans cette liste</string>
-    <string name="answer_configure_wifi_settings">Vous pouvez configurer les paramètres de scan WiFi en allant à la page principale et en cliquant sur les trois points en haut à droite de l en-tête Ici vous pouvez ajuster la fréquence de scan les unités de température et la langue selon vos besoins Assurez-vous que votre Pi est allumé et connecté à un point d accès Vous devriez voir un retour d état sur l écran LCD du Pi Assurez-vous que le capteur GPS n est pas trop proche du Pi lors du premier démarrage ou du redémarrage du Pi</string>
-    <string name="answer_view_scanned_data">Les données scannées du WiFi sont affichées dans la section Liste des réseaux scannés Cette section fournit une vue détaillée des réseaux capturés pendant le scan y compris leurs BSSID SSID et protocoles de sécurité</string>
+    <string name="answer_what_is_nsgs">L\'application WiScan (Oui Scan) est conçue pour capturer les données locales WiFi les nettoyer afficher la progression à l\'utilisateur et envoyer les données pour des visualisations avancées telles que des graphiques et des cartes</string>
+    <string name="answer_start_wifi_scan">Pour voir les réseaux scannés allez dans la section Liste des réseaux scannés et appuyez sur le bouton. L\'application commencera à récupérer les données depuis le cloud pour les afficher dans cette liste</string>
+    <string name="answer_configure_wifi_settings">Vous pouvez configurer les paramètres de scan WiFi en allant à la page principale et en cliquant sur les trois points en haut à droite de l\'en-tête. Ici vous pouvez ajuster la fréquence de scan les unités de température et la langue selon vos besoins. Assurez-vous que votre Pi est allumé et connecté à un point d\'accès. Vous devriez voir un retour d\'état sur l\'écran LCD du Pi. Assurez-vous que le capteur GPS n\'est pas trop proche du Pi lors du premier démarrage ou du redémarrage du Pi.</string>
+    <string name="answer_view_scanned_data">Les données scannées du WiFi sont affichées dans la section. Liste des réseaux scannés Cette section fournit une vue détaillée des réseaux capturés pendant le scan y compris leurs BSSID SSID et protocoles de sécurité.</string>
 
     <string name="help_title">Aide</string>
     <string name="multiple_networks">Plusieurs réseaux</string>
@@ -87,7 +87,7 @@
     <string name="shutdown_command">Commande d arrêt</string>
     <string name="is_currently_inactive_you_can_safely_click_the_button">est actuellement inactif Vous pouvez cliquer sur le bouton en toute sécurité</string>
     <string name="in_progress">en cours</string>
-    <string name="acknowledged_by_device_and_is_in_progress">reconnu par l appareil et est en cours</string>
+    <string name="acknowledged_by_device_and_is_in_progress">reconnu par l\'appareil et est en cours</string>
     <string name="timed_out">a expiré</string>
     <string name="state">état</string>
     <string name="unknown">Inconnu</string>
@@ -102,24 +102,24 @@
     <string name="a_5GHZ">5GHz</string>
     <string name="type">Type</string>
     <string name="description">Description</string>
-    <string name="wpa2_description">Wi-Fi Protected Access II (WPA2) est une technologie de sécurité réseau couramment utilisée sur les réseaux sans fil Wi-Fi C est une amélioration par rapport à WPA et offre une meilleure protection des données et un meilleur contrôle d accès réseau</string>
-    <string name="wpa3_description">Wi-Fi Protected Access III (WPA3) est la dernière génération de sécurité Wi-Fi offrant une authentification plus robuste et une meilleure force cryptographique</string>
-    <string name="wep_description">Wired Equivalent Privacy (WEP) est un protocole de sécurité pour les réseaux sans fil qui offre une confidentialité des données comparable à un réseau câblé traditionnel Cependant il est considéré comme le moins sécurisé en raison de diverses vulnérabilités</string>
-    <string name="a_4ghz_description">4GHz fait référence à la bande de fréquence utilisée par certains réseaux Wi-Fi Elle est couramment utilisée en raison de sa compatibilité avec un large éventail d appareils bien qu elle soit susceptible aux interférences</string>
-    <string name="a_5ghz_description">5GHz est une autre bande de fréquence utilisée par les réseaux Wi-Fi Elle offre des vitesses plus rapides et moins d interférences par rapport à la bande de 2 4GHz mais a une portée plus courte</string>
+    <string name="wpa2_description">Wi-Fi Protected Access II (WPA2) est une technologie de sécurité réseau couramment utilisée sur les réseaux sans fil Wi-Fi C\'est une amélioration par rapport à WPA et offre une meilleure protection des données et un meilleur contrôle d\'accès réseau.</string>
+    <string name="wpa3_description">Wi-Fi Protected Access III (WPA3) est la dernière génération de sécurité Wi-Fi offrant une authentification plus robuste et une meilleure force cryptographique.</string>
+    <string name="wep_description">Wired Equivalent Privacy (WEP) est un protocole de sécurité pour les réseaux sans fil qui offre une confidentialité des données comparable à un réseau câblé traditionnel Cependant il est considéré comme le moins sécurisé en raison de diverses vulnérabilités.</string>
+    <string name="a_4ghz_description">4GHz fait référence à la bande de fréquence utilisée par certains réseaux Wi-Fi Elle est couramment utilisée en raison de sa compatibilité avec un large éventail d\'appareils bien qu elle soit susceptible aux interférences.</string>
+    <string name="a_5ghz_description">5GHz est une autre bande de fréquence utilisée par les réseaux Wi-Fi Elle offre des vitesses plus rapides et moins d interférences par rapport à la bande de 2.4GHz mais a une portée plus courte.</string>
     <string name="common_vulnerabilities_and_attacks">Vulnérabilités et Attaques Courantes</string>
     <string name="wep_vulnerabilities">Vulnérabilités WEP</string>
-    <string name="wep_vulnerabilities_description">WEP est vulnérable à plusieurs attaques en raison de l utilisation de clés statiques et de vecteurs d initialisation faibles Les attaques courantes incluent l attaque FMS qui exploite ces faiblesses pour craquer rapidement les clés WEP</string>
+    <string name="wep_vulnerabilities_description">WEP est vulnérable à plusieurs attaques en raison de l\'utilisation de clés statiques et de vecteurs d initialisation faibles Les attaques courantes incluent l attaque FMS qui exploite ces faiblesses pour craquer rapidement les clés WEP</string>
     <string name="wpa_wpa2_attacks">Attaques WPA WPA2</string>
-    <string name="wpa_wpa2_attacks_description">WPA et WPA2 sont susceptibles aux attaques par force brute si des mots de passe faibles sont utilisés De plus l attaque KRACK (Key Reinstallation Attack) découverte en 2017 exploite une vulnérabilité dans le processus de poignée de main WPA2 permettant aux attaquants d intercepter et de déchiffrer les données</string>
+    <string name="wpa_wpa2_attacks_description">WPA et WPA2 sont susceptibles aux attaques par force brute si des mots de passe faibles sont utilisés. De plus l\'attaque KRACK (Key Reinstallation Attack) découverte en 2017 exploite une vulnérabilité dans le processus de poignée de main WPA2 permettant aux attaquants d\'intercepter et de déchiffrer les données.</string>
     <string name="wpa3_security_enhancements">Améliorations de la Sécurité WPA3</string>
-    <string name="wpa3_security_enhancements_description">WPA3 corrige de nombreuses vulnérabilités présentes dans WPA2 La poignée de main SAE (Simultaneous Authentication of Equals) dans WPA3 offre une protection contre les attaques par dictionnaire hors ligne et l utilisation du cryptage des données individualisées améliore la sécurité dans les réseaux publics</string>
+    <string name="wpa3_security_enhancements_description">WPA3 corrige de nombreuses vulnérabilités présentes dans WPA2. La poignée de main SAE (Simultaneous Authentication of Equals) dans WPA3 offre une protection contre les attaques par dictionnaire hors ligne et l utilisation du cryptage des données individualisées améliore la sécurité dans les réseaux publics.</string>
     <string name="network_security_best_practices">Meilleures Pratiques de Sécurité Réseau</string>
     <string name="use_strong_passwords">1 Utiliser des Mots de Passe Forts Assurez-vous que votre réseau Wi-Fi utilise un mot de passe fort et unique pour empêcher tout accès non autorisé</string>
     <string name="enable_encryption">2 Activer le Cryptage Activez toujours le cryptage WPA3 ou WPA2 sur votre routeur pour une sécurité renforcée</string>
     <string name="update_firmware">3 Mettre à Jour le Firmware Mettez régulièrement à jour le firmware de votre routeur pour corriger les vulnérabilités de sécurité et améliorer les performances</string>
     <string name="use_firewalls">4 Utiliser des Pare-feux Activez le pare-feu sur votre routeur pour protéger votre réseau contre les menaces externes</string>
-    <string name="disable_wps">5 Désactiver le WPS Le Wi-Fi Protected Setup (WPS) peut représenter un risque de sécurité Désactivez-le si ce n est pas nécessaire</string>
+    <string name="disable_wps">5 Désactiver le WPS Le Wi-Fi Protected Setup (WPS) peut représenter un risque de sécurité Désactivez-le si ce n\'est pas nécessaire.</string>
 
     <string name="pie_chart_1">Diagramme circulaire des protocoles</string>
     <string name="pie_chart_2">Diagramme circulaire des fournisseurs</string>
