@@ -6,7 +6,7 @@
     android:padding="16dp"
     android:layout_margin="8dp"
     android:elevation="2dp"
-    android:background="@drawable/item_background">
+    android:background="@drawable/gray_border">
     <!-- NOT USING STRINGS.XML BECAUSE THESE ARE PLACEHOLDERS/NEVER DISPLAYED-->
     <!-- @TODO replace with strings.xml -->
     <TextView
@@ -16,8 +16,7 @@
         android:text="SSID"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:paddingBottom="4dp"
-        android:textColor="@android:color/black" />
+        android:paddingBottom="4dp" />
 
     <TextView
         android:id="@+id/security"
@@ -25,6 +24,5 @@
         android:layout_height="wrap_content"
         android:text="Security"
         android:textSize="14sp"
-        android:paddingBottom="4dp"
-        android:textColor="@android:color/darker_gray" />
+        android:paddingBottom="4dp" />
 </LinearLayout>
