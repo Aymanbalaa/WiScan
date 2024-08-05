@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:id ="@+id/additional_activity_layout">
-
+    android:id="@+id/additional_activity_layout">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="ExtraText">
 
         <TextView
             android:id="@+id/types_of_security_title"
@@ -111,6 +112,112 @@
             </TableRow>
 
         </TableLayout>
+
+        <TextView
+            android:id="@+id/common_vulnerabilities_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/common_vulnerabilities_and_attacks"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/wep_vulnerabilities_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wep_vulnerabilities"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/wep_vulnerabilities_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wep_vulnerabilities_description"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/wpa_wpa2_attacks_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wpa_wpa2_attacks"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/wpa_wpa2_attacks_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wpa_wpa2_attacks_description"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/wpa3_security_enhancements_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wpa3_security_enhancements"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/wpa3_security_enhancements_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wpa3_security_enhancements_description"
+            android:padding="8dp"/>
+
+        <!-- Network Security Best Practices -->
+        <TextView
+            android:id="@+id/network_security_best_practices_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/network_security_best_practices"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/use_strong_passwords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/use_strong_passwords"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/enable_encryption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_encryption"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/update_firmware"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update_firmware"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/use_firewalls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/use_firewalls"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/disable_wps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/disable_wps"
+            android:padding="8dp"/>
 
     </LinearLayout>
 

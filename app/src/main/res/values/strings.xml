@@ -138,6 +138,20 @@
     <string name="wep_description">Wired Equivalent Privacy (WEP) is a security protocol for wireless networks that provides data confidentiality comparable to a traditional wired network. However, it is considered to be the least secure due to various vulnerabilities.</string>
     <string name="a_4ghz_description">4GHz refers to the frequency band used by some Wi-Fi networks. It is commonly used due to its compatibility with a wide range of devices, though it is susceptible to interference.</string>
     <string name="a_5ghz_description">5GHz is another frequency band used by Wi-Fi networks. It provides faster speeds and less interference compared to the 2.4GHz band but has a shorter range.</string>
+    <string name="common_vulnerabilities_and_attacks">Common Vulnerabilities and Attacks</string>
+    <string name="wep_vulnerabilities">WEP Vulnerabilities:</string>
+    <string name="wep_vulnerabilities_description">WEP is vulnerable to several attacks due to its use of static keys and weak initialization vectors. Common attacks include the "FMS attack," which exploits these weaknesses to quickly crack WEP keys.</string>
+    <string name="wpa_wpa2_attacks">WPA/WPA2 Attacks:</string>
+    <string name="wpa_wpa2_attacks_description">WPA and WPA2 are susceptible to brute-force attacks if weak passwords are used. Additionally, the "KRACK" (Key Reinstallation Attack) discovered in 2017 exploits a vulnerability in the WPA2 handshake process, allowing attackers to intercept and decrypt data.</string>
+    <string name="wpa3_security_enhancements">WPA3 Security Enhancements:</string>
+    <string name="wpa3_security_enhancements_description">WPA3 addresses many of the vulnerabilities present in WPA2. The SAE (Simultaneous Authentication of Equals) handshake in WPA3 provides protection against offline dictionary attacks, and the use of individualized data encryption enhances security in public networks.</string>
+    <string name="network_security_best_practices">Network Security Best Practices</string>
+    <string name="use_strong_passwords">1. Use Strong Passwords: Ensure your Wi-Fi network uses a strong, unique password to prevent unauthorized access.</string>
+    <string name="enable_encryption">2. Enable Encryption: Always enable WPA3 or WPA2 encryption on your router for enhanced security.</string>
+    <string name="update_firmware">3. Update Firmware: Regularly update your routers firmware to patch security vulnerabilities and improve performance.</string>
+    <string name="use_firewalls">4. Use Firewalls: Enable the firewall on your router to protect your network from external threats.</string>
+    <string name="disable_wps">5. Disable WPS: Wi-Fi Protected Setup (WPS) can be a security risk. Disable it if not needed.</string>
+
 
 
     //Statistics Page
