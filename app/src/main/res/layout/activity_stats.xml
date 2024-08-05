@@ -33,15 +33,15 @@
             android:textColor="@android:color/white"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_right_of_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Neighborhood"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/text_right_of_title"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Neighborhood"-->
+<!--        android:textSize="18sp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:paddingTop="8dp"-->
+<!--        android:paddingBottom="8dp"/>-->
 
     <TextView
         android:id="@+id/text_below_title"

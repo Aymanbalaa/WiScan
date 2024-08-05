@@ -81,7 +81,7 @@ public class StatsActivity extends AppCompatActivity {
 
         pieChartProtocols = findViewById(R.id.pie_chart_protocols);
         pieChartProviders = findViewById(R.id.pie_chart_providers);
-        textViewToRightOfPieTitle = findViewById(R.id.text_right_of_title);
+        //textViewToRightOfPieTitle = findViewById(R.id.text_right_of_title);
         textViewBelowPieTitle = findViewById(R.id.text_below_title);
         buttonPieChart1 = findViewById(R.id.button_pie_chart_1);
         buttonPieChart2 = findViewById(R.id.button_pie_chart_2);
@@ -93,14 +93,14 @@ public class StatsActivity extends AppCompatActivity {
 
         protocols = getUniqueSecurityProtocols(networkList);
 
-        for (Network network : networkList) {
-            if (!Objects.equals(network.getNeighborhood(), "Area name not found")) {
-                neighborhood = network.getNeighborhood();
-                break;
-            }
-        }
-
-        textViewToRightOfPieTitle.setText(neighborhood);
+//        for (Network network : networkList) {
+//            if (!Objects.equals(network.getNeighborhood(), "Area name not found")) {
+//                neighborhood = network.getNeighborhood();
+//                break;
+//            }
+//        }
+//
+//        textViewToRightOfPieTitle.setText(neighborhood);
         textViewBelowPieTitle.setText(getString(R.string.total_networks_label, networkList.size()));
 
         if (networkList != null && protocols != null) {
