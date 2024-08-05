@@ -39,6 +39,8 @@ public class ThemeSelection {
                 break;
 
             case "Light":
+            case "Clair":
+            case "Свет":
             default:
                 //viewGroup.setBackgroundResource(R.drawable.gradient_background_light);
                 if (activity.getActionBar() != null) {

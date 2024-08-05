@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
 
             case "Light":
+            case "Clair":
+            case "Свет":
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
         }
 

@@ -80,6 +80,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
 //
 //            case "Light":
+//            case "Clair":
 //                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
 //        }
 
