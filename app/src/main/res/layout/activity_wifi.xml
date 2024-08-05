@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:usesCleartextTraffic="true"
     tools:context=".WiFiActivity"
-    android:id ="@+id/wifi_activity_layout">
+    android:id="@+id/wifi_activity_layout">
 
     <TextView
         android:id="@+id/totalNetworksTextView"
@@ -51,7 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="@string/button_export_csv" />
+            android:text="@string/button_export_csv"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btn_scroll"

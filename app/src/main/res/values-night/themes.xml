@@ -3,6 +3,6 @@
     <style name="Theme.NSGSApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">#777777</item>
+        <item name="android:textColor">@color/textColorDark</item>
     </style>
 </resources>

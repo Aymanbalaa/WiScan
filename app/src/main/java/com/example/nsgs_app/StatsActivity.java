@@ -3,6 +3,7 @@ package com.example.nsgs_app;
 import static com.example.nsgs_app.NetworkProviderGuesser.getNetworkProvider;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -119,6 +120,15 @@ public class StatsActivity extends AppCompatActivity {
             pieChartProtocols.setVisibility(View.GONE);
             pieChartProviders.setVisibility(View.VISIBLE);
         });
+
+        // Set legend text color based on theme
+        if (isDarkMode()) {
+            pieChartProtocols.getLegend().setTextColor(Color.WHITE);
+            pieChartProviders.getLegend().setTextColor(Color.WHITE);
+        } else {
+            pieChartProtocols.getLegend().setTextColor(Color.BLACK);
+            pieChartProviders.getLegend().setTextColor(Color.BLACK);
+        }
     }
 
     @Override
@@ -268,5 +278,10 @@ public class StatsActivity extends AppCompatActivity {
             providers.add(getNetworkProvider(network.getSsid()));
         }
         return providers;
+    }
+
+    private boolean isDarkMode() {
+        int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES;
     }
 }
