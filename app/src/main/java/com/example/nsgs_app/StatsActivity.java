@@ -256,7 +256,12 @@ public class StatsActivity extends AppCompatActivity {
     }
 
     private int[] getColorList(int size) {
-        int[] baseColors = ColorTemplate.COLORFUL_COLORS;
+        int[] baseColors = {
+                Color.rgb(193, 37, 82), Color.rgb(255, 102, 0), Color.rgb(245, 199, 0),
+                Color.rgb(106, 150, 31),
+                Color.rgb(0, 128, 255), Color.rgb(128, 0, 128), Color.rgb(0, 255, 128)
+        };
+
         int[] colors = new int[size];
 
         for (int i = 0; i < size; i++) {
