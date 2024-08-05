@@ -72,6 +72,12 @@ public class HelpActivity extends AppCompatActivity {
         FaqExpandableListAdapter listAdapter = new FaqExpandableListAdapter(this, listDataHeader, listDataChild);
         faqListView.setAdapter(listAdapter);
 
+        setListViewHeightBasedOnChildren(faqListView); // Adjust height based on children
+
+        faqListView.setOnGroupExpandListener(groupPosition -> setListViewHeightBasedOnChildren(faqListView));
+
+        faqListView.setOnGroupCollapseListener(groupPosition -> setListViewHeightBasedOnChildren(faqListView));
+
         getSupportActionBar().setTitle(getString(R.string.help_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -109,6 +115,34 @@ public class HelpActivity extends AppCompatActivity {
                 getString(R.string.faq_configure_wifi_settings), getString(R.string.answer_configure_wifi_settings),
                 getString(R.string.faq_view_scanned_data), getString(R.string.answer_view_scanned_data)
         );
+    }
+
+    private void setListViewHeightBasedOnChildren(ExpandableListView listView) {
+        FaqExpandableListAdapter listAdapter = (FaqExpandableListAdapter) listView.getExpandableListAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
+            View groupItem = listAdapter.getGroupView(i, false, null, listView);
+            groupItem.measure(0, 0);
+            totalHeight += groupItem.getMeasuredHeight();
+
+            if (listView.isGroupExpanded(i)) {
+                for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
+                    View listItem = listAdapter.getChildView(i, j, false, null, listView);
+                    listItem.measure(0, 0);
+                    totalHeight += listItem.getMeasuredHeight();
+                }
+            }
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 
     public class FaqExpandableListAdapter extends BaseExpandableListAdapter {

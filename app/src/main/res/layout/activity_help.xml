@@ -1,62 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:id="@+id/help_Layout">
+    android:fillViewport="true">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Tutorial Video"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingBottom="16dp" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:id="@+id/help_Layout">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginBottom="16dp"
-        android:layout_gravity="center">
-
-        <VideoView
-            android:id="@+id/tutorialVideoView"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-
-        <Button
-            android:id="@+id/fullscreenButton"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full Screen"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="8dp"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp" />
-    </FrameLayout>
+            android:gravity="center"
+            android:text="Tutorial Video"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingBottom="16dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="FAQ"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingBottom="16dp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center">
 
-    <ExpandableListView
-        android:id="@+id/faqListView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="0dp"
-        android:childDivider="@android:color/transparent"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="15dp"
-        android:groupIndicator="@null"
-        android:padding="0dp" />
+            <VideoView
+                android:id="@+id/tutorialVideoView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
 
-</LinearLayout>
+            <Button
+                android:id="@+id/fullscreenButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Screen"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:padding="8dp" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="FAQ"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingBottom="16dp" />
+
+        <ExpandableListView
+            android:id="@+id/faqListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:childDivider="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="15dp"
+            android:groupIndicator="@null"
+            android:padding="0dp" />
+
+    </LinearLayout>
+
+</ScrollView>
