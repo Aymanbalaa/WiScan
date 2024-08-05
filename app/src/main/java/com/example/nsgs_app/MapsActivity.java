@@ -1,6 +1,7 @@
 package com.example.nsgs_app;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -13,9 +14,14 @@ import androidx.core.content.ContextCompat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.nsgs_app.databinding.ActivityMapsBinding;
@@ -51,7 +57,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Map<LatLng, Marker> currentMarkers = new HashMap<>();
     private Handler handler;
     private Runnable refreshRunnable;
-    private static final int REFRESH_INTERVAL = 3000; // 10 seconds
+    private static final int REFRESH_INTERVAL = 3000; // 3 seconds
+    private double clusterRadius = 0.0005;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,10 +199,30 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             for (Network network : finalNetworkList) {
                 if (network != null) {
                     LatLng location = new LatLng(network.getLatitude(), network.getLongitude());
-                    locationNetworkMap.computeIfAbsent(location, k -> new ArrayList<>()).add(network);
+                    boolean addedToCluster = false;
+
+                    for (LatLng existingLocation : locationNetworkMap.keySet()) {
+                        if (distanceBetween(existingLocation, location) < clusterRadius) {
+                            locationNetworkMap.get(existingLocation).add(network);
+                            addedToCluster = true;
+                            break;
+                        }
+                    }
+
+                    if (!addedToCluster) {
+                        List<Network> networks = new ArrayList<>();
+                        networks.add(network);
+                        locationNetworkMap.put(location, networks);
+                    }
                 }
             }
         }
+    }
+
+    private double distanceBetween(LatLng loc1, LatLng loc2) {
+        double latDiff = loc1.latitude - loc2.latitude;
+        double lngDiff = loc1.longitude - loc2.longitude;
+        return Math.sqrt(latDiff * latDiff + lngDiff * lngDiff);
     }
 
     private void updateNetworkPins() {
@@ -270,16 +297,85 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.cluster_radius_menu, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_set_cluster_radius) {
+            showClusterRadiusDialog();
+            return true;
+        } else if (itemId == android.R.id.home) {
             Log.d(TAG, "Home button clicked");
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
             return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    private void showClusterRadiusDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        builder.setTitle("Choose Cluster Radius");
+        builder.setView(inflater.inflate(R.layout.dialog_cluster_radius, null));
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                AlertDialog alertDialog = (AlertDialog) dialog;
+                RadioGroup radioGroup = alertDialog.findViewById(R.id.radioGroupClusterRadius);
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                if (selectedId == R.id.radius_very_small) {
+                    clusterRadius = 0.00005;
+                    Toast.makeText(MapsActivity.this, "Cluster Radius: Very Small", Toast.LENGTH_SHORT).show();
+                }
+                else if (selectedId == R.id.radius_small) {
+                    clusterRadius = 0.0001;
+                    Toast.makeText(MapsActivity.this, "Cluster Radius: Small", Toast.LENGTH_SHORT).show();
+                } else if (selectedId == R.id.radius_medium) {
+                    clusterRadius = 0.0005;
+                    Toast.makeText(MapsActivity.this, "Cluster Radius: Medium", Toast.LENGTH_SHORT).show();
+                } else if (selectedId == R.id.radius_large) {
+                    clusterRadius = 0.001;
+                    Toast.makeText(MapsActivity.this, "Cluster Radius: Large", Toast.LENGTH_SHORT).show();
+                }
+                refreshData();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                AlertDialog alertDialog = (AlertDialog) dialog;
+                RadioGroup checkBox = alertDialog.findViewById(R.id.radioGroupClusterRadius);
+                if (clusterRadius == 0.00005) {
+                    checkBox.check(R.id.radius_very_small);
+                }
+                else if (clusterRadius == 0.0001) {
+                    checkBox.check(R.id.radius_small);
+                }
+                else if (clusterRadius == 0.0005) {
+                    checkBox.check(R.id.radius_medium);
+                } else if (clusterRadius == 0.001) {
+                    checkBox.check(R.id.radius_large);
+                }
+            }
+        });
+        dialog.show();
     }
 
     @Override

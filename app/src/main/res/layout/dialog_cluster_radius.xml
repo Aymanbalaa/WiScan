@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <RadioGroup
+        android:id="@+id/radioGroupClusterRadius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radius_very_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Very Small Radius (0.00005)" />
+
+        <RadioButton
+            android:id="@+id/radius_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Small Radius (0.0001)" />
+
+        <RadioButton
+            android:id="@+id/radius_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium Radius (0.0005)"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radius_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large Radius (0.001)" />
+    </RadioGroup>
+</LinearLayout>
