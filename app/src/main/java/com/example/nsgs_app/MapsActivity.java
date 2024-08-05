@@ -69,7 +69,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        getSupportActionBar().setTitle("Map");
+
+        getSupportActionBar().setTitle(getString(R.string.map_activity_bar_title));
 
 //        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.map), this,this);
 //        switch(currentTheme) {
@@ -81,6 +82,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 //            case "Light":
 //                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
 //        }
+
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

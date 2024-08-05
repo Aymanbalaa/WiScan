@@ -18,15 +18,15 @@
 
         <Button
             android:id="@+id/button_pie_chart_1"
-            android:layout_width="153dp"
-            android:layout_height="wrap_content"
+            android:layout_width="154dp"
+            android:layout_height="85dp"
             android:layout_marginEnd="8dp"
             android:text="@string/pie_chart_1" />
 
         <Button
             android:id="@+id/button_pie_chart_2"
-            android:layout_width="153dp"
-            android:layout_height="wrap_content"
+            android:layout_width="154dp"
+            android:layout_height="85dp"
             android:layout_marginStart="8dp"
             android:text="@string/pie_chart_2" />
     </LinearLayout>

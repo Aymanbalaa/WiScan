@@ -36,7 +36,7 @@ public class HelpActivity extends AppCompatActivity {
         FaqExpandableListAdapter listAdapter = new FaqExpandableListAdapter(this, listDataHeader, listDataChild);
         faqListView.setAdapter(listAdapter);
 
-        getSupportActionBar().setTitle("Help");
+        getSupportActionBar().setTitle(getString(R.string.help_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         switch(currentTheme) {

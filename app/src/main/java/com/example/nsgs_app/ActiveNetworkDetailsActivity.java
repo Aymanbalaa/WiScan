@@ -19,7 +19,7 @@ public class ActiveNetworkDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_active_network_details);
         ThemeSelection.themeInitializer(findViewById(R.id.active_network_details_layout),this,this);
 
-        getSupportActionBar().setTitle("Details");
+        getSupportActionBar().setTitle(getString(R.string.network_detail_activity_bar_title));
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

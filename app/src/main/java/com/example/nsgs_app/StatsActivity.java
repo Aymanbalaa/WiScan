@@ -52,7 +52,7 @@ public class StatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stats);
         String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.activity_stats), this,this);
 
-        getSupportActionBar().setTitle("Statistics");
+        getSupportActionBar().setTitle(getString(R.string.stats_bar_title));
         // Enable the Up button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

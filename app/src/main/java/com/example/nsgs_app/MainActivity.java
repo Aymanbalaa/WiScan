@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.main), this,this);
 
-        getSupportActionBar().setTitle("Home");
+
+        getSupportActionBar().setTitle(getString(R.string.home_bar_title));
         switch(currentTheme) {
             case "Warm":
             case "Amical":
