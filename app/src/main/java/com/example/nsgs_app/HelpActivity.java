@@ -2,33 +2,58 @@ package com.example.nsgs_app;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
-import java.util.HashMap;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class HelpActivity extends AppCompatActivity {
 
-    ExpandableListView faqListView;
-    List<String> listDataHeader;
-    Map<String, String> listDataChild;
+    private ExpandableListView faqListView;
+    private List<String> listDataHeader;
+    private Map<String, String> listDataChild;
+    private VideoView tutorialVideoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
-        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.help_Layout), this,this);
+        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.help_Layout), this, this);
+
+        // Initialize the VideoView
+        tutorialVideoView = findViewById(R.id.tutorialVideoView);
+
+        // Set up the video URI and media controller
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.test);
+        tutorialVideoView.setVideoURI(videoUri);
+        MediaController mediaController = new MediaController(this);
+        tutorialVideoView.setMediaController(mediaController);
+        mediaController.setAnchorView(tutorialVideoView);
+
+        // Ensure video playback starts
+        tutorialVideoView.setOnPreparedListener(mp -> {
+            mp.setLooping(true);
+            tutorialVideoView.start();
+        });
+
+        // Handle errors
+        tutorialVideoView.setOnErrorListener((mp, what, extra) -> {
+            // Handle the error here (you can show a Toast message or log the error)
+            return true; // Returning true means we handled the error
+        });
 
         faqListView = findViewById(R.id.faqListView);
         prepareListData();
@@ -39,14 +64,15 @@ public class HelpActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getString(R.string.help_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        switch(currentTheme) {
+        switch (currentTheme) {
             case "Warm":
             case "Amical":
             case "Теплый":
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.warm)));
-
+                break;
             case "Light":
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
+                break;
         }
     }
 
@@ -74,9 +100,9 @@ public class HelpActivity extends AppCompatActivity {
 
     public class FaqExpandableListAdapter extends BaseExpandableListAdapter {
 
-        private Context context;
-        private List<String> listDataHeader;
-        private Map<String, String> listDataChild;
+        private final Context context;
+        private final List<String> listDataHeader;
+        private final Map<String, String> listDataChild;
 
         public FaqExpandableListAdapter(Context context, List<String> listDataHeader, Map<String, String> listDataChild) {
             this.context = context;
