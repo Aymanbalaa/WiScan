@@ -121,8 +121,8 @@
     <string name="use_firewalls">4 Utiliser des Pare-feux Activez le pare-feu sur votre routeur pour protéger votre réseau contre les menaces externes</string>
     <string name="disable_wps">5 Désactiver le WPS Le Wi-Fi Protected Setup (WPS) peut représenter un risque de sécurité Désactivez-le si ce n est pas nécessaire</string>
 
-    <string name="pie_chart_1">Diagramme circulaire des protocoles</string>
-    <string name="pie_chart_2">Diagramme circulaire des fournisseurs</string>
+    <string name="pie_chart_1">Diagramme des protocoles</string>
+    <string name="pie_chart_2">Diagramme des fournisseurs</string>
     <string name="home_bar_title">Menu Principal</string>
     <string name="stats_bar_title">Statistiques</string>
     <string name="info_activity_bar_title">Informations supplémentaires</string>
@@ -140,4 +140,19 @@
     <string name="network_provider">Fournisseurs de réseau</string>
     <string name="filter_by_security">Filtrer par sécurité</string>
     <string name="default_view">Vue par défaut</string>
+    <string name="activity_networks_bar_title">Réseaux actifs</string>
+    <string name="cluster_radius_menu">Définir le rayon du cluster</string>
+    <string name="choose_cluster">Choisir le rayon du cluster</string>
+    <string name="set_cluster_very_small">Rayon du cluster : très petit (0.00005)</string>
+    <string name="set_cluster_small">Rayon du cluster : petit (0.0001)</string>
+    <string name="set_cluster_medium">Rayon du cluster : moyen (0.0005)</string>
+    <string name="set_cluster_large">Rayon du cluster : grand (0.001)</string>
+    <string name="ok_button">Ok</string>
+    <string name="cancel_button">Annuler</string>
+    <string name="set_cluster_very_small_confirmed">Rayon du cluster : très petit</string>
+    <string name="set_cluster_small_confirmed">Rayon du cluster : petit</string>
+    <string name="set_cluster_medium_confirmed">Rayon du cluster : moyen</string>
+    <string name="set_cluster_large_confirmed">Rayon du cluster : grand</string>
+    <string name="ok_button_confirmed">Ok</string>
+    <string name="cancel_button_confirmed">Annuler</string>
 </resources>

@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_set_cluster_radius"
-        android:title="Set Cluster Radius"
+        android:title="@string/cluster_radius_menu"
         app:showAsAction="always" />
 </menu>

@@ -309,7 +309,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         networkListView.setAdapter(adapter);
 
         builder.setView(networkListView);
-        builder.setPositiveButton("OK", null);
+        builder.setPositiveButton(getString(R.string.ok_button), null);
         builder.show();
     }
 
@@ -341,9 +341,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void showClusterRadiusDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        builder.setTitle("Choose Cluster Radius");
+        builder.setTitle(getString(R.string.choose_cluster));
         builder.setView(inflater.inflate(R.layout.dialog_cluster_radius, null));
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok_button), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 AlertDialog alertDialog = (AlertDialog) dialog;
@@ -352,22 +352,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 if (selectedId == R.id.radius_very_small) {
                     clusterRadius = 0.00005;
-                    Toast.makeText(MapsActivity.this, "Cluster Radius: Very Small", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, R.string.set_cluster_very_small, Toast.LENGTH_SHORT).show();
                 }
                 else if (selectedId == R.id.radius_small) {
                     clusterRadius = 0.0001;
-                    Toast.makeText(MapsActivity.this, "Cluster Radius: Small", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, getString(R.string.set_cluster_small), Toast.LENGTH_SHORT).show();
                 } else if (selectedId == R.id.radius_medium) {
                     clusterRadius = 0.0005;
-                    Toast.makeText(MapsActivity.this, "Cluster Radius: Medium", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, getString(R.string.set_cluster_medium), Toast.LENGTH_SHORT).show();
                 } else if (selectedId == R.id.radius_large) {
                     clusterRadius = 0.001;
-                    Toast.makeText(MapsActivity.this, "Cluster Radius: Large", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, getString(R.string.set_cluster_large), Toast.LENGTH_SHORT).show();
                 }
                 refreshData();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel_button), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();

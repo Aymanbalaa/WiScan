@@ -59,7 +59,7 @@ public class ActiveActivity extends AppCompatActivity {
         ViewGroup view = findViewById(R.id.active_networks_layout);
         String currentTheme = ThemeSelection.themeInitializer(view,this,this);
 
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle(getString(R.string.activity_networks_bar_title));
         switch(currentTheme) {
             case "Warm":
             case "Amical":
@@ -72,7 +72,7 @@ public class ActiveActivity extends AppCompatActivity {
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
         }
 
-        getSupportActionBar().setTitle("Active Networks");
+
 
         // Enable the Up button
         if (getSupportActionBar() != null) {

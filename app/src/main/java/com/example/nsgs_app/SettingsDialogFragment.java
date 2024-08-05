@@ -100,10 +100,10 @@ public class SettingsDialogFragment extends DialogFragment {
                     String toastMessage;
                     switch (selectedLanguage) {
                         case "fr":
-                            toastMessage = "Language set to French";
+                            toastMessage = "Langue définie sur le français";
                             break;
                         case "ru":
-                            toastMessage = "Language set to Russian";
+                            toastMessage = "Язык установлен на русский";
                             break;
                         default:
                             toastMessage = "Language set to English";
