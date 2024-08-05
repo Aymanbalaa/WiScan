@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="SSID: "
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
 
     <ImageView
         android:id="@+id/signalStrengthImageView"
@@ -27,5 +28,6 @@
         android:layout_height="wrap_content"
         android:paddingStart="8dp"
         android:text="0%"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
 </LinearLayout>

@@ -19,4 +19,8 @@
     <color name="red">#F44336</color>
     <color name="warm">#E49969</color>
 
+    <color name="textColorLight">#000000</color>
+    <color name="textColorDark">#FFFFFF</color>
+    <color name="activeNetworkTextColor">#000000</color>
+
 </resources>

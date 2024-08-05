@@ -21,14 +21,16 @@
             android:layout_width="154dp"
             android:layout_height="85dp"
             android:layout_marginEnd="8dp"
-            android:text="@string/pie_chart_1" />
+            android:text="@string/pie_chart_1"
+            android:textColor="@android:color/white"/>
 
         <Button
             android:id="@+id/button_pie_chart_2"
             android:layout_width="154dp"
             android:layout_height="85dp"
             android:layout_marginStart="8dp"
-            android:text="@string/pie_chart_2" />
+            android:text="@string/pie_chart_2"
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 
     <TextView
