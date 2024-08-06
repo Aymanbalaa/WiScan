@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;
@@ -86,6 +87,7 @@ public class NetworkManager {
                             List<Network> fetchedNetworkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
                             networkList.clear();
                             networkList.addAll(fetchedNetworkList);
+                            Collections.reverse(networkList);
                             saveNetworkListToPreferences();
                         }
                     } catch (Exception e) {
