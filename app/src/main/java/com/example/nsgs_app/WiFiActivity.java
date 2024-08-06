@@ -28,28 +28,17 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class WiFiActivity extends AppCompatActivity {
 
@@ -58,22 +47,25 @@ public class WiFiActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private NetworkAdapter networkAdapter;
     private List<Network> networkList;
-    private List<Network> filteredNetworkList; // List for filtered networks
+    private List<Network> filteredNetworkList;
     private TextView totalNetworksTextView;
     private Handler handler;
     private Runnable fetchTask;
-    private int fetchInterval; // This variable will hold the fetch interval in milliseconds
-    private Comparator<Network> currentComparator; // Save the current comparator
-    private String currentFilter; // Save the current filter
-    private boolean isFilteringMode = false; // Track whether filtering mode is active
+    private int fetchInterval;
+    private Comparator<Network> currentComparator;
+    private String currentSortDescription = "Oldest to Newest"; // default sort description
+    private String currentFilter;
+    private boolean isFilteringMode = false;
     private Button btnExportCsv, btnScroll;
-    private boolean isAtBottom = false; // Track the current scroll position
-    private String currentQuery = ""; // This will hold the current search query
+    private boolean isAtBottom = false;
+    private String currentQuery = "";
+    private boolean isReversedOrder = false;
 
-    private static final String PREFS_NAME = "WiFiActivityPrefs"; // USED TO SAVE POS IN SHARED PREFS
+    private static final String PREFS_NAME = "WiFiActivityPrefs";
     private static final String SCROLL_POSITION_KEY = "scroll_position";
     private static final String SCROLL_OFFSET_KEY = "scroll_offset";
     private static final String NETWORK_LIST_KEY = "network_list";
+    private static final String ORDER_KEY = "order_key";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -105,31 +97,27 @@ public class WiFiActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        // Retrieve the fetch interval from SharedPreferences
         SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
-        String fetchIntervalString = preferences.getString("fetch_unit", "10");
+        String fetchIntervalString = preferences.getString("fetch_interval", "10");
         int fetchIntervalSeconds = Integer.parseInt(fetchIntervalString);
-        fetchInterval = fetchIntervalSeconds * 1000; // Convert to milliseconds
+        fetchInterval = fetchIntervalSeconds * 1000;
+
+        isReversedOrder = preferences.getBoolean(ORDER_KEY, false);
 
         fetchTask = new Runnable() {
             @Override
             public void run() {
-                saveScrollPosition(); // Save the scroll position before fetching data
+                saveScrollPosition();
                 fetchNetworks();
                 handler.postDelayed(this, fetchInterval);
             }
         };
 
-        fetchNetworks(); // Initial fetch on create
+        fetchNetworks();
+        handler.postDelayed(fetchTask, fetchInterval);
 
-        handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
-
-        // Check for write permissions
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
         }
 
         btnExportCsv.setOnClickListener(v -> exportToCsv());
@@ -163,7 +151,6 @@ public class WiFiActivity extends AppCompatActivity {
             }
         });
 
-        // Add a scroll listener to the RecyclerView
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -210,7 +197,7 @@ public class WiFiActivity extends AppCompatActivity {
 
     private void fetchNetworks() {
         NetworkManager networkManager = NetworkManager.getInstance(this);
-        networkManager.fetchNetworks("http://217.15.171.225:5000/get_all_networks", false);
+        networkManager.fetchNetworks("http://217.15.171.225:5000/get_all_networks", false, isReversedOrder);
         networkList = networkManager.getNetworkList();
 
         applyCurrentSortOrFilter();
@@ -221,8 +208,7 @@ public class WiFiActivity extends AppCompatActivity {
         } else {
             updateAdapter(filteredNetworkList);
         }
-
-        invalidateOptionsMenu(); // Refresh Filter List
+        invalidateOptionsMenu();
     }
 
     private void exportToCsv() {
@@ -253,25 +239,12 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, proceed with exporting
-            }
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_wifi, menu);
-
-        // Clear existing items in the filter submenu before adding new ones AVOIDING DUPLICATES
         SubMenu filterSubMenu = menu.findItem(R.id.action_filter_submenu).getSubMenu();
-        filterSubMenu.clear(); // clearrrr
-        Set<String> securityProtocols = getUniqueSecurityProtocols(networkList); // refill the list and get all protocols
-
+        filterSubMenu.clear();
+        Set<String> securityProtocols = getUniqueSecurityProtocols(networkList);
         for (String protocol : securityProtocols) {
             filterSubMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, protocol).setOnMenuItemClickListener(item -> {
                 isFilteringMode = true;
@@ -279,29 +252,29 @@ public class WiFiActivity extends AppCompatActivity {
                 return true;
             });
         }
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == android.R.id.home) {// Back button
+        if (itemId == android.R.id.home) {
             navigateToMainActivity();
             return true;
-        } else if (itemId == R.id.sort_by_ssid) {// Sort by SSID
+        } else if (itemId == R.id.sort_by_ssid) {
             isFilteringMode = false;
+            currentSortDescription = "SSID";
             sortNetworkList(Comparator.comparing(network -> network.getSsid().toLowerCase()));
             return true;
-        } else if (itemId == R.id.sort_by_security) {// Sort by Security Protocol
+        } else if (itemId == R.id.sort_by_security) {
             isFilteringMode = false;
+            currentSortDescription = "Security";
             sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
             return true;
-        }else if(itemId == R.id.action_default_view){
-            resetFiltersAndSort();
+        } else if (itemId == R.id.action_toggle_order) {
+            toggleOrder();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -356,17 +329,10 @@ public class WiFiActivity extends AppCompatActivity {
         updateAdapter(filteredNetworkList);
     }
 
-    private void resetFiltersAndSort() { // no need for function
-        isFilteringMode = false;
-        currentFilter = null;
-        currentComparator = null;
-        applyCurrentSortOrFilter();
-    }
-
     @SuppressLint("StringFormatMatches")
     private void updateAdapter(List<Network> networkList) {
-        // Update the total networks count (Top Page)
-        totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size()));
+        String sortDescription = isFilteringMode ? getString(R.string.filtered_by) + currentFilter : getString(R.string.sorted_by) + currentSortDescription;
+        totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size(), sortDescription));
 
         if (networkAdapter == null) {
             networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList, currentFilter);
@@ -397,7 +363,7 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
     private void restoreScrollPosition() {
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE); // causes slight offset that we did not fix
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int scrollPosition = preferences.getInt(SCROLL_POSITION_KEY, RecyclerView.NO_POSITION);
         int scrollOffset = preferences.getInt(SCROLL_OFFSET_KEY, 0);
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
@@ -423,7 +389,6 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
     private Set<String> getUniqueSecurityProtocols(List<Network> networks) {
-        //Function to retrieve the unique protocols from the fetched networks list
         Set<String> securityProtocols = new HashSet<>();
         for (Network network : networks) {
             securityProtocols.add(network.getSecurity());
@@ -431,7 +396,7 @@ public class WiFiActivity extends AppCompatActivity {
         return securityProtocols;
     }
 
-    private String escapeCsvValue(String value) { // because of Security = (WEP, XXXX) and coordinates = [34.34,47.74]
+    private String escapeCsvValue(String value) {
         if (value == null) {
             return "\"\"";
         }
@@ -444,5 +409,26 @@ public class WiFiActivity extends AppCompatActivity {
         } else {
             btnScroll.setCompoundDrawablesWithIntrinsicBounds(R.drawable.arrow_down, 0, 0, 0);
         }
+    }
+
+    private void toggleOrder() {
+        isReversedOrder = !isReversedOrder;
+        if (networkList != null) {
+            Collections.reverse(networkList); // Directly reverse the list
+        }
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(ORDER_KEY, isReversedOrder);
+        editor.apply();
+        updateAdapter(networkList);
+        resetFiltersAndSort();
+    }
+
+    private void resetFiltersAndSort() {
+        isFilteringMode = false;
+        currentFilter = null;
+        currentComparator = null;
+        currentSortDescription = isReversedOrder ? getString(R.string.newest_to_oldest) : getString(R.string.oldest_to_newest);
+        applyCurrentSortOrFilter();
     }
 }

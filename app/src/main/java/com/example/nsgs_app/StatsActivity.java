@@ -84,20 +84,12 @@ public class StatsActivity extends AppCompatActivity {
 
         // Fetching network list from NetworkManager
         NetworkManager networkManager = NetworkManager.getInstance(this);
-        networkManager.fetchNetworks("http://217.15.171.225:5000/get_all_networks", false);
+        networkManager.fetchNetworks("http://217.15.171.225:5000/get_all_networks", false,false);
         networkList = new ArrayList<>(networkManager.getNetworkList()); // Ensure a local copy of the list
 
         protocols = getUniqueSecurityProtocols(networkList);
 
-//        for (Network network : networkList) {
-//            if (!Objects.equals(network.getNeighborhood(), "Area name not found")) {
-//                neighborhood = network.getNeighborhood();
-//                break;
-//            }
-//        }
-//
-//        textViewToRightOfPieTitle.setText(neighborhood);
-        textViewBelowPieTitle.setText(getString(R.string.total_networks_label, networkList.size()));
+        textViewBelowPieTitle.setText(getString(R.string.total_networks_label2, networkList.size()));
 
         if (networkList != null && protocols != null) {
             setUpPieChart(pieChartProtocols, "Security Protocols");

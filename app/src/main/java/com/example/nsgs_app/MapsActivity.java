@@ -201,8 +201,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         String networksUrl = "http://217.15.171.225:5000/get_all_networks";
         String triangulatedUrl = "http://217.15.171.225:6000/filtered_triangulated";
 
-        networkManager.fetchNetworks(networksUrl, false);
-        networkManager.fetchNetworks(triangulatedUrl, true);
+        networkManager.fetchNetworks(networksUrl, false,false);
+        networkManager.fetchNetworks(triangulatedUrl, true,false);
         networkManager.refreshLists();
 
         networkList = networkManager.getNetworkList();

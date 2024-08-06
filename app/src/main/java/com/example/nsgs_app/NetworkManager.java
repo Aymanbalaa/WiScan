@@ -16,7 +16,9 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -56,7 +58,7 @@ public class NetworkManager {
         return triangulatedList;
     }
 
-    public void fetchNetworks(String url, boolean isTriangulated) {
+    public void fetchNetworks(String url, boolean isTriangulated, boolean isReversedOrder) {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder().url(url).build();
@@ -78,16 +80,26 @@ public class NetworkManager {
                         JSONObject jsonObject = new JSONObject(responseData);
                         Gson gson = new Gson();
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
+                        List<Network> fetchedList = gson.fromJson(jsonObject.getJSONArray(isTriangulated ? "records" : "networks").toString(), networkListType);
+                        Set<String> seenSSIDs = new HashSet<>();
+                        List<Network> uniqueNetworks = new ArrayList<>();
+
+                        for (Network network : fetchedList) {
+                            if (seenSSIDs.add(network.getSsid())) {
+                                uniqueNetworks.add(network);
+                            }
+                        }
+
                         if (isTriangulated) {
-                            List<Network> fetchedTriangulatedList = gson.fromJson(jsonObject.getJSONArray("records").toString(), networkListType);
                             triangulatedList.clear();
-                            triangulatedList.addAll(fetchedTriangulatedList);
+                            triangulatedList.addAll(uniqueNetworks);
                             saveTriangulatedListToPreferences();
                         } else {
-                            List<Network> fetchedNetworkList = gson.fromJson(jsonObject.getJSONArray("networks").toString(), networkListType);
                             networkList.clear();
-                            networkList.addAll(fetchedNetworkList);
-                            Collections.reverse(networkList);
+                            networkList.addAll(uniqueNetworks);
+                            if (isReversedOrder) {
+                                Collections.reverse(networkList);
+                            }
                             saveNetworkListToPreferences();
                         }
                     } catch (Exception e) {

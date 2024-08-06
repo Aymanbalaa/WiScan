@@ -8,7 +8,8 @@
     <string name="coordinates_label">Coordinates: %1$s</string>
     <string name="postal_code_label">Postal Code: %1$s</string>
     <string name="neighborhood_label">Neighborhood: %1$s</string>
-    <string name="total_networks_label">Total Networks: %1$s</string>
+    <string name="total_networks_label">%1$s Networks %2$s</string>
+    <string name="total_networks_label2">Total Networks: %1$s</string>
     <string name="hi">Welcome</string>
     <string name="thomas">Thomas</string>
     <string name="guidance">Help</string>
@@ -210,5 +211,10 @@
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
     <string name="video_tutorial">Video Tutorial</string>
+    <string name="toggle_order">Toggle List Order</string>
+    <string name="oldest_to_newest">"Oldest to Newest"</string>
+    <string name="sorted_by">"Sorted by "</string>
+    <string name="filtered_by">"Filtered by "</string>
+    <string name="newest_to_oldest">Newest to Oldest</string>
 
 </resources>

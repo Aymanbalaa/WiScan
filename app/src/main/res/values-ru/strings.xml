@@ -7,7 +7,8 @@
     <string name="coordinates_label">Координаты: %1$s</string>
     <string name="postal_code_label">Почтовый индекс: %1$s</string>
     <string name="neighborhood_label">Район: %1$s</string>
-    <string name="total_networks_label">Всего сетей: %1$s</string>
+    <string name="total_networks_label"> %1$s сетей %2$s</string>
+    <string name="total_networks_label2">Всего сетей: %1$s</string>
     <string name="hi">Добро пожаловать</string>
     <string name="thomas">Томас</string>
     <string name="guidance">Помощь</string>
@@ -161,4 +162,9 @@
     <string name="ok_button_confirmed">Хорошо</string>
     <string name="cancel_button_confirmed">Отмена</string>
     <string name="video_tutorial">видеоурок</string>
+    <string name="toggle_order">Переключение порядка списка</string>
+    <string name="oldest_to_newest">От самого старого к самому новому</string>
+    <string name="sorted_by">Отсортировано по </string>
+    <string name="filtered_by">Отфильтровано </string>
+    <string name="newest_to_oldest">От самого нового до самого старого</string>
 </resources>

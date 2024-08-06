@@ -7,7 +7,8 @@
     <string name="coordinates_label">Coordonnées: %1$s</string>
     <string name="postal_code_label">Code Postal: %1$s</string>
     <string name="neighborhood_label">Quartier: %1$s</string>
-    <string name="total_networks_label">Réseaux Totaux: %1$s</string>
+    <string name="total_networks_label">%1$s Réseaux %2$s</string>
+    <string name="total_networks_label2">Réseaux Totaux: %1$s</string>
     <string name="hi">Bienvenue</string>
     <string name="thomas">Thomas</string>
     <string name="guidance">Aide</string>
@@ -155,4 +156,9 @@
     <string name="ok_button_confirmed">Ok</string>
     <string name="cancel_button_confirmed">Annuler</string>
     <string name="video_tutorial">Tutoriel Vidéo</string>
+    <string name="toggle_order">Alterner l\'ordre de la liste</string>
+    <string name="oldest_to_newest">Du plus ancien au plus récent</string>
+    <string name="sorted_by">Classé par </string>
+    <string name="filtered_by">Filtré par </string>
+    <string name="newest_to_oldest">Du plus récent au plus ancien</string>
 </resources>
