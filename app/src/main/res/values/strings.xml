@@ -209,5 +209,6 @@
     </string-array>
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
+    <string name="video_tutorial">Video Tutorial</string>
 
 </resources>

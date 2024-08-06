@@ -160,4 +160,5 @@
     <string name="set_cluster_large_confirmed">Радиус кластера: Большой</string>
     <string name="ok_button_confirmed">Хорошо</string>
     <string name="cancel_button_confirmed">Отмена</string>
+    <string name="video_tutorial">видеоурок</string>
 </resources>

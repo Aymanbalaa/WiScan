@@ -1,11 +1,15 @@
 package com.example.nsgs_app;
 
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import java.util.Objects;
 
 public class FullscreenVideoActivity extends AppCompatActivity {
 
@@ -15,13 +19,22 @@ public class FullscreenVideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen_video);
+        fullscreenVideoView = findViewById(R.id.fullscreenVideoView);
+        String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.fullScreenVideo), this, this);
 
+        getSupportActionBar().setTitle(R.string.video_tutorial);
         // Enable the action bar and set the back button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        fullscreenVideoView = findViewById(R.id.fullscreenVideoView);
+        switch (currentTheme) {
+            case "Light":
+            case "Clair":
+            case "Свет":
+                Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
+                break;
+        }
 
         // Get the video URI from the intent
         Uri videoUri = getIntent().getParcelableExtra("videoUri");
