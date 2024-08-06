@@ -157,8 +157,8 @@
     <string name="cancel_button_confirmed">Annuler</string>
     <string name="video_tutorial">Tutoriel Vidéo</string>
     <string name="toggle_order">Alterner l\'ordre de la liste</string>
-    <string name="oldest_to_newest">Du plus ancien au plus récent</string>
-    <string name="sorted_by">Classé par </string>
-    <string name="filtered_by">Filtré par </string>
-    <string name="newest_to_oldest">Du plus récent au plus ancien</string>
+    <string name="oldest_to_newest">du plus ancien au plus récent</string>
+    <string name="sorted_by">Classé par  </string>
+    <string name="filtered_by">Filtré par </string>
+    <string name="newest_to_oldest">du plus récent au plus ancien</string>
 </resources>

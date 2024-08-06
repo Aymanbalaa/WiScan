@@ -165,7 +165,7 @@ public class StatsActivity extends AppCompatActivity {
                     .collect(Collectors.toList());
 
             pieEntries.add(new PieEntry(((float) filteredNetworkList.size() / networkList.size()) * 100, protocol));
-            customLegendEntries.add(protocol + " (" + String.format("%.1f", ((float) filteredNetworkList.size() / networkList.size()) * 100) + "%)");
+            customLegendEntries.add(protocol + " (" + String.format("%.1f", ((float) filteredNetworkList.size() / networkList.size()) * 100) + "%) || " + filteredNetworkList.size());
         }
 
         PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
@@ -198,7 +198,7 @@ public class StatsActivity extends AppCompatActivity {
                     .collect(Collectors.toList());
 
             pieEntries.add(new PieEntry(((float) filteredNetworkList.size() / networkList.size()) * 100, provider));
-            customLegendEntries.add(provider + " (" + String.format("%.1f", ((float) filteredNetworkList.size() / networkList.size()) * 100) + "%)");
+            customLegendEntries.add(provider + " (" + String.format("%.1f", ((float) filteredNetworkList.size() / networkList.size()) * 100) + "%) || " + filteredNetworkList.size());
         }
 
         PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
