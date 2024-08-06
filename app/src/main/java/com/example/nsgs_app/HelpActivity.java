@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,18 @@ public class HelpActivity extends AppCompatActivity {
         String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.help_Layout), this, this);
 
         faqListView = findViewById(R.id.faqListView);
+
+        TextView textView = findViewById(R.id.tutorial_vid_text);
+
+        String text = "How can I get started? Click here for a video tutorial.";
+        SpannableString spannableString = new SpannableString(text);
+
+        int start = text.indexOf("Click here");
+        int end = text.length();
+        spannableString.setSpan(new UnderlineSpan(), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        textView.setText(spannableString);
+
         prepareListData();
 
         FaqExpandableListAdapter listAdapter = new FaqExpandableListAdapter(this, listDataHeader, listDataChild);

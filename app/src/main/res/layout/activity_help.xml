@@ -32,10 +32,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="view tutorial video"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:id="@+id/tutorial_vid_text"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <ExpandableListView
