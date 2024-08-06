@@ -350,7 +350,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 int selectedId = radioGroup.getCheckedRadioButtonId();
 
                 if (selectedId == R.id.radius_very_small) {
-                    clusterRadius = 0.00005;
+                    clusterRadius = 0.00000005;
                     Toast.makeText(MapsActivity.this, R.string.set_cluster_very_small, Toast.LENGTH_SHORT).show();
                 }
                 else if (selectedId == R.id.radius_small) {
@@ -378,7 +378,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onShow(DialogInterface dialog) {
                 AlertDialog alertDialog = (AlertDialog) dialog;
                 RadioGroup checkBox = alertDialog.findViewById(R.id.radioGroupClusterRadius);
-                if (clusterRadius == 0.00005) {
+                if (clusterRadius == 0.00000005) {
                     checkBox.check(R.id.radius_very_small);
                 }
                 else if (clusterRadius == 0.0001) {
