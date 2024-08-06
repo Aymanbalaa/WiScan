@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WiScan-App</string>
     <string name="ssid_label">SSID: %1$s</string>
@@ -28,7 +27,6 @@
     <string name="sort">Сортировать</string>
     <string name="settingsTitle">Настройки</string>
 
-
     <string name="temperature_unit_text_view">Единица измерения температуры</string>
 
     <string name="Celsius" translatable="false">Celsius</string>
@@ -37,7 +35,6 @@
         <item>@string/Celsius</item>
         <item>@string/Fahrenheit</item>
     </string-array>
-
 
     <string name="language_text_view">Язык</string>
     <string name="language1">English</string>
@@ -49,7 +46,6 @@
         <item>@string/language2</item>
         <item>@string/language3</item>
     </string-array>
-
 
     <string-array name="databaseArray">
         <item>3</item>
@@ -67,13 +63,13 @@
     <string name="inactive">Неактивный</string>
     <string name="db_text_view">Интервал обновления базы данных</string>
 
-    // FAQ Questions
+    <!-- FAQ Questions -->
     <string name="faq_what_is_nsgs">Что такое приложение WiScan?</string>
     <string name="faq_start_wifi_scan">Как я могу увидеть сканирование WiFi?</string>
     <string name="faq_configure_wifi_settings">Как настроить параметры сканирования WiFi?</string>
     <string name="faq_view_scanned_data">Где я могу увидеть данные сканирования WiFi?</string>
 
-    // FAQ Answers
+    <!-- FAQ Answers -->
     <string name="answer_what_is_nsgs">Приложение WiScan (We Scan) предназначено для захвата данных локальных сетей WiFi, их очистки, отображения прогресса пользователю и отправки данных для расширенной визуализации, такой как графики и карты.</string>
     <string name="answer_start_wifi_scan">Чтобы увидеть отсканированные сети, перейдите в раздел "Список отсканированных сетей" и нажмите кнопку. Приложение начнет загружать данные из облака для отображения в этом списке.</string>
     <string name="answer_configure_wifi_settings">Вы можете настроить параметры сканирования WiFi, перейдя на главную страницу и нажав на три точки в правом верхнем углу заголовка. Здесь вы можете настроить частоту сканирования, единицы температуры и язык в соответствии с вашими потребностями. Убедитесь, что ваш Pi включен и подключен к точке доступа. Вы должны увидеть статус на ЖК-экране Pi. Убедитесь, что GPS-датчик не находится близко к Pi при первой загрузке или перезагрузке Pi.</string>
@@ -86,7 +82,7 @@
     <string name="networks_at_this_location">Сети в этом месте</string>
     <string name="shutdown_button">Кнопка выключения</string>
 
-    //SSID Page
+    <!-- SSID Page -->
     <string name="button_export_csv">Экспорт в CSV</string>
     <string name="search_hint">Поиск по SSID</string>
     <string name="shutdown_command">Команда завершения работы</string>
@@ -97,21 +93,25 @@
     <string name="state">состояние</string>
     <string name="unknown">Неизвестное </string>
 
-    //ADDITIONAL INFO PAGE
+    <!-- ADDITIONAL INFO PAGE -->
     <string name="types_of_security">Типы безопасности</string>
     <string name="wifi_networks">WiFi сети</string>
+    <string name="none">Нет</string>
+    <string name="WPA1">WPA1</string>
     <string name="WPA2">WPA2</string>
+    <string name="WPA2_Enterprise">WPA2-Enterprise</string>
     <string name="WPA3">WPA3</string>
+    <string name="WPA3_Enterprise">WPA3-Enterprise</string>
     <string name="WEP">WEP</string>
-    <string name="a_4GHZ">4GHz</string>
-    <string name="a_5GHZ">5GHz</string>
     <string name="type">Тип</string>
     <string name="description">Описание</string>
+    <string name="none_description">Сеть без пароля и шифрования.</string>
+    <string name="wpa1_description">Wi-Fi Protected Access (WPA1) — это протокол безопасности, разработанный для устранения недостатков WEP. Он использует TKIP (Temporal Key Integrity Protocol) для более сильного шифрования.</string>
     <string name="wpa2_description">Wi-Fi Protected Access II (WPA2) — это технология сетевой безопасности, часто используемая в беспроводных сетях Wi-Fi. Она является улучшением WPA и обеспечивает более надежную защиту данных и контроль доступа к сети.</string>
+    <string name="wpa2_enterprise_description">WPA2-Enterprise предназначен для корпоративных сетей, требует RADIUS-сервера для аутентификации и обеспечивает повышенную безопасность благодаря использованию 802.1X.</string>
     <string name="wpa3_description">Wi-Fi Protected Access III (WPA3) — это последнее поколение безопасности Wi-Fi, обеспечивающее более надежную аутентификацию и улучшенную криптографическую защиту.</string>
+    <string name="wpa3_enterprise_description">WPA3-Enterprise предлагает самый высокий уровень безопасности для корпоративных сетей, требующий 192-битного шифрования и улучшенной защиты конфиденциальных данных.</string>
     <string name="wep_description">Wired Equivalent Privacy (WEP) — это протокол безопасности для беспроводных сетей, обеспечивающий конфиденциальность данных, сопоставимую с традиционной проводной сетью. Однако он считается наименее безопасным из-за различных уязвимостей.</string>
-    <string name="a_4ghz_description">4GHz относится к частотному диапазону, используемому некоторыми Wi-Fi сетями. Он часто используется из-за своей совместимости с широким спектром устройств, хотя он подвержен помехам.</string>
-    <string name="a_5ghz_description">5GHz — это другой частотный диапазон, используемый Wi-Fi сетями. Он обеспечивает более высокие скорости и меньшее количество помех по сравнению с диапазоном 2,4GHz, но имеет меньший радиус действия.</string>
     <string name="common_vulnerabilities_and_attacks">Общие Уязвимости и Атаки</string>
     <string name="wep_vulnerabilities">Уязвимости WEP:</string>
     <string name="wep_vulnerabilities_description">WEP уязвим для нескольких атак из-за использования статических ключей и слабых инициализационных векторов. К распространенным атакам относится "атака FMS", которая использует эти слабости для быстрого взлома ключей WEP.</string>
@@ -126,41 +126,50 @@
     <string name="use_firewalls">4. Используйте Межсетевые Экраны: Включите межсетевой экран на вашем маршрутизаторе для защиты вашей сети от внешних угроз.</string>
     <string name="disable_wps">5. Отключите WPS: Wi-Fi Protected Setup (WPS) может представлять угрозу безопасности. Отключите его, если он не нужен.</string>
 
-
-
-    <string name="pie_chart_1">Круговая диаграмма протоколов</string>
-    <string name="home_bar_title">Главное меню</string>
-    <string name="stats_bar_title">Статистика</string>
-    <string name="info_activity_bar_title">Дополнительная информация</string>
-    <string name="map_activity_bar_title">Карта</string>
-    <string name="network_detail_activity_bar_title">Подробности</string>
-    <string name="wifi_activity_bar_title">Обнаруженные сети</string>
-    <string name="theme_text_view">Тема</string>
-    <string name="light_theme">Свет</string>
-    <string name="dark_theme">Темный</string>
-    <string name="theme_selection">Выбор темы</string>
-    <string name="unknown_values">" Неизвестные значения"</string>
-    <string name="Statistics">"Статистика" </string>
-    <string name="pie_chart_2">Круговая диаграмма поставщиков</string>
-    <string name="security_protocol">Протоколы безопасности</string>
-    <string name="network_provider">Сетевые провайдеры</string>
-    <string name="filter_by_security">Фильтровать по безопасности</string>
-    <string name="default_view">Вид по умолчанию</string>
-    <string name="activity_networks_bar_title">Активные сети</string>
+    <!-- Map Page -->
     <string name="cluster_radius_menu">Установить радиус кластера</string>
     <string name="choose_cluster">Выберите радиус кластера</string>
+
     <string name="set_cluster_very_small">Радиус кластера: Очень маленький (0.00005)</string>
     <string name="set_cluster_small">Радиус кластера: Маленький (0.0001)</string>
     <string name="set_cluster_medium">Радиус кластера: Средний (0.0005)</string>
     <string name="set_cluster_large">Радиус кластера: Большой (0.001)</string>
-    <string name="ok_button">Хорошо</string>
-    <string name="cancel_button">Отмена</string>
+
     <string name="set_cluster_very_small_confirmed">Радиус кластера: Очень маленький</string>
     <string name="set_cluster_small_confirmed">Радиус кластера: Маленький</string>
     <string name="set_cluster_medium_confirmed">Радиус кластера: Средний</string>
     <string name="set_cluster_large_confirmed">Радиус кластера: Большой</string>
     <string name="ok_button_confirmed">Хорошо</string>
     <string name="cancel_button_confirmed">Отмена</string>
+
+    <!-- Statistics Page -->
+    <string name="Statistics">"Статистика"</string>
+    <string name="pie_chart_1">Круговая диаграмма протоколов</string>
+    <string name="pie_chart_2">Круговая диаграмма поставщиков</string>
+    <string name="security_protocol">Протоколы безопасности</string>
+    <string name="network_provider">Сетевые провайдеры</string>
+
+    <!-- Action Bar Titles -->
+    <string name="home_bar_title">Главное меню</string>
+    <string name="stats_bar_title">Статистика</string>
+    <string name="info_activity_bar_title">Дополнительная информация</string>
+    <string name="map_activity_bar_title">Карта</string>
+    <string name="network_detail_activity_bar_title">Подробности</string>
+    <string name="wifi_activity_bar_title">Обнаруженные сети</string>
+    <string name="activity_networks_bar_title">Активные сети</string>
+
+    <string name="theme_text_view">Тема</string>
+    <string name="light_theme">Свет</string>
+    <string name="dark_theme">Темный</string>
+    <string name="theme_selection">Выбор темы</string>
+    <string name="unknown_values">" Неизвестные значения"</string>
+
+    <string-array name="theme_array">
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
+    </string-array>
+    <string name="ok_button">Хорошо</string>
+    <string name="cancel_button">Отмена</string>
     <string name="video_tutorial">видеоурок</string>
     <string name="toggle_order">Переключение порядка списка</string>
     <string name="oldest_to_newest">От самого старого к самому новому</string>

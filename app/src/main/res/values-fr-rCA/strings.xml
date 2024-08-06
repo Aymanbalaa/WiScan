@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WiScan-App</string>
     <string name="ssid_label">SSID: %1$s</string>
@@ -18,7 +17,7 @@
 
     <string name="change_language">Modifier la langue</string>
     <string name="disclaimer_title">Avertissement</string>
-    <string name="disclaimer_text">L\'application WiScan est conçue uniquement dans le but de capturer des données WiFi locales BSSID SSID protocoles de sécurité et données de localisation correspondantes de nettoyer les données d afficher les progrès pour l\'utilisateur et d\'envoyer les données pour des visualisations avancées telles que des graphiques et des cartes. L\'application permet la configuration via des contrôles utilisateur tels que la fréquence et le rayon de scan WiFi.\n\nAvis Important: \n\n- L\'application WiScan doit être utilisée exclusivement à des fins prévues comme décrit ci-dessus.\n\n- Il est interdit aux utilisateurs d\'utiliser l\'application pour toute activité malveillante y compris mais sans s y limiter l\'accès non autorisé l\'interférence avec la sécurité du réseau ou la violation de la confidentialité.\n\n- En utilisant l\'application WiScan vous acceptez de respecter toutes les lois et réglementations applicables concernant la collecte de données et la confidentialité.\n\n- Les développeurs de WiScan ne sont pas responsables de toute mauvaise utilisation de l\'application.</string>
+    <string name="disclaimer_text">L\'application WiScan est conçue uniquement dans le but de capturer des données WiFi locales BSSID SSID protocoles de sécurité et données de localisation correspondantes de nettoyer les données d\'afficher les progrès pour l\'utilisateur et d\'envoyer les données pour des visualisations avancées telles que des graphiques et des cartes.\n\nAvis Important: \n\n- L\'application WiScan doit être utilisée exclusivement à des fins prévues comme décrit ci-dessus.\n\n- Il est interdit aux utilisateurs d\'utiliser l\'application pour toute activité malveillante y compris mais sans s\'y limiter l\'accès non autorisé l\'interférence avec la sécurité du réseau ou la violation de la confidentialité.\n\n- En utilisant l\'application WiScan vous acceptez de respecter toutes les lois et réglementations applicables concernant la collecte de données et la confidentialité.\n\n- Les développeurs de WiScan ne sont pas responsables de toute mauvaise utilisation de l\'application.</string>
     <string name="accept">Accepter</string>
     <string name="decline">Refuser</string>
     <string name="provider_label">Fournisseur: %1$s</string>
@@ -54,39 +53,39 @@
     <string name="activeActivity">Liste des réseaux actifs</string>
 
     <string name="buttonSave">Sauvegarder</string>
-    <string name="cpu_time">Temps du CPU </string>
-    <string name="scanning_status">Statut de numérisation </string>
+    <string name="cpu_time">Temps du CPU</string>
+    <string name="scanning_status">Statut de numérisation</string>
     <string name="active">Actif</string>
     <string name="inactive">Inactif</string>
-    <string name="cpuTemperature">Température du CPU </string>
+    <string name="cpuTemperature">Température du CPU</string>
     <string name="temperature_unit_text_view">Unité de température</string>
     <string name="language_text_view">Langue</string>
-    <string name="db_text_view">Intervalle d actualisation de la base de données</string>
+    <string name="db_text_view">Intervalle d\'actualisation de la base de données</string>
 
     <!-- FAQ Questions -->
-    <string name="faq_what_is_nsgs">Qu est-ce que l\'application WiScan</string>
+    <string name="faq_what_is_nsgs">Qu\'est-ce que l\'application WiScan</string>
     <string name="faq_start_wifi_scan">Comment puis-je voir un scan WiFi</string>
     <string name="faq_configure_wifi_settings">Comment configurer les paramètres de scan WiFi</string>
     <string name="faq_view_scanned_data">Où puis-je voir les données scannées du WiFi</string>
 
     <!-- FAQ Answers -->
-    <string name="answer_what_is_nsgs">L\'application WiScan (Oui Scan) est conçue pour capturer les données locales WiFi les nettoyer afficher la progression à l\'utilisateur et envoyer les données pour des visualisations avancées telles que des graphiques et des cartes</string>
-    <string name="answer_start_wifi_scan">Pour voir les réseaux scannés allez dans la section Liste des réseaux scannés et appuyez sur le bouton. L\'application commencera à récupérer les données depuis le cloud pour les afficher dans cette liste</string>
-    <string name="answer_configure_wifi_settings">Vous pouvez configurer les paramètres de scan WiFi en allant à la page principale et en cliquant sur les trois points en haut à droite de l\'en-tête. Ici vous pouvez ajuster la fréquence de scan les unités de température et la langue selon vos besoins. Assurez-vous que votre Pi est allumé et connecté à un point d\'accès. Vous devriez voir un retour d\'état sur l\'écran LCD du Pi. Assurez-vous que le capteur GPS n\'est pas trop proche du Pi lors du premier démarrage ou du redémarrage du Pi.</string>
-    <string name="answer_view_scanned_data">Les données scannées du WiFi sont affichées dans la section. Liste des réseaux scannés Cette section fournit une vue détaillée des réseaux capturés pendant le scan y compris leurs BSSID SSID et protocoles de sécurité.</string>
+    <string name="answer_what_is_nsgs">L\'application WiScan (Oui Scan) est conçue pour capturer les données locales WiFi les nettoyer afficher la progression à l\'utilisateur et envoyer les données pour des visualisations avancées telles que des graphiques et des cartes.</string>
+    <string name="answer_start_wifi_scan">Pour voir les réseaux scannés, allez dans la section "Liste des réseaux scannés" et appuyez sur le bouton. L\'application commencera à récupérer les données depuis le cloud pour les afficher dans cette liste.</string>
+    <string name="answer_configure_wifi_settings">Vous pouvez configurer les paramètres de scan WiFi en allant à la page principale et en cliquant sur les trois points en haut à droite de l\'en-tête. Ici, vous pouvez ajuster la fréquence de scan, les unités de température et la langue selon vos besoins. Assurez-vous que votre Pi est allumé et connecté à un point d\'accès. Vous devriez voir un retour d\'état sur l\'écran LCD du Pi. Assurez-vous que le capteur GPS n\'est pas trop proche du Pi lors du premier démarrage ou du redémarrage du Pi.</string>
+    <string name="answer_view_scanned_data">Les données scannées du WiFi sont affichées dans la section "Liste des réseaux scannés". Cette section fournit une vue détaillée des réseaux capturés pendant le scan, y compris leurs BSSID, SSID et protocoles de sécurité.</string>
 
     <string name="help_title">Aide</string>
     <string name="multiple_networks">Plusieurs réseaux</string>
     <string name="location_permission_is_required_to_use_this_feature">Une autorisation de localisation est requise pour utiliser cette fonctionnalité</string>
     <string name="you_are_here">Vous êtes là</string>
     <string name="networks_at_this_location">Réseaux à cet endroit</string>
-    <string name="shutdown_button">Bouton d arrêt</string>
+    <string name="shutdown_button">Bouton d\'arrêt</string>
 
     <!-- SSID Page -->
     <string name="button_export_csv">Exporter en CSV</string>
     <string name="search_hint">Rechercher un SSID</string>
-    <string name="shutdown_command">Commande d arrêt</string>
-    <string name="is_currently_inactive_you_can_safely_click_the_button">est actuellement inactif Vous pouvez cliquer sur le bouton en toute sécurité</string>
+    <string name="shutdown_command">Commande d\'arrêt</string>
+    <string name="is_currently_inactive_you_can_safely_click_the_button">est actuellement inactif. Vous pouvez cliquer sur le bouton en toute sécurité</string>
     <string name="in_progress">en cours</string>
     <string name="acknowledged_by_device_and_is_in_progress">reconnu par l\'appareil et est en cours</string>
     <string name="timed_out">a expiré</string>
@@ -96,69 +95,84 @@
     <!-- ADDITIONAL INFO PAGE -->
     <string name="types_of_security">Types de sécurité</string>
     <string name="wifi_networks">Réseaux WiFi</string>
+    <string name="none">Aucun</string>
+    <string name="WPA1">WPA1</string>
     <string name="WPA2">WPA2</string>
+    <string name="WPA2_Enterprise">WPA2-Enterprise</string>
     <string name="WPA3">WPA3</string>
+    <string name="WPA3_Enterprise">WPA3-Enterprise</string>
     <string name="WEP">WEP</string>
-    <string name="a_4GHZ">4GHz</string>
-    <string name="a_5GHZ">5GHz</string>
     <string name="type">Type</string>
     <string name="description">Description</string>
-    <string name="wpa2_description">Wi-Fi Protected Access II (WPA2) est une technologie de sécurité réseau couramment utilisée sur les réseaux sans fil Wi-Fi C\'est une amélioration par rapport à WPA et offre une meilleure protection des données et un meilleur contrôle d\'accès réseau.</string>
-    <string name="wpa3_description">Wi-Fi Protected Access III (WPA3) est la dernière génération de sécurité Wi-Fi offrant une authentification plus robuste et une meilleure force cryptographique.</string>
-    <string name="wep_description">Wired Equivalent Privacy (WEP) est un protocole de sécurité pour les réseaux sans fil qui offre une confidentialité des données comparable à un réseau câblé traditionnel Cependant il est considéré comme le moins sécurisé en raison de diverses vulnérabilités.</string>
-    <string name="a_4ghz_description">4GHz fait référence à la bande de fréquence utilisée par certains réseaux Wi-Fi Elle est couramment utilisée en raison de sa compatibilité avec un large éventail d\'appareils bien qu elle soit susceptible aux interférences.</string>
-    <string name="a_5ghz_description">5GHz est une autre bande de fréquence utilisée par les réseaux Wi-Fi Elle offre des vitesses plus rapides et moins d interférences par rapport à la bande de 2.4GHz mais a une portée plus courte.</string>
+    <string name="none_description">Un réseau sans mot de passe et non chiffré.</string>
+    <string name="wpa1_description">Wi-Fi Protected Access (WPA1) est un protocole de sécurité développé pour pallier les faiblesses du WEP. Il utilise TKIP (Temporal Key Integrity Protocol) pour un cryptage plus fort.</string>
+    <string name="wpa2_description">Wi-Fi Protected Access II (WPA2) est une technologie de sécurité réseau couramment utilisée sur les réseaux sans fil Wi-Fi. C\'est une amélioration par rapport à WPA et offre une meilleure protection des données et un meilleur contrôle d\'accès réseau.</string>
+    <string name="wpa2_enterprise_description">WPA2-Enterprise est conçu pour les réseaux d\'entreprise, nécessitant un serveur RADIUS pour l\'authentification et offrant une sécurité renforcée grâce à l\'utilisation de 802.1X.</string>
+    <string name="wpa3_description">Wi-Fi Protected Access III (WPA3) est la dernière génération de sécurité Wi-Fi, offrant une authentification plus robuste et une meilleure force cryptographique.</string>
+    <string name="wpa3_enterprise_description">WPA3-Enterprise offre le plus haut niveau de sécurité pour les réseaux d\'entreprise, nécessitant un cryptage 192 bits et des protections renforcées pour les données sensibles.</string>
+    <string name="wep_description">Wired Equivalent Privacy (WEP) est un protocole de sécurité pour les réseaux sans fil qui offre une confidentialité des données comparable à un réseau câblé traditionnel. Cependant, il est considéré comme le moins sécurisé en raison de diverses vulnérabilités.</string>
     <string name="common_vulnerabilities_and_attacks">Vulnérabilités et Attaques Courantes</string>
-    <string name="wep_vulnerabilities">Vulnérabilités WEP</string>
-    <string name="wep_vulnerabilities_description">WEP est vulnérable à plusieurs attaques en raison de l\'utilisation de clés statiques et de vecteurs d initialisation faibles Les attaques courantes incluent l attaque FMS qui exploite ces faiblesses pour craquer rapidement les clés WEP</string>
-    <string name="wpa_wpa2_attacks">Attaques WPA WPA2</string>
-    <string name="wpa_wpa2_attacks_description">WPA et WPA2 sont susceptibles aux attaques par force brute si des mots de passe faibles sont utilisés. De plus l\'attaque KRACK (Key Reinstallation Attack) découverte en 2017 exploite une vulnérabilité dans le processus de poignée de main WPA2 permettant aux attaquants d\'intercepter et de déchiffrer les données.</string>
-    <string name="wpa3_security_enhancements">Améliorations de la Sécurité WPA3</string>
-    <string name="wpa3_security_enhancements_description">WPA3 corrige de nombreuses vulnérabilités présentes dans WPA2. La poignée de main SAE (Simultaneous Authentication of Equals) dans WPA3 offre une protection contre les attaques par dictionnaire hors ligne et l utilisation du cryptage des données individualisées améliore la sécurité dans les réseaux publics.</string>
+    <string name="wep_vulnerabilities">Vulnérabilités WEP:</string>
+    <string name="wep_vulnerabilities_description">WEP est vulnérable à plusieurs attaques en raison de l\'utilisation de clés statiques et de vecteurs d\'initialisation faibles. Les attaques courantes incluent l\'attaque "FMS", qui exploite ces faiblesses pour craquer rapidement les clés WEP.</string>
+    <string name="wpa_wpa2_attacks">Attaques WPA/WPA2:</string>
+    <string name="wpa_wpa2_attacks_description">WPA et WPA2 sont susceptibles aux attaques par force brute si des mots de passe faibles sont utilisés. De plus, l\'attaque "KRACK" (Key Reinstallation Attack) découverte en 2017 exploite une vulnérabilité dans le processus de poignée de main WPA2, permettant aux attaquants d\'intercepter et de déchiffrer les données.</string>
+    <string name="wpa3_security_enhancements">Améliorations de la Sécurité WPA3:</string>
+    <string name="wpa3_security_enhancements_description">WPA3 corrige de nombreuses vulnérabilités présentes dans WPA2. La poignée de main SAE (Simultaneous Authentication of Equals) dans WPA3 offre une protection contre les attaques par dictionnaire hors ligne, et l\'utilisation du cryptage des données individualisées améliore la sécurité dans les réseaux publics.</string>
     <string name="network_security_best_practices">Meilleures Pratiques de Sécurité Réseau</string>
-    <string name="use_strong_passwords">1 Utiliser des Mots de Passe Forts Assurez-vous que votre réseau Wi-Fi utilise un mot de passe fort et unique pour empêcher tout accès non autorisé</string>
-    <string name="enable_encryption">2 Activer le Cryptage Activez toujours le cryptage WPA3 ou WPA2 sur votre routeur pour une sécurité renforcée</string>
-    <string name="update_firmware">3 Mettre à Jour le Firmware Mettez régulièrement à jour le firmware de votre routeur pour corriger les vulnérabilités de sécurité et améliorer les performances</string>
-    <string name="use_firewalls">4 Utiliser des Pare-feux Activez le pare-feu sur votre routeur pour protéger votre réseau contre les menaces externes</string>
-    <string name="disable_wps">5 Désactiver le WPS Le Wi-Fi Protected Setup (WPS) peut représenter un risque de sécurité Désactivez-le si ce n\'est pas nécessaire.</string>
+    <string name="use_strong_passwords">1. Utiliser des Mots de Passe Forts: Assurez-vous que votre réseau Wi-Fi utilise un mot de passe fort et unique pour empêcher tout accès non autorisé.</string>
+    <string name="enable_encryption">2. Activer le Cryptage: Activez toujours le cryptage WPA3 ou WPA2 sur votre routeur pour une sécurité renforcée.</string>
+    <string name="update_firmware">3. Mettre à Jour le Firmware: Mettez régulièrement à jour le firmware de votre routeur pour corriger les vulnérabilités de sécurité et améliorer les performances.</string>
+    <string name="use_firewalls">4. Utiliser des Pare-feux: Activez le pare-feu sur votre routeur pour protéger votre réseau contre les menaces externes.</string>
+    <string name="disable_wps">5. Désactiver le WPS: Le Wi-Fi Protected Setup (WPS) peut représenter un risque de sécurité. Désactivez-le si ce n\'est pas nécessaire.</string>
 
-    <string name="pie_chart_1">Diagramme des protocoles</string>
-    <string name="pie_chart_2">Diagramme des fournisseurs</string>
+    <!-- Map Page -->
+    <string name="cluster_radius_menu">Définir le rayon du cluster</string>
+    <string name="choose_cluster">Choisir le rayon du cluster</string>
+
+    <string name="set_cluster_very_small">Rayon du cluster: Très petit (0.00005)</string>
+    <string name="set_cluster_small">Rayon du cluster: Petit (0.0001)</string>
+    <string name="set_cluster_medium">Rayon du cluster: Moyen (0.0005)</string>
+    <string name="set_cluster_large">Rayon du cluster: Grand (0.001)</string>
+
+    <string name="set_cluster_very_small_confirmed">Rayon du cluster: Très petit</string>
+    <string name="set_cluster_small_confirmed">Rayon du cluster: Petit</string>
+    <string name="set_cluster_medium_confirmed">Rayon du cluster: Moyen</string>
+    <string name="set_cluster_large_confirmed">Rayon du cluster: Grand</string>
+    <string name="ok_button_confirmed">OK</string>
+    <string name="cancel_button_confirmed">Annuler</string>
+
+    <!-- Statistics Page -->
+    <string name="Statistics">"Statistiques"</string>
+    <string name="pie_chart_1">Diagramme des Protocoles</string>
+    <string name="pie_chart_2">Diagramme des Fournisseurs</string>
+    <string name="security_protocol">Protocoles de Sécurité</string>
+    <string name="network_provider">Fournisseurs de Réseau</string>
+
+    <!-- Action Bar Titles -->
     <string name="home_bar_title">Menu Principal</string>
     <string name="stats_bar_title">Statistiques</string>
-    <string name="info_activity_bar_title">Informations supplémentaires</string>
+    <string name="info_activity_bar_title">Informations Supplémentaires</string>
     <string name="map_activity_bar_title">Carte</string>
     <string name="network_detail_activity_bar_title">Détails</string>
-    <string name="wifi_activity_bar_title">Réseaux découverts</string>
+    <string name="wifi_activity_bar_title">Réseaux Découverts</string>
+    <string name="activity_networks_bar_title">Réseaux Actifs</string>
+
     <string name="theme_text_view">Thème</string>
     <string name="light_theme">Clair</string>
     <string name="dark_theme">Sombre</string>
-    <string name="theme_selection">Sélection du thème</string>
-    <string name="unknown_values">Valeurs inconnues</string>
-    <string name="Statistics">Statistiques</string>
-    <string name="security_protocol">Protocole de sécurité</string>
-    <string name="network_provider">Fournisseurs de réseau</string>
-    <string name="filter_by_security">Filtrer par sécurité</string>
-    <string name="default_view">Vue par défaut</string>
-    <string name="activity_networks_bar_title">Réseaux actifs</string>
-    <string name="cluster_radius_menu">Définir le rayon du cluster</string>
-    <string name="choose_cluster">Choisir le rayon du cluster</string>
-    <string name="set_cluster_very_small">Rayon du cluster : très petit (0.00005)</string>
-    <string name="set_cluster_small">Rayon du cluster : petit (0.0001)</string>
-    <string name="set_cluster_medium">Rayon du cluster : moyen (0.0005)</string>
-    <string name="set_cluster_large">Rayon du cluster : grand (0.001)</string>
-    <string name="ok_button">Ok</string>
+    <string name="theme_selection">Sélection du Thème</string>
+    <string name="unknown_values">"Valeurs Inconnues"</string>
+
+    <string-array name="theme_array">
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
+    </string-array>
+    <string name="ok_button">OK</string>
     <string name="cancel_button">Annuler</string>
-    <string name="set_cluster_very_small_confirmed">Rayon du cluster : très petit</string>
-    <string name="set_cluster_small_confirmed">Rayon du cluster : petit</string>
-    <string name="set_cluster_medium_confirmed">Rayon du cluster : moyen</string>
-    <string name="set_cluster_large_confirmed">Rayon du cluster : grand</string>
-    <string name="ok_button_confirmed">Ok</string>
-    <string name="cancel_button_confirmed">Annuler</string>
     <string name="video_tutorial">Tutoriel Vidéo</string>
-    <string name="toggle_order">Alterner l\'ordre de la liste</string>
-    <string name="oldest_to_newest">du plus ancien au plus récent</string>
-    <string name="sorted_by">Classé par  </string>
-    <string name="filtered_by">Filtré par </string>
-    <string name="newest_to_oldest">du plus récent au plus ancien</string>
+    <string name="toggle_order">Changer l\'Ordre de la Liste</string>
+    <string name="oldest_to_newest">"Du Plus Ancien au Plus Récent"</string>
+    <string name="sorted_by">"Trié par "</string>
+    <string name="filtered_by">"Filtré par "</string>
+    <string name="newest_to_oldest">Du Plus Récent au Plus Ancien</string>
 </resources>

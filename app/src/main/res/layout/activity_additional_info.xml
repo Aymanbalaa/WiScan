@@ -45,6 +45,34 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/none"
+                    android:padding="8dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/none_description"
+                    android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/WPA1"
+                    android:padding="8dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/wpa1_description"
+                    android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/WPA2"
                     android:padding="8dp"/>
                 <TextView
@@ -52,6 +80,20 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/wpa2_description"
+                    android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/WPA2_Enterprise"
+                    android:padding="8dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/wpa2_enterprise_description"
                     android:padding="8dp"/>
             </TableRow>
 
@@ -73,6 +115,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/WPA3_Enterprise"
+                    android:padding="8dp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/wpa3_enterprise_description"
+                    android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/WEP"
                     android:padding="8dp"/>
                 <TextView
@@ -80,34 +136,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/wep_description"
-                    android:padding="8dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/a_4GHZ"
-                    android:padding="8dp"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/a_4ghz_description"
-                    android:padding="8dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/a_5GHZ"
-                    android:padding="8dp"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/a_5ghz_description"
                     android:padding="8dp"/>
             </TableRow>
 

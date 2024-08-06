@@ -1,6 +1,5 @@
 <resources>
-
-    //MAIN PAGE
+    <!-- MAIN PAGE -->
     <string name="app_name">WiScan-App</string>
     <string name="ssid_label">SSID: %1$s</string>
     <string name="bssid_label">BSSID: %1$s</string>
@@ -17,19 +16,17 @@
     <string name="location">Map</string>
     <string name="additional_information">Additional Information</string>
 
-    //DISCLAIMER
+    <!-- DISCLAIMER -->
     <string name="change_language">Change Language</string>
     <string name="disclaimer_title">Disclaimer</string>
     <string name="disclaimer_text">
-    The “WiScan” (We Scan) app is designed solely for the purpose of capturing local WiFi data (BSSIDs, SSIDs, security protocols, and corresponding location data), cleaning the data, displaying progress to the user, and sending the data for advanced visualizations such as graphs and maps. The app allows configuration through user controls like WiFi scan frequency and radius.\n\n
-    Important Notice:\n\n
-    - The WiScan app must be used exclusively for its intended purpose as described above.\n\n
-    - Users are prohibited from using the app for any malicious activities, including but not limited to unauthorized access, interference with network security, or privacy violations.\n\n
-    - By using the WiScan app, you agree to abide by all applicable laws and regulations regarding data collection and privacy.\n\n
-    - The developers of WiScan are not responsible for any misuse of the app.
-        <!--    <string name="disclaimer_text_fr">L\'application « Network Security Geo-Scanner » (WiScan) est conçue uniquement dans le but de capturer des données WiFi locales (BSSID, SSID, protocoles de sécurité et données de localisation correspondantes), de nettoyer les données, d\'afficher les progrès pour l\'utilisateur et d\'envoyer les données pour des visualisations avancées telles que des graphiques et des cartes. L\'application permet la configuration via des contrôles utilisateur tels que la fréquence et le rayon de scan WiFi.\n\nAvis Important :\n\n- L\'application WiScan doit être utilisée exclusivement à des fins prévues, comme décrit ci-dessus.\n- Il est interdit aux utilisateurs d\'utiliser l\'application pour toute activité malveillante, y compris, mais sans s\'y limiter, l\'accès non autorisé, l\'interférence avec la sécurité du réseau ou la violation de la confidentialité.\n- En utilisant l\'application WiScan, vous acceptez de respecter toutes les lois et réglementations applicables concernant la collecte de données et la confidentialité.\n- Les développeurs de WiScan ne sont pas responsables de toute mauvaise utilisation de l\'application.</string>-->
-        <!--    <string name="disclaimer_text_ru">Приложение «Network Security Geo-Scanner» (WiScan) предназначено исключительно для захвата данных о локальной сети WiFi (BSSID, SSID, протоколы безопасности и соответствующие данные о местоположении), очистки данных, отображения прогресса для пользователя и отправки данных для расширенной визуализации, такой как графики и карты. Приложение позволяет настраивать частоту и радиус сканирования WiFi через элементы управления.\n\nВажное уведомление: \n\n- Приложение WiScan должно использоваться исключительно для его предусмотренного назначения, как описано выше.\n- Пользователям запрещено использовать приложение для любых вредоносных действий, включая, но не ограничиваясь, несанкционированный доступ, вмешательство в безопасность сети или нарушение конфиденциальности.\n- Используя приложение WiScan, вы соглашаетесь соблюдать все применимые законы и правила, касающиеся сбора данных и конфиденциальности.\n- Разработчики WiScan не несут ответственности за любое неправильное использование приложения.</string>-->
-</string>
+        The “WiScan” (We Scan) app is designed solely for the purpose of capturing local WiFi data (BSSIDs, SSIDs, security protocols, and corresponding location data), cleaning the data, displaying progress to the user, and sending the data for advanced visualizations such as graphs and maps. The app allows configuration through user controls like WiFi scan frequency and radius.\n\n
+        Important Notice:\n\n
+        - The WiScan app must be used exclusively for its intended purpose as described above.\n\n
+        - Users are prohibited from using the app for any malicious activities, including but not limited to unauthorized access, interference with network security, or privacy violations.\n\n
+        - By using the WiScan app, you agree to abide by all applicable laws and regulations regarding data collection and privacy.\n\n
+        - The developers of WiScan are not responsible for any misuse of the app.
+    </string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string-array name="language_array">
@@ -38,7 +35,7 @@
         <item>Russian</item>
     </string-array>
 
-    // SSID PAGE
+    <!-- SSID PAGE -->
     <string name="provider_label">Provider : %1s</string>
     <string name="settings">SETTINGS</string>
     <string name="sort_by_ssid">Sort by SSID</string>
@@ -55,26 +52,24 @@
     <string name="filter_by_security">Filter by Security</string>
     <string name="default_view">Default View</string>
 
-
-    // FAQ QUESTIONS
+    <!-- FAQ QUESTIONS -->
     <string name="faq_what_is_nsgs">What is WiScan App?</string>
     <string name="faq_start_wifi_scan">How do I see a WiFi scan?</string>
     <string name="faq_configure_wifi_settings">How do I configure the WiFi scan settings?</string>
     <string name="faq_view_scanned_data">Where can I see the scanned WiFi data?</string>
 
-    // FAQ ANSWERS
+    <!-- FAQ ANSWERS -->
     <string name="answer_what_is_nsgs">The WiScan (We Scan) App is designed to capture local WiFi data, clean it, display progress to the user, and send the data for advanced visualizations such as graphs and maps.</string>
     <string name="answer_start_wifi_scan">To see scanned network, navigate to the Scanned Network List section, and press the button. The app will begin fetching the data from the cloud to show in this list.</string>
-    <string name="answer_configure_wifi_settings">You can configure the WiFi scan settings by going to the Main page and clicking on the three dots at the top right corner of the header. Here you can adjust the scan frequency, units of temperature and language to your needs. Ensure that your Pi is powered on, and connected to a hotspot. You should status feedback on the Pi\'s LCD screen. Ensure that the GPS sensor is not close to the Pi during the booting for the first time or rebooting the Pi.</string>
+    <string name="answer_configure_wifi_settings">You can configure the WiFi scan settings by going to the Main page and clicking on the three dots at the top right corner of the header. Here you can adjust the scan frequency, units of temperature and language to your needs. Ensure that your device is powered on, and connected to a hotspot. You should status feedback on the devices\'s LCD screen. Ensure that the GPS sensor is not close to the Pi during the booting for the first time or rebooting the Pi.</string>
     <string name="answer_view_scanned_data">The scanned WiFi data is displayed in the Scanned Network List section. This section provides a detailed view of the networks captured during the scan, including their BSSIDs, SSIDs, and security protocols.</string>
 
     <string name="title_activity_maps" translatable="false">MapsActivity</string>
 
-
     <string name="settingsTitle">Settings</string>
     <string name="help_title">Help</string>
 
-    // SETTINGS PAGE
+    <!-- SETTINGS PAGE -->
     <string name="temperature_unit_text_view">Temperature Unit</string>
     <string name="Celsius" translatable="false">Celsius</string>
     <string name="Fahrenheit" translatable="false">Fahrenheit</string>
@@ -87,7 +82,6 @@
     <string name="language1">English</string>
     <string name="language2">Français</string>
     <string name="language3">Русский</string>
-
 
     <string-array name="languageArray">
         <item>@string/language1</item>
@@ -123,22 +117,25 @@
         <item>ru</item>
     </string-array>
 
-
-    //ADDITIONAL INFORMATION PAGE
+    <!-- ADDITIONAL INFORMATION PAGE -->
     <string name="types_of_security">Types of Security</string>
     <string name="wifi_networks">WiFi Networks</string>
+    <string name="none">None</string>
+    <string name="WPA1">WPA1</string>
     <string name="WPA2">WPA2</string>
+    <string name="WPA2_Enterprise">WPA2-Enterprise</string>
     <string name="WPA3">WPA3</string>
+    <string name="WPA3_Enterprise">WPA3-Enterprise</string>
     <string name="WEP">WEP</string>
-    <string name="a_4GHZ">4GHz</string>
-    <string name="a_5GHZ">5GHz</string>
     <string name="type">Type</string>
     <string name="description">Description</string>
+    <string name="none_description">A passwordless and unencrypted network.</string>
+    <string name="wpa1_description">Wi-Fi Protected Access (WPA1) is a security protocol developed to address the weaknesses of WEP. It uses TKIP (Temporal Key Integrity Protocol) for stronger encryption.</string>
     <string name="wpa2_description">Wi-Fi Protected Access II (WPA2) is a network security technology commonly used on Wi-Fi wireless networks. It is an improvement over WPA and provides stronger data protection and network access control.</string>
+    <string name="wpa2_enterprise_description">WPA2-Enterprise is designed for enterprise networks, requiring a RADIUS server for authentication and providing enhanced security through the use of 802.1X.</string>
     <string name="wpa3_description">Wi-Fi Protected Access III (WPA3) is the latest generation of Wi-Fi security, providing more robust authentication and improved cryptographic strength.</string>
+    <string name="wpa3_enterprise_description">WPA3-Enterprise offers the highest level of security for enterprise networks, requiring 192-bit encryption and enhanced protections for sensitive data.</string>
     <string name="wep_description">Wired Equivalent Privacy (WEP) is a security protocol for wireless networks that provides data confidentiality comparable to a traditional wired network. However, it is considered to be the least secure due to various vulnerabilities.</string>
-    <string name="a_4ghz_description">4GHz refers to the frequency band used by some Wi-Fi networks. It is commonly used due to its compatibility with a wide range of devices, though it is susceptible to interference.</string>
-    <string name="a_5ghz_description">5GHz is another frequency band used by Wi-Fi networks. It provides faster speeds and less interference compared to the 2.4GHz band but has a shorter range.</string>
     <string name="common_vulnerabilities_and_attacks">Common Vulnerabilities and Attacks</string>
     <string name="wep_vulnerabilities">WEP Vulnerabilities:</string>
     <string name="wep_vulnerabilities_description">WEP is vulnerable to several attacks due to its use of static keys and weak initialization vectors. Common attacks include the "FMS attack," which exploits these weaknesses to quickly crack WEP keys.</string>
@@ -153,18 +150,14 @@
     <string name="use_firewalls">4. Use Firewalls: Enable the firewall on your router to protect your network from external threats.</string>
     <string name="disable_wps">5. Disable WPS: Wi-Fi Protected Setup (WPS) can be a security risk. Disable it if not needed.</string>
 
-
-    //Map Page
-
+    <!-- Map Page -->
     <string name="cluster_radius_menu">Set Cluster Radius</string>
     <string name="choose_cluster">Choose Cluster Radius</string>
-
 
     <string name="set_cluster_very_small">Cluster Radius: Very Small (0.00005)</string>
     <string name="set_cluster_small">Cluster Radius: Small (0.0001)</string>
     <string name="set_cluster_medium">Cluster Radius: Medium (0.0005)</string>
     <string name="set_cluster_large">Cluster Radius: Large (0.001)</string>
-
 
     <string name="set_cluster_very_small_confirmed">Cluster Radius: Very Small</string>
     <string name="set_cluster_small_confirmed">Cluster Radius: Small</string>
@@ -173,21 +166,14 @@
     <string name="ok_button_confirmed">OK</string>
     <string name="cancel_button_confirmed">Cancel</string>
 
-
-
-
-
-    //Statistics Page
-
-    <string name="Statistics" >"Statistics"</string>
-    <string name="pie_chart_1" >Protocols Chart</string>
-    <string name="pie_chart_2" >Providers Chart</string>
+    <!-- Statistics Page -->
+    <string name="Statistics">"Statistics"</string>
+    <string name="pie_chart_1">Protocols Chart</string>
+    <string name="pie_chart_2">Providers Chart</string>
     <string name="security_protocol">Security Protocols</string>
     <string name="network_provider">Network Providers"</string>
 
-
-    //Action Bar Titles
-
+    <!-- Action Bar Titles -->
     <string name="home_bar_title">Home</string>
     <string name="stats_bar_title">Statistics</string>
     <string name="info_activity_bar_title">Additional Information</string>
@@ -196,8 +182,6 @@
     <string name="wifi_activity_bar_title">Discovered Networks</string>
     <string name="activity_networks_bar_title">Active Networks</string>
 
-
-    //
     <string name="theme_text_view">Theme</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
@@ -216,5 +200,4 @@
     <string name="sorted_by">"Sorted by "</string>
     <string name="filtered_by">"Filtered by "</string>
     <string name="newest_to_oldest">Newest to Oldest</string>
-
 </resources>
