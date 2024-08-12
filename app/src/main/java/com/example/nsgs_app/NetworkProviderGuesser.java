@@ -10,7 +10,7 @@ public class NetworkProviderGuesser {
     private static final Map<String, String> providers = new HashMap<>();
 
     static {
-        // ADD MORE COMBINATIONS FOR NETWORK PROVIDERS
+        // ADD MORE COMBINATIONS FOR NETWORK PROVIDERS AS WE FIND THEM
         providers.put("Bell", ".*Bell.*|.*BELL.*|.*bell.*");
         providers.put("Rogers", ".*Rogers.*|.*ROGERS.*|.*rogers.*");
         providers.put("Telus", ".*Telus.*|.*TELUS.*|.*telus.*");
@@ -24,6 +24,7 @@ public class NetworkProviderGuesser {
         providers.put("Fizz", ".*Fizz.*|.*FIZZ.*|.*fizz.*");
     }
 
+    // hasmap setup
     public static String getNetworkProvider(String ssid) {
         for (Map.Entry<String, String> entry : providers.entrySet()) {
             Pattern pattern = Pattern.compile(entry.getValue());

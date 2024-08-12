@@ -40,6 +40,9 @@ public class NetworkAdapter extends RecyclerView.Adapter<NetworkAdapter.NetworkV
         // Set OnClickListener to open NetworkDetailActivity with network details and current filter
         holder.itemView.setOnClickListener(v -> NetworkDetailActivity.start(context, network, currentFilter));
 
+        // can i remove this?
+        //@todo
+
        /* holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, NetworkDetailActivity.class);
             intent.putExtra("ssid", network.getSsid());

@@ -25,8 +25,8 @@ import java.util.Objects;
 public class HelpActivity extends AppCompatActivity {
 
     private ExpandableListView faqListView;
-    private List<String> listDataHeader;
-    private Map<String, String> listDataChild;
+    private List<String> quests;
+    private Map<String, String> responsesss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class HelpActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.tutorial_vid_text);
 
+        // @TODO transate this?
         String text = "How can I get started? Click here for a video tutorial.";
         SpannableString spannableString = new SpannableString(text);
 
@@ -49,7 +50,7 @@ public class HelpActivity extends AppCompatActivity {
 
         prepareListData();
 
-        FaqExpandableListAdapter listAdapter = new FaqExpandableListAdapter(this, listDataHeader, listDataChild);
+        FaqExpandableListAdapter listAdapter = new FaqExpandableListAdapter(this, quests, responsesss);
         faqListView.setAdapter(listAdapter);
 
         setListViewHeightBasedOnChildren(faqListView); // Adjust height based on children
@@ -84,14 +85,14 @@ public class HelpActivity extends AppCompatActivity {
     }
 
     private void prepareListData() {
-        listDataHeader = List.of(
+        quests = List.of(
                 getString(R.string.faq_what_is_nsgs),
                 getString(R.string.faq_start_wifi_scan),
                 getString(R.string.faq_configure_wifi_settings),
                 getString(R.string.faq_view_scanned_data)
         );
 
-        listDataChild = Map.of(
+        responsesss = Map.of(
                 getString(R.string.faq_what_is_nsgs), getString(R.string.answer_what_is_nsgs),
                 getString(R.string.faq_start_wifi_scan), getString(R.string.answer_start_wifi_scan),
                 getString(R.string.faq_configure_wifi_settings), getString(R.string.answer_configure_wifi_settings),

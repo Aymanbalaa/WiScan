@@ -31,9 +31,15 @@ public class NetworkManager {
     private static NetworkManager instance;
     private List<Network> networkList;
     private List<Network> triangulatedList;
+
+    // @todo deprecate we dont want shared prefs
     private static final String PREFS_NAME = "WiFiActivityPrefs";
+
+    // table nmame
     private static final String NETWORK_LIST_KEY = "network_list";
     private static final String TRIANGULATED_LIST_KEY = "triangulated_list";
+
+
     private Context context;
 
     private NetworkManager(Context context) {
@@ -80,7 +86,12 @@ public class NetworkManager {
                         JSONObject jsonObject = new JSONObject(responseData);
                         Gson gson = new Gson();
                         Type networkListType = new TypeToken<List<Network>>() {}.getType();
+                        // triangulated is boolean
+                        // inside function arguments
+                        // true should iony be in map
                         List<Network> fetchedList = gson.fromJson(jsonObject.getJSONArray(isTriangulated ? "records" : "networks").toString(), networkListType);
+
+                        //  we dont want duppps ssid
                         Set<String> seenSSIDs = new HashSet<>();
                         List<Network> uniqueNetworks = new ArrayList<>();
 
@@ -117,6 +128,9 @@ public class NetworkManager {
         });
     }
 
+    // shared preferences causing bugs and refresh issues , can we avoid?
+
+    // @todo depracate
     private void saveNetworkListToPreferences() {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -125,7 +139,7 @@ public class NetworkManager {
         editor.putString(NETWORK_LIST_KEY, networkListJson);
         editor.apply();
     }
-
+    // @todo depracate
     private void saveTriangulatedListToPreferences() {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -134,7 +148,7 @@ public class NetworkManager {
         editor.putString(TRIANGULATED_LIST_KEY, triangulatedListJson);
         editor.apply();
     }
-
+    // @todo depracate
     private void loadNetworkListFromPreferences() {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String networkListJson = preferences.getString(NETWORK_LIST_KEY, null);
@@ -150,12 +164,12 @@ public class NetworkManager {
             triangulatedList = gson.fromJson(triangulatedListJson, listType);
         }
     }
-
+    // @todo depracate
     public void refreshLists() {
         loadNetworkListFromPreferences();
         loadTriangulatedListFromPreferences();
     }
-
+    // @todo depracate
     private void loadTriangulatedListFromPreferences() {
         SharedPreferences preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String triangulatedListJson = preferences.getString(TRIANGULATED_LIST_KEY, null);

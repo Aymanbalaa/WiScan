@@ -52,15 +52,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ActivityMapsBinding binding;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
     private List<Network> networkList = new ArrayList<>();
     private List<Network> triangulatedList = new ArrayList<>();
     private List<Network> finalNetworkList = new ArrayList<>();
+
     private Map<LatLng, List<Network>> locationNetworkMap = new HashMap<>();
     private Map<LatLng, Marker> currentMarkers = new HashMap<>();
     private Handler handler;
     private Runnable refreshRunnable;
-    private static final int REFRESH_INTERVAL = 3000; // 3 seconds
-    private double clusterRadius = 0.00000005;
+
+
+    private static final int REFRESH_INTERVAL = 3000; // 3 seconds in miliseconds
+    private double clusterRadius = 0.00000005; // default is lowww
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         getSupportActionBar().setTitle(getString(R.string.map_activity_bar_title));
 
+        // theme setupd
+        // causes bugs?
         String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.map), this, this);
         switch(currentTheme) {
             case "Light":
@@ -88,7 +94,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        // xoom in/out
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -98,11 +104,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void run() {
                 refreshData();
-                handler.postDelayed(this, REFRESH_INTERVAL);
+
+                handler.postDelayed(this, REFRESH_INTERVAL); // threads created
             }
         };
     }
 
+    // all needed lists refresh
     private void refreshData() {
         fetchNetworkList();
         addSecurityToTriangulated();
@@ -111,6 +119,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         updateNetworkPins();
     }
 
+    // trianmgulated networks doesnt have security so we add it heree
     private void addSecurityToTriangulated() {
         Map<String, String> bssidToSecurityMap = new HashMap<>();
         for (Network network : networkList) {
@@ -136,17 +145,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         for (Network network : triangulatedList) {
             if (network != null && network.getBssid() != null) {
                 finalNetworkList.add(network);
+
                 bssidSet.add(network.getBssid());
             }
         }
 
-        for (Network network : networkList) {
-            if (network != null && network.getBssid() != null && !bssidSet.contains(network.getBssid())) {
+        for (Network network : networkList) {if (network != null && network.getBssid() != null && !bssidSet.contains(network.getBssid())) {
                 finalNetworkList.add(network);
             }
         }
     }
 
+    // google maps sdk help page copied from
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "onMapReady");
@@ -156,6 +166,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setMarkerClickListener();
     }
 
+    // google maps sdk help page copied from
     private void enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -182,6 +193,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    // google maps sdk help page copied from
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -196,10 +208,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    // fetch botgh ists
     private void fetchNetworkList() {
         NetworkManager networkManager = NetworkManager.getInstance(this);
         String networksUrl = "http://217.15.171.225:5000/get_all_networks";
-        String triangulatedUrl = "http://217.15.171.225:6000/filtered_triangulated";
+        String triangulatedUrl = "http://217.15.171.225:6000/filtered_triangulated"; // different endpoints!
+        // maybe not use 217? dont want to use endpint
 
         networkManager.fetchNetworks(networksUrl, false,false);
         networkManager.fetchNetworks(triangulatedUrl, true,false);
@@ -235,12 +249,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    // cartesian math using maps coord
     private double distanceBetween(LatLng loc1, LatLng loc2) {
         double latDiff = loc1.latitude - loc2.latitude;
         double lngDiff = loc1.longitude - loc2.longitude;
         return Math.sqrt(latDiff * latDiff + lngDiff * lngDiff);
     }
 
+    // dont remove pins but refresh them? tested enough to mke sure refresh wont ruin display
     private void updateNetworkPins() {
         Set<LatLng> locationsToRemove = new HashSet<>(currentMarkers.keySet());
         if (locationNetworkMap != null) {
@@ -320,6 +336,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     @Override
+    // in toobaer we have optin with wrench
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.action_set_cluster_radius) {

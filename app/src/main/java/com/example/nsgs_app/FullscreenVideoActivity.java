@@ -27,7 +27,7 @@ public class FullscreenVideoActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
+// THEME _ ACTION BAR SETUPP
         switch (currentTheme) {
             case "Light":
             case "Clair":

@@ -1,6 +1,7 @@
 package com.example.nsgs_app;
 
 public class ActiveNetwork {
+    // we odnt use id but its here for json filtering
     private String bssid;
     private int id;
     private int signalStrength;

@@ -39,9 +39,7 @@ public class StatsActivity extends AppCompatActivity {
     private List<Network> networkList;
     private PieChart pieChartProtocols;
     private PieChart pieChartProviders;
-    private TextView textViewToRightOfPieTitle;
     private TextView textViewBelowPieTitle;
-    private String neighborhood;
     private Button buttonPieChart1;
     private Button buttonPieChart2;
     public Set<String> protocols;
@@ -154,6 +152,7 @@ public class StatsActivity extends AppCompatActivity {
         legend.setYEntrySpace(15f); // Increased vertical space to avoid overlapping
     }
 
+    // GITHUB REPO TEMPATE PROVIDED
     private void loadPieChartDataProtocols() {
         pieChartProtocols.setCenterText(getString(R.string.security_protocol));
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
@@ -178,14 +177,13 @@ public class StatsActivity extends AppCompatActivity {
             pieChartProtocols.animateXY(2000, 2000); // Faster animation
             setCustomLegendEntries(pieChartProtocols, customLegendEntries);
             pieChartProtocols.invalidate();
-
-            // Request layout pass to fix legend overlap
             pieChartProtocols.requestLayout();
         } else {
             Log.e("StatsActivity", "Mismatch between legend entries and pie chart data entries.");
         }
     }
 
+    // GITHUB TEMPLATE
     private void loadPieChartDataProviders() {
         pieChartProviders.setCenterText(getString(R.string.network_provider));
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
@@ -219,12 +217,13 @@ public class StatsActivity extends AppCompatActivity {
         }
     }
 
+    // writes everything below
     private void setCustomLegendEntries(PieChart pieChart, List<String> customLegendEntries) {
         Legend legend = pieChart.getLegend();
         legend.setCustom(createLegendEntries(customLegendEntries));
         legend.setWordWrapEnabled(true);
         legend.setXEntrySpace(10f);
-        legend.setYEntrySpace(15f); // Increased vertical space to avoid overlapping
+        legend.setYEntrySpace(15f); // SWEET SPOT TO AVOID OVERLAPS
     }
 
     private List<LegendEntry> createLegendEntries(List<String> customLegendEntries) {
@@ -243,6 +242,7 @@ public class StatsActivity extends AppCompatActivity {
         return legendEntries;
     }
 
+    // colors used can be changed here make sure theyre different/distinctable
     private int[] getColorList(int size) {
         int[] baseColors = {
                 Color.rgb(193, 37, 82), Color.rgb(255, 102, 0), Color.rgb(245, 199, 0),
@@ -259,6 +259,13 @@ public class StatsActivity extends AppCompatActivity {
         return colors;
     }
 
+
+
+
+
+
+
+    // to start count
     private Set<String> getUniqueSecurityProtocols(List<Network> networks) {
         Set<String> securityProtocols = new HashSet<>();
         for (Network network : networks) {
@@ -266,7 +273,7 @@ public class StatsActivity extends AppCompatActivity {
         }
         return securityProtocols;
     }
-
+    // to start count
     private Set<String> getUniqueProviders(List<Network> networks) {
         Set<String> providers = new HashSet<>();
         for (Network network : networks) {
@@ -275,6 +282,7 @@ public class StatsActivity extends AppCompatActivity {
         return providers;
     }
 
+    // for fonts to switche
     private boolean isDarkMode() {
         int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
         return nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES;

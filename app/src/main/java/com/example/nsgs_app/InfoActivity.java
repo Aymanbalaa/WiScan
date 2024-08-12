@@ -18,6 +18,7 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_additional_info);
         String currentTheme = themeInitializer(findViewById(R.id.additional_activity_layout),this,this);
 
+        // Action bar stuff and theme initttt
         getSupportActionBar().setTitle(getString(R.string.info_activity_bar_title));
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

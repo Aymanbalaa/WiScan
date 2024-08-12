@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -43,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView cpuTempTextView, cpuTimeTextView, scanningStatusTextView;
     private List<SystemStats> systemStats;
     private static boolean disclaimerShown = false;
-    private AlertDialog disclaimerDialog;
-    private boolean isActivityRunning;
+    private AlertDialog discText;
+    private boolean isListOpened;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         String currentTheme = ThemeSelection.themeInitializer(findViewById(R.id.main), this,this);
 
-
+// theme setup + action bar
         getSupportActionBar().setTitle(getString(R.string.home_bar_title));
         switch(currentTheme) {
 
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.colorPrimary)));
         }
 
-        isActivityRunning = true;
+        isListOpened = true;
 
         Button wifiButton = findViewById(R.id.wifi_button);
         Button locationButton = findViewById(R.id.location_button);
@@ -77,21 +76,21 @@ public class MainActivity extends AppCompatActivity {
             disclaimerShown = true;
         }
 
+
         wifiButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, WiFiActivity.class);
             startActivity(intent);
         });
 
+
         locationButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(intent);
         });
-
         activeButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ActiveActivity.class);
             startActivity(intent);
         });
-
         statsButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, StatsActivity.class);
             startActivity(intent);
@@ -107,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        isActivityRunning = false;
-        if (disclaimerDialog != null && disclaimerDialog.isShowing()) {
-            disclaimerDialog.dismiss();
+        isListOpened = false;
+        if (discText != null && discText.isShowing()) {
+            discText.dismiss();
         }
     }
 
@@ -144,8 +143,11 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(responseData);
                         Gson gson = new Gson();
 
-                        // Filtering JSON data and feeding it into List of Networks
+                        // Filtering JSON data
                         Type systemStatsType = new TypeToken<List<SystemStats>>() {}.getType();
+
+
+                        // systen_stats is tabe name
                         systemStats = gson.fromJson(jsonObject.getJSONArray("system_stats").toString(), systemStatsType);
 
                         runOnUiThread(() -> {
@@ -183,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
+// too bar for settings help and additional info
         if (id == R.id.help) {
             Intent helpIntent = new Intent(this, HelpActivity.class);
             startActivity(helpIntent);
@@ -207,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showDisclaimer() {
-        if (!isActivityRunning) return;
+        if (!isListOpened) return;
 
         LayoutInflater inflater = LayoutInflater.from(this);
         @SuppressLint("InflateParams") LinearLayout disclaimerLayout = (LinearLayout) inflater.inflate(R.layout.dialog_disclaimer, null);
@@ -233,15 +235,11 @@ public class MainActivity extends AppCompatActivity {
             Language.setLanguage(this, newLanguage);
             Language.saveLanguage(this, newLanguage);
 
-            // Update the disclaimer text
-            TextView disclaimerText = disclaimerLayout.findViewById(R.id.disclaimer_text);
-            disclaimerText.setText(R.string.disclaimer_text);
-
-            // Update title if necessary
+            // disclaimer text and xml setups
+            TextView textDisc = disclaimerLayout.findViewById(R.id.disclaimer_text);
+            textDisc.setText(R.string.disclaimer_text);
             TextView disclaimerTitle = disclaimerLayout.findViewById(R.id.disclaimer_title);
             disclaimerTitle.setText(R.string.disclaimer_title);
-
-            // Update buttons text
             Button acceptButton = disclaimerLayout.findViewById(R.id.accept_button);
             Button declineButton = disclaimerLayout.findViewById(R.id.decline_button);
             acceptButton.setText(R.string.accept);
@@ -251,25 +249,27 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(disclaimerLayout);
 
-        disclaimerDialog = builder.create();
+        discText = builder.create();
 
         Button acceptButton = disclaimerLayout.findViewById(R.id.accept_button);
         Button declineButton = disclaimerLayout.findViewById(R.id.decline_button);
 
         acceptButton.setOnClickListener(v -> {
-            disclaimerDialog.dismiss();
+            discText.dismiss();
         });
 
         declineButton.setOnClickListener(v -> {
-            disclaimerDialog.dismiss();
+            discText.dismiss();
             System.exit(0);
         });
 
-        disclaimerDialog.setCancelable(false);
-        disclaimerDialog.show();
+        discText.setCancelable(false);
+        discText.show();
     }
 
     private void setButtonColor(String theme, Button wifiButton, Button locationButton, Button activeButton, Button infoButton) {
+        // button color and theme
+        // shoud be switched to themes.xml
         switch (theme) {
             case "Dark":
             case "Sombre":

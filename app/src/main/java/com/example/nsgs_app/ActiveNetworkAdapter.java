@@ -39,9 +39,9 @@ public class ActiveNetworkAdapter extends RecyclerView.Adapter<ActiveNetworkAdap
         int signalStrength = activeNetwork.getSignalStrength();
         holder.signalStrengthPercentageTextView.setText(signalStrength + "%");
 
-        // Set the appropriate signal strength drawable
+        // signal to xml conversion 0 is empty 4 is full
         if (signalStrength <= 20) {
-            holder.signalStrengthImageView.setImageResource(R.drawable.signal_0);
+            holder.signalStrengthImageView.setImageResource(R.drawable.signal_0); // emotyyy
         } else if (signalStrength <= 40) {
             holder.signalStrengthImageView.setImageResource(R.drawable.signal_1);
         } else if (signalStrength <= 60) {
@@ -49,7 +49,7 @@ public class ActiveNetworkAdapter extends RecyclerView.Adapter<ActiveNetworkAdap
         } else if (signalStrength <= 80) {
             holder.signalStrengthImageView.setImageResource(R.drawable.signal_3);
         } else {
-            holder.signalStrengthImageView.setImageResource(R.drawable.signal_4);
+            holder.signalStrengthImageView.setImageResource(R.drawable.signal_4); // full
         }
 
         holder.itemView.setOnClickListener(v -> {
@@ -61,11 +61,12 @@ public class ActiveNetworkAdapter extends RecyclerView.Adapter<ActiveNetworkAdap
                 }
             }
 
+            // GET REST OF DETAILS FORM THE OTHER FETCH
             if (selectedNetwork != null) {
                 Intent intent = new Intent(context, ActiveNetworkDetailsActivity.class);
                 intent.putExtra("ssid", selectedNetwork.getSsid());
                 intent.putExtra("bssid", selectedNetwork.getBssid());
-                intent.putExtra("security", selectedNetwork.getSecurity());
+                intent.putExtra("security", selectedNetwork.getSecurity()); // WE DONT HAVE THIS IN ACTIVE LIST FETCH
                 intent.putExtra("coordinates", selectedNetwork.getCoordinates());
                 intent.putExtra("postalCode", selectedNetwork.getPostalCode());
                 intent.putExtra("neighborhood", selectedNetwork.getNeighborhood());
@@ -79,6 +80,7 @@ public class ActiveNetworkAdapter extends RecyclerView.Adapter<ActiveNetworkAdap
         return activeNetworkList.size();
     }
 
+    // XML STUFF
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ssidTextView;
         ImageView signalStrengthImageView;

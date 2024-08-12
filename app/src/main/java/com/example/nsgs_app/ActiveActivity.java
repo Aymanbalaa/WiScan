@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -40,7 +39,7 @@ public class ActiveActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ActiveNetworkAdapter activeNetworkAdapter;
     private List<ActiveNetwork> activeNetworkList = new ArrayList<>();
-    private List<ActiveNetwork> filteredActiveNetworkList = new ArrayList<>();
+    private List<ActiveNetwork> activeListRefresh = new ArrayList<>();
     private Handler handler;
     private Runnable fetchTask;
     private int fetchInterval;
@@ -79,7 +78,8 @@ public class ActiveActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Fetch the network list from shared preferences
+        // we do this for the first refrsh onlyyy
+        // we then use the other fetching class
         SharedPreferences preferences = getSharedPreferences("WiFiActivityPrefs", MODE_PRIVATE);
         String networkListJson = preferences.getString("network_list", null);
         if (networkListJson != null) {
@@ -90,46 +90,45 @@ public class ActiveActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        fetchInterval = 1000; // Convert to milliseconds
+        fetchInterval = 1000; // 1 second = 1000ms !!!!!!!!!!!!
 
         fetchTask = new Runnable() {
             @Override
             public void run() {
-                saveScrollPosition(); // Save the scroll position before fetching data
+                saveScrollPosition(); // helps fix some scroll bugs
                 fetchActiveNetworks();
                 handler.postDelayed(this, fetchInterval);
             }
         };
 
-        fetchActiveNetworks(); // Initial fetch on create
+        fetchActiveNetworks(); // Initial llist fetchhj
 
-        handler.postDelayed(fetchTask, fetchInterval); // Schedule fetch every interval
+        handler.postDelayed(fetchTask, fetchInterval); // creates threads
+        // repeats every fetch interval
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Save the current scroll position and offset
-        saveScrollPosition();
+        saveScrollPosition(); // when we leave to detais it save the ist
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Restore the scroll position and offset
-        restoreScrollPosition();
+        restoreScrollPosition(); // when we come back from detais it restores list
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        handler.removeCallbacks(fetchTask);
+        handler.removeCallbacks(fetchTask); // stop thread to save memory
     }
 
     private void fetchActiveNetworks() {
         OkHttpClient client = new OkHttpClient();
 
-        String url = "http://217.15.171.225:5000/get_all_active_networks";
+        String url = "http://217.15.171.225:5000/get_all_active_networks"; // endpoint for active , ip can change
 
         Request request = new Request.Builder()
                 .url(url)
@@ -152,19 +151,20 @@ public class ActiveActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(responseData);
                         Gson gson = new Gson();
 
-                        // Filtering JSON data and feeding it into List of ActiveNetworks
+                        // Filtering JSON data
+                        // activeScanNetworks is the table name IF CHANGED CHANGE IT HERE
                         Type activeNetworkListType = new TypeToken<List<ActiveNetwork>>() {}.getType();
                         activeNetworkList = gson.fromJson(jsonObject.getJSONArray("activeScanNetworks").toString(), activeNetworkListType);
                         activeNetworkList.sort(Comparator.comparing(ActiveNetwork::getSignalStrength).reversed());
 
                         runOnUiThread(() -> {
-                            // Update filtered active network list
-                            filteredActiveNetworkList.clear();
-                            filteredActiveNetworkList.addAll(activeNetworkList);
+                            // cear and refil list at every refresh
+                            activeListRefresh.clear();
+                            activeListRefresh.addAll(activeNetworkList);
 
                             // linking recycler view from xml to java
                             if (activeNetworkAdapter == null) {
-                                activeNetworkAdapter = new ActiveNetworkAdapter(ActiveActivity.this, filteredActiveNetworkList, networkList);
+                                activeNetworkAdapter = new ActiveNetworkAdapter(ActiveActivity.this, activeListRefresh, networkList);
                                 recyclerView.setAdapter(activeNetworkAdapter);
                             } else {
                                 activeNetworkAdapter.notifyDataSetChanged();
@@ -182,9 +182,12 @@ public class ActiveActivity extends AppCompatActivity {
         });
     }
 
+    // saved from wifi activity
     private void saveScrollPosition() {
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         if (layoutManager != null) {
+            // @todo change at some point vauses bugs
+            // first viisble is not reliable
             int scrollPosition = layoutManager.findFirstVisibleItemPosition();
             int scrollOffset = 0;
             if (scrollPosition != RecyclerView.NO_POSITION) {

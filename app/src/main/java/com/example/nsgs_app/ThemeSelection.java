@@ -17,6 +17,7 @@ public class ThemeSelection {
 
     public static String themeInitializer(ViewGroup viewGroup, Context context, Activity activity) {
 
+        // we need to do it in all languages until we fix theme logic
         String currentTheme = context.getSharedPreferences("prefs", MODE_PRIVATE).getString("Theme", "Light");
         switch (currentTheme) {
             case "Dark":

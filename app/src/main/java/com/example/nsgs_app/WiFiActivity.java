@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,16 +45,24 @@ public class WiFiActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private NetworkAdapter networkAdapter;
+
     private List<Network> networkList;
     private List<Network> filteredNetworkList;
     private TextView totalNetworksTextView;
     private Handler handler;
     private Runnable fetchTask;
+
+
     private int fetchInterval;
     private Comparator<Network> currentComparator;
-    private String currentSortDescription = "Oldest to Newest"; // default sort description
-    private String currentFilter;
+
+
+
+    private String currentFiterStatus = "Oldest to Newest"; // default sort description
+    private String currentFilterNotTheStringgg;
     private boolean isFilteringMode = false;
+
+
     private Button btnExportCsv, btnScroll;
     private boolean isAtBottom = false;
     private String currentQuery = "";
@@ -79,6 +86,8 @@ public class WiFiActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        // theme setupppp and action barr
 
         switch(currentTheme) {
             case "Light":
@@ -178,8 +187,8 @@ public class WiFiActivity extends AppCompatActivity {
         // Check if there is a filter state passed back from NetworkDetailActivity
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("currentFilter")) {
-            currentFilter = intent.getStringExtra("currentFilter");
-            isFilteringMode = currentFilter != null;
+            currentFilterNotTheStringgg = intent.getStringExtra("currentFilter");
+            isFilteringMode = currentFilterNotTheStringgg != null;
         }
         applyCurrentSortOrFilter();
 
@@ -263,12 +272,12 @@ public class WiFiActivity extends AppCompatActivity {
             return true;
         } else if (itemId == R.id.sort_by_ssid) {
             isFilteringMode = false;
-            currentSortDescription = "SSID";
+            currentFiterStatus = "SSID";
             sortNetworkList(Comparator.comparing(network -> network.getSsid().toLowerCase()));
             return true;
         } else if (itemId == R.id.sort_by_security) {
             isFilteringMode = false;
-            currentSortDescription = "Security";
+            currentFiterStatus = "Security";
             sortNetworkList(Comparator.comparing(Network::getSecurity, String::compareToIgnoreCase));
             return true;
         } else if (itemId == R.id.action_toggle_order) {
@@ -295,7 +304,7 @@ public class WiFiActivity extends AppCompatActivity {
     }
 
     private void filterNetworkList(String securityType) {
-        currentFilter = securityType;
+        currentFilterNotTheStringgg = securityType;
         if (networkList != null) {
             if (securityType == null) {
                 filteredNetworkList = new ArrayList<>(networkList); // No filter, show all networks
@@ -313,10 +322,10 @@ public class WiFiActivity extends AppCompatActivity {
             return;
         }
 
-        if (isFilteringMode && currentFilter != null) {
+        if (isFilteringMode && currentFilterNotTheStringgg != null) {
             // Apply the current filter
             filteredNetworkList = networkList.stream()
-                    .filter(network -> network.getSecurity().equalsIgnoreCase(currentFilter))
+                    .filter(network -> network.getSecurity().equalsIgnoreCase(currentFilterNotTheStringgg))
                     .collect(Collectors.toList());
         } else if (!isFilteringMode && currentComparator != null) {
             // Apply the current sort
@@ -331,11 +340,11 @@ public class WiFiActivity extends AppCompatActivity {
 
     @SuppressLint("StringFormatMatches")
     private void updateAdapter(List<Network> networkList) {
-        String sortDescription = isFilteringMode ? getString(R.string.filtered_by) + currentFilter : getString(R.string.sorted_by) + currentSortDescription;
+        String sortDescription = isFilteringMode ? getString(R.string.filtered_by) + currentFilterNotTheStringgg : getString(R.string.sorted_by) + currentFiterStatus;
         totalNetworksTextView.setText(getString(R.string.total_networks_label, networkList.size(), sortDescription));
 
         if (networkAdapter == null) {
-            networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList, currentFilter);
+            networkAdapter = new NetworkAdapter(WiFiActivity.this, networkList, currentFilterNotTheStringgg);
             recyclerView.setAdapter(networkAdapter);
         } else {
             networkAdapter.updateNetworkList(networkList);
@@ -343,6 +352,8 @@ public class WiFiActivity extends AppCompatActivity {
         }
     }
 
+
+    // on resume and on pause
     private void saveScrollPosition() {
         LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         if (layoutManager != null) {
@@ -362,6 +373,9 @@ public class WiFiActivity extends AppCompatActivity {
         }
     }
 
+
+
+    // bug fix
     private void restoreScrollPosition() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         int scrollPosition = preferences.getInt(SCROLL_POSITION_KEY, RecyclerView.NO_POSITION);
@@ -388,6 +402,7 @@ public class WiFiActivity extends AppCompatActivity {
         }
     }
 
+    //used  auto fitering
     private Set<String> getUniqueSecurityProtocols(List<Network> networks) {
         Set<String> securityProtocols = new HashSet<>();
         for (Network network : networks) {
@@ -395,7 +410,7 @@ public class WiFiActivity extends AppCompatActivity {
         }
         return securityProtocols;
     }
-
+// csv file have to be escpaed since "," cause encoding issuess
     private String escapeCsvValue(String value) {
         if (value == null) {
             return "\"\"";
@@ -411,6 +426,9 @@ public class WiFiActivity extends AppCompatActivity {
         }
     }
 
+
+
+    // newest at top can be switched to opposite
     private void toggleOrder() {
         isReversedOrder = !isReversedOrder;
         if (networkList != null) {
@@ -426,9 +444,9 @@ public class WiFiActivity extends AppCompatActivity {
 
     private void resetFiltersAndSort() {
         isFilteringMode = false;
-        currentFilter = null;
+        currentFilterNotTheStringgg = null;
         currentComparator = null;
-        currentSortDescription = isReversedOrder ? getString(R.string.newest_to_oldest) : getString(R.string.oldest_to_newest);
+        currentFiterStatus = isReversedOrder ? getString(R.string.newest_to_oldest) : getString(R.string.oldest_to_newest);
         applyCurrentSortOrFilter();
     }
 }
